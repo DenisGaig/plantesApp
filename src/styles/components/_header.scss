@@ -1,0 +1,150 @@
+header {
+  position: fixed;
+
+  background: transparent;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.3rem 10%;
+  z-index: 100;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    backdrop-filter: blur(50px);
+    z-index: -1;
+  }
+
+  .logo {
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  #navCheck {
+    display: none;
+  }
+
+  .nav-icons {
+    position: absolute;
+    right: 5%;
+    font-size: 2.8rem;
+    color: white;
+    cursor: pointer;
+    display: none;
+  }
+
+  .site-navbar {
+    transition: $background-color $transition-duration;
+    a {
+      position: relative;
+      font-size: 1.2rem;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 2rem;
+      padding: 6px 15px;
+      transition: 0.5s;
+      cursor: pointer;
+
+      &:hover,
+      &.active {
+        color: black;
+        span {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        border-radius: 20px;
+        z-index: -1;
+        transform: scale(0);
+        opacity: 0;
+        transition: 0.5s;
+      }
+    }
+  }
+
+  // ---------- Menu Hamburger -----------
+
+  @media (max-width: $breakpoint-medium) {
+    .nav-icons {
+      display: inline-flex;
+    }
+
+    #navCheck:checked ~ .nav-icons #menu-icon {
+      display: none;
+    }
+
+    .nav-icons #close-icon {
+      display: none;
+    }
+
+    #navCheck:checked ~ .nav-icons #close-icon {
+      display: block;
+    }
+
+    .site-navbar {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: rgba(192, 44, 44, 0.151);
+      backdrop-filter: blur(50px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: 0.3s ease-in-out;
+
+      a {
+        display: block;
+        font-size: 1.1rem;
+        margin: 1.5rem 0;
+        text-align: center;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: 0.3s ease-in-out;
+
+        span {
+          position: absolute;
+          top: 0;
+          left: 30%;
+          right: 30%;
+          width: 40%;
+          // height: 100%;
+          transform: translateX(-50%);
+          background: white;
+        }
+      }
+    }
+
+    #navCheck:checked ~ .site-navbar {
+      height: 17.3rem;
+    }
+
+    #navCheck:checked ~ .site-navbar a {
+      transform: translateY(0);
+      opacity: 1;
+      transition-delay: calc(0.15s * var(--i));
+    }
+  }
+
+  // ---------- Fin media -----------
+}

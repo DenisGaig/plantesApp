@@ -1,0 +1,32 @@
+---
+import { DateFormater } from "../../../utils.ts";
+import './../../../styles/index.css';
+
+interface Props {
+  article: CollectionEntry<"blog">;
+}
+const {article} = Astro.props;
+console.log("Dernier article", article.data.image.src);
+
+import Image from "astro/components/Image.astro";
+import type { CollectionEntry } from "astro:content";
+
+
+---
+
+  <a class="most-recent-article" href={`/blog/${article.slug}`}>
+    <!-- <img src={article.data.image.src} alt={article.data.image.alt} /> -->
+    <Image
+    class="most-recent-article__image"
+      src={article.data.image.src}
+      alt={article.data.image.alt}
+      width={266}
+      height={200}
+    />
+    <div class="most-recent-article__content">
+      <p>Dernier article publié</p>
+      <h2 class="most-recent-article__title">{article.data.title}</h2>
+      <p class="most-recent-article__description">{article.data.description}</p>
+      <p class="most-recent-article__date">{DateFormater(article.data.pubDate)}</p>
+    </div>
+  </a>

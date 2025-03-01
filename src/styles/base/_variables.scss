@@ -1,0 +1,24 @@
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$text-color: #333;
+$background-color: #f4f4f4;
+$error-color: #e74c3c;
+$success-color: #2ecc71;
+$light-gray-transparent: #e9e8e89c;
+$white: #ffffff;
+$black: #000000ff;
+
+$spacing-unit: 8px;
+$spacing-small: $spacing-unit * 2;
+$spacing-medium: $spacing-unit * 4;
+$spacing-large: $spacing-unit * 8;
+
+// Breaking points for screen sizes
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 992px;
+$breakpoint-extra-large: 1200px;
+
+$border-radius: 5px;
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+$transition-duration: 0.3s;

@@ -1,0 +1,63 @@
+---
+import './../styles/index.css'
+
+const currentPath = Astro.url.pathname;
+const navItems = [
+  { path: '/', label: 'Accueil' },
+  { path: '/blog', label: 'Blog' },
+  { path: '/app', label: 'Diagnostic' },
+  { path: '/about', label: 'A propos' }
+];
+---
+<header>
+  <a href="#" class="logo">Logo</a>
+
+  <input type="checkbox" id="navCheck" />
+  <label for="navCheck" class="nav-icons">
+    <i class="bx bx-menu" id="menu-icon"></i>
+    <i class="bx bx-x" id="close-icon"></i>
+  </label>
+  
+  <nav class="site-navbar">
+    {navItems.map((item) => (
+      <a
+          href={item.path}
+          class={`route ${currentPath === item.path ? 'active' : ''}`}
+          >
+          {item.label}
+          <span></span>
+      </a>
+      ))}
+  </nav>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("header")
+  const logo = document.querySelector<HTMLElement>(".logo")
+  const menuAnchor = document.querySelectorAll('.route');
+
+  if (header === null || logo === null) {
+      throw new Error('navbar is required')
+  }
+
+  window.addEventListener('scroll',()=>{
+      if (window.scrollY > 100) 
+          { 
+              header.style.height = "50px";
+              logo.style.width = "40px";
+              logo.style.height = "40px"
+
+          } else {
+            header.style.height = "70px";
+              logo.style.width = "50px";
+              logo.style.height = "50px"
+          } 
+          if (window.scrollY > 150) {
+            header.classList.add('active')
+          }
+          else {
+            header.classList.remove('active')
+          }
+      })
+
+</script>

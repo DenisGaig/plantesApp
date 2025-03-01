@@ -1,0 +1,79 @@
+@font-face {
+  font-family: "Lato";
+  src: url("src/assets/fonts/Lato-Regular.ttf");
+}
+
+$font-size-base: 16px;
+$font-size-small: 14px;
+$font-size-large: 20px;
+
+$font-family-base: "Lato", sans-serif;
+$font-family-heading: "Lato", sans-serif;
+
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+@mixin heading($size, $weight: $font-weight-bold) {
+  font-size: $size;
+  font-weight: $weight;
+  margin-bottom: 0.5em;
+}
+
+@mixin paragraph {
+  font-size: $font-size-base;
+  line-height: 1.5;
+  margin-bottom: 1em;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: 1.5;
+}
+
+// Heading typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family-heading;
+  margin-top: 0;
+}
+
+h1 {
+  @include heading(2.5rem);
+}
+h2 {
+  @include heading(2rem);
+}
+h3 {
+  @include heading(1.75rem);
+}
+h4 {
+  @include heading(1.5rem);
+}
+h5 {
+  @include heading(1.25rem);
+}
+h6 {
+  @include heading(1rem);
+}
+
+p {
+  @include paragraph;
+}
+
+// Responsive typography
+@media (max-width: 600px) {
+  h1 {
+    @include heading(2rem);
+  }
+  h2 {
+    @include heading(1.75rem);
+  }
+  h3 {
+    @include heading(1.5rem);
+  }
+}

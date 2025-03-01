@@ -1,0 +1,9 @@
+// --article-header-bg: url("../../assets/images/plantes/achillee.jpg");
+$article-header-height: 500px;
+
+.article {
+  &__header {
+    height: $article-header-height;
+    background: var(--article-header-bg) no-repeat center/cover;
+  }
+}

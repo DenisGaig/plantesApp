@@ -1,11 +1,69 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import MostRecentArticle from '../components/blog/astro/MostRecentArticle.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import './../styles/index.css';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const allBlogArticles: CollectionEntry<'blog'>[] = (await getCollection('blog')).sort((a: CollectionEntry<'blog'>, b:CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const mostRecentBlogArticle: CollectionEntry<'blog'> = allBlogArticles[0];
+const otherBlogArticles:CollectionEntry<'blog'>[] = allBlogArticles.slice(1);
+
+console.log("Tous les articles",otherBlogArticles);
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout>
+	<main>
+		<div class="title-container">
+			<h1>Les plantes nous parlent... <br/>écoutons les !</h1>
+			<h2>Découvrez l'univers des plantes bio-indicatrices</h2>
+		</div>
+		
+		<div class="main__latest-article">
+			<MostRecentArticle article={mostRecentBlogArticle} />
+		</div>
+		
+		<section class="main__appli">
+			<div class="main__appli-left">
+				<h2>Une application de diagnostic du sol</h2>
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+				<a href="/app"><button class="main__btn"> En savoir plus </button></a>
+			</div>
+			<div class="main__appli-right"></div>
+		</section>
+
+		<section class="main__blog">
+			<h2>Des articles complets et détaillés sur les plantes bio-indicatrices</h2>
+			<div class="main__articles-grid">
+				{otherBlogArticles.slice(0,3).map((article,index) => (
+					<a href={`blog/${article.slug}`} class={`article${index+1}`}>
+						<div class="grid-card" style={{backgroundImage: `url(${article.data.image.src})`}}>
+							<h2>{article.data.title}</h2>
+							<p>{article.data.description}</p>
+						</div>
+					</a>))
+				}
+			</div>
+		</section>
+
+		<section class="main__about">
+
+		</section>
+
+	</main>
+</BaseLayout>
+
+<script>
+	const latest = document.querySelector<HTMLElement>('.main__latest-article');
+		console.log(latest);
+	
+	latest?.addEventListener('mouseenter', () => {
+			latest.style.left="55%";
+		});
+		latest?.addEventListener('mouseleave', () => {
+			latest.style.left="85%";
+		});
+	
+
+</script>

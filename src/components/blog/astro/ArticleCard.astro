@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { DateFormater } from '../../../utils.ts';
+import './../../../styles/index.css';
+
+interface Props {
+  article: CollectionEntry<'blog'>;
+}
+const {article} = Astro.props; 
+---
+
+  <a class="article-card" href={`blog/${article.slug}`}>
+    <div class="card-background" style={{backgroundImage: `url(${article.data.image.src})`}}>
+    </div>
+    <div class="article-card-content">
+      <h2>{article.data.title}</h2>
+      <p>{article.data.description}</p>
+      <p>{DateFormater(article.data.pubDate)}</p>
+      <!-- <div class="first-lines">
+        <p>{article.body.slice(0, 100)}</p>
+      </div> -->
+    </div>
+  </a>

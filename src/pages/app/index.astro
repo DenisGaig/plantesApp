@@ -1,0 +1,17 @@
+---
+import App from "../../components/app/App.jsx";
+import AppLayout from "../../layouts/AppLayout.astro";
+import "../../styles/index.css";
+
+---
+<!-- export const prerender = false -->
+<!--
+Ce contenu sera rendu sur le serveur à la demande !
+Toutes les autres pages sont générées statiquement au moment de la construction !
+-->
+
+<AppLayout>
+    <div class="app-wrapper" transition:animate="slide">
+        <App client:only>
+    </div>
+</AppLayout>

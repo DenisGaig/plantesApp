@@ -1,0 +1,30 @@
+---
+
+import { SITE_DESCRIPTION, SITE_TITLE } from "../constants.ts";
+import BaseLayout from "./BaseLayout.astro";
+const { title = 'Bienvenue' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={SITE_DESCRIPTION}>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    />
+		<link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+		<title>{SITE_TITLE} - {title}</title>
+	</head>
+	<BaseLayout>
+			<slot />
+	</BaseLayout>
+</html>
+
