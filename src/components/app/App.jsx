@@ -7,6 +7,7 @@ import {
   useRouteError,
 } from "react-router-dom";
 
+// Import des pages
 import Diagnostic from "../../pages/app/Diagnostic.jsx";
 import Home from "../../pages/app/Home.jsx";
 import Identification from "../../pages/app/Identification.jsx";
