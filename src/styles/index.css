@@ -757,24 +757,13 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
   }
 }
 
-.plant-card-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: 2rem;
-}
-.plant-card-container .plant-card {
+.plant-card {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 1rem;
   margin: 1rem;
-  width: 220px;
-  height: 300px;
+  width: 270px;
+  height: 400px;
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -796,24 +785,117 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.plant-card-container .plant-card:hover {
+.plant-card:hover {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
-.plant-card-container .plant-card img {
+.plant-card img {
   width: 100%;
   height: 200px;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 5px;
 }
-.plant-card-container .plant-card h2 {
-  font-size: 1.5rem;
+.plant-card .plant_card__title {
+  font-size: 1.2rem;
   margin: 0.5rem 0;
 }
-.plant-card-container .plant-card p {
+.plant-card .plant_card__scientific_title,
+.plant-card .plant_card__family {
+  font-size: 1rem;
+  margin: 0.2rem 0;
+}
+.plant-card .plant_card__biotope h4 {
   font-size: 1rem;
   margin: 0.5rem 0;
+}
+.plant-card .plant_card__biotope ul li {
+  font-size: 0.8rem;
+  margin: 0.2rem 0;
+  text-align: left;
+}
+.plant-card .plant_card__soil-state .plant_card__soil-state__good {
+  color: green;
+}
+.plant-card .plant_card__soil-state .plant_card__soil-state__medium {
+  color: orange;
+}
+.plant-card .plant_card__soil-state .plant_card__soil-state__bad {
+  color: red;
+}
+.plant-card .plant_card__soil-state .plant_card__comestible {
+  background-color: rgba(0, 128, 0, 0.589);
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: white;
+}
+.plant-card .plant_card__soil-state .plant_card__toxique {
+  background-color: rgba(255, 0, 0, 0.589);
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: white;
+}
+
+.plant-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 2rem;
+}
+
+.filter-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #d1cece;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.filter-bar .filter-bar_group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  gap: 0.5rem;
+}
+.filter-bar .filter-bar_group label {
+  font-weight: bold;
+}
+.filter-bar .filter-bar_group input,
+.filter-bar .filter-bar_group select {
+  padding: 0.5rem;
+  border: 1px solid #050505;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+.filter-bar .filter-bar_reset-button {
+  padding: 16px;
+  border-radius: 5px;
+  background-color: #3498db;
+  cursor: pointer;
 }/*# sourceMappingURL=index.css.map */

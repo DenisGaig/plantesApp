@@ -10,7 +10,7 @@ const allBlogArticles: CollectionEntry<'blog'>[] = (await getCollection('blog'))
 const mostRecentBlogArticle: CollectionEntry<'blog'> = allBlogArticles[0];
 const otherBlogArticles:CollectionEntry<'blog'>[] = allBlogArticles.slice(1);
 
-console.log("Tous les articles",otherBlogArticles);
+// console.log("Tous les articles",otherBlogArticles);
 ---
 
 <BaseLayout>

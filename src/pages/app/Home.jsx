@@ -1,5 +1,3 @@
-import PlantCard from "../../components/app/shared/PlantCard.jsx";
-
 export default function Home() {
   console.log("HOME bien monté");
   return (
@@ -9,7 +7,6 @@ export default function Home() {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
         voluptatum.
       </p>
-      <PlantCard famille="astéracées" />
     </div>
   );
 }

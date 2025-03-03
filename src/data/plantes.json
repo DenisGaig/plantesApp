@@ -1,1066 +1,1046 @@
 [
-    {
-        "id": 1,
-        "Nom Coste": "Acer campestre",
-        "Nom commun": "Erable champêtre",
-        "Famille": "aceracées",
-        "Biotope primaire": [
-            "Forets des plateaux calcaires et balsatiques",
-            "Lisières forestières sur des sols drainants riches en bases sous microclimat chaud"
-        ],
-        "Biotope secondaire": [
-            "Haies",
-            "Friches",
-            "Prés bois",
-            "Coupe de bois"
-        ],
-        "Caractères indicateurs": [
-            "Arbre du minéral des sols riches en bases sous microclimat chaud"
-        ],
-        "Etat du sol": 1.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 2,
-        "Nom Coste": "Achillea millefolium",
-        "Nom commun": "Achillée millefeuille",
-        "Famille": "astéracées",
-        "Biotope primaire": [
-            "Pelouse et prairies naturelles des vallées alluviales, des plateaux calcaires et basaltiques",
-            "Pelouses et prairies montagnardes et alpines",
-            "Clairières forestières et landes"
-        ],
-        "Biotope secondaire": [
-            "Prairies agricoles",
-            "Terres remuées par les travaux routiers",
-            "Talus",
-            "Bords des chemins et des routes",
-            "Vignes",
-            "Vergers",
-            "Parcs à chevaux"
-        ],
-        "Caractères indicateurs": [
-            "Hémorragies en MO et en fertilisants dues à des traumatismes du sol (labours trop profonds, surpâturages) provoquant des érosions",
-            "Excès de carbone dus au crottin dans les parcs à chevaux"
-        ],
-        "Etat du sol": 3.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 3,
-        "Nom Coste": "Adonis aestivalis",
-        "Nom commun": "Adonis d’été",
-        "Famille": "renonculacées",
-        "Biotope primaire": [
-            "Pelouses des plateaux calcaires et basaltiques",
-            "Oueds et pelouses écorchées de la zone méditerannéenne"
-        ],
-        "Biotope secondaire": [
-            "Moissons et cultures des régions à sols à pH supérieur à 7"
-        ],
-        "Caractères indicateurs": [
-            "pH élevé",
-            "Sols remués en permanence sous microclimat chaud",
-            "Les adomis indiquent des sols qui ne sont pas encore saturés de pesticides"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "N"
-    },
-    {
-        "id": 4,
-        "Nom Coste": "Adonis autumnalis",
-        "Nom commun": "Adonis d’automne",
-        "Famille": "renonculacées",
-        "Biotope primaire": [
-            "Pelouses des plateaux calcaires et basaltiques",
-            "Oueds et pelouses écorchées de la zone méditerannéenne"
-        ],
-        "Biotope secondaire": [
-            "Moissons et cultures des régions à sols à pH supérieur à 7"
-        ],
-        "Caractères indicateurs": [
-            "pH élevé",
-            "Sols remués en permanence sous microclimat chaud",
-            "Les adomis indiquent des sols qui ne sont pas encore saturés de pesticides"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "N"
-    },
-    {
-        "id": 5,
-        "Nom Coste": "Adonis flammea",
-        "Nom commun": "Adonis écarlate",
-        "Famille": "renonculacées",
-        "Biotope primaire": [
-            "Pelouses des plateaux calcaires et basaltiques",
-            "Oueds et pelouses écorchées de la zone méditerannéenne"
-        ],
-        "Biotope secondaire": [
-            "Moissons et cultures des régions à sols à pH supérieur à 7"
-        ],
-        "Caractères indicateurs": [
-            "pH élevé",
-            "Sols remués en permanence sous microclimat chaud",
-            "Les adomis indiquent des sols qui ne sont pas encore saturés de pesticides"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "N"
-    },
-    {
-        "id": 6,
-        "Nom Coste": "Agrostis alba",
-        "Nom commun": "Agrostide stolonifère",
-        "Famille": "poacées",
-        "Biotope primaire": [
-            "Vases et limons humides du littoral",
-            "Bras morts des fleuves et des rivières",
-            "Bords des lacs et étangs",
-            "Clairières forestières très humides"
-        ],
-        "Biotope secondaire": [
-            "Prairies d’élevage et cultres irriguées sur lesquelles on a épendu du lisiers, des purins ou du compost de mauvaise qualité",
-            "Bords des fossés, des routes et des chemins",
-            "Cultures",
-            "Vignes",
-            "Vergers",
-            "Golfs"
-        ],
-        "Caractères indicateurs": [
-            "Engorgement en eau et en MO d’origine végétake ou animale provoquant des hydromorphismes avec formation de gley et des anaéobioses par asphyxie de la vie microbienne",
-            "Blocage des oligo-éléments et du phosphore P",
-            "Compactage des sols travaillés par temps trop humide",
-            "Semmelles de labour ou enfousissement de MO",
-            "Surpâturage des pairies par temps trop humide ou en hiver"
-        ],
-        "Etat du sol": 3.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 7,
-        "Nom Coste": "Ajuga reptans",
-        "Nom commun": "Bugle rampante",
-        "Famille": "lamiacées",
-        "Biotope primaire": [
-            "Chênaies et charmaies humides",
-            "Forêts hydromorphes",
-            "Marais et tourbières",
-            "Landes humides"
-        ],
-        "Biotope secondaire": [
-            "Prairies agricoles",
-            "Coupes forestières",
-            "Fossés et canaux",
-            "Talus, bords des chemins et des routes",
-            "Terrains vagues",
-            "Vignes et vergers"
-        ],
-        "Caractères indicateurs": [
-            "Engorgement des sols en eau et en MO provoquant des hydromorphismes avec formation de gley",
-            "Asphyxie des sols travaillés par temps trop humide",
-            "Surpâturage des prairies humides ou para tourbeuses"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 8,
-        "Nom Coste": "Alchemilla vulgaris",
-        "Nom commun": "Alchémille commune",
-        "Famille": "rosacées",
-        "Biotope primaire": [
-            "Lisère et clairières forestières"
-        ],
-        "Biotope secondaire": [
-            "Fossés",
-            "Prairies d’élevage montagnardes",
-            "Très rare en plaine"
-        ],
-        "Caractères indicateurs": [
-            "Engorgement en MO et en eau des sols riches en bases",
-            "Hydromorphismes"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 9,
-        "Nom Coste": "Allium cepa",
-        "Nom commun": "Poireau des vignes",
-        "Famille": "alliacées",
-        "Biotope primaire": [
-            "Maquis et garrigues",
-            "Dunes littorales"
-        ],
-        "Biotope secondaire": [
-            "Cultures, vignes et vergers",
-            "Talus des chemins et des routes"
-        ],
-        "Caractères indicateurs": [
-            "Blocage de la potasse par déficience de la vie microbienne ou lessivage de la potasse par manque de couverture de sol",
-            "Compactage des sols à faible pouvoir de rétention",
-            "Carence réelle ou induite de la potasse",
-            "Compactage des sols riches en bases à pH souvent élevé"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 10,
-        "Nom Coste": "Allium oleraceum",
-        "Nom commun": "Ail des maraîchers",
-        "Famille": "alliacées",
-        "Biotope primaire": [
-            "Pelouses et prairies permanentes des grandes vallées alluviales"
-        ],
-        "Biotope secondaire": [
-            "Bords des chemins et des routes",
-            "Terrains vagues",
-            "Vignes et vergers",
-            "Pariries agricoles"
-        ],
-        "Caractères indicateurs": [
-            "Carence réelle ou induite de la potasse",
-            "Compactage des sols riches en bases à pH souvent élevé"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 11,
-        "Nom Coste": "Allium vineale",
-        "Nom commun": "Ail des vignes",
-        "Famille": "alliacées",
-        "Biotope primaire": [
-            "Pelouses et prairies permanentes des grandes vallées alluviales"
-        ],
-        "Biotope secondaire": [
-            "Bords des chemins et des routes",
-            "Terrains vagues",
-            "Vignes et vergers",
-            "Pariries agricoles"
-        ],
-        "Caractères indicateurs": [
-            "Carence réelle ou induite de la potasse",
-            "Compactage des sols riches en bases à pH souvent élevé"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 12,
-        "Nom Coste": "Alopecurus agrestis",
-        "Nom commun": "Vulpin des champs",
-        "Famille": "poacées",
-        "Biotope primaire": [
-            "Vallée alluviales sur limons riches en bases"
-        ],
-        "Biotope secondaire": [
-            "Cultures, vignes et vergers",
-            "Terrains vagues et jachères",
-            "Jamais dans les praiires"
-        ],
-        "Caractères indicateurs": [
-            "Semelles de labour",
-            "Enfouissement deMO sur sol riche en bases",
-            "Compactage des sols à pH élevé",
-            "Hydromorphismes induits par le travail du sol par temps humide ou pluvieux"
-        ],
-        "Etat du sol": 3.0,
-        "Comestible": "/"
-    },
-    {
-        "id": 13,
-        "Nom Coste": "Alopecurus pratensis",
-        "Nom commun": "Vulpin des prés",
-        "Famille": "poacées",
-        "Biotope primaire": [
-            "Pelouses et prairies naturelles des plateaux et des vallées alluviales"
-        ],
-        "Biotope secondaire": [
-            "Fossés",
-            "Bords des chemins et des routes",
-            "Prairies agricoles d’élevage"
-        ],
-        "Caractères indicateurs": [
-            "Engorgement du sol en eau ou en MO provoquant des hydromorphismes avec formation de gley et des anaérobioses par asphyxie de la vie microbienne aérobie",
-            "Pousse dans les prairies inondables et les prairies humides"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "/"
-    },
-    {
-        "id": 14,
-        "Nom Coste": "Amaranthus albus",
-        "Nom commun": "Amarante blanche",
-        "Famille": "amarantacées",
-        "Biotope primaire": [
-            "Espèce d’Amérique du Nord naturalisée dans les vallées alluviales de la région méditerranéenne",
-            "Vases et sables maritimes",
-            "Vases et sables continentaux salés"
-        ],
-        "Biotope secondaire": [
-            "Bords des chemins et des routes",
-            "Terrains vagues",
-            "Vignes et vergers",
-            "Pariries agricoles"
-        ],
-        "Caractères indicateurs": [
-            "Excès de fumure minérale, en particulier de potasse (sulfate de potassium, chlorure de potassium, nitrate de potassium)",
-            "Salinisation des sols par excès d’irrigation en période chaude",
-            "Contraste hydrique et forte chaleur estivale"
-        ],
-        "Etat du sol": 3.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 15,
-        "Nom Coste": "Amaranthus blitum",
-        "Nom commun": "Amarante blette",
-        "Famille": "amarantacées",
-        "Biotope primaire": [
-            "Vallée alluviales",
-            "Lisière et clairières forestières"
-        ],
-        "Biotope secondaire": [
-            "Cultures",
-            "Vignes",
-            "Vergers",
-            "Maraîchages",
-            "Jardins",
-            "Bords des chemins et des routes",
-            "Terrains vagues"
-        ],
-        "Caractères indicateurs": [
-            "Excès de potasse ou d’azote par des causes très différentes suivant la saison",
-            "Libération d’azote au printemps après faim d’azote"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 16,
-        "Nom Coste": "Amaranthus patulus",
-        "Nom commun": "Amarante couchée",
-        "Famille": "amarantacées",
-        "Biotope primaire": [
-            "Vallée alluviales",
-            "Lisière et clairières forestières"
-        ],
-        "Biotope secondaire": [
-            "Cultures",
-            "Vignes",
-            "Vergers",
-            "Maraîchages",
-            "Jardins",
-            "Bords des chemins et des routes",
-            "Terrains vagues"
-        ],
-        "Caractères indicateurs": [
-            "Excès de potasse ou d’azote par des causes très différentes suivant la saison",
-            "Libération d’azote au printemps après faim d’azote"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 17,
-        "Nom Coste": "Amaranthus retroflexus",
-        "Nom commun": "Amarante réfléchie",
-        "Famille": "amarantacées",
-        "Biotope primaire": [
-            "Vallée alluviales",
-            "Lisière et clairières forestières"
-        ],
-        "Biotope secondaire": [
-            "Cultures",
-            "Vignes",
-            "Vergers",
-            "Maraîchages",
-            "Jardins",
-            "Bords des chemins et des routes",
-            "Terrains vagues"
-        ],
-        "Caractères indicateurs": [
-            "Excès de potasse ou d’azote par des causes très différentes suivant la saison",
-            "Libération d’azote au printemps après faim d’azote"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 18,
-        "Nom Coste": "Ambrosia artemisiaefolia",
-        "Nom commun": "Ambroisie à feuilles d’artémise ",
-        "Famille": "astéracées",
-        "Biotope primaire": [
-            "Dune sableuses des déserts de l’Amérique du Nord",
-            "Dunes littorales et des grands fleuves",
-            "Arènes granitiques pauvres en humus et en argile"
-        ],
-        "Biotope secondaire": [
-            "Cultures intensives",
-            "Jachères",
-            "Bords des routes et des chemins",
-            "Espaces perturbés par les travaux routiers et urbains",
-            "Friches industrielles"
-        ],
-        "Caractères indicateurs": [
-            "Perte d’humus",
-            "Destructuration des argiles par les intrants chimiques provoquant la disparition du CAH et la réduction des sols en poussière",
-            "Stérilisation des sols par boulversement des couches anaérobies du aux labours trop profonds ou aux travaux routiers et urbains"
-        ],
-        "Etat du sol": 3.0,
-        "Comestible": "/"
-    },
-    {
-        "id": 19,
-        "Nom Coste": "Anagallis arvensis",
-        "Nom commun": "Mouron rouge ",
-        "Famille": "primulacées",
-        "Biotope primaire": [
-            "Sabkes et limons des vallées alluviales",
-            "Eboulis au pied des rochers et falaises",
-            "Argiles, sables et limons non stabilisés, plus ou moins mobiles"
-        ],
-        "Biotope secondaire": [
-            "Cultures",
-            "Vignes",
-            "Vergers",
-            "Maraichage",
-            "Jardins",
-            "Terrains vagues",
-            "Bords des routes et des chemins"
-        ],
-        "Caractères indicateurs": [
-            "Terrains légers, bien ressuyés et remués, riche en nitrates",
-            "Nitratophile",
-            "Indicateur de pH",
-            "PH<6,5"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "N"
-    },
-    {
-        "id": 20,
-        "Nom Coste": "Anagallis arvensis coerulea",
-        "Nom commun": "Mouron bleu",
-        "Famille": "primulacées",
-        "Biotope primaire": [
-            "Limons, sables et graviers calcaires des fleuves et des rivières, riche en MO"
-        ],
-        "Biotope secondaire": [
-            "Cultures",
-            "Vignes",
-            "Vergers",
-            "Maraichage",
-            "Jardins",
-            "Terrains vagues",
-            "Bords des routes et des chemins"
-        ],
-        "Caractères indicateurs": [
-            "Nitratophile",
-            "Terrains alcalins",
-            "pH>7"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "N"
-    },
-    {
-        "id": 21,
-        "Nom Coste": "Andryala sinuata",
-        "Nom commun": "Andryale à feuilles entières",
-        "Famille": "astéracées",
-        "Biotope primaire": [
-            "Maquis et garrigues",
-            "Oueds de la région méditerranéenne"
-        ],
-        "Biotope secondaire": [
-            "Culture",
-            "Vignes",
-            "Vergers",
-            "Bords des chemins et des routes",
-            "Terrains vagues"
-        ],
-        "Caractères indicateurs": [
-            "Plante méditerranéenne",
-            "Microclimat chaud",
-            "Sol à fort contraste hydrique",
-            "Sol brulant en été",
-            "Dans le Nord de la France, zone à microclimat pseudo-méditerranéen"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "/"
-    },
-    {
-        "id": 22,
-        "Nom Coste": "Anthoxanthum odoratum",
-        "Nom commun": "Flouve odorante",
-        "Famille": "poacées",
-        "Biotope primaire": [
-            "Prairies naturelles des grandes vallées alluviales et alpines sur sols frais et riches",
-            "Bordure et clairières forestières riches en humus"
-        ],
-        "Biotope secondaire": [
-            "Prairies agricoles, n’ayant été ni drainées, ni amendées",
-            "Talus des chemins et des routes",
-            "Coupes de bois"
-        ],
-        "Caractères indicateurs": [
-            "Grande biodiversité",
-            "Sols frais et riches en MO d’origine végétale",
-            "Engorgement en carbone",
-            "Carence en MO animale ou en azote"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 23,
-        "Nom Coste": "Anthriscus silvestris",
-        "Nom commun": "Cerfeuil des bois",
-        "Famille": "apiacées",
-        "Biotope primaire": [
-            "Lisières et clairières forestières engorgées en MO archaïque",
-            "Sols riches en bases"
-        ],
-        "Biotope secondaire": [
-            "Bords des chemins et des routes",
-            "Terrains vagues",
-            "Pariries agricoles d’élevage"
-        ],
-        "Caractères indicateurs": [
-            "Engorgement des sols riches en bases, riches en MO surtout végétale ou archïque",
-            "Mauvaise minéralisation de la MO en excès"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 24,
-        "Nom Coste": "Anthyllis vulneraria",
-        "Nom commun": "Anthyllide vulnéraire",
-        "Famille": "fabacées",
-        "Biotope primaire": [
-            "Rochers et éboulis à pH élevé, riches en bases",
-            "Pelouses arides et pelouses écorchées des plateaux calcaires et basaltiques",
-            "Plateaux calcaires à pH élevé"
-        ],
-        "Biotope secondaire": [
-            "Talus et bords des chemins et des routes",
-            "Parcours à moutons"
-        ],
-        "Caractères indicateurs": [
-            "Sols arides à pH élevé > 7,5",
-            "Sol très mince sur substrat rocheux"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "N"
-    },
-    {
-        "id": 25,
-        "Nom Coste": "Alchemilla arvensis",
-        "Nom commun": "Alchémille des champs",
-        "Famille": "rosacées",
-        "Biotope primaire": [
-            "Sables et limons meubles et perméables des vallées alluviales",
-            "Arènes granitiques",
-            "Dunes littorales ou continentales"
-        ],
-        "Biotope secondaire": [
-            "Haies",
-            "Friches",
-            "Prés bois",
-            "Coupes forestières",
-            "Cultures",
-            "Chemins",
-            "Terrains vagues",
-            "Sols remués par les travaux",
-            "Vignes",
-            "Vergers",
-            "Maraîchages",
-            "Jardins"
-        ],
-        "Caractères indicateurs": [
-            "Erosion et lessivage des sols filtrants contenant peu ou pas d’argile ni de MO"
-        ],
-        "Etat du sol": 3.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 26,
-        "Nom Coste": "Lappa major",
-        "Nom commun": "Grande bardane",
-        "Famille": "astéracées",
-        "Biotope primaire": [
-            "Lisières et clairières forestières des plaines et des montagnes",
-            "Forêts alluviales et riveraines"
-        ],
-        "Biotope secondaire": [
-            "Bords des chemins et des routes",
-            "Terrains vagues",
-            "Cultures",
-            "Maraîchage",
-            "Vignes",
-            "Vergers",
-            "Cours de ferme",
-            "Environ des villages et des habitations"
-        ],
-        "Caractères indicateurs": [
-            "Engorgement en MO végétale archïque ayant pou rorigine la lignine",
-            "Sols riches en bases"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 27,
-        "Nom Coste": "Aristolochia clematitis",
-        "Nom commun": "Aristoloche clématite",
-        "Famille": "aristolochiacées",
-        "Biotope primaire": [
-            "Forêts alluviales inondables des grands fleuves et de leurs affluent",
-            "Foêts intermédiaires à lianes (vigne sauvage, clématite, houblon, etc)",
-            "Sols profonds",
-            "Sols humides",
-            "Sols riches en humus"
-        ],
-        "Biotope secondaire": [
-            "Cultures sur sol profonds et humides",
-            "Vignes",
-            "Vergers",
-            "Haies des bocages",
-            "Friches agricoles",
-            "Bords des chemins et des routes"
-        ],
-        "Caractères indicateurs": [
-            "Engorgement en MO, en azote et en eau",
-            "Sols profonds riches en bases",
-            "Sols à forts contraste hydriques"
-        ],
-        "Etat du sol": 1.0,
-        "Comestible": "N"
-    },
-    {
-        "id": 28,
-        "Nom Coste": "Arnica montana",
-        "Nom commun": "Arnique de montagne, Arnica",
-        "Famille": "astéracées",
-        "Biotope primaire": [
-            "Pelouses et landes acides sur sols frais à humide"
-        ],
-        "Biotope secondaire": [
-            "Pelouses et prairies agricoles des plaines et des montagnes",
-            "Lisières et clairières forestières"
-        ],
-        "Caractères indicateurs": [
-            "Acidité des sols frais à humide",
-            "Plante calcifuge",
-            "Engorgement en MO végétale archaîque",
-            "Plante acidophile (rare)"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "N"
-    },
-    {
-        "id": 29,
-        "Nom Coste": "Arrhenatherum elatius",
-        "Nom commun": "Avoine élevée",
-        "Famille": "poacées",
-        "Biotope primaire": [
-            "Prairies naturelles des grandes vallées alluviales",
-            "Plateaux calcaires et basaltiques",
-            "Lisières et clairières forestières"
-        ],
-        "Biotope secondaire": [
-            "Prairies agricoles amendées",
-            "Prairies de fauche sur sols riches des plaines et des montagnes",
-            "Bords des routes et des chemins",
-            "Terrains vagues",
-            "Vignes",
-            "Vergers",
-            "Cultures pour subsp bulbosum"
-        ],
-        "Caractères indicateurs": [
-            "Prairies équilibrées pour subsp elatius",
-            "Engorgement en C ou enfouissement de MO végétale ou fond de la raie de labours pour subsp bulbosum"
-        ],
-        "Etat du sol": 1.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 30,
-        "Nom Coste": "Artemisia vulgaris",
-        "Nom commun": "Armoise commune",
-        "Famille": "astéracées",
-        "Biotope primaire": [
-            "Sols sableux et limoneux des vallées alluviales",
-            "Plante pionnère"
-        ],
-        "Biotope secondaire": [
-            "Cultures",
-            "Jardins",
-            "Vignes et vergers",
-            "Bords des routes et des chemins",
-            "Terrains vagues",
-            "Digues des canaux et ballasts des chemins de fer"
-        ],
-        "Caractères indicateurs": [
-            "Engorgement en MO",
-            "Sols riches en bases subissant compactages et érosions",
-            "Manque de couverture des sols à faible pouvoir de rétention",
-            "Asphyxie par compactage ou excès d’irrigation"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 31,
-        "Nom Coste": "Arum italicum",
-        "Nom commun": "Arum d’Italie",
-        "Famille": "aracées",
-        "Biotope primaire": [
-            "Forêts alluviales et riveraines",
-            "Ourlets et bordure forestières"
-        ],
-        "Biotope secondaire": [
-            "Vignes",
-            "Vergers",
-            "Bords des chemins et des routes",
-            "Talus",
-            "Terrains vagues"
-        ],
-        "Caractères indicateurs": [
-            "Evolution des sols riches en bases vers la forêt",
-            "Excès de MO d’origine végétale",
-            "Mauvaise minéralisation de la MO archaïque",
-            "Fossolisation au lieu de minéralisation",
-            "Carence en MO d’origine animale",
-            "Blocage de la potasse par déficience de la vie microbienne"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "N"
-    },
-    {
-        "id": 32,
-        "Nom Coste": "Arum maculatum",
-        "Nom commun": "Arum maculé",
-        "Famille": "aracées",
-        "Biotope primaire": [
-            "Lisières et clairières forestières des plaines et montagnes"
-        ],
-        "Biotope secondaire": [
-            "Petits bois résiduels",
-            "Plantation de robiniers",
-            "Haies des bocages",
-            "Broussailles",
-            "Friches agricoles",
-            "Vignes",
-            "Vergers"
-        ],
-        "Caractères indicateurs": [
-            "Evolution des sols riches en bases vers la forêt",
-            "Excès de MO d’origine végétale",
-            "Mauvaise minéralisation de la MO archaïque",
-            "Fossolisation au lieu de minéralisation",
-            "Carence en MO d’origine animale",
-            "Blocage de la potasse par déficience de la vie microbienne"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "N"
-    },
-    {
-        "id": 33,
-        "Nom Coste": "Asparagus acutifolius",
-        "Nom commun": "Asperge.sauvage, A. piquante",
-        "Famille": "asparagacées",
-        "Biotope primaire": [
-            "Forêts de chênes verts",
-            "Maquis",
-            "Garrigues méditerranéeennes"
-        ],
-        "Biotope secondaire": [
-            "Vignes",
-            "Vergers installés depuis longtemps sur une même parcelle",
-            "Parcelles cultivées depuis longtemps à sol nu"
-        ],
-        "Caractères indicateurs": [
-            "Evolution de la culture vers la forêt",
-            "Excès de MO végétale archaïque",
-            "Destructuration du sol"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 34,
-        "Nom Coste": "Asphodelus microcarpus",
-        "Nom commun": "Asphodèle à petits fruits",
-        "Famille": "asphodélacées",
-        "Biotope primaire": [
-            "Pelous et landes acides",
-            "Lisières et clairières forestières"
-        ],
-        "Biotope secondaire": [
-            "Prairie agricoles",
-            "Talus",
-            "Bords de routes et de chemins",
-            "Terrains vagues"
-        ],
-        "Caractères indicateurs": [
-            "Sols sableux",
-            "Compacts",
-            "Acides",
-            "Dégradés",
-            "Erosions dues à des incendies répétés",
-            "Piétinement du bétail dans les parcelles surpâturées",
-            "Décalcification par dégradation importante des prairies agricoles"
-        ],
-        "Etat du sol": 3.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 35,
-        "Nom Coste": "Asphodelus albus",
-        "Nom commun": "Asphodèle blanc",
-        "Famille": "asphodélacées",
-        "Biotope primaire": [
-            "Pelous et landes acides",
-            "Lisières et clairières forestières"
-        ],
-        "Biotope secondaire": [
-            "Prairie agricoles",
-            "Talus",
-            "Bords de routes et de chemins",
-            "Terrains vagues"
-        ],
-        "Caractères indicateurs": [
-            "Sols sableux",
-            "Compacts",
-            "Acides",
-            "Dégradés",
-            "Erosions dues à des incendies répétés",
-            "Piétinement du bétail dans les parcelles surpâturées",
-            "Décalcification par dégradation importante des prairies agricoles"
-        ],
-        "Etat du sol": 3.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 36,
-        "Nom Coste": "Asphodelus cerasifer",
-        "Nom commun": "Asphodèle rameuse",
-        "Famille": "asphodélacées",
-        "Biotope primaire": [
-            "Pelous et landes acides",
-            "Lisières et clairières forestières"
-        ],
-        "Biotope secondaire": [
-            "Prairie agricoles",
-            "Talus",
-            "Bords de routes et de chemins",
-            "Terrains vagues"
-        ],
-        "Caractères indicateurs": [
-            "Sols sableux",
-            "Compacts",
-            "Acides",
-            "Dégradés",
-            "Erosions dues à des incendies répétés",
-            "Piétinement du bétail dans les parcelles surpâturées",
-            "Décalcification par dégradation importante des prairies agricoles"
-        ],
-        "Etat du sol": 3.0,
-        "Comestible": "/"
-    },
-    {
-        "id": 37,
-        "Nom Coste": "Aster squamatus",
-        "Nom commun": "Aster écailleux",
-        "Famille": "astéracées",
-        "Biotope primaire": [
-            "Bords des eaux salées",
-            "Sables et vases salés du littoral",
-            "Espèce introduite d’Amérique"
-        ],
-        "Biotope secondaire": [
-            "Cultures irriguées",
-            "Prairies humides",
-            "Prairies agricoles amendées",
-            "Terrains vagues",
-            "Bords des routes et des chemins"
-        ],
-        "Caractères indicateurs": [
-            "Salinisation des sols par l’irrigation ou l’apports d’engrais solubles",
-            "Remontées des sels du sous-sol dans les terres compactées des régions littorales"
-        ],
-        "Etat du sol": 3.0,
-        "Comestible": "/"
-    },
-    {
-        "id": 38,
-        "Nom Coste": "Atriplex patula",
-        "Nom commun": "Arroche étalée",
-        "Famille": "salsolacées",
-        "Biotope primaire": [
-            "Bras morts des fleuves et des rivières",
-            "Clairières et bordures forestières",
-            "Reposoirs à animaux sauvages"
-        ],
-        "Biotope secondaire": [
-            "Cultures",
-            "Vignes",
-            "Vergers",
-            "Maraîchage",
-            "Jardins",
-            "Pieds des murs pollués dans les villages",
-            "Bords des routes et des chemins",
-            "Terrains vagues"
-        ],
-        "Caractères indicateurs": [
-            "Excès d’azote N",
-            "Engorgement en MO",
-            "Engorgement en eau",
-            "Hydromorphismes",
-            "Libération brutale de grandes quantités d’azote N dans les sols par temps chaud et sec",
-            "Travail des sols à forts contraste hydrique par temps chaud et sec"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 39,
-        "Nom Coste": "Atriplex hastata",
-        "Nom commun": "Arroche à feuilles hastées",
-        "Famille": "salsolacées",
-        "Biotope primaire": [
-            "Bras morts des fleuves et des rivières",
-            "Clairières et bordures forestières",
-            "Reposoirs à animaux sauvages"
-        ],
-        "Biotope secondaire": [
-            "Cultures",
-            "Vignes",
-            "Vergers",
-            "Maraîchage",
-            "Jardins",
-            "Pieds des murs pollués dans les villages",
-            "Bords des routes et des chemins",
-            "Terrains vagues"
-        ],
-        "Caractères indicateurs": [
-            "Excès d’azote N",
-            "Engorgement en MO",
-            "Engorgement en eau",
-            "Hydromorphismes",
-            "Libération brutale de grandes quantités d’azote N dans les sols par temps chaud et sec",
-            "Travail des sols à forts contraste hydrique par temps chaud et sec"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 40,
-        "Nom Coste": "Avena barbata",
-        "Nom commun": "Avoine barbue",
-        "Famille": null,
-        "Biotope primaire": null,
-        "Biotope secondaire": null,
-        "Caractères indicateurs": null,
-        "Etat du sol": null,
-        "Comestible": null
-    },
-    {
-        "id": 41,
-        "Nom Coste": "Avena fatua",
-        "Nom commun": "Folle-avoine",
-        "Famille": "poacées",
-        "Biotope primaire": [
-            "Sables remués et limons des vallées alluviales"
-        ],
-        "Biotope secondaire": [
-            "Cultures",
-            "Vignes",
-            "Vergers",
-            "Terrains vagues",
-            "Jachères",
-            "Bords des chemins et des routes"
-        ],
-        "Caractères indicateurs": [
-            "Sables et limons alcalins compactés",
-            "Sols argilo-calcaires à pH élevé compactés",
-            "Favorisée par excès de N et de K dans les sols compactés",
-            "Destructuration des sols riches en bases"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 42,
-        "Nom Coste": "Avena sterilis",
-        "Nom commun": "Avoine stérile",
-        "Famille": "poacées",
-        "Biotope primaire": [
-            "Grandes vallées alluviales",
-            "Sables calcaires des rivières",
-            "Maquis et garrigues sur sols calcaires",
-            "Region méditerranéenne"
-        ],
-        "Biotope secondaire": [
-            "Cultures amendées et fumées",
-            "Vignes",
-            "Vergers",
-            "Terrains vagues",
-            "Bords des chemins et des routes"
-        ],
-        "Caractères indicateurs": [
-            "Sables et limons alcalins compactés",
-            "Sols argilo-calcaires à pH élevé compactés",
-            "Favorisée par excès de N et de K dans les sols compactés",
-            "Destructuration des sols riches en bases"
-        ],
-        "Etat du sol": 2.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 43,
-        "Nom Coste": "Avena pratensis",
-        "Nom commun": "Avoine des prés",
-        "Famille": "poacées",
-        "Biotope primaire": [
-            "Pelouses et prairies naturelles des vallées alluviales, des plateaux calcaires et basaltiques"
-        ],
-        "Biotope secondaire": [
-            "Prairies agricoles",
-            "Bords des chemins et des routes",
-            "Terrains vagues"
-        ],
-        "Caractères indicateurs": [
-            "Equilibre des prairies sur sols riches en bases",
-            "Début d’engorgement en MO carbonée",
-            "Début de carence en MO animale"
-        ],
-        "Etat du sol": 1.0,
-        "Comestible": "O"
-    },
-    {
-        "id": 44,
-        "Nom Coste": "Avena pubescens",
-        "Nom commun": "Avoine pubescente",
-        "Famille": "poacées",
-        "Biotope primaire": [
-            "Pelouses et prairies naturelles des vallées alluviales, des plateaux calcaires et basaltiques"
-        ],
-        "Biotope secondaire": [
-            "Prairies agricoles",
-            "Bords des chemins et des routes",
-            "Terrains vagues"
-        ],
-        "Caractères indicateurs": [
-            "Equilibre des prairies sur sols riches en bases",
-            "Début d’engorgement en MO carbonée",
-            "Début de carence en MO animale"
-        ],
-        "Etat du sol": 1.0,
-        "Comestible": "O"
-    }
+  {
+    "id": 1,
+    "Nom Coste": "Acer campestre",
+    "Nom commun": "Erable champêtre",
+    "Famille": "aceracées",
+    "Biotope primaire": [
+      "Forets des plateaux calcaires et balsatiques",
+      "Lisières forestières sur des sols drainants riches en bases sous microclimat chaud"
+    ],
+    "Biotope secondaire": ["Haies", "Friches", "Prés bois", "Coupe de bois"],
+    "Caractères indicateurs": [
+      "Arbre du minéral des sols riches en bases sous microclimat chaud"
+    ],
+    "Etat du sol": 1.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 2,
+    "Nom Coste": "Achillea millefolium",
+    "Nom commun": "Achillée millefeuille",
+    "Famille": "astéracées",
+    "Biotope primaire": [
+      "Pelouse et prairies naturelles des vallées alluviales, des plateaux calcaires et basaltiques",
+      "Pelouses et prairies montagnardes et alpines",
+      "Clairières forestières et landes"
+    ],
+    "Biotope secondaire": [
+      "Prairies agricoles",
+      "Terres remuées par les travaux routiers",
+      "Talus",
+      "Bords des chemins et des routes",
+      "Vignes",
+      "Vergers",
+      "Parcs à chevaux"
+    ],
+    "Caractères indicateurs": [
+      "Hémorragies en MO et en fertilisants dues à des traumatismes du sol (labours trop profonds, surpâturages) provoquant des érosions",
+      "Excès de carbone dus au crottin dans les parcs à chevaux"
+    ],
+    "Etat du sol": 3.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 3,
+    "Nom Coste": "Adonis aestivalis",
+    "Nom commun": "Adonis d’été",
+    "Famille": "renonculacées",
+    "Biotope primaire": [
+      "Pelouses des plateaux calcaires et basaltiques",
+      "Oueds et pelouses écorchées de la zone méditerannéenne"
+    ],
+    "Biotope secondaire": [
+      "Moissons et cultures des régions à sols à pH supérieur à 7"
+    ],
+    "Caractères indicateurs": [
+      "pH élevé",
+      "Sols remués en permanence sous microclimat chaud",
+      "Les adomis indiquent des sols qui ne sont pas encore saturés de pesticides"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "T"
+  },
+  {
+    "id": 4,
+    "Nom Coste": "Adonis autumnalis",
+    "Nom commun": "Adonis d’automne",
+    "Famille": "renonculacées",
+    "Biotope primaire": [
+      "Pelouses des plateaux calcaires et basaltiques",
+      "Oueds et pelouses écorchées de la zone méditerannéenne"
+    ],
+    "Biotope secondaire": [
+      "Moissons et cultures des régions à sols à pH supérieur à 7"
+    ],
+    "Caractères indicateurs": [
+      "pH élevé",
+      "Sols remués en permanence sous microclimat chaud",
+      "Les adomis indiquent des sols qui ne sont pas encore saturés de pesticides"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "T"
+  },
+  {
+    "id": 5,
+    "Nom Coste": "Adonis flammea",
+    "Nom commun": "Adonis écarlate",
+    "Famille": "renonculacées",
+    "Biotope primaire": [
+      "Pelouses des plateaux calcaires et basaltiques",
+      "Oueds et pelouses écorchées de la zone méditerannéenne"
+    ],
+    "Biotope secondaire": [
+      "Moissons et cultures des régions à sols à pH supérieur à 7"
+    ],
+    "Caractères indicateurs": [
+      "pH élevé",
+      "Sols remués en permanence sous microclimat chaud",
+      "Les adomis indiquent des sols qui ne sont pas encore saturés de pesticides"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "T"
+  },
+  {
+    "id": 6,
+    "Nom Coste": "Agrostis alba",
+    "Nom commun": "Agrostide stolonifère",
+    "Famille": "poacées",
+    "Biotope primaire": [
+      "Vases et limons humides du littoral",
+      "Bras morts des fleuves et des rivières",
+      "Bords des lacs et étangs",
+      "Clairières forestières très humides"
+    ],
+    "Biotope secondaire": [
+      "Prairies d’élevage et cultres irriguées sur lesquelles on a épendu du lisiers, des purins ou du compost de mauvaise qualité",
+      "Bords des fossés, des routes et des chemins",
+      "Cultures",
+      "Vignes",
+      "Vergers",
+      "Golfs"
+    ],
+    "Caractères indicateurs": [
+      "Engorgement en eau et en MO d’origine végétake ou animale provoquant des hydromorphismes avec formation de gley et des anaéobioses par asphyxie de la vie microbienne",
+      "Blocage des oligo-éléments et du phosphore P",
+      "Compactage des sols travaillés par temps trop humide",
+      "Semmelles de labour ou enfousissement de MO",
+      "Surpâturage des pairies par temps trop humide ou en hiver"
+    ],
+    "Etat du sol": 3.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 7,
+    "Nom Coste": "Ajuga reptans",
+    "Nom commun": "Bugle rampante",
+    "Famille": "lamiacées",
+    "Biotope primaire": [
+      "Chênaies et charmaies humides",
+      "Forêts hydromorphes",
+      "Marais et tourbières",
+      "Landes humides"
+    ],
+    "Biotope secondaire": [
+      "Prairies agricoles",
+      "Coupes forestières",
+      "Fossés et canaux",
+      "Talus, bords des chemins et des routes",
+      "Terrains vagues",
+      "Vignes et vergers"
+    ],
+    "Caractères indicateurs": [
+      "Engorgement des sols en eau et en MO provoquant des hydromorphismes avec formation de gley",
+      "Asphyxie des sols travaillés par temps trop humide",
+      "Surpâturage des prairies humides ou para tourbeuses"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 8,
+    "Nom Coste": "Alchemilla vulgaris",
+    "Nom commun": "Alchémille commune",
+    "Famille": "rosacées",
+    "Biotope primaire": ["Lisère et clairières forestières"],
+    "Biotope secondaire": [
+      "Fossés",
+      "Prairies d’élevage montagnardes",
+      "Très rare en plaine"
+    ],
+    "Caractères indicateurs": [
+      "Engorgement en MO et en eau des sols riches en bases",
+      "Hydromorphismes"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 9,
+    "Nom Coste": "Allium cepa",
+    "Nom commun": "Poireau des vignes",
+    "Famille": "alliacées",
+    "Biotope primaire": ["Maquis et garrigues", "Dunes littorales"],
+    "Biotope secondaire": [
+      "Cultures, vignes et vergers",
+      "Talus des chemins et des routes"
+    ],
+    "Caractères indicateurs": [
+      "Blocage de la potasse par déficience de la vie microbienne ou lessivage de la potasse par manque de couverture de sol",
+      "Compactage des sols à faible pouvoir de rétention",
+      "Carence réelle ou induite de la potasse",
+      "Compactage des sols riches en bases à pH souvent élevé"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 10,
+    "Nom Coste": "Allium oleraceum",
+    "Nom commun": "Ail des maraîchers",
+    "Famille": "alliacées",
+    "Biotope primaire": [
+      "Pelouses et prairies permanentes des grandes vallées alluviales"
+    ],
+    "Biotope secondaire": [
+      "Bords des chemins et des routes",
+      "Terrains vagues",
+      "Vignes et vergers",
+      "Pariries agricoles"
+    ],
+    "Caractères indicateurs": [
+      "Carence réelle ou induite de la potasse",
+      "Compactage des sols riches en bases à pH souvent élevé"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 11,
+    "Nom Coste": "Allium vineale",
+    "Nom commun": "Ail des vignes",
+    "Famille": "alliacées",
+    "Biotope primaire": [
+      "Pelouses et prairies permanentes des grandes vallées alluviales"
+    ],
+    "Biotope secondaire": [
+      "Bords des chemins et des routes",
+      "Terrains vagues",
+      "Vignes et vergers",
+      "Pariries agricoles"
+    ],
+    "Caractères indicateurs": [
+      "Carence réelle ou induite de la potasse",
+      "Compactage des sols riches en bases à pH souvent élevé"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 12,
+    "Nom Coste": "Alopecurus agrestis",
+    "Nom commun": "Vulpin des champs",
+    "Famille": "poacées",
+    "Biotope primaire": ["Vallée alluviales sur limons riches en bases"],
+    "Biotope secondaire": [
+      "Cultures, vignes et vergers",
+      "Terrains vagues et jachères",
+      "Jamais dans les praiires"
+    ],
+    "Caractères indicateurs": [
+      "Semelles de labour",
+      "Enfouissement deMO sur sol riche en bases",
+      "Compactage des sols à pH élevé",
+      "Hydromorphismes induits par le travail du sol par temps humide ou pluvieux"
+    ],
+    "Etat du sol": 3.0,
+    "Comestible": "/"
+  },
+  {
+    "id": 13,
+    "Nom Coste": "Alopecurus pratensis",
+    "Nom commun": "Vulpin des prés",
+    "Famille": "poacées",
+    "Biotope primaire": [
+      "Pelouses et prairies naturelles des plateaux et des vallées alluviales"
+    ],
+    "Biotope secondaire": [
+      "Fossés",
+      "Bords des chemins et des routes",
+      "Prairies agricoles d’élevage"
+    ],
+    "Caractères indicateurs": [
+      "Engorgement du sol en eau ou en MO provoquant des hydromorphismes avec formation de gley et des anaérobioses par asphyxie de la vie microbienne aérobie",
+      "Pousse dans les prairies inondables et les prairies humides"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "/"
+  },
+  {
+    "id": 14,
+    "Nom Coste": "Amaranthus albus",
+    "Nom commun": "Amarante blanche",
+    "Famille": "amarantacées",
+    "Biotope primaire": [
+      "Espèce d’Amérique du Nord naturalisée dans les vallées alluviales de la région méditerranéenne",
+      "Vases et sables maritimes",
+      "Vases et sables continentaux salés"
+    ],
+    "Biotope secondaire": [
+      "Bords des chemins et des routes",
+      "Terrains vagues",
+      "Vignes et vergers",
+      "Pariries agricoles"
+    ],
+    "Caractères indicateurs": [
+      "Excès de fumure minérale, en particulier de potasse (sulfate de potassium, chlorure de potassium, nitrate de potassium)",
+      "Salinisation des sols par excès d’irrigation en période chaude",
+      "Contraste hydrique et forte chaleur estivale"
+    ],
+    "Etat du sol": 3.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 15,
+    "Nom Coste": "Amaranthus blitum",
+    "Nom commun": "Amarante blette",
+    "Famille": "amarantacées",
+    "Biotope primaire": [
+      "Vallée alluviales",
+      "Lisière et clairières forestières"
+    ],
+    "Biotope secondaire": [
+      "Cultures",
+      "Vignes",
+      "Vergers",
+      "Maraîchages",
+      "Jardins",
+      "Bords des chemins et des routes",
+      "Terrains vagues"
+    ],
+    "Caractères indicateurs": [
+      "Excès de potasse ou d’azote par des causes très différentes suivant la saison",
+      "Libération d’azote au printemps après faim d’azote"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 16,
+    "Nom Coste": "Amaranthus patulus",
+    "Nom commun": "Amarante couchée",
+    "Famille": "amarantacées",
+    "Biotope primaire": [
+      "Vallée alluviales",
+      "Lisière et clairières forestières"
+    ],
+    "Biotope secondaire": [
+      "Cultures",
+      "Vignes",
+      "Vergers",
+      "Maraîchages",
+      "Jardins",
+      "Bords des chemins et des routes",
+      "Terrains vagues"
+    ],
+    "Caractères indicateurs": [
+      "Excès de potasse ou d’azote par des causes très différentes suivant la saison",
+      "Libération d’azote au printemps après faim d’azote"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 17,
+    "Nom Coste": "Amaranthus retroflexus",
+    "Nom commun": "Amarante réfléchie",
+    "Famille": "amarantacées",
+    "Biotope primaire": [
+      "Vallée alluviales",
+      "Lisière et clairières forestières"
+    ],
+    "Biotope secondaire": [
+      "Cultures",
+      "Vignes",
+      "Vergers",
+      "Maraîchages",
+      "Jardins",
+      "Bords des chemins et des routes",
+      "Terrains vagues"
+    ],
+    "Caractères indicateurs": [
+      "Excès de potasse ou d’azote par des causes très différentes suivant la saison",
+      "Libération d’azote au printemps après faim d’azote"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 18,
+    "Nom Coste": "Ambrosia artemisiaefolia",
+    "Nom commun": "Ambroisie à feuilles d’artémise ",
+    "Famille": "astéracées",
+    "Biotope primaire": [
+      "Dune sableuses des déserts de l’Amérique du Nord",
+      "Dunes littorales et des grands fleuves",
+      "Arènes granitiques pauvres en humus et en argile"
+    ],
+    "Biotope secondaire": [
+      "Cultures intensives",
+      "Jachères",
+      "Bords des routes et des chemins",
+      "Espaces perturbés par les travaux routiers et urbains",
+      "Friches industrielles"
+    ],
+    "Caractères indicateurs": [
+      "Perte d’humus",
+      "Destructuration des argiles par les intrants chimiques provoquant la disparition du CAH et la réduction des sols en poussière",
+      "Stérilisation des sols par boulversement des couches anaérobies du aux labours trop profonds ou aux travaux routiers et urbains"
+    ],
+    "Etat du sol": 3.0,
+    "Comestible": "/"
+  },
+  {
+    "id": 19,
+    "Nom Coste": "Anagallis arvensis",
+    "Nom commun": "Mouron rouge ",
+    "Famille": "primulacées",
+    "Biotope primaire": [
+      "Sabkes et limons des vallées alluviales",
+      "Eboulis au pied des rochers et falaises",
+      "Argiles, sables et limons non stabilisés, plus ou moins mobiles"
+    ],
+    "Biotope secondaire": [
+      "Cultures",
+      "Vignes",
+      "Vergers",
+      "Maraichage",
+      "Jardins",
+      "Terrains vagues",
+      "Bords des routes et des chemins"
+    ],
+    "Caractères indicateurs": [
+      "Terrains légers, bien ressuyés et remués, riche en nitrates",
+      "Nitratophile",
+      "Indicateur de pH",
+      "PH<6,5"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "N"
+  },
+  {
+    "id": 20,
+    "Nom Coste": "Anagallis arvensis coerulea",
+    "Nom commun": "Mouron bleu",
+    "Famille": "primulacées",
+    "Biotope primaire": [
+      "Limons, sables et graviers calcaires des fleuves et des rivières, riche en MO"
+    ],
+    "Biotope secondaire": [
+      "Cultures",
+      "Vignes",
+      "Vergers",
+      "Maraichage",
+      "Jardins",
+      "Terrains vagues",
+      "Bords des routes et des chemins"
+    ],
+    "Caractères indicateurs": ["Nitratophile", "Terrains alcalins", "pH>7"],
+    "Etat du sol": 2.0,
+    "Comestible": "N"
+  },
+  {
+    "id": 21,
+    "Nom Coste": "Andryala sinuata",
+    "Nom commun": "Andryale à feuilles entières",
+    "Famille": "astéracées",
+    "Biotope primaire": [
+      "Maquis et garrigues",
+      "Oueds de la région méditerranéenne"
+    ],
+    "Biotope secondaire": [
+      "Culture",
+      "Vignes",
+      "Vergers",
+      "Bords des chemins et des routes",
+      "Terrains vagues"
+    ],
+    "Caractères indicateurs": [
+      "Plante méditerranéenne",
+      "Microclimat chaud",
+      "Sol à fort contraste hydrique",
+      "Sol brulant en été",
+      "Dans le Nord de la France, zone à microclimat pseudo-méditerranéen"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "/"
+  },
+  {
+    "id": 22,
+    "Nom Coste": "Anthoxanthum odoratum",
+    "Nom commun": "Flouve odorante",
+    "Famille": "poacées",
+    "Biotope primaire": [
+      "Prairies naturelles des grandes vallées alluviales et alpines sur sols frais et riches",
+      "Bordure et clairières forestières riches en humus"
+    ],
+    "Biotope secondaire": [
+      "Prairies agricoles, n’ayant été ni drainées, ni amendées",
+      "Talus des chemins et des routes",
+      "Coupes de bois"
+    ],
+    "Caractères indicateurs": [
+      "Grande biodiversité",
+      "Sols frais et riches en MO d’origine végétale",
+      "Engorgement en carbone",
+      "Carence en MO animale ou en azote"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 23,
+    "Nom Coste": "Anthriscus silvestris",
+    "Nom commun": "Cerfeuil des bois",
+    "Famille": "apiacées",
+    "Biotope primaire": [
+      "Lisières et clairières forestières engorgées en MO archaïque",
+      "Sols riches en bases"
+    ],
+    "Biotope secondaire": [
+      "Bords des chemins et des routes",
+      "Terrains vagues",
+      "Pariries agricoles d’élevage"
+    ],
+    "Caractères indicateurs": [
+      "Engorgement des sols riches en bases, riches en MO surtout végétale ou archïque",
+      "Mauvaise minéralisation de la MO en excès"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 24,
+    "Nom Coste": "Anthyllis vulneraria",
+    "Nom commun": "Anthyllide vulnéraire",
+    "Famille": "fabacées",
+    "Biotope primaire": [
+      "Rochers et éboulis à pH élevé, riches en bases",
+      "Pelouses arides et pelouses écorchées des plateaux calcaires et basaltiques",
+      "Plateaux calcaires à pH élevé"
+    ],
+    "Biotope secondaire": [
+      "Talus et bords des chemins et des routes",
+      "Parcours à moutons"
+    ],
+    "Caractères indicateurs": [
+      "Sols arides à pH élevé > 7,5",
+      "Sol très mince sur substrat rocheux"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "N"
+  },
+  {
+    "id": 25,
+    "Nom Coste": "Alchemilla arvensis",
+    "Nom commun": "Alchémille des champs",
+    "Famille": "rosacées",
+    "Biotope primaire": [
+      "Sables et limons meubles et perméables des vallées alluviales",
+      "Arènes granitiques",
+      "Dunes littorales ou continentales"
+    ],
+    "Biotope secondaire": [
+      "Haies",
+      "Friches",
+      "Prés bois",
+      "Coupes forestières",
+      "Cultures",
+      "Chemins",
+      "Terrains vagues",
+      "Sols remués par les travaux",
+      "Vignes",
+      "Vergers",
+      "Maraîchages",
+      "Jardins"
+    ],
+    "Caractères indicateurs": [
+      "Erosion et lessivage des sols filtrants contenant peu ou pas d’argile ni de MO"
+    ],
+    "Etat du sol": 3.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 26,
+    "Nom Coste": "Lappa major",
+    "Nom commun": "Grande bardane",
+    "Famille": "astéracées",
+    "Biotope primaire": [
+      "Lisières et clairières forestières des plaines et des montagnes",
+      "Forêts alluviales et riveraines"
+    ],
+    "Biotope secondaire": [
+      "Bords des chemins et des routes",
+      "Terrains vagues",
+      "Cultures",
+      "Maraîchage",
+      "Vignes",
+      "Vergers",
+      "Cours de ferme",
+      "Environ des villages et des habitations"
+    ],
+    "Caractères indicateurs": [
+      "Engorgement en MO végétale archïque ayant pou rorigine la lignine",
+      "Sols riches en bases"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 27,
+    "Nom Coste": "Aristolochia clematitis",
+    "Nom commun": "Aristoloche clématite",
+    "Famille": "aristolochiacées",
+    "Biotope primaire": [
+      "Forêts alluviales inondables des grands fleuves et de leurs affluent",
+      "Foêts intermédiaires à lianes (vigne sauvage, clématite, houblon, etc)",
+      "Sols profonds",
+      "Sols humides",
+      "Sols riches en humus"
+    ],
+    "Biotope secondaire": [
+      "Cultures sur sol profonds et humides",
+      "Vignes",
+      "Vergers",
+      "Haies des bocages",
+      "Friches agricoles",
+      "Bords des chemins et des routes"
+    ],
+    "Caractères indicateurs": [
+      "Engorgement en MO, en azote et en eau",
+      "Sols profonds riches en bases",
+      "Sols à forts contraste hydriques"
+    ],
+    "Etat du sol": 1.0,
+    "Comestible": "N"
+  },
+  {
+    "id": 28,
+    "Nom Coste": "Arnica montana",
+    "Nom commun": "Arnique de montagne, Arnica",
+    "Famille": "astéracées",
+    "Biotope primaire": ["Pelouses et landes acides sur sols frais à humide"],
+    "Biotope secondaire": [
+      "Pelouses et prairies agricoles des plaines et des montagnes",
+      "Lisières et clairières forestières"
+    ],
+    "Caractères indicateurs": [
+      "Acidité des sols frais à humide",
+      "Plante calcifuge",
+      "Engorgement en MO végétale archaîque",
+      "Plante acidophile (rare)"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "N"
+  },
+  {
+    "id": 29,
+    "Nom Coste": "Arrhenatherum elatius",
+    "Nom commun": "Avoine élevée",
+    "Famille": "poacées",
+    "Biotope primaire": [
+      "Prairies naturelles des grandes vallées alluviales",
+      "Plateaux calcaires et basaltiques",
+      "Lisières et clairières forestières"
+    ],
+    "Biotope secondaire": [
+      "Prairies agricoles amendées",
+      "Prairies de fauche sur sols riches des plaines et des montagnes",
+      "Bords des routes et des chemins",
+      "Terrains vagues",
+      "Vignes",
+      "Vergers",
+      "Cultures pour subsp bulbosum"
+    ],
+    "Caractères indicateurs": [
+      "Prairies équilibrées pour subsp elatius",
+      "Engorgement en C ou enfouissement de MO végétale ou fond de la raie de labours pour subsp bulbosum"
+    ],
+    "Etat du sol": 1.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 30,
+    "Nom Coste": "Artemisia vulgaris",
+    "Nom commun": "Armoise commune",
+    "Famille": "astéracées",
+    "Biotope primaire": [
+      "Sols sableux et limoneux des vallées alluviales",
+      "Plante pionnère"
+    ],
+    "Biotope secondaire": [
+      "Cultures",
+      "Jardins",
+      "Vignes et vergers",
+      "Bords des routes et des chemins",
+      "Terrains vagues",
+      "Digues des canaux et ballasts des chemins de fer"
+    ],
+    "Caractères indicateurs": [
+      "Engorgement en MO",
+      "Sols riches en bases subissant compactages et érosions",
+      "Manque de couverture des sols à faible pouvoir de rétention",
+      "Asphyxie par compactage ou excès d’irrigation"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 31,
+    "Nom Coste": "Arum italicum",
+    "Nom commun": "Arum d’Italie",
+    "Famille": "aracées",
+    "Biotope primaire": [
+      "Forêts alluviales et riveraines",
+      "Ourlets et bordure forestières"
+    ],
+    "Biotope secondaire": [
+      "Vignes",
+      "Vergers",
+      "Bords des chemins et des routes",
+      "Talus",
+      "Terrains vagues"
+    ],
+    "Caractères indicateurs": [
+      "Evolution des sols riches en bases vers la forêt",
+      "Excès de MO d’origine végétale",
+      "Mauvaise minéralisation de la MO archaïque",
+      "Fossolisation au lieu de minéralisation",
+      "Carence en MO d’origine animale",
+      "Blocage de la potasse par déficience de la vie microbienne"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "N"
+  },
+  {
+    "id": 32,
+    "Nom Coste": "Arum maculatum",
+    "Nom commun": "Arum maculé",
+    "Famille": "aracées",
+    "Biotope primaire": [
+      "Lisières et clairières forestières des plaines et montagnes"
+    ],
+    "Biotope secondaire": [
+      "Petits bois résiduels",
+      "Plantation de robiniers",
+      "Haies des bocages",
+      "Broussailles",
+      "Friches agricoles",
+      "Vignes",
+      "Vergers"
+    ],
+    "Caractères indicateurs": [
+      "Evolution des sols riches en bases vers la forêt",
+      "Excès de MO d’origine végétale",
+      "Mauvaise minéralisation de la MO archaïque",
+      "Fossolisation au lieu de minéralisation",
+      "Carence en MO d’origine animale",
+      "Blocage de la potasse par déficience de la vie microbienne"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "N"
+  },
+  {
+    "id": 33,
+    "Nom Coste": "Asparagus acutifolius",
+    "Nom commun": "Asperge.sauvage, A. piquante",
+    "Famille": "asparagacées",
+    "Biotope primaire": [
+      "Forêts de chênes verts",
+      "Maquis",
+      "Garrigues méditerranéeennes"
+    ],
+    "Biotope secondaire": [
+      "Vignes",
+      "Vergers installés depuis longtemps sur une même parcelle",
+      "Parcelles cultivées depuis longtemps à sol nu"
+    ],
+    "Caractères indicateurs": [
+      "Evolution de la culture vers la forêt",
+      "Excès de MO végétale archaïque",
+      "Destructuration du sol"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 34,
+    "Nom Coste": "Asphodelus microcarpus",
+    "Nom commun": "Asphodèle à petits fruits",
+    "Famille": "asphodélacées",
+    "Biotope primaire": [
+      "Pelous et landes acides",
+      "Lisières et clairières forestières"
+    ],
+    "Biotope secondaire": [
+      "Prairie agricoles",
+      "Talus",
+      "Bords de routes et de chemins",
+      "Terrains vagues"
+    ],
+    "Caractères indicateurs": [
+      "Sols sableux",
+      "Compacts",
+      "Acides",
+      "Dégradés",
+      "Erosions dues à des incendies répétés",
+      "Piétinement du bétail dans les parcelles surpâturées",
+      "Décalcification par dégradation importante des prairies agricoles"
+    ],
+    "Etat du sol": 3.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 35,
+    "Nom Coste": "Asphodelus albus",
+    "Nom commun": "Asphodèle blanc",
+    "Famille": "asphodélacées",
+    "Biotope primaire": [
+      "Pelous et landes acides",
+      "Lisières et clairières forestières"
+    ],
+    "Biotope secondaire": [
+      "Prairie agricoles",
+      "Talus",
+      "Bords de routes et de chemins",
+      "Terrains vagues"
+    ],
+    "Caractères indicateurs": [
+      "Sols sableux",
+      "Compacts",
+      "Acides",
+      "Dégradés",
+      "Erosions dues à des incendies répétés",
+      "Piétinement du bétail dans les parcelles surpâturées",
+      "Décalcification par dégradation importante des prairies agricoles"
+    ],
+    "Etat du sol": 3.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 36,
+    "Nom Coste": "Asphodelus cerasifer",
+    "Nom commun": "Asphodèle rameuse",
+    "Famille": "asphodélacées",
+    "Biotope primaire": [
+      "Pelous et landes acides",
+      "Lisières et clairières forestières"
+    ],
+    "Biotope secondaire": [
+      "Prairie agricoles",
+      "Talus",
+      "Bords de routes et de chemins",
+      "Terrains vagues"
+    ],
+    "Caractères indicateurs": [
+      "Sols sableux",
+      "Compacts",
+      "Acides",
+      "Dégradés",
+      "Erosions dues à des incendies répétés",
+      "Piétinement du bétail dans les parcelles surpâturées",
+      "Décalcification par dégradation importante des prairies agricoles"
+    ],
+    "Etat du sol": 3.0,
+    "Comestible": "/"
+  },
+  {
+    "id": 37,
+    "Nom Coste": "Aster squamatus",
+    "Nom commun": "Aster écailleux",
+    "Famille": "astéracées",
+    "Biotope primaire": [
+      "Bords des eaux salées",
+      "Sables et vases salés du littoral",
+      "Espèce introduite d’Amérique"
+    ],
+    "Biotope secondaire": [
+      "Cultures irriguées",
+      "Prairies humides",
+      "Prairies agricoles amendées",
+      "Terrains vagues",
+      "Bords des routes et des chemins"
+    ],
+    "Caractères indicateurs": [
+      "Salinisation des sols par l’irrigation ou l’apports d’engrais solubles",
+      "Remontées des sels du sous-sol dans les terres compactées des régions littorales"
+    ],
+    "Etat du sol": 3.0,
+    "Comestible": "/"
+  },
+  {
+    "id": 38,
+    "Nom Coste": "Atriplex patula",
+    "Nom commun": "Arroche étalée",
+    "Famille": "salsolacées",
+    "Biotope primaire": [
+      "Bras morts des fleuves et des rivières",
+      "Clairières et bordures forestières",
+      "Reposoirs à animaux sauvages"
+    ],
+    "Biotope secondaire": [
+      "Cultures",
+      "Vignes",
+      "Vergers",
+      "Maraîchage",
+      "Jardins",
+      "Pieds des murs pollués dans les villages",
+      "Bords des routes et des chemins",
+      "Terrains vagues"
+    ],
+    "Caractères indicateurs": [
+      "Excès d’azote N",
+      "Engorgement en MO",
+      "Engorgement en eau",
+      "Hydromorphismes",
+      "Libération brutale de grandes quantités d’azote N dans les sols par temps chaud et sec",
+      "Travail des sols à forts contraste hydrique par temps chaud et sec"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 39,
+    "Nom Coste": "Atriplex hastata",
+    "Nom commun": "Arroche à feuilles hastées",
+    "Famille": "salsolacées",
+    "Biotope primaire": [
+      "Bras morts des fleuves et des rivières",
+      "Clairières et bordures forestières",
+      "Reposoirs à animaux sauvages"
+    ],
+    "Biotope secondaire": [
+      "Cultures",
+      "Vignes",
+      "Vergers",
+      "Maraîchage",
+      "Jardins",
+      "Pieds des murs pollués dans les villages",
+      "Bords des routes et des chemins",
+      "Terrains vagues"
+    ],
+    "Caractères indicateurs": [
+      "Excès d’azote N",
+      "Engorgement en MO",
+      "Engorgement en eau",
+      "Hydromorphismes",
+      "Libération brutale de grandes quantités d’azote N dans les sols par temps chaud et sec",
+      "Travail des sols à forts contraste hydrique par temps chaud et sec"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 40,
+    "Nom Coste": "Avena barbata",
+    "Nom commun": "Avoine barbue",
+    "Famille": null,
+    "Biotope primaire": null,
+    "Biotope secondaire": null,
+    "Caractères indicateurs": null,
+    "Etat du sol": null,
+    "Comestible": null
+  },
+  {
+    "id": 41,
+    "Nom Coste": "Avena fatua",
+    "Nom commun": "Folle-avoine",
+    "Famille": "poacées",
+    "Biotope primaire": ["Sables remués et limons des vallées alluviales"],
+    "Biotope secondaire": [
+      "Cultures",
+      "Vignes",
+      "Vergers",
+      "Terrains vagues",
+      "Jachères",
+      "Bords des chemins et des routes"
+    ],
+    "Caractères indicateurs": [
+      "Sables et limons alcalins compactés",
+      "Sols argilo-calcaires à pH élevé compactés",
+      "Favorisée par excès de N et de K dans les sols compactés",
+      "Destructuration des sols riches en bases"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 42,
+    "Nom Coste": "Avena sterilis",
+    "Nom commun": "Avoine stérile",
+    "Famille": "poacées",
+    "Biotope primaire": [
+      "Grandes vallées alluviales",
+      "Sables calcaires des rivières",
+      "Maquis et garrigues sur sols calcaires",
+      "Region méditerranéenne"
+    ],
+    "Biotope secondaire": [
+      "Cultures amendées et fumées",
+      "Vignes",
+      "Vergers",
+      "Terrains vagues",
+      "Bords des chemins et des routes"
+    ],
+    "Caractères indicateurs": [
+      "Sables et limons alcalins compactés",
+      "Sols argilo-calcaires à pH élevé compactés",
+      "Favorisée par excès de N et de K dans les sols compactés",
+      "Destructuration des sols riches en bases"
+    ],
+    "Etat du sol": 2.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 43,
+    "Nom Coste": "Avena pratensis",
+    "Nom commun": "Avoine des prés",
+    "Famille": "poacées",
+    "Biotope primaire": [
+      "Pelouses et prairies naturelles des vallées alluviales, des plateaux calcaires et basaltiques"
+    ],
+    "Biotope secondaire": [
+      "Prairies agricoles",
+      "Bords des chemins et des routes",
+      "Terrains vagues"
+    ],
+    "Caractères indicateurs": [
+      "Equilibre des prairies sur sols riches en bases",
+      "Début d’engorgement en MO carbonée",
+      "Début de carence en MO animale"
+    ],
+    "Etat du sol": 1.0,
+    "Comestible": "O"
+  },
+  {
+    "id": 44,
+    "Nom Coste": "Avena pubescens",
+    "Nom commun": "Avoine pubescente",
+    "Famille": "poacées",
+    "Biotope primaire": [
+      "Pelouses et prairies naturelles des vallées alluviales, des plateaux calcaires et basaltiques"
+    ],
+    "Biotope secondaire": [
+      "Prairies agricoles",
+      "Bords des chemins et des routes",
+      "Terrains vagues"
+    ],
+    "Caractères indicateurs": [
+      "Equilibre des prairies sur sols riches en bases",
+      "Début d’engorgement en MO carbonée",
+      "Début de carence en MO animale"
+    ],
+    "Etat du sol": 1.0,
+    "Comestible": "O"
+  }
 ]

@@ -8,9 +8,12 @@ import {
 } from "react-router-dom";
 
 // Import des pages
+import { PlantsProvider } from "../../context/PlantsProvider.jsx";
+
 import Diagnostic from "../../pages/app/Diagnostic.jsx";
 import Home from "../../pages/app/Home.jsx";
 import Identification from "../../pages/app/Identification.jsx";
+import PlantDatabase from "../../pages/app/PlantDatabase.jsx";
 import Result from "../../pages/app/Result.jsx";
 import Method from "./methode/Method.jsx";
 import Spinner from "./shared/Spinner.jsx";
@@ -29,9 +32,9 @@ export default function App() {
   }, []);
   console.log("App est bien rendu !");
   return (
-    <div>
+    <PlantsProvider>
       <RouterProvider router={router} />
-    </div>
+    </PlantsProvider>
   );
 }
 
@@ -61,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "resultats",
         element: <Result />,
+      },
+      {
+        path: "plants",
+        element: <PlantDatabase />,
       },
     ],
   },

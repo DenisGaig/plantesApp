@@ -2,6 +2,7 @@ import {
   ClipboardCheck,
   Home,
   ListCheck,
+  LucideSearch,
   Menu,
   Scan,
   Sprout,
@@ -46,6 +47,12 @@ const verticalNavbar = () => {
       link: "/resultats",
       label: "Résultats",
       icon: ClipboardCheck,
+    },
+    {
+      id: "plants",
+      link: "/plants",
+      label: "Base de données",
+      icon: LucideSearch,
     },
   ];
 
