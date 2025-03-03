@@ -1,14 +1,13 @@
 import { useState } from "react";
-import plantNetService from "../../../services/plantNetService";
+import { usePlantIdentification } from "../../../hooks/usePlantIdentification.js";
 
 const CameraComponent = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [results, setResults] = useState(null);
 
-  const { identifyPlant } = plantNetService();
+  // Utiliser le hook pour l'identification de la plante
+  const { identifyPlantImage, loading, error, results } =
+    usePlantIdentification();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -21,24 +20,12 @@ const CameraComponent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Logique pour envoyer l'image à l'API PlantNet
+
     if (!selectedImage) return;
-    setLoading(true);
-    setError(null);
 
     // Appel à l'API PlantNet avec l'image sélectionnée
-    try {
-      const identificationResults = await identifyPlant(selectedImage);
-      setResults(identificationResults.results);
-      console.log("Résultats de l'identification: ", identificationResults);
-    } catch (error) {
-      setError(
-        "Erreur lors de l'identification de la plante. Veuillez réessayer."
-      );
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    // "results" est directement mis à jour par le hook donc plus besoin de le faire ici avec setResults
+    await identifyPlantImage(selectedImage);
   };
 
   return (
@@ -73,7 +60,7 @@ const CameraComponent = () => {
           <ul>
             {results.map((result, index) => (
               <li key={index}>
-                <h3>{result.species.commonNames[0]}</h3>
+                <h3>{result.species.commonNames?.[0]}</h3>
                 <p>Score: {(result.score * 100).toFixed(2)}%</p>
                 <p>Nom scientifique: {result.species.scientificName}</p>
               </li>

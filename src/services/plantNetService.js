@@ -1,5 +1,5 @@
-// Service pour l'API PlantNet
-const plantNetService = () => {
+// Service pour l'appel à l'API PlantNet
+export const plantNetService = () => {
   const apiKey = import.meta.env.PUBLIC_API_KEY_PLANTNET;
   const apiUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${apiKey}`;
   console.log("API Key:", apiKey);
@@ -11,7 +11,8 @@ const plantNetService = () => {
       const formData = new FormData();
       formData.append("images", image);
 
-      console.log("FormData:", [...formData.entries()]); // Affiche les entrées du FormData
+      // Affiche les entrées du FormData pour le débogage
+      console.log("FormData:", [...formData.entries()]);
 
       const response = await fetch(apiUrl, {
         method: "POST",
@@ -34,4 +35,4 @@ const plantNetService = () => {
   };
   return { identifyPlant };
 };
-export default plantNetService;
+// export default plantNetService;
