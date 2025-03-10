@@ -1,0 +1,210 @@
+.advanced-search {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+
+  &__search-options,
+  &__intuitive-search-bar,
+  &__popular-searches,
+  &__view-actions {
+    margin-right: 50px;
+    background-color: rgba(255, 255, 255, 0.63);
+    border-radius: $border-radius * 2;
+    padding: 1rem;
+    box-shadow: $box-shadow;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+    & span {
+      font-size: 1.2rem;
+      font-weight: $font-weight-bold;
+      color: $text-color;
+    }
+  }
+  &__search-options {
+    display: flex;
+    justify-content: space-between;
+
+    &__title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    &__toggle-buttons {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1.5rem;
+      // width: 100%;
+      height: 100%;
+
+      & .toggle-button {
+        background-color: $white;
+        border: 1px solid $primary-color;
+        border-radius: $border-radius;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        font-weight: $font-weight-bold;
+        color: $primary-color;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          background-color: $primary-color;
+          color: $white;
+        }
+        &.active {
+          background-color: $primary-color;
+          color: $white;
+        }
+      }
+    }
+  }
+
+  &__intuitive-search-bar {
+    // width: 100%;
+    border: none;
+    border-radius: $border-radius * 2;
+    padding: 0.5rem 1rem;
+    position: relative;
+
+    input {
+      width: 80%;
+      height: 3rem;
+      font-size: 1rem;
+      font-weight: $font-weight-normal;
+      color: $text-color;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      padding-left: 3rem;
+      &::placeholder {
+        color: $text-color;
+      }
+      &:focus {
+        border: 3px solid $border-color;
+        border-radius: $border-radius;
+      }
+    }
+
+    svg {
+      position: absolute;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $text-color;
+    }
+  }
+
+  &__popular-searches {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: left;
+    height: 100%;
+    // width: 100%;
+    &__title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    &__tags {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+      width: 100%;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      button {
+        background-color: $background-color;
+        color: $text-color;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: $border-radius * 3;
+        cursor: pointer;
+        &:hover {
+          background-color: $secondary-color;
+          color: $white;
+        }
+        &.active {
+          background-color: $secondary-color;
+          color: $white;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          svg {
+            color: $white;
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  &__view-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__view-mode {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      button {
+        background-color: $background-color;
+        color: $text-color;
+        padding: 0.5rem 0.5rem;
+        border: none;
+        border-radius: $border-radius;
+        cursor: pointer;
+        &:hover {
+          background-color: $secondary-color;
+          color: $white;
+        }
+        &.active {
+          background-color: $secondary-color;
+          color: $white;
+        }
+      }
+    }
+    &__actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      button {
+        background-color: $background-color;
+        color: $text-color;
+        padding: 0.5rem 0.5rem;
+      }
+    }
+  }
+
+  &__saved-results {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    width: 100%;
+  }
+  &__search-results {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    width: 100%;
+  }
+}

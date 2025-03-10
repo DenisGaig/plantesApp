@@ -16,3 +16,12 @@ function capitalize(str: string): string {
 }
 
 export { capitalize, DateFormater };
+
+function normalizeString(str: string): string {
+  return str
+    .normalize("NFD") // Décompose les caractères accentués
+    .replace(/[\u0300-\u036f]/g, "") // Supprime les diacritiques
+    .toLowerCase() // Convertit en minuscules
+    .trim(); // Supprime les espaces en début et fin de chaîne
+}
+export { normalizeString };

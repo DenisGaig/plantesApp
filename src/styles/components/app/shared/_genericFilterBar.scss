@@ -1,0 +1,160 @@
+.generic-filter-bar {
+  margin-right: 50px;
+  background-color: rgba(255, 255, 255, 0.63);
+  border-radius: $border-radius * 2;
+  padding: 1rem;
+  box-shadow: $box-shadow;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1 rem 1.5rem;
+    border-bottom: 1px solid $light-gray-transparent;
+
+    &__title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      h3 {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: $font-weight-bold;
+        color: $text-color;
+      }
+    }
+
+    .toggle-expand-button {
+      background: transparent;
+      border: 1px solid $primary-color;
+      border-radius: $border-radius;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: $primary-color;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+
+      &:after {
+        content: "";
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233b82f6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+  &__controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 0 1.5rem;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    & .filter-item {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0.75rem;
+
+      label {
+        font-size: 0.9rem;
+        font-weight: $font-weight-normal;
+        color: $text-color;
+        margin-bottom: 0.25rem;
+      }
+
+      .generic-filter-input,
+      .generic-filter-select {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid $primary-color;
+        border-radius: $border-radius;
+        font-size: 0.9rem;
+
+        &:focus {
+          border-color: $primary-color;
+          outline: none;
+          box-shadow: $box-shadow;
+        }
+      }
+      .generic-filter-checkbox {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      .generic-filter-range-filter {
+        display: flex;
+        align-items: center;
+
+        .generic-filter-range {
+          flex: 1;
+          margin-right: 0.75rem;
+        }
+        .generic-filter-range-value {
+          min-width: 2.5rem;
+          text-align: right;
+          font-size: 0.9rem;
+          color: $text-color;
+        }
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid $primary-color;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &.expanded {
+    .generic-filter-bar__header {
+      .toggle-expand-button::after {
+        transform: rotate(180deg);
+      }
+    }
+
+    .generic-filter-bar__controls {
+      max-height: 600px; // Hauteur suffisante pour le contenu
+      opacity: 1;
+      visibility: visible;
+      padding-top: 1.5rem;
+      padding-bottom: 1rem;
+    }
+
+    .generic-filter-bar__actions {
+      max-height: 100px; // Hauteur suffisante pour le contenu
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  // État replié mais avec des filtres actifs
+  & {
+    &.collapsed.has-active-filters {
+      .generic-filter-bar__header::before {
+        content: attr(data-active-filters);
+        background-color: #3b82f6;
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.125rem 0.5rem;
+        border-radius: 999px;
+        margin-left: 0.75rem;
+      }
+    }
+  }
+}

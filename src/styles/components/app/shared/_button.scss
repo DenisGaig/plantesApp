@@ -1,0 +1,49 @@
+$button-padding: 10px 20px;
+$button-color: $text-color;
+$button-border-radius: 5px;
+$button-transition: background-color 0.3s ease, color 0.3s ease;
+$button-hover-background: darken($primary-color, 10%);
+$button-outline-hover-background: $primary-color;
+$button-outline-hover-color: $white;
+$button-disabled-background: $light-gray-transparent;
+$button-disabled-color: $white;
+
+.button {
+  &.button-default {
+    background-color: $primary-color;
+    color: $white;
+    border: none;
+    padding: $button-padding;
+    border-radius: $button-border-radius;
+    cursor: pointer;
+    transition: $button-transition;
+    &:hover {
+      background-color: $button-hover-background;
+    }
+  }
+  &.button-outline {
+    background-color: transparent;
+    color: $primary-color;
+    border: 2px solid $primary-color;
+    padding: $button-padding;
+    border-radius: $button-border-radius;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    &:hover {
+      background-color: $primary-color;
+      color: $white;
+    }
+  }
+  &.button-small {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  &.button-disabled {
+    background-color: $light-gray-transparent;
+    color: $white;
+    cursor: not-allowed;
+    &:hover {
+      background-color: $button-hover-background;
+    }
+  }
+}

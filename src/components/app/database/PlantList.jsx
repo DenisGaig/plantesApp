@@ -1,24 +1,29 @@
 // Liste des résultats de recherche des plantes
-import { useContext } from "react";
-import { PlantsContext } from "../../../context/PlantsContext.jsx";
+import ListCard from "../shared/ListCard.jsx";
 import PlantCard from "../shared/PlantCard.jsx";
 
-const PlantList = () => {
-  const { filteredPlants, loading, error } = useContext(PlantsContext);
+const PlantList = ({ filteredPlants, viewMode }) => {
+  // const { filteredPlants, loading, error } = useContext(PlantsContext);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  // if (loading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
 
   // console.log("PLANT LIST RENDU !");
 
   return (
-    <div className="plant-list">
+    <div
+      className={viewMode === "list" ? "plant-list list" : "plant-list grid"}
+    >
       {filteredPlants.length === 0 ? (
         <p>Aucune plante ne correspond à ces critères</p>
       ) : (
-        filteredPlants.map((plant) => (
-          <PlantCard key={plant.id} plant={plant} />
-        ))
+        filteredPlants.map((plant) =>
+          viewMode === "list" ? (
+            <ListCard key={plant.id} plant={plant} />
+          ) : (
+            <PlantCard key={plant.id} plant={plant} />
+          )
+        )
       )}
     </div>
   );

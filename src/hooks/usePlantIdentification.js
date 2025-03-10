@@ -20,11 +20,13 @@ export function usePlantIdentification() {
         "Résultats de l'identification: ",
         identificationResults.results
       );
+      return identificationResults.results;
     } catch (error) {
       setError(
         "Erreur lors de l'identification de la plante. Veuillez réessayer."
       );
       console.error(error);
+      return null;
     } finally {
       setLoading(false);
     }

@@ -1,9 +1,9 @@
-import { DotLoader } from "react-spinner";
+import { DotLoader } from "react-spinners";
 
 const Spinner = () => {
   return (
     <div>
-      <DotLoader color="#000124" />
+      <DotLoader color="#c87d7d" loading speedMultiplier={1} />
     </div>
   );
 };

@@ -1,23 +1,19 @@
 import { useEffect, useState } from "react";
 import plantesData from "../data/plantes.json";
+import { normalizeString } from "../utils.ts";
 
 export function usePlantDatabase() {
   const [plants, setPlants] = useState([]);
   const [filteredPlants, setFilteredPlants] = useState([]);
-  const [filters, setFilters] = useState({
-    biotope: "",
-    caracteresIndicateurs: "",
-    famille: "",
-    comestible: "",
-    etatDuSol: null,
-  });
+  const [filters, setFilters] = useState({});
+  const [searchLogic, setSearchLogic] = useState("AND");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     try {
       setPlants(plantesData);
-      console.log("Plantes bien chargées");
+      console.log("Hook - Plantes bien chargées");
       setLoading(false);
     } catch (error) {
       setError(error);
@@ -26,76 +22,175 @@ export function usePlantDatabase() {
   }, []);
 
   useEffect(() => {
-    console.log("APPLY FILTERS !");
-    applyFilters();
-  }, [filters, plants]);
-
-  useEffect(() => {
     console.log("FILTERED PLANTS OUTPUT : ", filteredPlants);
   }, [filteredPlants]);
+
+  // Ajoutez une trace pour voir d'où vient l'appel - BUG
+  useEffect(() => {
+    console.log("FILTERS CHANGED TO:", JSON.stringify(filters));
+    // Ajoutez une trace pour voir d'où vient l'appel
+    console.trace("Filter change stacktrace");
+  }, [filters]);
 
   // Récupérer une plante par son ID
   const getPlantById = (id) => {
     return plants.find((plant) => plant.id === id);
   };
 
-  const applyFilters = () => {
+  const applyFilters = (
+    specificFilters = filters,
+    specificLogic = searchLogic
+  ) => {
     let result = [...plants];
     // console.log("RESULTS INPUT: ", result);
+    const matchFilters = {
+      name: (plant, value) =>
+        plant["Nom commun"]?.toLowerCase().includes(value.toLowerCase()),
 
-    // Filtrer par biotope
-    if (filters.biotope) {
+      latinName: (plant, value) =>
+        plant["Nom Coste"]?.toLowerCase().includes(value.toLowerCase()),
+
+      famille: (plant, value) =>
+        plant["Famille"]?.toLowerCase().includes(value.toLowerCase()),
+
+      primaryBiotope: (plant, value) => {
+        const normalizedValue = normalizeString(value);
+        const keywords = normalizedValue.split(" ");
+
+        // console.log("🔍 Valeur filtrée normalisée:", normalizedValue);
+        // console.log("🔍 Mots-clés recherchés:", keywords);
+
+        return (plant["Biotope primaire"] || []).some((biotope) => {
+          const normalizedBiotope = normalizeString(biotope);
+          // console.log("🌳 Biotope analysé normalisé:", normalizedBiotope);
+          // Vérifie si l'ensemble de la phrase est une sous-chaîne complète
+          if (normalizedBiotope.includes(normalizedValue)) {
+            // console.log("✅ Correspondance directe trouvée !");
+            return true;
+          }
+          // Vérifie si au moins UN des mots-clés est présent quelque part
+          return keywords.every((keyword) =>
+            normalizedBiotope.includes(keyword)
+          );
+        });
+      },
+
+      secondaryBiotope: (plant, value) => {
+        const normalizedValue = normalizeString(value);
+        const keywords = normalizedValue.split(" ");
+
+        // console.log("🔍 Valeur filtrée normalisée:", normalizedValue);
+        // console.log("🔍 Mots-clés recherchés:", keywords);
+
+        return (plant["Biotope secondaire"] || []).some((biotope) => {
+          const normalizedBiotope = normalizeString(biotope);
+          // console.log("🌳 Biotope analysé normalisé:", normalizedBiotope);
+          // Vérifie si l'ensemble de la phrase est une sous-chaîne complète
+          if (normalizedBiotope.includes(normalizedValue)) {
+            // console.log("✅ Correspondance directe trouvée !");
+            return true;
+          }
+          // Vérifie si au moins UN des mots-clés est présent quelque part
+          return keywords.every((keyword) =>
+            normalizedBiotope.includes(keyword)
+          );
+        });
+      },
+      // secondaryBiotope: (plant, value) =>
+      //   (plant["Biotope secondaire"] || []).some((biotope) =>
+      //     biotope.toLowerCase().includes(value.toLowerCase())
+      //   ),
+
+      isEdible: (plant, value) => {
+        // Si la valeur est vide ou undefined, ne pas filtrer sur ce critère
+        if (value === "" || value === undefined || value === null) {
+          return true; // Accepter toutes les plantes indépendamment de leur comestibilité
+        }
+
+        // Si la valeur est un booléen true, filtrer seulement les plantes comestibles
+        if (value === true) {
+          return plant["Comestible"] === "O";
+        }
+
+        // Si la valeur est un booléen false, ne pas filtrer sur ce critère
+        // (Accepter toutes les plantes indépendamment de leur comestibilité)
+        return true;
+      },
+
+      soilState: (plant, value) => plant["Etat du sol"] === value,
+
+      nitrogenIndicator: (plant, value) => plant["Indicateur azote"] === value,
+
+      moistureIndicator: (plant, value) =>
+        plant["Indicateur humidité"] === value,
+
+      pHIndicator: (plant, value) => plant["Indicateur pH"] === value,
+
+      isMedicinal: (plant, value) => plant["Médicinale"] === value,
+
+      indicatorStrength: (plant, value) => plant["Force indicateur"] === value,
+
+      // Ajouter d'autres correspondances au besoin
+      default: () => false,
+    };
+
+    const filterEntries = Object.entries(specificFilters);
+    console.log("Hook - FILTERS : ", filters);
+    console.log("Hook - FILTER ENTRIES : ", filterEntries);
+    console.log("Hook - SEARCH LOGIC : ", searchLogic);
+
+    if (filterEntries.length > 0) {
       result = result.filter((plant) => {
-        const allBiotopes = [
-          ...(plant["Biotope primaire"] || []),
-          ...(plant["Biotope secondaire"] || []),
-        ];
-        return allBiotopes.some((biotope) =>
-          biotope.toLowerCase().includes(filters.biotope.toLowerCase())
-        );
+        if (specificLogic === "AND") {
+          return filterEntries.every(([key, value]) => {
+            const matchFilter = matchFilters[key] || matchFilters.default;
+            return matchFilter(plant, value);
+          });
+        } else if (specificLogic === "OR") {
+          return filterEntries.some(([key, value]) => {
+            const matchFilter = matchFilters[key] || matchFilters.default;
+            return matchFilter(plant, value);
+          });
+        }
+        return true;
       });
     }
 
-    // Filtrer par famille
-    if (filters.famille) {
-      result = result.filter((plant) => {
-        // console.log("Plant famille : ", plant.Famille);
-        return plant["Famille"]
-          ?.toLowerCase()
-          .includes(filters.famille.toLowerCase());
-      });
-    }
-
-    // Filtrer par caractères indicateurs
-    if (filters.caracteresIndicateurs) {
-      result = result.filter((plant) => {
-        return plant["Caractères indicateurs"]?.some((caractere) =>
-          caractere
-            .toLowerCase()
-            .includes(filters.caracteresIndicateurs.toLowerCase())
-        );
-      });
-    }
-
-    // Filtrer par état du sol
-    if (filters.etatDuSol) {
-      result = result.filter((plant) => {
-        return plant["Etat du sol"] === filters.etatDuSol;
-      });
-    }
-    // Filtrer par comestibilité
-    if (filters.comestible) {
-      result = result.filter((plant) => {
-        return plant["Comestible"] === filters.comestible;
-      });
-    }
-
-    setFilteredPlants(result);
+    return result;
   };
 
   const updateFilters = (newFilters) => {
-    console.log("Mise à jour des filtres : ", newFilters);
+    console.log("Hook - Mise à jour des filtres : ", newFilters);
     setFilters((prev) => ({ ...prev, ...newFilters }));
+  };
+
+  const searchPlants = async ({ filters: newFilters, logic }) => {
+    setLoading(true);
+    // Ajouter un log pour voir les nouveaux filtres
+    console.log("Hook - SEARCHING WITH NEW FILTERS:", newFilters);
+    // Mise à jour des filtres et de la logique de recherche
+    console.log("Avant setFilters", filters);
+    setFilters(newFilters);
+    console.log("Après setFilters", filters);
+    if (logic) setSearchLogic(logic);
+
+    // Attendre le prochain cycle de rendu pour appliquer les filtres et filteredPlants sera mis à jour
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        // Utiliser applyFilters directement avec les paramètres fournis
+        const result = applyFilters(newFilters, logic || searchLogic);
+
+        // Mettre à jour l'état filteredPlants pour cohérence
+        setFilteredPlants(result);
+        setLoading(false);
+        console.log(
+          "RÉSULTATS DE RECHERCHE:",
+          result.length,
+          "plantes trouvées"
+        );
+        resolve(result);
+      }, 0);
+    });
   };
 
   return {
@@ -105,6 +200,9 @@ export function usePlantDatabase() {
     getPlantById,
     filteredPlants,
     updateFilters,
+    searchPlants,
+    setSearchLogic,
+    searchLogic,
     filters,
   };
 }

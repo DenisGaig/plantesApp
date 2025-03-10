@@ -1,7 +1,9 @@
 // Service pour l'appel à l'API PlantNet
 export const plantNetService = () => {
   const apiKey = import.meta.env.PUBLIC_API_KEY_PLANTNET;
-  const apiUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${apiKey}`;
+  const apiLang = "&lang=fr";
+  const apiIncludeRelatedImages = "&include-related-images=true";
+  const apiUrl = `https://my-api.plantnet.org/v2/identify/all?api-key=${apiKey}${apiLang}${apiIncludeRelatedImages}`;
   console.log("API Key:", apiKey);
   console.log("API URL:", apiUrl);
 

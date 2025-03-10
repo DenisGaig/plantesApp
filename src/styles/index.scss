@@ -1,16 +1,31 @@
+// Styles globaux
 @import "base/variables";
 @import "base/reset";
 @import "base/typography";
 
-@import "components/header";
-@import "components/articleCard";
-@import "components/mostRecentArticle";
+// composants du blog
+@import "components/blog/header";
+@import "components/blog/articleCard";
+@import "components/blog/mostRecentArticle";
 
+// pages du blog
 @import "pages/main";
-@import "pages/article";
+@import "pages/blog/article";
 
-@import "app/navbar";
-@import "app/main";
-@import "app/plantCard";
-@import "app/plantList";
-@import "app/filterBar";
+// pages de l'application
+@import "pages/app/main";
+@import "pages/app/identification";
+
+// composants de l'application
+@import "components/app/shared/plantCard";
+@import "components/app/shared/navbar";
+@import "components/app/shared/genericFilterBar";
+@import "components/app/shared/button";
+@import "components/app/shared/listCard";
+
+@import "components/app/database/plantDatabase";
+@import "components/app/database/advancedSearch";
+@import "components/app/database/plantList";
+
+@import "components/app/identification/cameraComponent";
+@import "components/app/identification/plantNetResults";

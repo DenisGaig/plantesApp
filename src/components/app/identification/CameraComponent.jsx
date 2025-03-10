@@ -1,20 +1,28 @@
+import { ImagePlus } from "lucide-react";
 import { useState } from "react";
 import { usePlantIdentification } from "../../../hooks/usePlantIdentification.js";
+import Spinner from "../shared/Spinner.jsx";
 
-const CameraComponent = () => {
+// const CameraComponent = () => {
+const CameraComponent = ({ onResultsReceived, onImagePreview }) => {
   const [imagePreview, setImagePreview] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // Utiliser le hook pour l'identification de la plante
-  const { identifyPlantImage, loading, error, results } =
-    usePlantIdentification();
+  // Utiliser le hook pour l'identification de la plante - results enlevé car il est passé en paramètre de la fonction onResultsReceived
+  const { identifyPlantImage, loading, error } = usePlantIdentification();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setSelectedImage(file);
+
       // Créer une URL pour la prévisualisation de l'image
-      setImagePreview(URL.createObjectURL(file));
+      const imagePreviewURL = URL.createObjectURL(file);
+      setImagePreview(imagePreviewURL);
+
+      if (onImagePreview) {
+        onImagePreview(imagePreviewURL);
+      }
     }
   };
 
@@ -25,49 +33,51 @@ const CameraComponent = () => {
 
     // Appel à l'API PlantNet avec l'image sélectionnée
     // "results" est directement mis à jour par le hook donc plus besoin de le faire ici avec setResults
-    await identifyPlantImage(selectedImage);
+    // await identifyPlantImage(selectedImage);
+
+    // Si onResultsReceived est fourni, appeler cette fonction avec les résultats
+    const results = await identifyPlantImage(selectedImage);
+    if (results && onResultsReceived) {
+      console.log("Résultats reçus dans CameraComponent:", results);
+      onResultsReceived(results);
+    }
   };
 
   return (
     <div className="camera-component">
-      <form onSubmit={handleSubmit}>
+      <form className="camera-component__upload-input" onSubmit={handleSubmit}>
+        <span className="camera-component__upload-icon">
+          <ImagePlus />
+        </span>
         <input
           type="file"
           accept="image/*"
           onChange={handleFileChange}
           id="image-upload"
         />
-        <label htmlFor="image-upload" className="upload-label">
+        <label
+          htmlFor="image-upload"
+          className="camera-component__upload-label"
+        >
           Sélectionnez une image
         </label>
 
         {imagePreview && (
-          <div className="image-preview">
+          <div className="camera-component__image-preview">
             <img src={imagePreview} alt="Prévisualisation de l'image" />
-            <button type="submit" className="submit-button">
+            <button type="submit" className="camera-component__submit-button">
               Identifier la plante
             </button>
           </div>
         )}
       </form>
 
-      {loading && <p>Chargement...</p>}
-      {error && <p>Erreur: {error}</p>}
-
-      {results && (
-        <div className="identification-results">
-          <h2>Résultats de l'identification</h2>
-          <ul>
-            {results.map((result, index) => (
-              <li key={index}>
-                <h3>{result.species.commonNames?.[0]}</h3>
-                <p>Score: {(result.score * 100).toFixed(2)}%</p>
-                <p>Nom scientifique: {result.species.scientificName}</p>
-              </li>
-            ))}
-          </ul>
+      {loading && (
+        <div className="camera-component__spinner">
+          <Spinner />
         </div>
       )}
+      {error && <p>Erreur: {error}</p>}
     </div>
   );
 };
