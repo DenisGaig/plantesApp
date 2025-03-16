@@ -1,0 +1,106 @@
+.plantNet-card {
+  .plantNet-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .plantNet-card__header-score {
+      font-size: 1.2rem;
+      font-weight: $font-weight-normal;
+      color: $text-color;
+      padding: 5px 10px;
+      width: 130px;
+      border: 1px solid $primary-color;
+      border-radius: $border-radius * 2;
+      background-color: transparent;
+      text-align: center;
+    }
+    h4 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      font-style: italic;
+    }
+    .planNet-card__header-name,
+    .planNet-card__header-genus,
+    .planNet-card__header-family {
+      background-color: transparent;
+      border-left: 1px solid $light-gray-transparent;
+      padding-left: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: left;
+
+      h5 {
+        font-size: 0.9rem;
+        font-weight: $font-weight-normal;
+        color: $text-color;
+        text-transform: uppercase;
+      }
+      p {
+        font-size: 1.2rem;
+        font-weight: $font-weight-normal;
+        color: $text-color;
+        text-transform: capitalize;
+        font-style: italic;
+      }
+    }
+  }
+  .plantNet-card__body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+
+    .plantNet-card__body-image {
+      width: 100px;
+      height: 100px;
+      border-radius: $border-radius * 2;
+      margin: 0 5px;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  .plantNet-card__button {
+    background-color: $primary-color;
+    color: $white;
+    border: none;
+    border-radius: $border-radius * 2;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      background-color: $secondary-color;
+      color: $primary-color;
+      transform: scale(1.05);
+    }
+    &:active {
+      transform: scale(0.95);
+      // background-color: $tertiary-color;
+      color: $primary-color;
+    }
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.5);
+    }
+    &:disabled {
+      // background-color: $gray;
+      color: $white;
+      cursor: not-allowed;
+      &:hover {
+        // background-color: $gray;
+        color: $white;
+        transform: none;
+      }
+      &:active {
+        // background-color: $gray;
+        color: $white;
+        transform: none;
+      }
+    }
+  }
+}

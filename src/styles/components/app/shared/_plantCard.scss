@@ -18,23 +18,24 @@
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   }
-  img {
+  &__image {
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
     border-radius: 5px;
+    background-color: $light-gray-transparent;
   }
-  .plant_card__title {
-    font-size: 1.2rem;
+  .plant-card__title {
+    font-size: 1rem;
     margin: 0.5rem 0;
   }
-  .plant_card__scientific_title,
-  .plant_card__family {
-    font-size: 1rem;
+  .plant-card__scientific_title,
+  .plant-card__family {
+    font-size: 0.8rem;
     margin: 0.2rem 0;
   }
 
-  .plant_card__biotope {
+  .plant-card__biotope {
     h4 {
       font-size: 1rem;
       margin: 0.5rem 0;
@@ -47,23 +48,23 @@
       }
     }
   }
-  .plant_card__soil-state {
-    .plant_card__soil-state__good {
+  .plant-card__soil-state {
+    .plant-card__soil-state__good {
       color: green;
     }
-    .plant_card__soil-state__medium {
+    .plant-card__soil-state__medium {
       color: orange;
     }
-    .plant_card__soil-state__bad {
+    .plant-card__soil-state__bad {
       color: red;
     }
-    .plant_card__comestible {
+    .plant-card__comestible {
       background-color: rgba(0, 128, 0, 0.589);
       padding: 5px 10px;
       border-radius: 10px;
       color: white;
     }
-    .plant_card__toxique {
+    .plant-card__toxique {
       background-color: rgba(255, 0, 0, 0.589);
       padding: 5px 10px;
       border-radius: 10px;

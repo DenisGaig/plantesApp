@@ -2,6 +2,8 @@
 import ListCard from "../shared/ListCard.jsx";
 import PlantCard from "../shared/PlantCard.jsx";
 
+import { useLocation } from "react-router-dom";
+
 const PlantList = ({ filteredPlants, viewMode }) => {
   // const { filteredPlants, loading, error } = useContext(PlantsContext);
 
@@ -9,6 +11,8 @@ const PlantList = ({ filteredPlants, viewMode }) => {
   // if (error) return <div>Error: {error.message}</div>;
 
   // console.log("PLANT LIST RENDU !");
+  const location = useLocation();
+  const currentSearchParams = location.search;
 
   return (
     <div
@@ -19,9 +23,17 @@ const PlantList = ({ filteredPlants, viewMode }) => {
       ) : (
         filteredPlants.map((plant) =>
           viewMode === "list" ? (
-            <ListCard key={plant.id} plant={plant} />
+            <ListCard
+              key={plant.id}
+              plant={plant}
+              searchParams={currentSearchParams}
+            />
           ) : (
-            <PlantCard key={plant.id} plant={plant} />
+            <PlantCard
+              key={plant.id}
+              plant={plant}
+              searchParams={currentSearchParams}
+            />
           )
         )
       )}

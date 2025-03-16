@@ -1,4 +1,5 @@
 $button-padding: 10px 20px;
+$button-small-padding: 5px 10px;
 $button-color: $text-color;
 $button-border-radius: 5px;
 $button-transition: background-color 0.3s ease, color 0.3s ease;
@@ -35,8 +36,13 @@ $button-disabled-color: $white;
     }
   }
   &.button-small {
-    padding: 5px 10px;
+    padding: $button-small-padding;
     font-size: 14px;
+    cursor: pointer;
+    transition: $button-transition;
+    &:hover {
+      background-color: $button-hover-background;
+    }
   }
   &.button-disabled {
     background-color: $light-gray-transparent;

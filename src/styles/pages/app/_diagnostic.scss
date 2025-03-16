@@ -1,0 +1,53 @@
+.diagnostic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: $white-transparent;
+  border-radius: $border-radius * 2;
+  box-shadow: $box-shadow;
+
+  &__stepper {
+    width: 100%;
+    // max-width: 800px;
+    margin-bottom: 20px;
+    background-color: $secondary-color-light;
+    color: $white;
+    padding: 10px 20px;
+    border-radius: $border-radius * 2;
+    box-shadow: $box-shadow;
+  }
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  &__content {
+    width: 100%;
+    min-height: 200px;
+    // max-width: 800px;
+    margin-bottom: 20px;
+    background-color: $secondary-color_light;
+    color: $white;
+    padding: 10px 20px;
+    border-radius: $border-radius * 2;
+    box-shadow: $box-shadow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    &-button {
+      margin: 0 10px;
+    }
+  }
+}

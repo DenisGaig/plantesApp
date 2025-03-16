@@ -619,6 +619,78 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
   min-height: 80vh;
 }
 
+.diagnostic {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.768627451);
+  border-radius: 10px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.diagnostic__stepper {
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: rgba(142, 181, 51, 0.7176470588);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.diagnostic__title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.diagnostic__content {
+  width: 100%;
+  min-height: 200px;
+  margin-bottom: 20px;
+  background-color: rgba(142, 181, 51, 0.7176470588);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.diagnostic__footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+}
+.diagnostic__footer-button {
+  margin: 0 10px;
+}
+
 .plant-card {
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -653,47 +725,48 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
-.plant-card img {
+.plant-card__image {
   width: 100%;
-  height: 200px;
+  height: 300px;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 5px;
+  background-color: rgba(233, 232, 232, 0.6117647059);
 }
-.plant-card .plant_card__title {
-  font-size: 1.2rem;
+.plant-card .plant-card__title {
+  font-size: 1rem;
   margin: 0.5rem 0;
 }
-.plant-card .plant_card__scientific_title,
-.plant-card .plant_card__family {
-  font-size: 1rem;
+.plant-card .plant-card__scientific_title,
+.plant-card .plant-card__family {
+  font-size: 0.8rem;
   margin: 0.2rem 0;
 }
-.plant-card .plant_card__biotope h4 {
+.plant-card .plant-card__biotope h4 {
   font-size: 1rem;
   margin: 0.5rem 0;
 }
-.plant-card .plant_card__biotope ul li {
+.plant-card .plant-card__biotope ul li {
   font-size: 0.8rem;
   margin: 0.2rem 0;
   text-align: left;
 }
-.plant-card .plant_card__soil-state .plant_card__soil-state__good {
+.plant-card .plant-card__soil-state .plant-card__soil-state__good {
   color: green;
 }
-.plant-card .plant_card__soil-state .plant_card__soil-state__medium {
+.plant-card .plant-card__soil-state .plant-card__soil-state__medium {
   color: orange;
 }
-.plant-card .plant_card__soil-state .plant_card__soil-state__bad {
+.plant-card .plant-card__soil-state .plant-card__soil-state__bad {
   color: red;
 }
-.plant-card .plant_card__soil-state .plant_card__comestible {
+.plant-card .plant-card__soil-state .plant-card__comestible {
   background-color: rgba(0, 128, 0, 0.589);
   padding: 5px 10px;
   border-radius: 10px;
   color: white;
 }
-.plant-card .plant_card__soil-state .plant_card__toxique {
+.plant-card .plant-card__soil-state .plant-card__toxique {
   background-color: rgba(255, 0, 0, 0.589);
   padding: 5px 10px;
   border-radius: 10px;
@@ -921,6 +994,7 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
   display: inline-block;
   width: 12px;
   height: 12px;
+  margin: auto 0 auto 0.5rem;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233b82f6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
@@ -1067,6 +1141,12 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
 .button.button-small {
   padding: 5px 10px;
   font-size: 14px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.button.button-small:hover {
+  background-color: #217dbb;
 }
 .button.button-disabled {
   background-color: rgba(233, 232, 232, 0.6117647059);
@@ -1077,7 +1157,12 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
   background-color: #217dbb;
 }
 
-.list-plant-card {
+.list-plant-card__link {
+  text-decoration: none;
+  width: 50%;
+  color: inherit;
+}
+.list-plant-card__link .list-plant-card {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1087,7 +1172,7 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  width: 50%;
+  width: 100%;
   padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -1100,14 +1185,14 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
   transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
 }
-.list-plant-card__image {
+.list-plant-card__link .list-plant-card__image {
   width: 100px;
   height: 100px;
   background-color: #ccc;
   border-radius: 10px;
   margin-right: 1rem;
 }
-.list-plant-card__content {
+.list-plant-card__link .list-plant-card__content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1119,17 +1204,17 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
       -ms-flex-pack: center;
           justify-content: center;
 }
-.list-plant-card__content__title {
+.list-plant-card__link .list-plant-card__content__title {
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
-.list-plant-card__content__scientific_title {
+.list-plant-card__link .list-plant-card__content__scientific_title {
   font-size: 0.8rem;
   color: #666;
   margin-bottom: 1rem;
 }
-.list-plant-card__content__soil-state {
+.list-plant-card__link .list-plant-card__content__soil-state {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1137,25 +1222,77 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
       -ms-flex-align: center;
           align-items: center;
 }
-.list-plant-card__content__soil-state h4 {
+.list-plant-card__link .list-plant-card__content__soil-state h4 {
   font-size: 1rem;
   font-weight: 400;
   margin-right: 0.5rem;
 }
-.list-plant-card__content__soil-state p {
+.list-plant-card__link .list-plant-card__content__soil-state p {
   font-size: 0.8rem;
   color: #ffffff;
   border-radius: 10px;
   padding: 0.2rem 0.5rem;
 }
-.list-plant-card__content__soil-state p.list-plant_card__soil-state__good {
+.list-plant-card__link .list-plant-card__content__soil-state p.list-plant_card__soil-state__good {
   background-color: green;
 }
-.list-plant-card__content__soil-state p.list-plant_card__soil-state__medium {
+.list-plant-card__link .list-plant-card__content__soil-state p.list-plant_card__soil-state__medium {
   background-color: orange;
 }
-.list-plant-card__content__soil-state p.list-plant_card__soil-state__bad {
+.list-plant-card__link .list-plant-card__content__soil-state p.list-plant_card__soil-state__bad {
   background-color: red;
+}
+
+.stepper {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.stepper__step {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.stepper__step-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #333;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 5px;
+}
+.stepper__step-label {
+  font-size: 14px;
+  color: #333;
+}
+.stepper__step.active .stepper__step-circle {
+  background-color: #007bff;
+  color: #fff;
+}
+.stepper__step.active .stepper__step-label {
+  color: #007bff;
 }
 
 .plant-database {
@@ -1681,7 +1818,8 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.plantNet-results ul > li .plantNet-results__header {
+
+.plantNet-card .plantNet-card__header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1693,7 +1831,7 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
           align-items: center;
   margin-bottom: 10px;
 }
-.plantNet-results ul > li .plantNet-results__header .plantNet-results__header-score {
+.plantNet-card .plantNet-card__header .plantNet-card__header-score {
   font-size: 1.2rem;
   font-weight: 400;
   color: #333;
@@ -1704,14 +1842,14 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
   background-color: transparent;
   text-align: center;
 }
-.plantNet-results ul > li .plantNet-results__header h4 {
+.plantNet-card .plantNet-card__header h4 {
   font-size: 1.6rem;
   font-weight: bold;
   font-style: italic;
 }
-.plantNet-results ul > li .plantNet-results__header .planNet-results__header-name,
-.plantNet-results ul > li .plantNet-results__header .planNet-results__header-genus,
-.plantNet-results ul > li .plantNet-results__header .planNet-results__header-family {
+.plantNet-card .plantNet-card__header .planNet-card__header-name,
+.plantNet-card .plantNet-card__header .planNet-card__header-genus,
+.plantNet-card .plantNet-card__header .planNet-card__header-family {
   background-color: transparent;
   border-left: 1px solid rgba(233, 232, 232, 0.6117647059);
   padding-left: 10px;
@@ -1729,24 +1867,24 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
       -ms-flex-align: left;
           align-items: left;
 }
-.plantNet-results ul > li .plantNet-results__header .planNet-results__header-name h5,
-.plantNet-results ul > li .plantNet-results__header .planNet-results__header-genus h5,
-.plantNet-results ul > li .plantNet-results__header .planNet-results__header-family h5 {
+.plantNet-card .plantNet-card__header .planNet-card__header-name h5,
+.plantNet-card .plantNet-card__header .planNet-card__header-genus h5,
+.plantNet-card .plantNet-card__header .planNet-card__header-family h5 {
   font-size: 0.9rem;
   font-weight: 400;
   color: #333;
   text-transform: uppercase;
 }
-.plantNet-results ul > li .plantNet-results__header .planNet-results__header-name p,
-.plantNet-results ul > li .plantNet-results__header .planNet-results__header-genus p,
-.plantNet-results ul > li .plantNet-results__header .planNet-results__header-family p {
+.plantNet-card .plantNet-card__header .planNet-card__header-name p,
+.plantNet-card .plantNet-card__header .planNet-card__header-genus p,
+.plantNet-card .plantNet-card__header .planNet-card__header-family p {
   font-size: 1.2rem;
   font-weight: 400;
   color: #333;
   text-transform: capitalize;
   font-style: italic;
 }
-.plantNet-results ul > li .plantNet-results__body {
+.plantNet-card .plantNet-card__body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1762,7 +1900,7 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
           align-items: center;
   padding: 10px 0;
 }
-.plantNet-results ul > li .plantNet-results__body .plantNet-results__body-image {
+.plantNet-card .plantNet-card__body .plantNet-card__body-image {
   width: 100px;
   height: 100px;
   border-radius: 10px;
@@ -1772,7 +1910,7 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
   -o-object-position: center;
      object-position: center;
 }
-.plantNet-results ul > li .plantNet-results__button {
+.plantNet-card .plantNet-card__button {
   background-color: #3498db;
   color: #ffffff;
   border: none;
@@ -1784,33 +1922,235 @@ main .main__blog .main__articles-grid:hover a:not(:hover) .grid-card {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.plantNet-results ul > li .plantNet-results__button:hover {
+.plantNet-card .plantNet-card__button:hover {
   background-color: #8eb533;
   color: #3498db;
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
 }
-.plantNet-results ul > li .plantNet-results__button:active {
+.plantNet-card .plantNet-card__button:active {
   -webkit-transform: scale(0.95);
           transform: scale(0.95);
   color: #3498db;
 }
-.plantNet-results ul > li .plantNet-results__button:focus {
+.plantNet-card .plantNet-card__button:focus {
   outline: none;
   -webkit-box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
           box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
 }
-.plantNet-results ul > li .plantNet-results__button:disabled {
+.plantNet-card .plantNet-card__button:disabled {
   color: #ffffff;
   cursor: not-allowed;
 }
-.plantNet-results ul > li .plantNet-results__button:disabled:hover {
+.plantNet-card .plantNet-card__button:disabled:hover {
   color: #ffffff;
   -webkit-transform: none;
           transform: none;
 }
-.plantNet-results ul > li .plantNet-results__button:disabled:active {
+.plantNet-card .plantNet-card__button:disabled:active {
   color: #ffffff;
   -webkit-transform: none;
           transform: none;
+}
+
+.plant-profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.plant-profile__back-button {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
+}
+.plant-profile__back-button:hover {
+  background-color: #8eb533;
+  color: #ffffff;
+}
+.plant-profile__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  width: 100%;
+  gap: 1rem;
+}
+.plant-profile__header__image {
+  width: 30%;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 0.5rem;
+  background-color: rgba(170, 170, 170, 0.7176470588);
+}
+.plant-profile__header__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: left;
+      -ms-flex-align: left;
+          align-items: left;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 0.5rem;
+  width: 70%;
+}
+.plant-profile__tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  background-color: #8eb533;
+}
+.plant-profile__tabs .tabs-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  background-color: #8eb533;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.plant-profile__tabs .tabs-button:hover {
+  background-color: #3498db;
+}
+.plant-profile__tabs .tabs-button.active {
+  background-color: #3498db;
+}
+
+.plant-bio-indicators {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.plant-bio-indicators__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  width: 100%;
+  gap: 1rem;
+}
+.plant-bio-indicators__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  width: 100%;
+  gap: 1rem;
+}
+.plant-bio-indicators__content__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: left;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  width: 100%;
+  gap: 1rem;
 }/*# sourceMappingURL=index.css.map */

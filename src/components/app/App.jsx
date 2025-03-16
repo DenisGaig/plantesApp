@@ -14,8 +14,9 @@ import Diagnostic from "../../pages/app/Diagnostic.jsx";
 import Home from "../../pages/app/Home.jsx";
 import Identification from "../../pages/app/Identification.jsx";
 import PlantDatabase from "../../pages/app/PlantDatabase.jsx";
-import Result from "../../pages/app/Result.jsx";
+import Result from "../../pages/app/DiagnosticResult.jsx";
 import Method from "./methode/Method.jsx";
+import PlantProfile from "./profile/PlantProfile.jsx";
 import Spinner from "./shared/Spinner.jsx";
 import VerticalNavbar from "./shared/VerticalNavbar.jsx";
 
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "plants",
         element: <PlantDatabase />,
+      },
+      {
+        path: "plants/:id",
+        element: <PlantProfile />,
       },
     ],
   },

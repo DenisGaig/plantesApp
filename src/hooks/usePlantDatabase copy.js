@@ -34,9 +34,7 @@ export function usePlantDatabase() {
 
   // Récupérer une plante par son ID
   const getPlantById = (id) => {
-    const plantIdAsNumber = Number(id);
-    console.log("GET PLANT BY ID CALLED", id);
-    return plants.find((plant) => plant.id === plantIdAsNumber);
+    return plants.find((plant) => plant.id === id);
   };
 
   const applyFilters = (

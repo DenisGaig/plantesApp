@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "Nom Coste": "Acer campestre",
+    "scientific_name": "Acer campestre",
     "Nom commun": "Erable champêtre",
     "Famille": "aceracées",
     "Biotope primaire": [
@@ -17,7 +17,7 @@
   },
   {
     "id": 2,
-    "Nom Coste": "Achillea millefolium",
+    "scientific_name": "Achillea millefolium",
     "Nom commun": "Achillée millefeuille",
     "Famille": "astéracées",
     "Biotope primaire": [
@@ -43,7 +43,7 @@
   },
   {
     "id": 3,
-    "Nom Coste": "Adonis aestivalis",
+    "scientific_name": "Adonis aestivalis",
     "Nom commun": "Adonis d’été",
     "Famille": "renonculacées",
     "Biotope primaire": [
@@ -63,7 +63,7 @@
   },
   {
     "id": 4,
-    "Nom Coste": "Adonis autumnalis",
+    "scientific_name": "Adonis autumnalis",
     "Nom commun": "Adonis d’automne",
     "Famille": "renonculacées",
     "Biotope primaire": [
@@ -83,7 +83,7 @@
   },
   {
     "id": 5,
-    "Nom Coste": "Adonis flammea",
+    "scientific_name": "Adonis flammea",
     "Nom commun": "Adonis écarlate",
     "Famille": "renonculacées",
     "Biotope primaire": [
@@ -103,7 +103,7 @@
   },
   {
     "id": 6,
-    "Nom Coste": "Agrostis alba",
+    "scientific_name": "Agrostis alba",
     "Nom commun": "Agrostide stolonifère",
     "Famille": "poacées",
     "Biotope primaire": [
@@ -132,7 +132,7 @@
   },
   {
     "id": 7,
-    "Nom Coste": "Ajuga reptans",
+    "scientific_name": "Ajuga reptans",
     "Nom commun": "Bugle rampante",
     "Famille": "lamiacées",
     "Biotope primaire": [
@@ -159,7 +159,7 @@
   },
   {
     "id": 8,
-    "Nom Coste": "Alchemilla vulgaris",
+    "scientific_name": "Alchemilla vulgaris",
     "Nom commun": "Alchémille commune",
     "Famille": "rosacées",
     "Biotope primaire": ["Lisière et clairières forestières"],
@@ -177,7 +177,7 @@
   },
   {
     "id": 9,
-    "Nom Coste": "Allium cepa",
+    "scientific_name": "Allium cepa",
     "Nom commun": "Poireau des vignes",
     "Famille": "alliacées",
     "Biotope primaire": ["Maquis et garrigues", "Dunes littorales"],
@@ -196,7 +196,7 @@
   },
   {
     "id": 10,
-    "Nom Coste": "Allium oleraceum",
+    "scientific_name": "Allium oleraceum",
     "Nom commun": "Ail des maraîchers",
     "Famille": "alliacées",
     "Biotope primaire": [
@@ -217,7 +217,7 @@
   },
   {
     "id": 11,
-    "Nom Coste": "Allium vineale",
+    "scientific_name": "Allium vineale",
     "Nom commun": "Ail des vignes",
     "Famille": "alliacées",
     "Biotope primaire": [
@@ -238,7 +238,7 @@
   },
   {
     "id": 12,
-    "Nom Coste": "Alopecurus agrestis",
+    "scientific_name": "Alopecurus agrestis",
     "Nom commun": "Vulpin des champs",
     "Famille": "poacées",
     "Biotope primaire": ["Vallée alluviales sur limons riches en bases"],
@@ -258,7 +258,7 @@
   },
   {
     "id": 13,
-    "Nom Coste": "Alopecurus pratensis",
+    "scientific_name": "Alopecurus pratensis",
     "Nom commun": "Vulpin des prés",
     "Famille": "poacées",
     "Biotope primaire": [
@@ -278,7 +278,7 @@
   },
   {
     "id": 14,
-    "Nom Coste": "Amaranthus albus",
+    "scientific_name": "Amaranthus albus",
     "Nom commun": "Amarante blanche",
     "Famille": "amarantacées",
     "Biotope primaire": [
@@ -302,7 +302,7 @@
   },
   {
     "id": 15,
-    "Nom Coste": "Amaranthus blitum",
+    "scientific_name": "Amaranthus blitum",
     "Nom commun": "Amarante blette",
     "Famille": "amarantacées",
     "Biotope primaire": [
@@ -327,7 +327,7 @@
   },
   {
     "id": 16,
-    "Nom Coste": "Amaranthus patulus",
+    "scientific_name": "Amaranthus patulus",
     "Nom commun": "Amarante couchée",
     "Famille": "amarantacées",
     "Biotope primaire": [
@@ -352,7 +352,7 @@
   },
   {
     "id": 17,
-    "Nom Coste": "Amaranthus retroflexus",
+    "scientific_name": "Amaranthus retroflexus",
     "Nom commun": "Amarante réfléchie",
     "Famille": "amarantacées",
     "Biotope primaire": [
@@ -377,7 +377,7 @@
   },
   {
     "id": 18,
-    "Nom Coste": "Ambrosia artemisiaefolia",
+    "scientific_name": "Ambrosia artemisiaefolia",
     "Nom commun": "Ambroisie à feuilles d’artémise ",
     "Famille": "astéracées",
     "Biotope primaire": [
@@ -402,7 +402,7 @@
   },
   {
     "id": 19,
-    "Nom Coste": "Anagallis arvensis",
+    "scientific_name": "Anagallis arvensis",
     "Nom commun": "Mouron rouge ",
     "Famille": "primulacées",
     "Biotope primaire": [
@@ -430,7 +430,7 @@
   },
   {
     "id": 20,
-    "Nom Coste": "Anagallis arvensis coerulea",
+    "scientific_name": "Anagallis arvensis coerulea",
     "Nom commun": "Mouron bleu",
     "Famille": "primulacées",
     "Biotope primaire": [
@@ -451,7 +451,7 @@
   },
   {
     "id": 21,
-    "Nom Coste": "Andryala sinuata",
+    "scientific_name": "Andryala sinuata",
     "Nom commun": "Andryale à feuilles entières",
     "Famille": "astéracées",
     "Biotope primaire": [
@@ -477,7 +477,7 @@
   },
   {
     "id": 22,
-    "Nom Coste": "Anthoxanthum odoratum",
+    "scientific_name": "Anthoxanthum odoratum",
     "Nom commun": "Flouve odorante",
     "Famille": "poacées",
     "Biotope primaire": [
@@ -500,7 +500,7 @@
   },
   {
     "id": 23,
-    "Nom Coste": "Anthriscus silvestris",
+    "scientific_name": "Anthriscus silvestris",
     "Nom commun": "Cerfeuil des bois",
     "Famille": "apiacées",
     "Biotope primaire": [
@@ -521,7 +521,7 @@
   },
   {
     "id": 24,
-    "Nom Coste": "Anthyllis vulneraria",
+    "scientific_name": "Anthyllis vulneraria",
     "Nom commun": "Anthyllide vulnéraire",
     "Famille": "fabacées",
     "Biotope primaire": [
@@ -542,7 +542,7 @@
   },
   {
     "id": 25,
-    "Nom Coste": "Alchemilla arvensis",
+    "scientific_name": "Alchemilla arvensis",
     "Nom commun": "Alchémille des champs",
     "Famille": "rosacées",
     "Biotope primaire": [
@@ -572,7 +572,7 @@
   },
   {
     "id": 26,
-    "Nom Coste": "Lappa major",
+    "scientific_name": "Lappa major",
     "Nom commun": "Grande bardane",
     "Famille": "astéracées",
     "Biotope primaire": [
@@ -598,7 +598,7 @@
   },
   {
     "id": 27,
-    "Nom Coste": "Aristolochia clematitis",
+    "scientific_name": "Aristolochia clematitis",
     "Nom commun": "Aristoloche clématite",
     "Famille": "aristolochiacées",
     "Biotope primaire": [
@@ -626,7 +626,7 @@
   },
   {
     "id": 28,
-    "Nom Coste": "Arnica montana",
+    "scientific_name": "Arnica montana",
     "Nom commun": "Arnique de montagne, Arnica",
     "Famille": "astéracées",
     "Biotope primaire": ["Pelouses et landes acides sur sols frais à humide"],
@@ -645,7 +645,7 @@
   },
   {
     "id": 29,
-    "Nom Coste": "Arrhenatherum elatius",
+    "scientific_name": "Arrhenatherum elatius",
     "Nom commun": "Avoine élevée",
     "Famille": "poacées",
     "Biotope primaire": [
@@ -671,7 +671,7 @@
   },
   {
     "id": 30,
-    "Nom Coste": "Artemisia vulgaris",
+    "scientific_name": "Artemisia vulgaris",
     "Nom commun": "Armoise commune",
     "Famille": "astéracées",
     "Biotope primaire": [
@@ -697,7 +697,7 @@
   },
   {
     "id": 31,
-    "Nom Coste": "Arum italicum",
+    "scientific_name": "Arum italicum",
     "Nom commun": "Arum d’Italie",
     "Famille": "aracées",
     "Biotope primaire": [
@@ -724,7 +724,7 @@
   },
   {
     "id": 32,
-    "Nom Coste": "Arum maculatum",
+    "scientific_name": "Arum maculatum",
     "Nom commun": "Arum maculé",
     "Famille": "aracées",
     "Biotope primaire": [
@@ -752,7 +752,7 @@
   },
   {
     "id": 33,
-    "Nom Coste": "Asparagus acutifolius",
+    "scientific_name": "Asparagus acutifolius",
     "Nom commun": "Asperge.sauvage, A. piquante",
     "Famille": "asparagacées",
     "Biotope primaire": [
@@ -775,7 +775,7 @@
   },
   {
     "id": 34,
-    "Nom Coste": "Asphodelus microcarpus",
+    "scientific_name": "Asphodelus microcarpus",
     "Nom commun": "Asphodèle à petits fruits",
     "Famille": "asphodélacées",
     "Biotope primaire": [
@@ -802,7 +802,7 @@
   },
   {
     "id": 35,
-    "Nom Coste": "Asphodelus albus",
+    "scientific_name": "Asphodelus albus",
     "Nom commun": "Asphodèle blanc",
     "Famille": "asphodélacées",
     "Biotope primaire": [
@@ -829,7 +829,7 @@
   },
   {
     "id": 36,
-    "Nom Coste": "Asphodelus cerasifer",
+    "scientific_name": "Asphodelus cerasifer",
     "Nom commun": "Asphodèle rameuse",
     "Famille": "asphodélacées",
     "Biotope primaire": [
@@ -856,7 +856,7 @@
   },
   {
     "id": 37,
-    "Nom Coste": "Aster squamatus",
+    "scientific_name": "Aster squamatus",
     "Nom commun": "Aster écailleux",
     "Famille": "astéracées",
     "Biotope primaire": [
@@ -880,7 +880,7 @@
   },
   {
     "id": 38,
-    "Nom Coste": "Atriplex patula",
+    "scientific_name": "Atriplex patula",
     "Nom commun": "Arroche étalée",
     "Famille": "salsolacées",
     "Biotope primaire": [
@@ -911,7 +911,7 @@
   },
   {
     "id": 39,
-    "Nom Coste": "Atriplex hastata",
+    "scientific_name": "Atriplex hastata",
     "Nom commun": "Arroche à feuilles hastées",
     "Famille": "salsolacées",
     "Biotope primaire": [
@@ -942,7 +942,7 @@
   },
   {
     "id": 40,
-    "Nom Coste": "Avena barbata",
+    "scientific_name": "Avena barbata",
     "Nom commun": "Avoine barbue",
     "Famille": null,
     "Biotope primaire": null,
@@ -953,7 +953,7 @@
   },
   {
     "id": 41,
-    "Nom Coste": "Avena fatua",
+    "scientific_name": "Avena fatua",
     "Nom commun": "Folle-avoine",
     "Famille": "poacées",
     "Biotope primaire": ["Sables remués et limons des vallées alluviales"],
@@ -976,7 +976,7 @@
   },
   {
     "id": 42,
-    "Nom Coste": "Avena sterilis",
+    "scientific_name": "Avena sterilis",
     "Nom commun": "Avoine stérile",
     "Famille": "poacées",
     "Biotope primaire": [
@@ -1003,7 +1003,7 @@
   },
   {
     "id": 43,
-    "Nom Coste": "Avena pratensis",
+    "scientific_name": "Avena pratensis",
     "Nom commun": "Avoine des prés",
     "Famille": "poacées",
     "Biotope primaire": [
@@ -1024,7 +1024,7 @@
   },
   {
     "id": 44,
-    "Nom Coste": "Avena pubescens",
+    "scientific_name": "Avena pubescens",
     "Nom commun": "Avoine pubescente",
     "Famille": "poacées",
     "Biotope primaire": [

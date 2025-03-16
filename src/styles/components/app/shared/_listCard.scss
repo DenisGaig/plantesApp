@@ -1,58 +1,64 @@
-.list-plant-card {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+.list-plant-card__link {
+  text-decoration: none;
   width: 50%;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: $border-radius * 2;
-  margin-bottom: 1rem;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
+  color: inherit;
 
-  &__image {
-    width: 100px;
-    height: 100px;
-    background-color: #ccc;
-    border-radius: $border-radius * 2;
-    margin-right: 1rem;
-  }
-  &__content {
+  .list-plant-card {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    &__title {
-      font-size: 1rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: $border-radius * 2;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+
+    &__image {
+      width: 100px;
+      height: 100px;
+      background-color: #ccc;
+      border-radius: $border-radius * 2;
+      margin-right: 1rem;
     }
-    &__scientific_title {
-      font-size: 0.8rem;
-      color: #666;
-      margin-bottom: 1rem;
-    }
-    &__soil-state {
+    &__content {
       display: flex;
-      align-items: center;
-      h4 {
+      flex-direction: column;
+      justify-content: center;
+      &__title {
         font-size: 1rem;
-        font-weight: $font-weight-normal;
-        margin-right: 0.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
       }
-      p {
+      &__scientific_title {
         font-size: 0.8rem;
-        color: $white;
-        border-radius: $border-radius * 2;
-        padding: 0.2rem 0.5rem;
-        &.list-plant_card__soil-state__good {
-          background-color: green;
+        color: #666;
+        margin-bottom: 1rem;
+      }
+      &__soil-state {
+        display: flex;
+        align-items: center;
+        h4 {
+          font-size: 1rem;
+          font-weight: $font-weight-normal;
+          margin-right: 0.5rem;
         }
-        &.list-plant_card__soil-state__medium {
-          background-color: orange; // Ajout de la couleur orange pour l'état moyen
-        }
-        &.list-plant_card__soil-state__bad {
-          background-color: red;
+        p {
+          font-size: 0.8rem;
+          color: $white;
+          border-radius: $border-radius * 2;
+          padding: 0.2rem 0.5rem;
+          &.list-plant_card__soil-state__good {
+            background-color: green;
+          }
+          &.list-plant_card__soil-state__medium {
+            background-color: orange; // Ajout de la couleur orange pour l'état moyen
+          }
+          &.list-plant_card__soil-state__bad {
+            background-color: red;
+          }
         }
       }
     }

@@ -8,13 +8,17 @@ import {
   TrendingUp,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { usePlantDatabase } from "../../../hooks/usePlantDatabase.js";
 import Button from "../shared/Button";
 import FilterBar from "../shared/GenericFilterBar.jsx";
 import PlantList from "./PlantList";
 
 const AdvancedSearch = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [activeFilters, setActiveFilters] = useState({});
   const [searchLogic, setSearchLogic] = useState("AND");
   const [savedSearches, setSavedSearches] = useState([]);
@@ -130,6 +134,39 @@ const AdvancedSearch = () => {
     },
   ];
 
+  useEffect(() => {
+    // Récupérer les filtres actifs depuis l'URL
+    const searchParams = new URLSearchParams(location.search);
+    const urlFilters = {};
+
+    // Parcourir tous les paramètres et les ajouter aux filtres
+    for (const [key, value] of searchParams.entries()) {
+      // Convertir les valeurs booléennes
+      if (value === "true") urlFilters[key] = true;
+      else if (value === "false") urlFilters[key] = false;
+      else urlFilters[key] = value;
+    }
+    // Récupérer la logique de recherche (AND/OR) depuis l'URL
+    const urlLogic = searchParams.get("searchLogic") || "AND";
+    // Supprimer la clé "searchLogic" de urlFilters
+    delete urlFilters["searchLogic"];
+    console.log("URL Filters:", urlFilters);
+    // Si des filtres sont présents dans l'URL, les appliquer et mettre à jour l'état du formulaire
+    if (Object.keys(urlFilters).length > 0) {
+      setFormValues(urlFilters);
+      setActiveFilters(urlFilters);
+      setSearchLogic(urlLogic);
+      // handleApplyFilters(urlFilters);
+    }
+  }, [location.search]);
+
+  useEffect(() => {
+    // Appliquer les filtres actifs lorsque le composant est monté ou que les filtres actifs changent
+    if (Object.keys(activeFilters).length > 0) {
+      handleApplyFilters(activeFilters);
+    }
+  }, [activeFilters, searchLogic]);
+
   // Applique les filtres et effectue la recherche
   const handleApplyFilters = async (filters) => {
     // Mettre à jour les valeurs du formulaire
@@ -162,6 +199,22 @@ const AdvancedSearch = () => {
     // Mettre à jour la logique de recherche
     updateSearchLogic(searchLogic);
 
+    // ------------------------------------------------------------------------
+    // Construire les paramètres de recherche pour l'URL
+    const params = new URLSearchParams();
+
+    // Ajouter les filtres valides à l'URL
+    Object.entries(validFilters).forEach(([key, value]) => {
+      params.set(key, value);
+    });
+
+    // Ajouter la logique de recherche à l'URL
+    params.set("searchLogic", searchLogic);
+    // Mettre à jour l'URL avec les nouveaux paramètres sans recharger la page
+    navigate(`/app/plants?${params.toString()}`, { replace: true });
+
+    // ------------------------------------------------------------------------
+
     try {
       const results = await searchPlants({
         filters: validFilters,
@@ -188,7 +241,7 @@ const AdvancedSearch = () => {
       Object.keys(search.filters).forEach((key) => {
         delete updatedFilters[key];
       });
-      console.log("Desactiver les filtres", updatedFilters);
+      console.log("Désactiver les filtres", updatedFilters);
       // Mettre à jour les valeurs du formulaire et les filtres actifs
       setFormValues(updatedFilters);
       setActiveFilters(updatedFilters);
