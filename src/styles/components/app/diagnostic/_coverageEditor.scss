@@ -1,0 +1,253 @@
+.coverage-editor {
+  padding: 1.5rem;
+  width: 100%;
+
+  &__header {
+    margin-bottom: 1.5rem;
+
+    &__description {
+      color: $text-color;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    &__total {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+
+      &--valid {
+        color: #388e3c;
+      }
+
+      &--invalid {
+        color: #f44336;
+      }
+    }
+  }
+
+  &__plants-list {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 1rem;
+  }
+
+  &__plant-item {
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  &__plant-image {
+    width: 100px;
+    height: 100px;
+    border-radius: $border-radius;
+    overflow: hidden;
+    // margin-right: 1rem;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__plant-info {
+    display: flex;
+    align-items: center;
+
+    // &__plant-names {
+    //   margin-left: 1rem;
+    // }
+
+    &__plant-latin {
+      color: #1b5e20;
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    &__plant-common {
+      color: #388e3c;
+      font-size: 0.875rem;
+      margin: 0.25rem 0 0 0;
+    }
+  }
+
+  &__slider-container {
+    display: flex;
+    align-items: center;
+    width: 50%;
+  }
+
+  &__slider {
+    -webkit-appearance: none;
+    height: 10px;
+    border-radius: 5px;
+    background: #e8f5e9;
+    outline: none;
+    flex-grow: 1;
+    margin-right: 1rem;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #388e3c;
+      border: 2px solid white;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #388e3c;
+      border: 2px solid white;
+      cursor: pointer;
+    }
+  }
+
+  &__percentage {
+    font-weight: bold;
+    color: #1b5e20;
+    font-size: 1rem;
+    min-width: 3rem;
+    text-align: right;
+  }
+
+  &__empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: #757575;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    gap: 1rem;
+  }
+}
+
+// .coverage-editor {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   width: 100%;
+//   height: 100%;
+//   padding: 20px;
+//   // background-color: #f5f5f5;
+//   // border-radius: 10px;
+//   // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+//   overflow: hidden;
+
+//   &__header {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     width: 100%;
+//     margin-bottom: 20px;
+//     h2 {
+//       font-size: 24px;
+//       font-weight: bold;
+//       margin-bottom: 10px;
+//     }
+//     p {
+//       font-size: 16px;
+//       color: #666;
+//     }
+//   }
+//   &__plants-list {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     width: 100%;
+//     margin-bottom: 20px;
+//     .coverage-editor__plant-item {
+//       display: flex;
+//       flex-direction: row;
+//       align-items: center;
+//       justify-content: space-between;
+//       width: 100%;
+//       margin-bottom: 10px;
+//       padding: 10px;
+//       background-color: #fff;
+//       border-radius: 10px;
+//       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+//       .coverage-editor__plant-image {
+//         width: 50px;
+//         height: 50px;
+//         margin-right: 10px;
+//         img {
+//           width: 100%;
+//           height: 100%;
+//           object-fit: cover;
+//           // border-radius: 50%;
+//         }
+//       }
+//       .coverage-editor__plant-info {
+//         display: flex;
+//         flex-direction: column;
+//         align-items: flex-start;
+//         justify-content: center;
+//         width: 100%;
+//         .coverage-editor__plant-names {
+//           display: flex;
+//           flex-direction: column;
+//           align-items: flex-start;
+//           justify-content: center;
+//           width: 100%;
+//           .coverage-editor__plant-latin {
+//             font-size: 18px;
+//             font-weight: bold;
+//             margin-bottom: 5px;
+//           }
+//           .coverage-editor__plant-common {
+//             font-size: 14px;
+//             color: #666;
+//           }
+//         }
+//       }
+//       .coverage-editor__slider-container {
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         justify-content: center;
+//         width: 100%;
+//         input[type="range"] {
+//           width: 100%;
+//           margin-bottom: 10px;
+//         }
+//         .coverage-editor__slider-value {
+//           font-size: 18px;
+//           font-weight: bold;
+//         }
+//       }
+//     }
+//   }
+//   .coverage-editor__total {
+//     font-size: 24px;
+//     font-weight: bold;
+//     margin-top: 20px;
+//     &--valid {
+//       color: green;
+//     }
+//     &--invalid {
+//       color: red;
+//     }
+//   }
+// }

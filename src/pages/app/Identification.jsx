@@ -7,8 +7,7 @@ import { usePlants } from "../../context/PlantsProvider.jsx";
 export default function Identification() {
   const [identificationResults, setIdentificationResults] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  // const [selectedPlants, setSelectedPlants] = useState(null);
-  const { addPlant } = usePlants();
+  const { addIdentifiedPlant } = usePlants();
 
   const handleResultsReceived = (results) => {
     console.log("Résultats reçus dans Identification:", results);
@@ -20,24 +19,65 @@ export default function Identification() {
     // Afficher l'URL de la prévisualisation de l'image dans la console
     console.log("Image Preview URL: ", imagePreviewURL);
   };
-  console.log("RESULTATS D'IDENTIFICATION: ", identificationResults);
+  // console.log("RESULTATS D'IDENTIFICATION: ", identificationResults);
 
   const handlePlantSelected = (plant) => {
     console.log("Plante sélectionnée:", plant);
-    // setSelectedPlants((prevSelectedPlants) => [...prevSelectedPlants, plant]);
-    // Normaliser les données de la plante sélectionnée
-    const normalizedPlant = {
-      id: uuidv4(), // Génère un identifiant unique pour la plante
-      score: plant.score,
-      images: plant.images,
-      name: plant.species.commonNames,
-      scientificName: plant.species.scientificNameWithoutAuthor,
-      genus: plant.species.genus.scientificNameWithoutAuthor,
-      family: plant.species.family.scientificNameWithoutAuthor,
-    };
+
+    let normalizedPlant;
+
+    // Vérifier si c'est une plante temporaire (issue directement de PlantNet)
+    // ou une plante de votre base de données (qui a été matchée)
+    if (plant.isTemporary !== undefined) {
+      // C'est une plante traitée par integrateIdentificationResults
+      if (plant.isTemporary) {
+        // C'est une plante temporaire créée à partir des résultats PlantNet
+        normalizedPlant = {
+          id: uuidv4(),
+          score: plant.confidence || 0,
+          images: plant.imageUrl ? [{ url: plant.imageUrl }] : [],
+          commonName: plant.commonName ? [plant.commonName] : [],
+          scientificName: plant.scientificName,
+          genus: plant.genus || "",
+          family: plant.family || "",
+        };
+      } else {
+        // C'est une plante de notre base de données
+        normalizedPlant = {
+          id: plant.id,
+          score: plant.confidence || 0,
+          images: plant.imageUrl ? [{ url: plant.imageUrl }] : [],
+          commonName: plant.commonName ? [plant.commonName] : [],
+          scientificName: plant.scientificName,
+          genus: plant.genus || "",
+          family: plant.family || "",
+          primaryBiotope: plant.primaryBiotope || [],
+          secondaryBiotope: plant.secondaryBiotope || [],
+          indicatorTraits: plant.indicatorTraits || [],
+          soilCondition: plant.soilCondition || 0,
+          edible: plant.edible || "",
+        };
+      }
+    } else {
+      // C'est un résultat brut de PlantNet (non traité par integrateIdentificationResults)
+      normalizedPlant = {
+        id: uuidv4(),
+        score: plant.score,
+        images: plant.images,
+        name: plant.species.commonNames,
+        scientificName: plant.species.scientificNameWithoutAuthor,
+        genus: plant.species.genus.scientificNameWithoutAuthor,
+        family: plant.species.family.scientificNameWithoutAuthor,
+      };
+    }
     console.log("Plante sélectionnée normalisée:", normalizedPlant);
 
-    addPlant(normalizedPlant);
+    addIdentifiedPlant(normalizedPlant);
+  };
+
+  const handleNewIdentification = () => {
+    setIdentificationResults(null);
+    setImagePreview(null);
   };
 
   return (
@@ -49,6 +89,7 @@ export default function Identification() {
           results={identificationResults}
           imagePreview={imagePreview}
           onPlantSelected={handlePlantSelected}
+          onNewIdentification={handleNewIdentification}
         />
       ) : (
         <>

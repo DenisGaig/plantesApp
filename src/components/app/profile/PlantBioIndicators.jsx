@@ -5,7 +5,7 @@ const PlantBioIndicators = ({ plant }) => {
     <div className="plant-bio-indicators">
       <div className="plant-bio-indicators__header"></div>
       <div className="plant-bio-indicators__content">
-        {plant["Caractères indicateurs"].map((indicator, index) => (
+        {plant["indicatorTraits"].map((indicator, index) => (
           <li key={index} className="plant-bio-indicators__content__item">
             <Dot size={10} />
             {indicator}

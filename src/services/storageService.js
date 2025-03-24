@@ -1,10 +1,10 @@
 // Service pour le stockage local
 const storageService = {
-  getItem: (key) => {
+  getStoredData: (key) => {
     const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : null;
   },
-  setItem: (key, value) => {
+  storeData: (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
   },
   removeItem: (key) => {

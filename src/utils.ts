@@ -17,6 +17,7 @@ function capitalize(str: string): string {
 
 export { capitalize, DateFormater };
 
+// Normalisation des chaînes de caractères pour la recherche
 function normalizeString(str: string): string {
   return str
     .normalize("NFD") // Décompose les caractères accentués

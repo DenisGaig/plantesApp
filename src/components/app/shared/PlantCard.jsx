@@ -12,7 +12,7 @@ const PlantCard = ({ plant, searchParams }) => {
     },
   };
 
-  const soilState = soilStates[plant["Etat du sol"]] || soilStates[3];
+  const soilState = soilStates[plant["soilCondition"]] || soilStates[3];
 
   return (
     <Link
@@ -23,36 +23,27 @@ const PlantCard = ({ plant, searchParams }) => {
         <div className="plant-card__image">
           {/* <img src="" className="plant-card__image" alt="" /> */}
         </div>
-        <h3 className="plant-card__title">{plant["Nom commun"]}</h3>
+        <h3 className="plant-card__title">{plant["commonName"]}</h3>
         <p className="plant-card__scientific_title">
-          ({plant["scientific_name"]})
+          ({plant["scientificName"]})
         </p>
-        <p className="plant-card__family">{plant["Famille"]}</p>
-        {/* {plant["Biotope primaire"] && plant["Biotope primaire"].length > 0 && (
-        <div className="plant-card__biotope">
-          <h4>Biotope primaire</h4>
-          <ul>
-            {plant["Biotope primaire"].slice(0, 2).map((biotope, index) => (
-              <li key={index}>- {biotope}</li>
-            ))}
-          </ul>
-        </div>
-      )} */}
+        <p className="plant-card__family">{plant["family"]}</p>
+
         <div className="plant-card__soil-state">
           <p>
             Etat du sol:{" "}
             <span className={soilState.className}>{soilState.text}</span>
           </p>
 
-          {plant.Comestible === "O" && (
+          {plant.edible === "O" && (
             <span className="plant-card__comestible">Comestible</span>
           )}
-          {plant.Comestible === "T" && (
+          {plant.edible === "T" && (
             <span className="plant-card__toxique">Toxique</span>
           )}
         </div>
         {/* <p className="plant-card__biotope">
-            {plant["Biotope secondaire"].slice(0, 2).join(" / ")}
+            {plant["secondaryBiotope"].slice(0, 2).join(" / ")}
           </p> */}
       </div>
     </Link>

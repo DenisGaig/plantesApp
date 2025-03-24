@@ -1,0 +1,90 @@
+.soil-query {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 20px;
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 16px;
+      color: #666;
+    }
+  }
+  &__tabs {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+
+    .soil-query__tab {
+      width: 50%;
+      text-align: center;
+      padding: 10px 20px;
+      border: none;
+      background-color: #fff;
+      color: #333;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      &:hover {
+        background-color: #f0f0f0;
+      }
+      &--active {
+        background-color: $primary-color;
+        color: #fff;
+      }
+    }
+  }
+  &__content {
+    width: 100%;
+    &__form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: $border-radius;
+
+      &__title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: $text-color;
+      }
+
+      &__row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 1rem;
+        background-color: #fff;
+        border-radius: $border-radius;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        label {
+          font-size: 1rem;
+          margin-right: 10px;
+          color: $text-color;
+        }
+        select {
+          padding: 5px;
+          font-size: 0.9rem;
+          background-color: #f5f5f5;
+          border: 1px solid #ccc;
+          border-radius: $border-radius;
+          width: 100%;
+          margin-top: 5px;
+          color: lighten($text-color, 20%);
+        }
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@ const FilterBar = () => {
   const { filters, updateFilters, plants } = useContext(PlantsContext);
 
   // Extraire les familles uniques pour le filtre
-  const familles = [...new Set(plants.map((plant) => plant.Famille))].sort();
+  const familles = [...new Set(plants.map((plant) => plant.family))].sort();
 
   return (
     <div className="filter-bar">

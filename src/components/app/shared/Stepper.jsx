@@ -7,7 +7,7 @@ const Stepper = ({ steps, currentStep }) => {
           className={`stepper__step ${index === currentStep ? "active" : ""}`}
         >
           <div className="stepper__step-circle">{index + 1}</div>
-          <div className="stepper__step-label">{step}</div>
+          <div className="stepper__step-label">{step.label}</div>
         </div>
       ))}
     </div>

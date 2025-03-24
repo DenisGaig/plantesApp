@@ -1,6 +1,7 @@
 $primary-color: #3498db;
 $secondary-color: #8eb533;
 $secondary-color-light: #8eb533b7;
+$secondary-color-dark: #617c23;
 $primary-color-dark: #2980b9;
 
 $text-color: #333;
@@ -17,6 +18,10 @@ $spacing-unit: 8px;
 $spacing-small: $spacing-unit * 2;
 $spacing-medium: $spacing-unit * 4;
 $spacing-large: $spacing-unit * 8;
+
+$padding-small: 5px 10px;
+$padding-medium: 10px 20px;
+$padding-large: 20px 40px;
 
 // Breaking points for screen sizes
 $breakpoint-small: 576px;

@@ -17,24 +17,56 @@ const PlantProfile = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const searchParams = new URLSearchParams(location.search);
+  const fromPath = searchParams.get("from");
+
   const handleBackToSearch = () => {
-    // Extraire les paramètres de recherche de l'URL actuelle
-    const currentParams = new URLSearchParams(location.search);
+    // Extraire le paramètre "from" de l'URL
 
-    // Créer un nouvel objet URLSearchParams pour éviter les doublons
-    const uniqueParams = new URLSearchParams();
+    console.log("fromPath:", fromPath);
+    if (fromPath) {
+      // Décoder l'URL pour gérer les caractères spéciaux
+      const decodedPath = decodeURIComponent(fromPath);
+      console.log("Retour à:", decodedPath);
 
-    // Ajouter chaque paramètre une seule fois (en prenant la dernière valeur)
-    for (const [key, value] of currentParams.entries()) {
-      // Supprimer le paramètre existant s'il existe déjà
-      uniqueParams.delete(key);
-      // Ajouter le paramètre avec sa valeur
-      uniqueParams.append(key, value);
+      // Naviguer vers la page d'origine avec tous ses paramètres
+      navigate(decodedPath);
+    } else {
+      // Fallback - si pour une raison quelconque le paramètre "from" est absent
+      // Vous pouvez utiliser votre ancienne logique ici
+      const currentParams = new URLSearchParams(location.search);
+      const uniqueParams = new URLSearchParams();
+
+      for (const [key, value] of currentParams.entries()) {
+        if (key !== "from") {
+          // Ignorer le paramètre "from"
+          uniqueParams.delete(key);
+          uniqueParams.append(key, value);
+        }
+      }
+
+      navigate(`/app/plants?${uniqueParams.toString()}`);
     }
-
-    // Naviguer vers la page de recherche avec les paramètres uniques
-    navigate(`/app/plants?${uniqueParams.toString()}`);
   };
+
+  // const handleBackToSearch = () => {
+  //   // Extraire les paramètres de recherche de l'URL actuelle
+  //   const currentParams = new URLSearchParams(location.search);
+
+  //   // Créer un nouvel objet URLSearchParams pour éviter les doublons
+  //   const uniqueParams = new URLSearchParams();
+
+  //   // Ajouter chaque paramètre une seule fois (en prenant la dernière valeur)
+  //   for (const [key, value] of currentParams.entries()) {
+  //     // Supprimer le paramètre existant s'il existe déjà
+  //     uniqueParams.delete(key);
+  //     // Ajouter le paramètre avec sa valeur
+  //     uniqueParams.append(key, value);
+  //   }
+
+  //   // Naviguer vers la page de recherche avec les paramètres uniques
+  //   navigate(`/app/plants?${uniqueParams.toString()}`);
+  // };
 
   useEffect(() => {
     const loadPlant = async () => {
@@ -93,12 +125,12 @@ const PlantProfile = () => {
           <h2>
             {plant["Nom scientifique"]
               ? plant["Nom scientifique"]
-              : plant["scientific_name"]}
+              : plant["scientificName"]}
           </h2>
           <h4>
-            {plant["Nom commun"]
-              ? plant["Nom commun"]
-              : plant["scientific_name"]}
+            {plant["commonName"]
+              ? plant["commonName"]
+              : plant["scientificName"]}
           </h4>
         </div>
       </div>

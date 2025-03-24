@@ -3,7 +3,7 @@ import plantesData from "../data/plantes.json";
 import { normalizeString } from "../utils.ts";
 
 export function usePlantDatabase() {
-  const [plants, setPlants] = useState([]);
+  const [plantsDatabase, setPlantsDatabase] = useState([]);
   const [filteredPlants, setFilteredPlants] = useState([]);
   const [filters, setFilters] = useState({});
   const [searchLogic, setSearchLogic] = useState("AND");
@@ -12,7 +12,7 @@ export function usePlantDatabase() {
 
   useEffect(() => {
     try {
-      setPlants(plantesData);
+      setPlantsDatabase(plantesData);
       console.log("Hook - Plantes bien chargées");
       setLoading(false);
     } catch (error) {
@@ -36,24 +36,24 @@ export function usePlantDatabase() {
   const getPlantById = (id) => {
     const plantIdAsNumber = Number(id);
     console.log("GET PLANT BY ID CALLED", id);
-    return plants.find((plant) => plant.id === plantIdAsNumber);
+    return plantsDatabase.find((plant) => plant.id === plantIdAsNumber);
   };
 
   const applyFilters = (
     specificFilters = filters,
     specificLogic = searchLogic
   ) => {
-    let result = [...plants];
+    let result = [...plantsDatabase];
     // console.log("RESULTS INPUT: ", result);
     const matchFilters = {
       name: (plant, value) =>
-        plant["Nom commun"]?.toLowerCase().includes(value.toLowerCase()),
+        plant["commonName"]?.toLowerCase().includes(value.toLowerCase()),
 
       latinName: (plant, value) =>
-        plant["scientific_name"]?.toLowerCase().includes(value.toLowerCase()),
+        plant["scientificName"]?.toLowerCase().includes(value.toLowerCase()),
 
       famille: (plant, value) =>
-        plant["Famille"]?.toLowerCase().includes(value.toLowerCase()),
+        plant["family"]?.toLowerCase().includes(value.toLowerCase()),
 
       primaryBiotope: (plant, value) => {
         const normalizedValue = normalizeString(value);
@@ -62,7 +62,7 @@ export function usePlantDatabase() {
         // console.log("🔍 Valeur filtrée normalisée:", normalizedValue);
         // console.log("🔍 Mots-clés recherchés:", keywords);
 
-        return (plant["Biotope primaire"] || []).some((biotope) => {
+        return (plant["primaryBiotope"] || []).some((biotope) => {
           const normalizedBiotope = normalizeString(biotope);
           // console.log("🌳 Biotope analysé normalisé:", normalizedBiotope);
           // Vérifie si l'ensemble de la phrase est une sous-chaîne complète
@@ -84,7 +84,7 @@ export function usePlantDatabase() {
         // console.log("🔍 Valeur filtrée normalisée:", normalizedValue);
         // console.log("🔍 Mots-clés recherchés:", keywords);
 
-        return (plant["Biotope secondaire"] || []).some((biotope) => {
+        return (plant["secondaryBiotope"] || []).some((biotope) => {
           const normalizedBiotope = normalizeString(biotope);
           // console.log("🌳 Biotope analysé normalisé:", normalizedBiotope);
           // Vérifie si l'ensemble de la phrase est une sous-chaîne complète
@@ -99,7 +99,7 @@ export function usePlantDatabase() {
         });
       },
       // secondaryBiotope: (plant, value) =>
-      //   (plant["Biotope secondaire"] || []).some((biotope) =>
+      //   (plant["secondaryBiotope"] || []).some((biotope) =>
       //     biotope.toLowerCase().includes(value.toLowerCase())
       //   ),
 
@@ -111,7 +111,7 @@ export function usePlantDatabase() {
 
         // Si la valeur est un booléen true, filtrer seulement les plantes comestibles
         if (value === true) {
-          return plant["Comestible"] === "O";
+          return plant["edible"] === "O";
         }
 
         // Si la valeur est un booléen false, ne pas filtrer sur ce critère
@@ -119,7 +119,7 @@ export function usePlantDatabase() {
         return true;
       },
 
-      soilState: (plant, value) => plant["Etat du sol"] === value,
+      soilState: (plant, value) => plant["soilCondition"] === value,
 
       nitrogenIndicator: (plant, value) => plant["Indicateur azote"] === value,
 
@@ -196,7 +196,7 @@ export function usePlantDatabase() {
   };
 
   return {
-    plants,
+    plantsDatabase,
     loading,
     error,
     getPlantById,

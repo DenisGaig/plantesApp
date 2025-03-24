@@ -1,0 +1,60 @@
+.soil-analyzer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+
+  &__collectedData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    &__plants {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+
+      &__chart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .responsive-container {
+          width: 100%;
+          height: 300px;
+        }
+        .legend {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 20px;
+          .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            .legend-color {
+              width: 20px;
+              height: 20px;
+              margin-right: 10px;
+            }
+            .legend-label {
+              font-size: 14px;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+}

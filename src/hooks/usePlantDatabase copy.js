@@ -45,13 +45,13 @@ export function usePlantDatabase() {
     // console.log("RESULTS INPUT: ", result);
     const matchFilters = {
       name: (plant, value) =>
-        plant["Nom commun"]?.toLowerCase().includes(value.toLowerCase()),
+        plant["commonName"]?.toLowerCase().includes(value.toLowerCase()),
 
       latinName: (plant, value) =>
-        plant["scientific_name"]?.toLowerCase().includes(value.toLowerCase()),
+        plant["scientificName"]?.toLowerCase().includes(value.toLowerCase()),
 
       famille: (plant, value) =>
-        plant["Famille"]?.toLowerCase().includes(value.toLowerCase()),
+        plant["family"]?.toLowerCase().includes(value.toLowerCase()),
 
       primaryBiotope: (plant, value) => {
         const normalizedValue = normalizeString(value);
@@ -60,7 +60,7 @@ export function usePlantDatabase() {
         // console.log("🔍 Valeur filtrée normalisée:", normalizedValue);
         // console.log("🔍 Mots-clés recherchés:", keywords);
 
-        return (plant["Biotope primaire"] || []).some((biotope) => {
+        return (plant["primaryBiotope"] || []).some((biotope) => {
           const normalizedBiotope = normalizeString(biotope);
           // console.log("🌳 Biotope analysé normalisé:", normalizedBiotope);
           // Vérifie si l'ensemble de la phrase est une sous-chaîne complète
@@ -82,7 +82,7 @@ export function usePlantDatabase() {
         // console.log("🔍 Valeur filtrée normalisée:", normalizedValue);
         // console.log("🔍 Mots-clés recherchés:", keywords);
 
-        return (plant["Biotope secondaire"] || []).some((biotope) => {
+        return (plant["secondaryBiotope"] || []).some((biotope) => {
           const normalizedBiotope = normalizeString(biotope);
           // console.log("🌳 Biotope analysé normalisé:", normalizedBiotope);
           // Vérifie si l'ensemble de la phrase est une sous-chaîne complète
@@ -97,7 +97,7 @@ export function usePlantDatabase() {
         });
       },
       // secondaryBiotope: (plant, value) =>
-      //   (plant["Biotope secondaire"] || []).some((biotope) =>
+      //   (plant["secondaryBiotope"] || []).some((biotope) =>
       //     biotope.toLowerCase().includes(value.toLowerCase())
       //   ),
 
@@ -109,7 +109,7 @@ export function usePlantDatabase() {
 
         // Si la valeur est un booléen true, filtrer seulement les plantes comestibles
         if (value === true) {
-          return plant["Comestible"] === "O";
+          return plant["edible"] === "O";
         }
 
         // Si la valeur est un booléen false, ne pas filtrer sur ce critère
@@ -117,7 +117,7 @@ export function usePlantDatabase() {
         return true;
       },
 
-      soilState: (plant, value) => plant["Etat du sol"] === value,
+      soilState: (plant, value) => plant["soilCondition"] === value,
 
       nitrogenIndicator: (plant, value) => plant["Indicateur azote"] === value,
 
