@@ -16,7 +16,10 @@ export default function Diagnostic() {
     const storedCoverages = storageService.getStoredData("coverages");
     return storedCoverages || {};
   });
-  const [totalCoverage, setTotalCoverage] = useState(0);
+  const [coefficients, setCoefficients] = useState(() => {
+    const storedCoefficients = storageService.getStoredData("coefficients");
+    return storedCoefficients || {};
+  });
   const [formData, setFormData] = useState(() => {
     const storedData = storageService.getStoredData("formData");
     return (
@@ -37,6 +40,8 @@ export default function Diagnostic() {
       }
     );
   });
+
+  console.log("COEFFICIENTS", Object.keys(coefficients).length);
 
   // const steps = [
   //   { id: 1, label: "Inventaire", completed: identifiedPlants.length > 0 },
@@ -61,11 +66,11 @@ export default function Diagnostic() {
     setSelectedPlants(plants);
   };
 
-  const handleCoverageChange = (coverageData, total) => {
+  const handleCoverageChange = (coverageData, coefficientData) => {
     setCoverages(coverageData);
-    setTotalCoverage(total);
+    setCoefficients(coefficientData);
     storageService.storeData("coverages", coverageData);
-    // console.log("Total coverage: ", total);
+    storageService.storeData("coefficients", coefficientData);
     // console.log("Coverages: ", coverages);
   };
 
@@ -120,6 +125,7 @@ export default function Diagnostic() {
           <SoilAnalyzer
             selectedPlants={selectedPlants}
             selectedCoverages={coverages}
+            selectedCoefficients={coefficients}
             selectedFormData={formData}
           />
         );
@@ -136,8 +142,7 @@ export default function Diagnostic() {
       return selectedPlants.length === 0;
     }
     if (currentStep === 1) {
-      // Si la couverture totale n'est pas de 100%, désactiver le bouton "Suivant" en retournant "true"
-      return totalCoverage !== 100;
+      return Object.keys(coefficients).length === 0;
     }
     return false;
   };

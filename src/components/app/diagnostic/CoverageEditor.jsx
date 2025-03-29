@@ -6,7 +6,16 @@ const CoverageEditor = ({
   initialCoverages,
 }) => {
   const [coverages, setCoverages] = useState(initialCoverages || {});
-  const [totalCoverage, setTotalCoverage] = useState(0);
+  const [coefficients, setCoefficients] = useState({});
+
+  const densityOptions = [
+    { value: 0, label: "Quelques pieds", coefficient: 0 },
+    { value: 5, label: "< 25%", coefficient: 1 },
+    { value: 25, label: "25%", coefficient: 2 },
+    { value: 50, label: "50%", coefficient: 3 },
+    { value: 75, label: "75%", coefficient: 4 },
+    { value: 100, label: "100%", coefficient: 5 },
+  ];
 
   useEffect(() => {
     console.log("Selected Plants: ", selectedPlants);
@@ -18,39 +27,18 @@ const CoverageEditor = ({
     });
     console.log("Initial Coverages: ", initialCoverages);
     setCoverages(initialCoverages);
-    updateTotalCoverage(initialCoverages);
+    // updateTotalCoverage(initialCoverages);
   }, [selectedPlants]);
 
-  const updateTotalCoverage = (updatedCoverages) => {
-    const total = Object.values(updatedCoverages).reduce(
-      (sum, value) => sum + value,
-      0
-    );
-    setTotalCoverage(total);
-
-    // Passe les coverages mis à jour et le total au composant parent
-    onCoverageChange(updatedCoverages, total);
-  };
-
-  const handleSliderChange = (plantId, value) => {
-    const newValue = parseInt(value);
-    const currentValue = coverages[plantId] || 0;
-    const otherValuesTotal = totalCoverage - currentValue;
-
-    // Vérifie si la nouvelle valeur dépasse 100%
-    if (otherValuesTotal + newValue > 100) {
-      const maxPossibleValue = 100 - otherValuesTotal;
-      const newCoverages = { ...coverages, [plantId]: maxPossibleValue };
-      setCoverages(newCoverages);
-      updateTotalCoverage(newCoverages);
-      // alert(`La valeur maximale pour cette plante est ${maxPossibleValue}%`);
-      return;
-    } else {
-      // sinon met à jour les coverages
-      const newCoverages = { ...coverages, [plantId]: newValue };
-      setCoverages(newCoverages);
-      updateTotalCoverage(newCoverages);
-    }
+  const handleDensityChange = (plantId, value) => {
+    const newCoverages = { ...coverages, [plantId]: value };
+    const option = densityOptions.find((opt) => opt.value === value);
+    const coefficient = option ? option.coefficient : 0;
+    const newCoefficient = { ...coefficients, [plantId]: coefficient };
+    setCoefficients(newCoefficient);
+    setCoverages(newCoverages);
+    onCoverageChange(newCoverages, newCoefficient);
+    console.log("New Coefficients: ", newCoefficient);
   };
 
   return (
@@ -59,18 +47,6 @@ const CoverageEditor = ({
         <h2>Etape 2: Attribution de la densité des espèces</h2>
         <p className="coverage-editor__header__description">
           Veuillez indiquer la densité de chaque espèce sur votre terrain.
-        </p>
-        <p className="coverage-editor__header__total">
-          Total actuel: <strong>{totalCoverage}%</strong>
-          <span
-            className={
-              totalCoverage === 100
-                ? "coverage-editor__header__total--valid"
-                : "coverage-editor__header__total--invalid"
-            }
-          >
-            {totalCoverage === 100 ? " (Valide)" : " (doit atteindre 100%)"}
-          </span>
         </p>
       </div>
       <div className="coverage-editor__plants-list">
@@ -93,19 +69,48 @@ const CoverageEditor = ({
               </div>
             </div>
 
-            <div className="coverage-editor__slider-container">
-              <input
-                type="range"
-                min="0"
-                max="100"
-                step="1"
-                value={coverages[plant.id] || 0}
-                onChange={(e) => handleSliderChange(plant.id, e.target.value)}
-                className="coverage-editor__slider"
-              />
-              <span className="coverage-editor__percentage">
-                {coverages[plant.id] || 0}%
-              </span>
+            <div className="coverage-editor__density-section">
+              <div className="coverage-editor__density-section-info">
+                <p className="coverage-editor__density-section-label">
+                  Densité observée:
+                </p>
+                {coefficients[plant.id] && (
+                  <p className="coverage-editor__density-section-coefficient">
+                    Coefficient: {coefficients[plant.id]}
+                  </p>
+                )}
+              </div>
+
+              <div className="coverage-editor__density-section-options">
+                {densityOptions.map((option) => (
+                  <div
+                    key={option.value}
+                    className="coverage-editor__density-section-option"
+                    onClick={() => handleDensityChange(plant.id, option.value)}
+                  >
+                    <div
+                      className={`coverage-editor__density-section-option-circle ${
+                        coverages[plant.id] === option.value
+                          ? "coverage-editor__density-section-option-circle-selected"
+                          : ""
+                      }`}
+                    >
+                      {option.value > 0 && (
+                        <div
+                          className="coverage-editor__density-section-option-circle-inner"
+                          style={{
+                            width: `${Math.max(30, option.value * 0.7)}%`,
+                            height: `${Math.max(30, option.value * 0.7)}%`,
+                          }}
+                        ></div>
+                      )}
+                    </div>
+                    <span className="coverage-editor__density-section-option-label">
+                      {option.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ))}

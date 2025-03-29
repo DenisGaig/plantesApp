@@ -1,47 +1,22 @@
-import {
-  Cell,
-  Legend,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
+import { Mountain, Shovel, Wheat, Worm } from "lucide-react";
 import Button from "../shared/Button.jsx";
+import SoilCharts from "./SoilCharts.jsx";
+import SoilIndicators from "./SoilIndicators.jsx";
 
 const SoilAnalyzer = ({
   selectedPlants,
   selectedCoverages,
+  selectedCoefficients,
   selectedFormData,
 }) => {
-  console.log("Inputs: ", selectedPlants, selectedCoverages, selectedFormData);
-  // Format des étiquettes pour le graphique circulaire
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-    index,
-  }) => {
-    const RADIAN = Math.PI / 180;
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  console.log(
+    "Inputs: ",
+    selectedPlants,
+    selectedCoverages,
+    selectedCoefficients,
+    selectedFormData
+  );
 
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-        fontSize={12}
-      >
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
   return (
     <div className="soil-analyzer">
       <h2>Etape 4: Analyse du sol</h2>
@@ -51,38 +26,44 @@ const SoilAnalyzer = ({
           <div className="soil-analyzer__collectedDatas__plants">
             <h4>Plantes identifiées</h4>
             <div className="soil-analyzer__collectedDatas__plants__chart">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={selectedPlants}
-                    dataKey="coverage"
-                    nameKey="plant"
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={80}
-                    fill="#8884d8"
-                  >
-                    {selectedPlants.map((plant) => (
-                      <Cell key={`cell-${plant.plant}`} fill={plant.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    formatter={(value) => `${value}%`}
-                    labelFormatter={(index) =>
-                      `${selectedPlants[index].scientificName} (${selectedPlants[index].commonName})`
-                    }
-                  />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
+              <SoilCharts
+                chartType="bar"
+                selectedPlants={selectedPlants}
+                selectedCoverages={selectedCoverages}
+                selectedCoefficients={selectedCoefficients}
+              />
             </div>
           </div>
-          <div className="soil-analyzer__collectedDatas__soil-parameters"></div>
-          <div className="soil-analyzer__collectedDatas__history"></div>
+          <div className="soil-analyzer__collectedDatas__soil-parameters">
+            <SoilIndicators selectedFormData={selectedFormData} />
+          </div>
+        </div>
+        <div className="soil-analyzer__collectedDatas__history">
+          <h4>Historique de la parcelle</h4>
+          <ul>
+            <li>
+              <Wheat color="#FFE666" strokeWidth="1.5" /> Culture précédente:{" "}
+              {selectedFormData.history.soilHistory}
+            </li>
+            <li>
+              <Shovel color="#676767" strokeWidth="1.5" />
+              Travail du sol: {selectedFormData.history.soilWork}
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <Worm color="#987654" strokeWidth="1.5" />
+              Amendement récent: {selectedFormData.history.soilAmendement}
+            </li>
+            <li>
+              <Mountain />
+              Texture du sol: {selectedFormData.soil.soilTexture}
+            </li>
+          </ul>
         </div>
       </div>
       <div className="soil-analyzer__collectedDatas__action">
-        <Button onClick={() => {}}>Analyser</Button>
+        <Button onClick={() => {}}>Lancer l'analyse</Button>
       </div>
     </div>
   );

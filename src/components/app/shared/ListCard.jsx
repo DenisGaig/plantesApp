@@ -26,14 +26,25 @@ const ListCard = ({ plant, searchParams, compact = false }) => {
   if (!plant) return <p>Plante non disponible</p>;
 
   return (
-    <div className="list-plant-card">
+    <div
+      className={`list-plant-card ${
+        isSelected ? " list-plant-card--selected" : ""
+      }`}
+    >
+      {isSelected && <div className="list-plant-card__selected-badge"></div>}
       <div className="list-plant-card__image">
         {plant.images && (
           <img src={plant.images[0]?.url} alt={plant.commonName} />
         )}
       </div>
       <div className="list-plant-card__content">
-        <h3 className="list-plant-card__content__title">{plant.commonName}</h3>
+        <h3
+          className={`list-plant-card__content__title ${
+            isSelected ? "list-plant-card__content__title--selected" : ""
+          }`}
+        >
+          {plant.commonName}
+        </h3>
         <p className="list-plant-card__content__scientific_title">
           ({plant.scientificName})
         </p>
@@ -61,7 +72,7 @@ const ListCard = ({ plant, searchParams, compact = false }) => {
             </button>
           ) : (
             <button
-              className="list-plant-card__content__info__addPlant"
+              className="list-plant-card__content__info__removePlant"
               onClick={() => handleRemovePlant(plant)}
             >
               <span>Retirer de la liste</span> 🌿

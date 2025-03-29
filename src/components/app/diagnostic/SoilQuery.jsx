@@ -116,7 +116,7 @@ const SoilQuery = ({ initialData, onDataChange }) => {
                     Lent (l'eau reste visible pendant plusieurs heures voire une
                     journée)
                   </option>
-                  <option value="tres-lent">
+                  <option value="tresLent">
                     Très lent (l'eau stagne pendant plus d'une journée)
                   </option>
                 </select>
@@ -134,8 +134,8 @@ const SoilQuery = ({ initialData, onDataChange }) => {
                 >
                   <option value="">Sélectionner...</option>
                   <option value="facile">Facile</option>
+                  <option value="moyen">Moyen</option>
                   <option value="difficile">Difficile</option>
-                  <option value="tres-difficile">Très difficile</option>
                 </select>
               </div>
             </div>
@@ -156,6 +156,7 @@ const SoilQuery = ({ initialData, onDataChange }) => {
                   <option value="forte">En abondance</option>
                   <option value="moderee">En quantité modérée</option>
                   <option value="faible">En faible quantité</option>
+                  <option value="aucune">Aucune</option>
                 </select>
               </div>
             </div>
@@ -215,7 +216,7 @@ const SoilQuery = ({ initialData, onDataChange }) => {
                   <option value="">Sélectionner...</option>
                   <option value="fumier">Fumier</option>
                   <option value="compost">Compost</option>
-                  <option value="engrais-vert">Engrais vert</option>
+                  <option value="engraisVert">Engrais vert</option>
                   <option value="brf">BRF</option>
                   <option value="aucun">Aucun</option>
                 </select>

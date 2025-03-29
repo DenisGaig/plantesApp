@@ -1,3 +1,4 @@
+import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import Button from "../shared/Button";
 
@@ -145,6 +146,19 @@ const FilterBar = ({
         hasActiveFilters ? "has-active-filters" : ""
       }`}
     >
+      {filters.length > 0 && (
+        <div key={filters[0].id} className="generic-filter-bar__name-item">
+          <label htmlFor={filters[0].id}>{filters[0].label}</label>
+          {renderFilterControl(filters[0])}
+          <button
+            className="generic-filter-bar__apply-button"
+            onClick={handleApply}
+          >
+            <Search />
+          </button>
+        </div>
+      )}
+
       <div
         className="generic-filter-bar__header"
         data-active-filters={
@@ -178,6 +192,7 @@ const FilterBar = ({
           </svg>
           <h3>Filtres avancés</h3>
         </div>
+
         <button
           className="toggle-expand-button"
           onClick={() => setExpanded(!expanded)}
@@ -186,14 +201,16 @@ const FilterBar = ({
         </button>
       </div>
 
-      <div className="generic-filter-bar__controls">
-        {filters.map((filter) => (
-          <div key={filter.id} className="filter-item">
-            <label htmlFor={filter.id}>{filter.label}</label>
-            {renderFilterControl(filter)}
-          </div>
-        ))}
-      </div>
+      {expanded && (
+        <div className="generic-filter-bar__controls">
+          {filters.slice(1).map((filter) => (
+            <div key={filter.id} className="filter-item">
+              <label htmlFor={filter.id}>{filter.label}</label>
+              {renderFilterControl(filter)}
+            </div>
+          ))}
+        </div>
+      )}
 
       {!autoApply && (
         <div className="generic-filter-bar__actions">

@@ -11,7 +11,32 @@
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
+  position: relative;
 
+  &--selected {
+    // border: 4px solid $primary-color;
+    background-color: #f0fdf4;
+    // border-radius: $border-radius;
+  }
+  &__selected-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #10b981; // bg-green-500
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &::before {
+      content: "✓";
+      padding: 5px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+  }
   &__image {
     width: 100px;
     height: 100px;
@@ -35,6 +60,10 @@
       font-size: 1rem;
       font-weight: bold;
       margin-bottom: 0.5rem;
+
+      &--selected {
+        color: $primary-color;
+      }
     }
     &__scientific_title {
       font-size: 0.8rem;
@@ -65,7 +94,8 @@
         background-color: darken($secondary-color, 10%);
       }
     }
-    &__addPlant {
+    &__addPlant,
+    &__removePlant {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -76,14 +106,15 @@
       border-radius: $border-radius;
       box-shadow: $box-shadow;
       padding: 0.5rem 1rem;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       cursor: pointer;
       transition: background-color 0.3s ease-in-out;
       span {
         margin-right: 0.5rem;
       }
       &:hover {
-        background-color: darken($primary-color, 10%);
+        background-color: lighten($primary-color, 10%);
+        color: $white;
       }
       &__icon {
         margin-left: 1rem;
@@ -95,6 +126,11 @@
           fill: darken($primary-color, 10%);
         }
       }
+    }
+    &__removePlant {
+      // background-color: $secondary-color;
+      color: $primary-color;
+      font-weight: bold;
     }
   }
 }

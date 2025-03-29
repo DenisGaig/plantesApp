@@ -3,7 +3,6 @@ import {
   Grid3x3,
   List,
   Save,
-  Search,
   Split,
   TrendingUp,
   X,
@@ -62,9 +61,10 @@ const AdvancedSearch = () => {
   const advancedFilters = [
     {
       id: "name",
-      label: "Nom commun",
+      label: "",
       type: "text",
-      placeholder: "Ex: Pissenlit",
+      placeholder:
+        "Rechercher le nom d'une plante en français (ex: Pissenlit...)",
     },
     {
       id: "latinName",
@@ -336,7 +336,7 @@ const AdvancedSearch = () => {
 
   return (
     <div className="advanced-search">
-      <div className="advanced-search__intuitive-search-bar">
+      {/* <div className="advanced-search__intuitive-search-bar">
         <Search />
         <input
           type="text"
@@ -344,7 +344,7 @@ const AdvancedSearch = () => {
           id=""
           placeholder="Rechercher une plante ..."
         />
-      </div>
+      </div> */}
       <div className="advanced-search__search-options">
         <div className="advanced-search__search-options__title">
           <Split />
