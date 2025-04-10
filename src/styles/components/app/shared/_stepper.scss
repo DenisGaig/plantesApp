@@ -24,11 +24,11 @@
     }
     &.active {
       .stepper__step-circle {
-        background-color: #007bff;
+        background-color: $primary-color;
         color: #fff;
       }
       .stepper__step-label {
-        color: #007bff;
+        color: $primary-color;
       }
     }
   }

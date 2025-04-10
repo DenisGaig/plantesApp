@@ -13,6 +13,8 @@ const Button = ({
   variant = "default",
   disabled = false,
   className = "",
+  component: Component = "button",
+  to,
   ...rest
 }) => {
   // Déterminer les classes CSS en fonction de la variante
@@ -30,14 +32,15 @@ const Button = ({
   };
 
   return (
-    <button
+    <Component
       className={getButtonClasses()}
       onClick={onClick}
       disabled={disabled}
+      {...(to && { to })}
       {...rest}
     >
       {children}
-    </button>
+    </Component>
   );
 };
 export default Button;

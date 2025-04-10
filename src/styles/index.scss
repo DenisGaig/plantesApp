@@ -24,6 +24,7 @@
 @import "components/app/shared/button";
 @import "components/app/shared/listCard";
 @import "components/app/shared/stepper";
+@import "components/app/shared/globalSearchBar";
 
 @import "components/app/database/plantDatabase";
 @import "components/app/database/advancedSearch";
@@ -41,3 +42,5 @@
 @import "components/app/diagnostic/soilQuery";
 @import "components/app/diagnostic/soilAnalyzer";
 @import "components/app/diagnostic/soilIndicators";
+@import "components/app/diagnostic/diagnosticResults";
+@import "components/app/diagnostic/recommendations";

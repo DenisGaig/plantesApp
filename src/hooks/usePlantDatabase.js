@@ -46,14 +46,30 @@ export function usePlantDatabase() {
     let result = [...plantsDatabase];
     // console.log("RESULTS INPUT: ", result);
     const matchFilters = {
-      name: (plant, value) =>
-        plant["commonName"]?.toLowerCase().includes(value.toLowerCase()),
+      // name: (plant, value) =>
+      //   plant["commonName"]?.toLowerCase().includes(value.toLowerCase()),
 
-      latinName: (plant, value) =>
-        plant["scientificName"]?.toLowerCase().includes(value.toLowerCase()),
+      name: (plant, value) => {
+        const normalizedValue = normalizeString(value);
+        const normalizedName = normalizeString(plant["commonName"] || "");
+        return normalizedName.includes(normalizedValue);
+      },
 
-      famille: (plant, value) =>
-        plant["family"]?.toLowerCase().includes(value.toLowerCase()),
+      latinName: (plant, value) => {
+        const normalizedValue = normalizeString(value);
+        const normalizedLatinName = normalizeString(
+          plant["scientificName"] || ""
+        );
+        return normalizedLatinName.includes(normalizedValue);
+      },
+      // plant["scientificName"]?.toLowerCase().includes(value.toLowerCase()),
+
+      famille: (plant, value) => {
+        const normalizedValue = normalizeString(value);
+        const normalizedFamily = normalizeString(plant["family"] || "");
+        return normalizedFamily.includes(normalizedValue);
+      },
+      // plant["family"]?.toLowerCase().includes(value.toLowerCase()),
 
       primaryBiotope: (plant, value) => {
         const normalizedValue = normalizeString(value);
@@ -168,7 +184,6 @@ export function usePlantDatabase() {
 
   const searchPlants = async ({ filters: newFilters, logic }) => {
     setLoading(true);
-    // Ajouter un log pour voir les nouveaux filtres
     console.log("Hook - SEARCHING WITH NEW FILTERS:", newFilters);
     // Mise à jour des filtres et de la logique de recherche
     console.log("Avant setFilters", filters);
@@ -179,7 +194,6 @@ export function usePlantDatabase() {
     // Attendre le prochain cycle de rendu pour appliquer les filtres et filteredPlants sera mis à jour
     return new Promise((resolve) => {
       setTimeout(() => {
-        // Utiliser applyFilters directement avec les paramètres fournis
         const result = applyFilters(newFilters, logic || searchLogic);
 
         // Mettre à jour l'état filteredPlants pour cohérence

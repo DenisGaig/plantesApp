@@ -1,98 +1,142 @@
 .soil-analyzer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  padding: 20px;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: flex-start;
+  // justify-content: center;
+  // width: 100%;
+  // padding: 20px;
 
-  &__collectedDatas {
+  &__resume {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    background-color: #f5f5f5;
-    color: $text-color;
-    padding: 2rem;
     width: 100%;
-    gap: 1rem;
+    padding: 20px;
 
-    &__container {
+    .soil-analyzer__collectedDatas {
       display: flex;
+      flex-direction: column;
       align-items: flex-start;
+      justify-content: center;
       border-radius: $border-radius;
-      background-color: $white;
+      background-color: #f5f5f5;
+      color: $text-color;
       padding: 2rem;
-      width: 95%;
-    }
-
-    &__plants {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      // margin: 2rem;
+      width: 100%;
       gap: 1rem;
-      // margin-bottom: 20px;
-      width: 55%;
-      color: $text-color;
 
-      &__chart {
-        display: flex;
-        // flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        width: 100%;
-      }
-    }
-    &__soil-parameters {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: start;
-      height: 100%;
-      padding-left: 2rem;
-      // border-radius: $border-radius;
-      margin-bottom: 20px;
-      width: 45%;
-      color: $text-color;
-      span {
-        width: 100%;
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: $text-color;
-      }
-    }
-    &__history {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      border-radius: $border-radius;
-      background-color: $white;
-      margin-bottom: 2rem;
-      padding: 1.5rem;
-      width: 95%;
-      color: $text-color;
-      ul {
+      &__container {
         display: flex;
         align-items: flex-start;
-        justify-content: flex-start;
-        width: 100%;
-        margin-bottom: 1rem;
-        li {
+        border-radius: $border-radius;
+        background-color: $white;
+        padding: 2rem;
+        width: 95%;
+      }
+
+      &__plants {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        // margin: 2rem;
+        gap: 1rem;
+        // margin-bottom: 20px;
+        width: 55%;
+        color: $text-color;
+
+        &__chart {
           display: flex;
+          // flex-direction: column;
           align-items: center;
           justify-content: flex-start;
           width: 100%;
-          margin-bottom: 1rem;
-          gap: 1rem;
         }
       }
+      &__soil-parameters {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: start;
+        height: 100%;
+        padding-left: 2rem;
+        // border-radius: $border-radius;
+        margin-bottom: 20px;
+        width: 45%;
+        color: $text-color;
+        span {
+          width: 100%;
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: $text-color;
+        }
+      }
+      &__history {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: $border-radius;
+        background-color: $white;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        width: 95%;
+        color: $text-color;
+        ul {
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          width: 100%;
+          margin-bottom: 1rem;
+          li {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            margin-bottom: 1rem;
+            gap: 1rem;
+          }
+        }
+      }
+      &__action {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px auto;
+        width: 100%;
+
+        .loading-spinner {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          &__text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: $primary-color;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  &__preliminary-results {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      // color: $text-color;
+      margin-bottom: 1rem;
     }
     &__action {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 20px;
+      margin: 20px auto;
       width: 100%;
     }
   }

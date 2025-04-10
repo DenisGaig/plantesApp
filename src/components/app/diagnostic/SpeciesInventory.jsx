@@ -2,6 +2,7 @@ import { CircleCheckBigIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { usePlants } from "../../../context/PlantsProvider.jsx";
 import Button from "../shared/Button.jsx";
+import GlobalSearchBar from "../shared/GlobalSearchBar.jsx";
 import ListCard from "../shared/ListCard.jsx";
 
 const SpeciesInventory = ({ selectedPlants, onSelectionChange }) => {
@@ -44,21 +45,43 @@ const SpeciesInventory = ({ selectedPlants, onSelectionChange }) => {
           Vous avez déjà identifié{" "}
           {identifiedPlants.length ? identifiedPlants.length : 0} espèces. Vous
           pouvez en ajouter de nouvelles en cliquant sur le bouton ci-dessous.
-          Sélectionnez (en cliquant sur les cartes) les plantes présentes sur
-          votre terrain pour ensuite ajuster la couverture de chaque espèce.
         </p>
       </div>
+
+      {!showAddPlantModal ? (
+        <Button
+          variant="default"
+          className="species-inventory__identified-plants__button"
+          // component={Link}
+          // to="/app/plants"
+          onClick={() => setShowAddPlantModal(true)}
+          // disabled={!identifiedPlants.length}
+        >
+          + Ajouter une plante
+        </Button>
+      ) : (
+        <div className="species-inventory__search-bar">
+          <Button
+            variant="default"
+            className="species-inventory__identified-plants__button"
+            onClick={() => setShowAddPlantModal(false)}
+          >
+            Retour
+          </Button>
+          {/* Barre de recherche globale */}
+          <GlobalSearchBar />
+        </div>
+      )}
+
       <div className="species-inventory__identified-plants">
         <div className="species-inventory__identified-plants__section-header">
           <h3>Plantes identifiées récemment</h3>
-          <Button
-            variant="outline"
-            className="species-inventory__identified-plants__button"
-            onClick={() => setShowAddPlantModal(true)}
-            // disabled={!identifiedPlants.length}
-          >
-            + Ajouter une plante
-          </Button>
+          {identifiedPlants.length > 0 && (
+            <p>
+              Sélectionnez (en cliquant sur les cartes) les plantes présentes
+              sur votre terrain pour passer au diagnostic.
+            </p>
+          )}
         </div>
 
         {identifiedPlants.length > 0 ? (
@@ -84,7 +107,7 @@ const SpeciesInventory = ({ selectedPlants, onSelectionChange }) => {
             ))}
           </div>
         ) : (
-          <p className="species-inventory__identified-plants-empty">
+          <p className="species-inventory__identified-plants__empty">
             Vous n'avez pas encore identifié de plantes. Utilisez la
             fonctionnalité d'identification ou ajoutez des plantes manuellement.
           </p>
@@ -113,7 +136,7 @@ const SpeciesInventory = ({ selectedPlants, onSelectionChange }) => {
             ))}
           </div>
         ) : (
-          <p className="species-inventory__selected-plants-empty">
+          <p className="species-inventory__selected-plants__empty">
             Vous n'avez pas encore sélectionné de plantes pour le diagnostic.
           </p>
         )}

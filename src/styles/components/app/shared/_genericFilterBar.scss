@@ -1,6 +1,7 @@
 .generic-filter-bar {
   margin-right: 50px;
-  background-color: rgba(255, 255, 255, 0.63);
+  // background-color: rgba(255, 255, 255, 0.63);
+  background-color: $white;
   border-radius: $border-radius * 2;
   padding: 1rem;
   box-shadow: $box-shadow;
@@ -14,17 +15,19 @@
     width: 100%;
     margin-bottom: 1rem;
     padding: 0 1.5rem;
-    // justify-content: center;
+    justify-content: center;
 
     .generic-filter-input {
       width: 70%;
       padding: 0.5rem 0.75rem;
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+      // border-radius: $border-radius;
       border: 1px solid $primary-color;
-      border-radius: $border-radius;
       font-size: 0.9rem;
 
       &:focus {
-        border-color: $primary-color;
+        border-color: darken($primary-color, 10%);
         outline: none;
         box-shadow: $box-shadow;
       }
@@ -35,7 +38,9 @@
     background-color: $secondary-color;
     color: $white;
     border: none;
-    border-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    // border-radius: $border-radius;
     height: 2.2rem;
     width: 2.2rem;
     cursor: pointer;

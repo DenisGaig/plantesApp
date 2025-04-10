@@ -1,3 +1,4 @@
+import { Info, Plus, Trash2 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usePlants } from "../../../context/PlantsProvider.jsx";
 
@@ -61,21 +62,21 @@ const ListCard = ({ plant, searchParams, compact = false }) => {
             onClick={() => handleNavigateToPlant(plant.id)}
             className="list-plant-card__content__info__link"
           >
-            Plus d'infos
+            Plus d'infos <Info size={16} />
           </button>
           {!isSelected ? (
             <button
               className="list-plant-card__content__info__addPlant"
               onClick={() => handleAddPlant(plant)}
             >
-              <span>Ajouter à la liste</span> 🌿
+              <span>Ajouter à la liste</span> <Plus size={16} />
             </button>
           ) : (
             <button
               className="list-plant-card__content__info__removePlant"
               onClick={() => handleRemovePlant(plant)}
             >
-              <span>Retirer de la liste</span> 🌿
+              <span>Retirer de la liste</span> <Trash2 size={16} />
             </button>
           )}
           {/* </Link> */}

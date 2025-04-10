@@ -1,14 +1,22 @@
-$primary-color: #3498db;
+// $primary-color: #3498db; // #714acc couleur complémentaire de secondary-color
+// $primary-color-light: #3498db9c;
+// $primary-color-dark: #2980b9;
+$primary-color: #714acc;
+$primary-color-light: #8155e9;
+$primary-color-dark: #5e3eaa;
 $secondary-color: #8eb533;
 $secondary-color-light: #8eb533b7;
 $secondary-color-dark: #617c23;
-$primary-color-dark: #2980b9;
 
-$text-color: #333;
+$green-chart: #16a34a;
+$green-chart-light: #dcfce7;
+
+$text-color: #222222;
 $background-color: #f4f4f4;
 $error-color: #e74c3c;
 $success-color: #2ecc71;
 $border-color: rgb(209 213 219);
+$gray: #f5f5f5;
 $light-gray-transparent: #e9e8e89c;
 $white: #ffffff;
 $white-transparent: #ffffffc4;

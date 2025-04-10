@@ -1,0 +1,286 @@
+// Variables
+// $primary-color: #22c55e; // Vert pour le thème de plantes
+$primary-dark: darken($primary-color, 15%);
+$primary-light: lighten($primary-color, 35%);
+$gray-100: #f3f4f6;
+$gray-200: #e5e7eb;
+$gray-300: #d1d5db;
+$gray-400: #9ca3af;
+$gray-500: #6b7280;
+$gray-600: #4b5563;
+$gray-700: #374151;
+$gray-800: #1f2937;
+$text-color: $gray-700;
+$border-radius: 8px;
+$box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+$transition-speed: 0.2s;
+
+// Mixins
+@mixin card {
+  border: 1px solid $gray-200;
+  border-radius: $border-radius;
+  overflow: hidden;
+}
+
+@mixin focus-ring {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba($primary-color, 0.5);
+}
+
+.plant-search {
+  width: 100%;
+  max-width: 48rem; // max-w-3xl
+  margin: 0 auto;
+  font-family: system-ui, -apple-system, sans-serif;
+
+  .search-container {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 2.5rem;
+      background-color: $gray-100;
+      border: 1px solid $gray-300;
+      border-radius: $border-radius;
+      font-size: 1rem;
+      transition: all $transition-speed;
+
+      &:focus {
+        @include focus-ring;
+        border-color: $primary-color;
+      }
+
+      &::placeholder {
+        color: $gray-400;
+      }
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $gray-400;
+    }
+
+    .clear-button {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: $gray-400;
+      cursor: pointer;
+      padding: 0;
+
+      &:hover {
+        color: $gray-600;
+      }
+    }
+  }
+
+  .suggestions-panel {
+    position: absolute;
+    z-index: 10;
+    margin-top: 0.25rem;
+    width: 100%;
+    background: white;
+    border: 1px solid $gray-200;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+
+    .searching-message {
+      padding: 0.75rem;
+      text-align: center;
+      color: $gray-500;
+    }
+
+    .suggestions-list {
+      max-height: 15rem;
+      overflow-y: auto;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      .suggestion-item,
+      .recent-search-item {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        color: $gray-500;
+
+        &:hover {
+          background-color: $gray-100;
+        }
+      }
+
+      .recent-searches-header {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: $gray-500;
+        font-weight: 500;
+      }
+
+      .recent-search-item {
+        display: flex;
+        align-items: center;
+
+        .recent-icon {
+          margin-right: 0.5rem;
+          color: $gray-400;
+        }
+      }
+
+      .no-suggestions-message {
+        padding: 0.5rem 1rem;
+        color: $gray-500;
+      }
+    }
+  }
+
+  .search-results {
+    margin-top: 1.5rem;
+
+    .results-header {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: $gray-800;
+    }
+
+    .results-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+
+  .plant-card {
+    @include card;
+    padding: 1rem;
+    transition: box-shadow $transition-speed;
+
+    &:hover {
+      box-shadow: $box-shadow;
+    }
+
+    .plant-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+
+      .plant-name-container {
+        .scientific-name {
+          font-weight: 600;
+          color: $primary-dark;
+          margin: 0;
+        }
+
+        .common-name {
+          color: $gray-600;
+          margin: 0.25rem 0 0;
+        }
+      }
+
+      .plant-family {
+        font-size: 0.875rem;
+        color: $gray-500;
+      }
+    }
+
+    .plant-description {
+      margin: 0.5rem 0;
+
+      p {
+        font-size: 0.875rem;
+        color: $gray-700;
+        margin: 0;
+      }
+    }
+
+    .plant-indicators {
+      margin-top: 0.75rem;
+
+      .indicators-header {
+        font-size: 0.75rem;
+        color: $gray-500;
+        margin-bottom: 0.25rem;
+      }
+
+      .indicators-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+
+        .indicator-badge {
+          display: inline-block;
+          padding: 0.25rem 0.5rem;
+          background-color: $primary-light;
+          color: $primary-dark;
+          border-radius: 9999px;
+          font-size: 0.75rem;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .plant-keywords {
+      margin-top: 0.5rem;
+
+      .keywords-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+
+        .keyword {
+          font-size: 0.75rem;
+          color: $gray-500;
+        }
+      }
+    }
+  }
+
+  .no-results {
+    margin-top: 1.5rem;
+    text-align: center;
+    padding: 2rem;
+    @include card;
+
+    .no-results-message {
+      color: $gray-500;
+      margin: 0 0 0.25rem;
+    }
+
+    .no-results-hint {
+      font-size: 0.875rem;
+      color: $gray-400;
+      margin: 0;
+    }
+  }
+
+  // Styles pour le surlignage des termes de recherche
+  mark {
+    background-color: #fef08a; // Jaune clair
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}

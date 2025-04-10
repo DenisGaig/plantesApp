@@ -32,7 +32,7 @@ const SoilQuery = ({ initialData, onDataChange }) => {
 
   return (
     <div className="soil-query">
-      <div className="soil-query-header">
+      <div className="soil-query__header">
         <h2>Etape 3: Paramètres du sol</h2>
         <p>
           Afin d'enrichir l'analyse et d'améliorer les résultats, vous pouvez

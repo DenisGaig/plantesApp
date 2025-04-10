@@ -14,7 +14,7 @@ import Diagnostic from "../../pages/app/Diagnostic.jsx";
 import Home from "../../pages/app/Home.jsx";
 import Identification from "../../pages/app/Identification.jsx";
 import PlantDatabase from "../../pages/app/PlantDatabase.jsx";
-import Result from "../../pages/app/DiagnosticResult.jsx";
+import Result from "../../pages/app/Results.jsx";
 import Method from "./methode/Method.jsx";
 import PlantProfile from "./profile/PlantProfile.jsx";
 import Spinner from "./shared/Spinner.jsx";

@@ -14,6 +14,12 @@ import Button from "../shared/Button";
 import FilterBar from "../shared/GenericFilterBar.jsx";
 import PlantList from "./PlantList";
 
+/**
+ * Composant AdvancedSearch pour effectuer des recherches avancées dans la base de données des plantes.
+ * Permet de filtrer les plantes par différents critères et d'afficher les résultats sous forme de liste ou de grille.
+ *
+ */
+
 const AdvancedSearch = () => {
   const location = useLocation();
   const navigate = useNavigate();

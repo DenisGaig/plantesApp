@@ -6,4 +6,26 @@ $article-header-height: 500px;
     height: $article-header-height;
     background: var(--article-header-bg) no-repeat center/cover;
   }
+
+  &__content {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+
+      em {
+        font-style: italic;
+        color: $primary-color;
+        font-weight: 600;
+      }
+    }
+  }
 }

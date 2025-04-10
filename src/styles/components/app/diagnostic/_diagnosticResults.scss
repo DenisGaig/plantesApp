@@ -1,0 +1,212 @@
+.diagnostic-results {
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  // margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: $gray;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+    h2 {
+      // font-size: 1.5rem;
+      // font-weight: 600;
+      color: $text-color;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: $border-radius;
+      background-color: $primary-color;
+      color: $white;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      &:hover {
+        background-color: $primary-color-dark;
+      }
+    }
+  }
+
+  &__plants-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    background-color: $white;
+    padding: 1.5rem;
+    border-radius: $border-radius;
+
+    h3 {
+      color: $text-color;
+      font-weight: 500;
+      font-size: 1.25rem;
+      // margin-bottom: 1rem;
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      li {
+        padding: 0.5rem 1rem;
+        border-radius: $border-radius * 10;
+        background-color: $green-chart-light;
+        color: $green-chart;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  &__preview {
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $text-color;
+      margin-bottom: 1rem;
+    }
+  }
+
+  // Chart
+  &__chart-container {
+    border-radius: $border-radius;
+    margin-bottom: 1.5rem;
+    background-color: $white;
+    padding: 1.5rem;
+
+    .chart-title {
+      font-weight: 500;
+      font-size: 1.125rem;
+      color: $text-color;
+      margin-bottom: 1rem;
+    }
+
+    .chart {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .chart-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: relative;
+
+        .chart-label {
+          width: 5rem;
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: $text-color;
+        }
+
+        .chart-bar-container {
+          flex-grow: 0.95;
+          background-color: $light-gray-transparent;
+          border-radius: 9999px;
+          height: 1.5rem;
+          overflow: hidden;
+          display: flex;
+
+          .chart-bar-positive {
+            height: 100%;
+            background-color: $success-color;
+            border-radius: 9999px;
+          }
+
+          .chart-bar-negative {
+            height: 100%;
+            background-color: $error-color;
+            border-radius: 9999px;
+          }
+        }
+
+        .chart-value {
+          width: 2rem;
+          text-align: right;
+          color: $text-color;
+          margin-right: 20px;
+        }
+
+        .chart-details {
+          width: 30px;
+          font-size: 0.75rem;
+          display: flex;
+          gap: 1rem;
+
+          .positive-text {
+            color: $success-color;
+          }
+
+          .negative-text {
+            color: $error-color;
+          }
+        }
+      }
+    }
+  }
+
+  &__table {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: $white;
+    padding: 1.5rem;
+    border-radius: $border-radius;
+    .table-title {
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: $text-color;
+    }
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th,
+      td {
+        color: $text-color;
+        font-weight: 400;
+        border: 1px solid $light-gray-transparent;
+        padding: 0.5rem;
+        text-align: center;
+      }
+
+      th {
+        background-color: $light-gray-transparent;
+        text-align: left;
+        font-size: 0.875rem;
+        text-align: center;
+      }
+
+      .positive-value {
+        color: $success-color;
+        text-align: center;
+      }
+
+      .negative-value {
+        color: $error-color;
+        text-align: center;
+      }
+
+      .total-value {
+        font-weight: 500;
+        text-align: center;
+      }
+    }
+  }
+
+  &__recommendations {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: $white;
+    padding: 1.5rem;
+    border-radius: $border-radius;
+  }
+}

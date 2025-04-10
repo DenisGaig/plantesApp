@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CoverageEditor from "../../components/app/diagnostic/CoverageEditor.jsx";
-import Recommendations from "../../components/app/diagnostic/Recommendations.jsx";
+import DiagnosticResults from "../../components/app/diagnostic/DiagnosticResults.jsx";
 import SoilAnalyzer from "../../components/app/diagnostic/SoilAnalyzer.jsx";
 import SoilQuery from "../../components/app/diagnostic/SoilQuery.jsx";
 import SpeciesInventory from "../../components/app/diagnostic/SpeciesInventory.jsx";
@@ -20,40 +20,30 @@ export default function Diagnostic() {
     const storedCoefficients = storageService.getStoredData("coefficients");
     return storedCoefficients || {};
   });
+  const emptyFormData = {
+    soil: {
+      soilTexture: "",
+      soilColor: "",
+      soilDrainage: "",
+      soilWorkability: "",
+      soilOrganisms: "",
+    },
+    history: {
+      soilHistory: "",
+      soilWork: "",
+      soilAmendement: "",
+      soilPollution: "",
+    },
+  };
   const [formData, setFormData] = useState(() => {
     const storedData = storageService.getStoredData("formData");
-    return (
-      storedData || {
-        soil: {
-          soilTexture: "",
-          soilColor: "",
-          soilDrainage: "",
-          soilWorkability: "",
-          soilOrganisms: "",
-        },
-        history: {
-          soilHistory: "",
-          soilWork: "",
-          soilAmendement: "",
-          soilPollution: "",
-        },
-      }
-    );
+    return storedData || emptyFormData;
   });
+  const [analysisResults, setAnalysisResults] = useState([]);
+  const [sortedResultsColumns, setSortedResultsColumns] = useState(null);
 
   console.log("COEFFICIENTS", Object.keys(coefficients).length);
 
-  // const steps = [
-  //   { id: 1, label: "Inventaire", completed: identifiedPlants.length > 0 },
-  //   { id: 2, label: "Couverture", completed: totalCoverage === 100 },
-  //   {
-  //     id: 3,
-  //     label: "Paramètres",
-  //     completed: Object.keys(soilParameters).length > 0,
-  //   },
-  //   { id: 4, label: "Analyse", completed: analysisResults !== null },
-  //   { id: 5, label: "Résultats", completed: false },
-  // ];
   const steps = [
     { id: 1, label: "Inventaire" },
     { id: 2, label: "Couverture" },
@@ -85,12 +75,35 @@ export default function Diagnostic() {
     }
   };
 
+  const handleAnalysisComplete = (results, sortedColumns) => {
+    console.log("Diagnostic: Résultats de l'analyse :", results);
+    setAnalysisResults(results);
+    console.log("Diagnostic: Colonnes triées :", sortedColumns);
+    setSortedResultsColumns(sortedColumns);
+    storageService.storeData("analysisResults", results);
+  };
+
   const handleNext = () => {
     setCurrentStep((prevStep) => Math.min(prevStep + 1, steps.length - 1));
   };
 
   const handlePrev = () => {
     setCurrentStep((prevStep) => Math.max(prevStep - 1, 0));
+  };
+
+  const handleReset = () => {
+    setCurrentStep(0);
+    setSelectedPlants([]);
+    setCoverages({});
+    setCoefficients({});
+    setFormData(emptyFormData);
+    setAnalysisResults(null);
+    setSortedResultsColumns([]);
+    storageService.removeItem("selectedPlants");
+    storageService.removeItem("coverages");
+    storageService.removeItem("coefficients");
+    storageService.removeItem("formData");
+    storageService.removeItem("analysisResults");
   };
 
   const renderStepContent = () => {
@@ -127,10 +140,20 @@ export default function Diagnostic() {
             selectedCoverages={coverages}
             selectedCoefficients={coefficients}
             selectedFormData={formData}
+            onAnalysisComplete={handleAnalysisComplete}
+            onNextStep={handleNext}
           />
         );
       case 4:
-        return <Recommendations />;
+        return (
+          <DiagnosticResults
+            selectedPlants={selectedPlants}
+            selectedCoefficients={coefficients}
+            analysisResults={analysisResults}
+            sortedResultsColumns={sortedResultsColumns}
+            isPreview={false}
+          />
+        );
       default:
         return null;
     }
@@ -158,7 +181,9 @@ export default function Diagnostic() {
       <div className="diagnostic__footer">
         <div className="diagnostic__footer-actions">
           {/* <Button variant="small">Terminer</Button> */}
-          <Button variant="small">Annuler</Button>
+          <Button variant="default" onClick={() => handleReset()}>
+            Annuler
+          </Button>
         </div>
         <div className="diagnostic__footer-progress">
           <Button

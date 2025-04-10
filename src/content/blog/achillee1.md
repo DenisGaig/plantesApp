@@ -15,9 +15,9 @@ id: 1
 
 # L'Achillée Millefeuille
 
-L'achillée millefeuille, également connue sous le nom de _Achillea millefolium_, est une plante herbacée vivace appartenant à la famille des Astéracées. Elle est largement répandue dans les régions tempérées de l'hémisphère nord, y compris en Europe, en Asie et en Amérique du Nord.
+L'achillée millefeuille, également connue sous le nom de _*Achillea millefolium*_, est une plante herbacée vivace appartenant à la famille des Astéracées. Elle est largement répandue dans les régions tempérées de l'hémisphère nord, y compris en Europe, en Asie et en Amérique du Nord.
 
-## Description
+## Description ☘️
 
 L'achillée millefeuille est reconnaissable à ses feuilles finement découpées, qui lui donnent son nom commun de "millefeuille". Ses fleurs, généralement blanches ou roses, sont regroupées en corymbes denses et apparaissent en été. La plante peut atteindre une hauteur de 60 cm à 1 mètre.
 
