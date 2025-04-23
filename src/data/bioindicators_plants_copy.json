@@ -324,7 +324,7 @@
     }
   },
   {
-    "scientificName": "Allium ampeloprasum",
+    "scientificName": " Allium ampeloprasum",
     "commonName": "Poireau sauvage",
     "caracteristiques": {
       "BNS": "+",
@@ -3099,7 +3099,7 @@
     }
   },
   {
-    "scientificName": "Crepis vesicaria ssp taraxacifolia",
+    "scientificName": "Crepis taraxacifolia",
     "commonName": "Crépide à feuilles de pissenlit",
     "caracteristiques": {
       "BNS": "+",
@@ -5216,7 +5216,7 @@
     }
   },
   {
-    "scientificName": "Koeleria vallesiana",
+    "scientificName": "Koeleria valesiana",
     "commonName": "Koelérie du Valais",
     "caracteristiques": {
       "BS": "++",
@@ -7140,19 +7140,6 @@
       "MO(C)": "-",
       "MO(N)": "-",
       "Foss": "++"
-    }
-  },
-  {
-    "scientificName": "Peucedanum ostruthium",
-    "commonName": "Impératoire",
-    "caracteristiques": {
-      "BNS": "++",
-      "Eau": "+",
-      "MOT": "++",
-      "MO(C)": "+",
-      "MO(N)": "+",
-      "Foss": "++",
-      "AB+": "+"
     }
   },
   {

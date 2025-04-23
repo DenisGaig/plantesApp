@@ -1,0 +1,25 @@
+.plant-properties {
+  width: 100%;
+
+  .plant-medicinal-use {
+    &__item {
+      list-style-type: none;
+      margin: 0.5rem 1rem;
+      text-align: left;
+    }
+  }
+  .plant-culinary-use {
+    &__item {
+      list-style-type: none;
+      margin: 0.5rem 1rem;
+      text-align: left;
+    }
+  }
+  .plant-notes {
+    &__item {
+      list-style-type: none;
+      margin: 0.5rem 1rem;
+      text-align: left;
+    }
+  }
+}

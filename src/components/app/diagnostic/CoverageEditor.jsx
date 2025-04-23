@@ -54,7 +54,7 @@ const CoverageEditor = ({
           <div key={plant.id} className="coverage-editor__plant-item">
             <div className="coverage-editor__plant-image">
               {plant.images && (
-                <img src={plant.images[0].url} alt={plant.commonName} />
+                <img src={plant.images[0]?.url} alt={plant.commonName} />
               )}
             </div>
             <div className="coverage-editor__plant-info">

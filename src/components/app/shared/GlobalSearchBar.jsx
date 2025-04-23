@@ -1,6 +1,6 @@
 import { Search, X } from "lucide-react";
 import { useEffect, useRef } from "react";
-import plantesData from "../../../data/plantes.json";
+import plantesData from "../../../data/fiches_plantes.json";
 import useGlobalSearch from "../../../hooks/useGlobalSearch";
 
 const GlobalSearchBar = () => {
@@ -22,7 +22,7 @@ const GlobalSearchBar = () => {
     recentSearches,
     setRecentSearches,
     highlightText,
-  } = useGlobalSearch(plantesData);
+  } = useGlobalSearch(plantesData.data);
 
   // console.log("Data:", plantesData);
 
@@ -168,13 +168,19 @@ const GlobalSearchBar = () => {
                     <h3
                       className="scientific-name"
                       dangerouslySetInnerHTML={{
-                        __html: highlightText(plant.scientificName, searchTerm),
+                        __html: highlightText(
+                          plant.scientificName?.[0],
+                          searchTerm
+                        ),
                       }}
                     />
                     <p
                       className="common-name"
                       dangerouslySetInnerHTML={{
-                        __html: highlightText(plant.commonName, searchTerm),
+                        __html: highlightText(
+                          plant.commonName?.[0],
+                          searchTerm
+                        ),
                       }}
                     />
                   </div>
@@ -182,21 +188,24 @@ const GlobalSearchBar = () => {
                     Famille:{" "}
                     <span
                       dangerouslySetInnerHTML={{
-                        __html: highlightText(plant.family, searchTerm),
+                        __html: highlightText(plant.family?.[0], searchTerm),
+                      }}
+                    />
+                  </div>
+
+                  <div className="plant-description">
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: highlightText(
+                          plant.description.generalDescription?.[0],
+                          searchTerm
+                        ),
                       }}
                     />
                   </div>
                 </div>
 
-                {/* <div className="plant-description">
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: highlightText(plant.description, searchTerm),
-                    }}
-                  />
-                </div>
-
-                <div className="plant-indicators">
+                {/* <div className="plant-indicators">
                   <div className="indicators-header">Bio-indications:</div>
                   <div className="indicators-list">
                     {plant.indicators.map((indicator, i) => (

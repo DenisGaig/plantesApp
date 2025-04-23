@@ -15,19 +15,19 @@ const useGlobalSearch = (initialData = []) => {
     let score = 0;
 
     // Correspondance exacte du nom scientifique (priorité la plus élevée)
-    if (plant.scientificName.toLowerCase().includes(term)) {
+    if (plant.scientificName[0]?.toLowerCase().includes(term)) {
       score += 10;
-      if (plant.scientificName.toLowerCase() === term) score += 5;
+      if (plant.scientificName[0]?.toLowerCase() === term) score += 5;
     }
 
     // Correspondance du nom commun (haute priorité)
-    if (plant.commonName.toLowerCase().includes(term)) {
+    if (plant.commonName[0]?.toLowerCase().includes(term)) {
       score += 8;
-      if (plant.commonName.toLowerCase() === term) score += 4;
+      if (plant.commonName[0]?.toLowerCase() === term) score += 4;
     }
 
     // Correspondance de la famille (priorité moyenne)
-    if (plant.family?.toLowerCase().includes(term)) {
+    if (plant.family[0]?.toLowerCase().includes(term)) {
       score += 5;
     }
 
@@ -44,9 +44,11 @@ const useGlobalSearch = (initialData = []) => {
     // score += matchingKeywords.length * 3;
 
     // Correspondance de la description (priorité la plus basse)
-    // if (plant.description.toLowerCase().includes(term)) {
-    //   score += 2;
-    // }
+    if (
+      plant.description.generalDescription?.[0]?.toLowerCase().includes(term)
+    ) {
+      score += 2;
+    }
 
     return score;
   };
@@ -108,12 +110,16 @@ const useGlobalSearch = (initialData = []) => {
       // Priorité aux noms scientifiques et communs
       initialData.forEach((plant) => {
         if (
-          plant.scientificName.toLowerCase().includes(searchTerm.toLowerCase())
+          plant.scientificName[0]
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase())
         ) {
-          suggestions.add(plant.scientificName);
+          suggestions.add(plant.scientificName[0]);
         }
-        if (plant.commonName.toLowerCase().includes(searchTerm.toLowerCase())) {
-          suggestions.add(plant.commonName);
+        if (
+          plant.commonName[0]?.toLowerCase().includes(searchTerm.toLowerCase())
+        ) {
+          suggestions.add(plant.commonName[0]);
         }
       });
 
@@ -121,7 +127,9 @@ const useGlobalSearch = (initialData = []) => {
       if (suggestions.size < 5) {
         initialData.forEach((plant) => {
           console.log("family", plant.family);
-          if (plant.family?.toLowerCase().includes(searchTerm.toLowerCase())) {
+          if (
+            plant.family?.[0]?.toLowerCase().includes(searchTerm.toLowerCase())
+          ) {
             suggestions.add(plant.family);
           }
           // plant.indicators.forEach((indicator) => {
@@ -155,6 +163,9 @@ const useGlobalSearch = (initialData = []) => {
 
   // Mise en évidence du texte correspondant
   const highlightText = (text, term) => {
+    console.log("highlightText text, term: ", text, term);
+    if (text === undefined || text === null) return "";
+
     if (!term.trim()) return text;
 
     const regex = new RegExp(

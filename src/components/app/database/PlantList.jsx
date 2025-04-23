@@ -1,23 +1,15 @@
 // Liste des résultats de recherche des plantes
-import ListCard from "../shared/ListCard.jsx";
-import PlantCard from "../shared/PlantCard.jsx";
-
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { PLANTS_PER_PAGE } from "../../../constants.ts";
+import PlantCard from "../shared/PlantCard.jsx";
 
-const PlantList = ({ filteredPlants, viewMode }) => {
-  // const { filteredPlants, loading, error } = useContext(PlantsContext);
-
-  // if (loading) return <div>Loading...</div>;
-  // if (error) return <div>Error: {error.message}</div>;
-
-  // console.log("PLANT LIST RENDU !");
+const PlantList = ({ filteredPlants, viewMode, currentPage, onPageChange }) => {
   const location = useLocation();
   const currentSearchParams = location.search;
 
   // Pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const [plantsPerPage] = useState(6);
+  const [plantsPerPage] = useState(PLANTS_PER_PAGE);
 
   // Calculer les index des plantes à afficher
   const indexOfLastPlant = currentPage * plantsPerPage;
@@ -27,7 +19,7 @@ const PlantList = ({ filteredPlants, viewMode }) => {
     indexOfLastPlant
   );
   const totalPages = Math.ceil(filteredPlants.length / plantsPerPage);
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => onPageChange(pageNumber);
 
   return (
     <div className="plant-list-container">
@@ -37,21 +29,15 @@ const PlantList = ({ filteredPlants, viewMode }) => {
         {currentPlants.length === 0 ? (
           <p>Aucune plante ne correspond à ces critères</p>
         ) : (
-          currentPlants.map((plant) =>
-            viewMode === "list" ? (
-              <ListCard
-                key={plant.id}
-                plant={plant}
-                searchParams={currentSearchParams}
-              />
-            ) : (
-              <PlantCard
-                key={plant.id}
-                plant={plant}
-                searchParams={currentSearchParams}
-              />
-            )
-          )
+          currentPlants.map((plant) => (
+            <PlantCard
+              key={plant.id}
+              plant={plant}
+              searchParams={currentSearchParams}
+              viewMode={viewMode}
+              currentPage={currentPage}
+            />
+          ))
         )}
       </div>
 

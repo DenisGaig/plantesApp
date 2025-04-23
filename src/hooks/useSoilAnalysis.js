@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import plantsIndicators from "../data/bioindicators_plants.json";
+import { normalizeString } from "../utils.ts";
 
 const useSoilAnalysis = (selectedPlants, selectedCoefficients, allColumns) => {
   const [indicatorsDatabase, setIndicatorsDatabase] = useState([]);
@@ -21,6 +22,31 @@ const useSoilAnalysis = (selectedPlants, selectedCoefficients, allColumns) => {
     }
   }, []);
 
+  const getPlantIndicatorsByScientificName = useCallback(
+    (scientificName) => {
+      console.log("Hook - getPlantIndicatorsByScientificName called");
+
+      const normalizedSearchName = normalizeString(scientificName);
+      console.log("Hook - Normalized search name:", normalizedSearchName);
+
+      // Recherche d'une correspondance exacte d'abord
+      let plant = indicatorsDatabase.find(
+        (plant) => plant.scientificName.toLowerCase() === normalizedSearchName
+      );
+
+      // Si aucune correspondance exacte n'est trouvée, rechercher une correspondance partielle
+      if (!plant) {
+        plant = indicatorsDatabase.find(
+          (plant) =>
+            plant.scientificName.toLowerCase().includes(normalizedSearchName) ||
+            normalizedSearchName.includes(plant.scientificName.toLowerCase())
+        );
+      }
+      return plant ? plant.caracteristiques : [];
+    },
+    [indicatorsDatabase]
+  );
+
   const generateAnalysisResults = () => {
     setLoading(true);
     console.log("Hook - Loading set to true");
@@ -30,6 +56,8 @@ const useSoilAnalysis = (selectedPlants, selectedCoefficients, allColumns) => {
 
         // Logique pour générer les résultats d'analyse
         console.log("Hook - Analyse du sol en cours...");
+        console.log("Hook - Selected plants:", selectedPlants);
+        console.log("Hook - Selected coefficients:", selectedCoefficients);
 
         const results = {};
         // Initialiser les résultats avec des objets pour stocker les valeurs positives et négatives
@@ -39,7 +67,7 @@ const useSoilAnalysis = (selectedPlants, selectedCoefficients, allColumns) => {
 
         selectedPlants.forEach((plant) => {
           const plantData = indicatorsDatabase.find(
-            (p) => p.scientificName === plant.scientificName
+            (p) => p.scientificName === plant.scientificName[0]
           );
 
           // Récupérer la densité correspondante à partir de selectedCoefficients
@@ -58,9 +86,9 @@ const useSoilAnalysis = (selectedPlants, selectedCoefficients, allColumns) => {
                 if (!results[column]) {
                   results[column] = { positive: 0, negative: 0, total: 0 };
                 }
-                if (value === "+" || value === "+K") {
+                if (value === "+" || value === "+K" || value === "++") {
                   results[column].positive += density;
-                } else if (value === "-") {
+                } else if (value === "-" || value === "--") {
                   results[column].negative += density;
                 }
                 results[column].total =
@@ -129,6 +157,7 @@ const useSoilAnalysis = (selectedPlants, selectedCoefficients, allColumns) => {
     generateAnalysisResults,
     resetAnalysis,
     getSortedResults,
+    getPlantIndicatorsByScientificName,
   };
 };
 export default useSoilAnalysis;

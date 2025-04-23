@@ -1,26 +1,6 @@
 import { useState } from "react";
 import Recommendations from "./Recommendations.jsx";
 
-// const columnDescriptions = {
-//   BNS: "Bases non solubles",
-//   BS: "Bases solubles",
-//   Air: "Air - porosité du sol",
-//   Eau: "Eau - drainage du sol",
-//   MOT: "Matière organique totale",
-//   "MO(C)": "Matière organique carbonée",
-//   "MO(N)": "Matière organique animale ou azotée",
-//   Nit: "Nitrites",
-//   "Al3+": "Ions Aluminium",
-//   Foss: "Fossilisation de la matière organique",
-//   Less: "Lessivage du sol",
-//   Ero: "Érosion du sol",
-//   Sali: "Salinisation du sol",
-//   BP: "Blocage du Phosphore",
-//   BK: "Blocage du Potassium",
-//   "AB+": "Bonne activité biologique microbienne",
-//   "AB-": "Activité biologique bloquée",
-//   Poll: "Pollution du sol",
-// };
 const columnDescriptions = {
   BNS: {
     positive: "Bases sous forme minérale non solubles",
@@ -55,7 +35,7 @@ const columnDescriptions = {
     negative: "",
   },
   "Al3+": {
-    positive: "Libération d'ion aluminium",
+    positive: "Libération d'ion aluminium par des anaérobioses",
     negative: "",
   },
   Foss: {

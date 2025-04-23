@@ -47,16 +47,16 @@
       border: 2px solid transparent;
       transition: border-color 0.3s ease;
       &--selected {
-        border: 4px solid #007bff;
-        border-radius: $border-radius * 2;
-        border-color: #007bff;
+        // border: 4px solid #007bff;
+        // border-radius: $border-radius * 2;
+        // border-color: #007bff;
         max-width: 500px;
       }
     }
     &__selection-indicator {
       position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
+      bottom: 50%;
+      right: 30%;
     }
     &--check-icon {
       color: #007bff;

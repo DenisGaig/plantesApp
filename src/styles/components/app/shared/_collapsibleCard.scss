@@ -1,0 +1,60 @@
+/* Styles pour les cartes dépliables */
+.collapsible-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.collapsible-card__header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: #f1f3f5;
+  }
+}
+
+.collapsible-card__icon {
+  margin-right: 12px;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+}
+
+.collapsible-card__title {
+  flex-grow: 1;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.collapsible-card__toggle {
+  color: #6c757d;
+  transition: transform 0.2s ease;
+}
+
+.collapsible-card__content {
+  padding: 16px;
+  background-color: #fff;
+  border-top: 1px solid #e9ecef;
+  animation: slideDown 0.3s ease forwards;
+}
+
+/* Animation pour l'ouverture de la carte */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

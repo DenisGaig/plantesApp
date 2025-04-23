@@ -30,6 +30,8 @@ const AdvancedSearch = () => {
   const [searchName, setSearchName] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [viewMode, setViewMode] = useState("list");
+  const [currentPage, setCurrentPage] = useState(1);
+
   // Ajout pour sauvegarder les recherches
   const [formValues, setFormValues] = useState({
     name: "",
@@ -147,6 +149,8 @@ const AdvancedSearch = () => {
 
     // Parcourir tous les paramètres et les ajouter aux filtres
     for (const [key, value] of searchParams.entries()) {
+      // Ignorer les paramètres spéciaux
+      if (["searchLogic", "viewMode", "page"].includes(key)) continue;
       // Convertir les valeurs booléennes
       if (value === "true") urlFilters[key] = true;
       else if (value === "false") urlFilters[key] = false;
@@ -154,15 +158,35 @@ const AdvancedSearch = () => {
     }
     // Récupérer la logique de recherche (AND/OR) depuis l'URL
     const urlLogic = searchParams.get("searchLogic") || "AND";
+
+    // Récupérer le mode d'affichage
+    const urlViewMode = searchParams.get("viewMode") || "list";
+
+    // Récupérer la page courante
+    const urlPage = parseInt(searchParams.get("page")) || 1;
+
+    // Vérifier si les filtres ont changé avant de mettre à jour
+    const filtersChanged = !areFiltersEqual(activeFilters, urlFilters);
+
     // Supprimer la clé "searchLogic" de urlFilters
     delete urlFilters["searchLogic"];
     console.log("URL Filters:", urlFilters);
+
     // Si des filtres sont présents dans l'URL, les appliquer et mettre à jour l'état du formulaire
     if (Object.keys(urlFilters).length > 0) {
       setFormValues(urlFilters);
-      setActiveFilters(urlFilters);
-      setSearchLogic(urlLogic);
+      // Mettre à jour les filtres actifs seulement s'ils ont changé
+      if (filtersChanged) {
+        setActiveFilters(urlFilters);
+      }
       // handleApplyFilters(urlFilters);
+    }
+    setSearchLogic(urlLogic);
+    setViewMode(urlViewMode);
+
+    // Mettre à jour la page seulement si elle a changé
+    if (currentPage !== urlPage) {
+      setCurrentPage(urlPage);
     }
   }, [location.search]);
 
@@ -175,6 +199,11 @@ const AdvancedSearch = () => {
 
   // Applique les filtres et effectue la recherche
   const handleApplyFilters = async (filters) => {
+    const filtersChanged = !areFiltersEqual(activeFilters, filters);
+    if (filtersChanged) {
+      // Réinitialiser à la première page lors de l'application de nouveaux filtres
+      setCurrentPage(1);
+    }
     // Mettre à jour les valeurs du formulaire
     setFormValues(filters);
 
@@ -216,6 +245,13 @@ const AdvancedSearch = () => {
 
     // Ajouter la logique de recherche à l'URL
     params.set("searchLogic", searchLogic);
+
+    // Ajouter le mode d'affichage et la page courante
+    params.set("viewMode", viewMode);
+    // Définir la page à 1 seulement si les filtres ont changé
+    params.set("page", filtersChanged ? 1 : currentPage);
+    // params.set("page", currentPage);
+
     // Mettre à jour l'URL avec les nouveaux paramètres sans recharger la page
     navigate(`/app/plants?${params.toString()}`, { replace: true });
 
@@ -232,6 +268,42 @@ const AdvancedSearch = () => {
     } catch (error) {
       console.error("Error searching plants:", error);
     }
+  };
+
+  // Cette fonction utilitaire vérifie si deux objets de filtres sont équivalents
+  const areFiltersEqual = (filters1, filters2) => {
+    const keys1 = Object.keys(filters1);
+    const keys2 = Object.keys(filters2);
+
+    if (keys1.length !== keys2.length) return false;
+
+    return keys1.every((key) => {
+      // Comparaison spéciale pour les tableaux si nécessaire
+      if (Array.isArray(filters1[key]) && Array.isArray(filters2[key])) {
+        return JSON.stringify(filters1[key]) === JSON.stringify(filters2[key]);
+      }
+      return filters1[key] === filters2[key];
+    });
+  };
+
+  const handleViewModeChange = (newMode) => {
+    setViewMode(newMode);
+
+    // Mettre à jour l'URL avec le nouveau mode
+    const params = new URLSearchParams(location.search);
+    params.set("viewMode", newMode);
+    navigate(`/app/plants?${params.toString()}`, { replace: true });
+  };
+
+  const handlePageChange = (newPage) => {
+    if (currentPage === newPage) return;
+
+    setCurrentPage(newPage);
+
+    // Mettre à jour l'URL avec la nouvelle page
+    const params = new URLSearchParams(location.search);
+    params.set("page", newPage);
+    navigate(`/app/plants?${params.toString()}`, { replace: true });
   };
 
   const handlePopularSearchClick = (search) => {
@@ -406,13 +478,13 @@ const AdvancedSearch = () => {
         <div className="advanced-search__view-actions__view-mode">
           <button
             className={`toggle-button ${viewMode === "list" ? "active" : ""}`}
-            onClick={() => setViewMode("list")}
+            onClick={() => handleViewModeChange("list")}
           >
             <List />
           </button>
           <button
             className={`toggle-button ${viewMode === "grid" ? "active" : ""}`}
-            onClick={() => setViewMode("grid")}
+            onClick={() => handleViewModeChange("grid")}
           >
             <Grid3x3 />
           </button>
@@ -458,7 +530,12 @@ const AdvancedSearch = () => {
         ) : (
           <>
             <h3>Résultats de recherche ({searchResults.length} plantes)</h3>
-            <PlantList filteredPlants={searchResults} viewMode={viewMode} />
+            <PlantList
+              filteredPlants={searchResults}
+              viewMode={viewMode}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+            />
           </>
         )}
       </div>

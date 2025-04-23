@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { usePlants } from "../../../context/PlantsProvider.jsx";
 import Button from "../shared/Button.jsx";
 import GlobalSearchBar from "../shared/GlobalSearchBar.jsx";
-import ListCard from "../shared/ListCard.jsx";
+import PlantCard from "../shared/PlantCard.jsx";
 
 const SpeciesInventory = ({ selectedPlants, onSelectionChange }) => {
   const { identifiedPlants } = usePlants();
@@ -96,7 +96,7 @@ const SpeciesInventory = ({ selectedPlants, onSelectionChange }) => {
                 }`}
                 onClick={() => handlePlantToggle(plant)}
               >
-                <ListCard plant={plant} />
+                <PlantCard plant={plant} viewMode="list" />
                 <div className="species-inventory__identified-plants__selection-indicator">
                   {/* Indicateur de sélection de la plante pour le diagnostic */}
                   {localSelectedPlants.some((p) => p.id === plant.id) ? (

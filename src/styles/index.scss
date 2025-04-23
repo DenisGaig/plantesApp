@@ -25,6 +25,7 @@
 @import "components/app/shared/listCard";
 @import "components/app/shared/stepper";
 @import "components/app/shared/globalSearchBar";
+@import "components/app/shared/collapsibleCard";
 
 @import "components/app/database/plantDatabase";
 @import "components/app/database/advancedSearch";
@@ -36,6 +37,9 @@
 
 @import "components/app/profile/plantProfile";
 @import "components/app/profile/plantBioIndicators";
+@import "components/app/profile/plantDetails";
+@import "components/app/profile/plantImages";
+@import "components/app/profile/plantProperties";
 
 @import "components/app/diagnostic/speciesInventory";
 @import "components/app/diagnostic/coverageEditor";

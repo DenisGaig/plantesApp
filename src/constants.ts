@@ -6,3 +6,5 @@ export const ARTICLES_PER_PAGE = 3;
 
 export const AUTHOR = "Denis";
 // export const SITE_URL = "https://astro-plantes.netlify.app";
+
+export const PLANTS_PER_PAGE = 10;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import plantesData from "../data/plantes.json";
+import plantesData from "../data/fiches_plantes.json";
 import { normalizeString } from "../utils.ts";
 
 export function usePlantDatabase() {
@@ -12,7 +12,7 @@ export function usePlantDatabase() {
 
   useEffect(() => {
     try {
-      setPlantsDatabase(plantesData);
+      setPlantsDatabase(plantesData.data);
       console.log("Hook - Plantes bien chargées");
       setLoading(false);
     } catch (error) {
@@ -51,14 +51,14 @@ export function usePlantDatabase() {
 
       name: (plant, value) => {
         const normalizedValue = normalizeString(value);
-        const normalizedName = normalizeString(plant["commonName"] || "");
+        const normalizedName = normalizeString(plant["commonName"][0] || "");
         return normalizedName.includes(normalizedValue);
       },
 
       latinName: (plant, value) => {
         const normalizedValue = normalizeString(value);
         const normalizedLatinName = normalizeString(
-          plant["scientificName"] || ""
+          plant["scientificName"][0] || ""
         );
         return normalizedLatinName.includes(normalizedValue);
       },
@@ -66,7 +66,7 @@ export function usePlantDatabase() {
 
       famille: (plant, value) => {
         const normalizedValue = normalizeString(value);
-        const normalizedFamily = normalizeString(plant["family"] || "");
+        const normalizedFamily = normalizeString(plant["family"][0] || "");
         return normalizedFamily.includes(normalizedValue);
       },
       // plant["family"]?.toLowerCase().includes(value.toLowerCase()),
@@ -78,7 +78,7 @@ export function usePlantDatabase() {
         // console.log("🔍 Valeur filtrée normalisée:", normalizedValue);
         // console.log("🔍 Mots-clés recherchés:", keywords);
 
-        return (plant["primaryBiotope"] || []).some((biotope) => {
+        return (plant["primaryHabitat"] || []).some((biotope) => {
           const normalizedBiotope = normalizeString(biotope);
           // console.log("🌳 Biotope analysé normalisé:", normalizedBiotope);
           // Vérifie si l'ensemble de la phrase est une sous-chaîne complète
@@ -100,7 +100,7 @@ export function usePlantDatabase() {
         // console.log("🔍 Valeur filtrée normalisée:", normalizedValue);
         // console.log("🔍 Mots-clés recherchés:", keywords);
 
-        return (plant["secondaryBiotope"] || []).some((biotope) => {
+        return (plant["secondaryHabitat"] || []).some((biotope) => {
           const normalizedBiotope = normalizeString(biotope);
           // console.log("🌳 Biotope analysé normalisé:", normalizedBiotope);
           // Vérifie si l'ensemble de la phrase est une sous-chaîne complète
@@ -127,7 +127,7 @@ export function usePlantDatabase() {
 
         // Si la valeur est un booléen true, filtrer seulement les plantes comestibles
         if (value === true) {
-          return plant["edible"] === "O";
+          return plant["isEdible"] === true;
         }
 
         // Si la valeur est un booléen false, ne pas filtrer sur ce critère
@@ -135,16 +135,7 @@ export function usePlantDatabase() {
         return true;
       },
 
-      soilState: (plant, value) => plant["soilCondition"] === value,
-
-      nitrogenIndicator: (plant, value) => plant["Indicateur azote"] === value,
-
-      moistureIndicator: (plant, value) =>
-        plant["Indicateur humidité"] === value,
-
-      pHIndicator: (plant, value) => plant["Indicateur pH"] === value,
-
-      isMedicinal: (plant, value) => plant["Médicinale"] === value,
+      isMedicinal: (plant, value) => plant["isMedicinal"] === value,
 
       indicatorStrength: (plant, value) => plant["Force indicateur"] === value,
 

@@ -163,6 +163,8 @@ $transition-speed: 0.2s;
 
   .plant-card {
     @include card;
+    width: 300px;
+    background-color: $white;
     padding: 1rem;
     transition: box-shadow $transition-speed;
 
@@ -172,6 +174,7 @@ $transition-speed: 0.2s;
 
     .plant-card-header {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
       align-items: flex-start;
       margin-bottom: 0.5rem;
