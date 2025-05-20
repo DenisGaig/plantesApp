@@ -48,7 +48,7 @@ export function PlantsProvider({ children }) {
     const newIdentifiedPlants = results.map((result) => {
       const existingPlant = plantsDatabase.find(
         (plant) =>
-          plant.scientificName.toLowerCase() ===
+          plant.scientificName[0].toLowerCase() ===
           result.species.scientificNameWithoutAuthor.toLowerCase()
       );
       if (existingPlant) {

@@ -1,5 +1,6 @@
 import {
   ClipboardCheck,
+  FlaskConical,
   Home,
   ListCheck,
   LucideSearch,
@@ -37,6 +38,12 @@ const verticalNavbar = () => {
       icon: Scan,
     },
     {
+      id: "plants",
+      link: "/plants",
+      label: "Base de données",
+      icon: LucideSearch,
+    },
+    {
       id: "diagnostic",
       link: "/diagnostic",
       label: "Diagnostic",
@@ -49,10 +56,10 @@ const verticalNavbar = () => {
       icon: ClipboardCheck,
     },
     {
-      id: "plants",
-      link: "/plants",
-      label: "Base de données",
-      icon: LucideSearch,
+      id: "calibration",
+      link: "/calibration",
+      label: "Calibration",
+      icon: FlaskConical,
     },
   ];
 

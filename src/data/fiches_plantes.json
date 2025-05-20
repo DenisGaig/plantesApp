@@ -3,7 +3,7 @@
   "page": 1,
   "perPage": 100,
   "totalPages": 3,
-  "lastUpdated": "2025-04-20T12:26:25.515121Z",
+  "lastUpdated": "2025-05-04T13:09:57.983452Z",
   "source": "conversion_docx_fiches_plantes",
   "data": [
     {
@@ -35,7 +35,7 @@
         "L’érable champêtre se rencontre principalement dans les forêts des plateaux calcaires et basaltiques, ainsi que sur les lisières forestières bénéficiant de sols drainants, riches en bases et d’un microclimat chaud."
       ],
       "secondaryHabitat": [
-        "Il colonise facilement les haies, les friches, les pré-bois et les zones de coupes forestières, où il tolère des conditions plus variées."
+        "Il colonise facilement les haies, les friches, les pré-bois et les zones de coupes de bois, où il tolère des conditions plus variées."
       ],
       "indicatorTraits": [
         "La présence de l’érable champêtre indique un sol riche en bases, bien drainé, souvent calcaire ou basaltique, et exposé à un climat relativement chaud.",
@@ -52,7 +52,7 @@
       "isEdible": true,
       "isMedicinal": true,
       "medicinalUses": [
-        "La sève et les bourgeons d’érable champêtre sont traditionnellement utilisés pour faciliter l’élimination des calculs biliaires, réduire le cholestérol et accompagner le traitement des diabètes gras."
+        "Le macérat de bourgeons d’érable champêtre est un excellent draineur utilisé pour faciliter l’élimination des calculs biliaires, réduire le cholestérol et accompagner le traitement des diabètes gras pour son action hypoglycémiante."
       ],
       "culinaryUses": [
         "La sève récoltée au printemps, riche en sucre, peut être transformée en sirop d’érable, apprécié pour son goût doux et sa valeur énergétique."
@@ -108,7 +108,8 @@
       "floweringPeriod": "mai – septembre",
       "melliferous": "2",
       "ecology": [
-        "L’achillée millefeuille attire de nombreux insectes pollinisateurs, notamment abeilles, syrphes et papillons. Elle coexiste avec une grande diversité de plantes herbacées dans les prairies et pelouses, jouant un rôle dans la structuration du couvert végétal.",
+        "L’achillée millefeuille attire de nombreux insectes pollinisateurs, notamment abeilles, syrphes et papillons.",
+        "Elle coexiste avec une grande diversité de plantes herbacées dans les prairies et pelouses, jouant un rôle dans la structuration du couvert végétal.",
         "Elle semble compétitive sur sols pauvres ou perturbés, favorisant la biodiversité locale."
       ],
       "isEdible": true,
@@ -129,7 +130,32 @@
         "Elle supporte bien la coupe et le pâturage, ce qui lui permet de persister dans les milieux exploités.",
         "Elle peut être utilisée en jardin naturel ou prairie fleurie pour favoriser la biodiversité, notamment les pollinisateurs."
       ],
-      "images": []
+      "images": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Achillea_millefolium.jpg/800px-Achillea_millefolium.jpg",
+          "caption": "",
+          "author": "",
+          "license": "",
+          "licenseUrl": "",
+          "sourceUrl": ""
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Achillea_Millefolium_-_Pl0224_-_FloraBatava-KB-v03.jpg/800px-Achillea_Millefolium_-_Pl0224_-_FloraBatava-KB-v03.jpg",
+          "caption": "",
+          "author": "",
+          "license": "",
+          "licenseUrl": "",
+          "sourceUrl": ""
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Mp-Achillea_millefolium.jpg/800px-Mp-Achillea_millefolium.jpg",
+          "caption": "",
+          "author": "",
+          "license": "",
+          "licenseUrl": "",
+          "sourceUrl": ""
+        }
+      ]
     },
     {
       "id": 3,
@@ -169,7 +195,8 @@
       "floweringPeriod": "mai - septembre",
       "melliferous": "1",
       "ecology": [
-        "Les adonis sont visités par divers insectes pollinisateurs, notamment des abeilles solitaires et certains coléoptères floricoles attirés par leurs teintes vives. Bien qu’elles ne soient pas considérées comme des plantes mellifères majeures, elles apportent néanmoins une ressource ponctuelle pour les pollinisateurs au printemps ou en début d’été selon l’espèce. Leur rôle écologique en tant que plante compagne est encore peu documenté, mais elles semblent cohabiter avec certaines adventices messicoles sans nuire à la biodiversité environnante, et peuvent ponctuellement servir de refuge à des auxiliaires discrets du sol."
+        "Les adonis sont visités par divers insectes pollinisateurs, notamment des abeilles solitaires et certains coléoptères floricoles attirés par leurs teintes vives. Bien qu’elles ne soient pas considérées comme des plantes mellifères majeures, elles apportent néanmoins une ressource ponctuelle pour les pollinisateurs au printemps ou en début d’été selon l’espèce.",
+        "Leur rôle écologique en tant que plante compagne est encore peu documenté, mais elles semblent cohabiter avec certaines adventices messicoles sans nuire à la biodiversité environnante, et peuvent ponctuellement servir de refuge à des auxiliaires discrets du sol."
       ],
       "isEdible": false,
       "isMedicinal": true,
@@ -245,54 +272,52 @@
       "synonyms": [],
       "description": {
         "generalDescription": [
-          "Vivace herbacée à racine épaisse et brunâtre, l’alchémille commune est une plante hermaphrodite que l’on reconnaît aisément à son port dense et ses feuilles ornementales."
+          "Plante herbacée vivace à racine brune pivotante, hermaphrodite.",
+          "taille: 15 à 40 cm de hauteur."
         ],
-        "size": [
-          "Elle mesure généralement entre 10 et 40 cm de hauteur, formant des touffes basses mais étalées."
-        ],
+        "size": [],
         "root": [],
-        "stem": [
-          "Tiges courtes, ramifiées dès la base, souvent poilues, portant directement les feuilles et l’inflorescence."
-        ],
+        "stem": ["Dressée, pubescente, peu ramifiée."],
         "leaf": [
-          "Les feuilles, très reconnaissables, sont simples, presque rondes, vert clair, largement lobées (7 à 11 lobes dentés) et pourvues de stipules, petites excroissances à la base du pétiole. Elles retiennent souvent la rosée du matin, formant des gouttes caractéristiques."
+          "Grandes feuilles simples stipulées, suborbiculaires à 7-11 lobes dentés, vert clair."
         ],
         "flower": [
-          "L’inflorescence, en forme de corymbe, regroupe de nombreuses petites fleurs verdâtres ou jaune pâle, discrètes, sans corolle — leur structure florale repose uniquement sur un double calice."
+          "Corymbes de fleurs minuscules (3-4 mm) verdâtres à jaunâtres, double calice sans corolle."
         ],
-        "fruit": [
-          "Non distinctif, très petit, sec et sans intérêt ornemental ou agricole."
-        ]
+        "fruit": ["Akènes ovoïdes regroupés dans le calice persistant."]
       },
       "primaryHabitat": [
-        "On trouve l’alchémille commune principalement en lisière de forêts et dans les clairières humides, en altitude modérée à élevée."
+        "L'alchemille commune colonise les lisières forestières et les clairières humides, où elle profite de sols riches en bases et d'une humidité constante."
       ],
       "secondaryHabitat": [
-        "Elle colonise également les fossés, les prairies d’élevage en zone montagnarde, mais reste très rare en plaine."
+        "Elle s'adapte aux fossés humides et aux prairies d'élevage montagnardes, bien que rarissime en plaine en raison de ses besoins spécifiques en humidité et en nutriments."
       ],
       "indicatorTraits": [
-        "La présence d’alchémille commune traduit généralement un engorgement en matière organique et en eau, dans des sols riches en bases.",
-        "Elle est souvent associée à des zones humides marquées par des signes d’hydromorphie."
+        "Sa présence signale des sols engorgés en eau et en matière organique, souvent marqués par des phénomènes d'hydromorphie. Elle révèle une saturation hydrique temporaire et une activité biologique limitée en surface."
       ],
       "soilCondition": 2,
       "floweringPeriod": "juin - septembre",
       "melliferous": "1",
       "ecology": [
-        "L’alchémille commune attire quelques insectes pollinisateurs généralistes, bien que ses fleurs soient peu voyantes. Elle joue un rôle modeste dans les écosystèmes prairiaux humides, mais sa présence est indicatrice de milieux riches en biodiversité.",
-        "Les prairies où elle se développe sont souvent des réservoirs floristiques abritant des espèces protégées. Le surpâturage y est fortement préjudiciable : il favorise l’érosion de la diversité végétale, y compris la disparition de l’alchémille.",
-        "À l’inverse, la fauche tardive, au moment de la floraison de la fléole, permet d’en préserver l’équilibre écologique tout en valorisant le fourrage."
+        "L'alchemille attire des pollinisateurs généralistes (diptères, coléoptères) grâce à ses inflorescences groupées. En milieu montagnard, elle coexiste avec des espèces hygrophiles comme la reine-des-prés. Ses feuilles retenant la rosée créent des microhabitats pour les arthropodes."
       ],
       "isEdible": true,
       "isMedicinal": true,
       "medicinalUses": [
-        "La plante entière, récoltée en floraison, est utilisée traditionnellement pour accompagner les troubles féminins : elle soutient les sécrétions hormonales et aide à réguler le cycle menstruel. Ses effets sont particulièrement reconnus en usage interne sous forme de tisane ou d’extrait."
+        "La plante est astringente, tonique, stomachique et diurétique.",
+        "En usage externe, elle est détersive (qui sert à désinfecter et à hâter la cicatrisation) et vulnéraire (cicatrisation des plaies)",
+        "La plante entière, récoltée en floraison, est utilisée traditionnellement pour accompagner les troubles féminins : elle soutient les sécrétions hormonales et aide à réguler le cycle menstruel.",
+        "Ses effets sont particulièrement reconnus en usage interne sous forme de tisane ou d’extrait."
       ],
       "culinaryUses": [
-        "Quelques feuilles ou jeunes pousses peuvent être ajoutées crues dans des salades, de même que les fleurs, pour leur texture et leur douceur discrète. Leur usage reste occasionnel, en touche aromatique."
+        "Quelques feuilles ou jeunes pousses peuvent être ajoutées crues dans des salades, de même que les fleurs, pour leur texture et leur douceur discrète.",
+        "Leur usage reste occasionnel, en touche aromatique.",
+        "Une cuisson à 2 eaux est recommandée pour enlever les tanins."
       ],
       "notes": [
         "Les gouttes de rosée qui perlent sur le bord des feuilles et s’amassent au centre au fil de la journée ont fasciné les alchimistes du passé, qui y voyaient une eau céleste aux vertus particulières — d’où le nom de la plante.",
-        "Les prairies humides qui abritent l’alchémille sont précieuses pour la biodiversité. Pour les préserver tout en favorisant un bon rendement fourrager, la fauche tardive est recommandée, tandis que le pâturage doit être évité. Ces milieux jouent un rôle crucial pour l’élevage durable et la conservation floristique, offrant une source de graines pour restaurer les zones appauvries par les pratiques agricoles intensives."
+        "Elle donne une teinture verte appréciée pour la teinture d’habits",
+        "Dans les prairies humides paratourbeuses, sa présence aux côtés d'espèces protégées justifie une fauche tardive (floraison de la fléole) plutôt qu'un pâturage destructeur. Ces milieux, véritables banques de graines naturelles, permettent de régénérer les sols dégradés par l'agriculture intensive tout en fournissant un fourrage équilibré pour les vaches."
       ],
       "images": []
     },
@@ -485,47 +510,46 @@
     {
       "id": 10,
       "scientificName": ["Alopecurus pratensis"],
-      "commonName": ["Vulpin des prés", "POACÉES", "GRAMINÉES"],
-      "family": [],
+      "commonName": ["Vulpin des prés"],
+      "family": ["POACÉES"],
       "synonyms": [],
       "description": {
         "generalDescription": [
-          "Vivace herbacée à souche épaisse, le vulpin des prés est la première des graminées à fleurir au printemps."
+          "Herbacée vivace à souche épaisse, floraison précoce au printemps."
         ],
-        "size": [],
+        "size": ["40 à 80 cm de hauteur."],
         "root": [],
-        "stem": ["La tige, de 40 à 80 cm de hauteur, est raide et glabre."],
-        "leaf": [
-          "Les feuilles, longues et larges, ont des ligules assez courtes."
-        ],
+        "stem": ["Raide, glabre."],
+        "leaf": ["Longues et larges, ligules courtes."],
         "flower": [
-          "La panicule verdâtre, longue de 5 à 10 cm, cylindrique, très dense, velue et soyeuse, la fait nommer \"queue de renard\"."
+          "Panicule cylindrique dense de 5 à 10 cm, verdâtre, velue-soyeuse (\"queue de renard\") ; épillets groupés par 4-6, glumes pointues-ciliées, glumelle à arête flexueuse saillante."
         ],
-        "fruit": []
+        "fruit": ["Caryopse oblong, intégré à l'épillet."]
       },
       "primaryHabitat": [
-        "Pelouses et prairies naturelles des plateaux et des vallées alluviales"
+        "Le vulpin des prés colonise naturellement les pelouses et prairies naturelles des plateaux et vallées alluviales, milieux humides à sol engorgé.",
+        "Biotope secundaire",
+        "Il s’adapte également aux milieux perturbés par l’homme comme les Fossés, talus routiers, prairies agricoles humides d'élevage."
       ],
-      "secondaryHabitat": [
-        "Fossés, bords des chemins et des routes",
-        "Prairies agricoles d'élevage"
-      ],
+      "secondaryHabitat": [],
       "indicatorTraits": [
-        "Engorgement du sol en eau ou en MO provoquant des hydromorphismes avec formation de gley et des anaérobioses par asphyxie de la vie microbienne aérobie.",
-        "Le vulpin des prés pousse dans les prairies inondables et les prairies humides"
+        "Le vulpin signale des sols asphyxiés par engorgement hydrique ou excès de matière organique, avec hydromorphie marquée (gley) et anaérobiose par asphyxie de la vie microbienne. Typique des prairies inondables à faible activité biologique aérobie.",
+        "Indice",
+        "2"
       ],
-      "soilCondition": 2,
-      "floweringPeriod": "",
-      "melliferous": "",
-      "ecology": [],
-      "isEdible": null,
-      "isMedicinal": null,
-      "medicinalUses": [],
-      "culinaryUses": [],
+      "soilCondition": "",
+      "floweringPeriod": "avril - juin",
+      "melliferous": "1",
+      "ecology": [
+        "Espèce pionnière des zones humides, le vulpin coexiste avec des plantes hygrophiles mais peut former des peuplements denses limitant la diversité. Ses racines tolèrent l'asphyxie racinaire temporaire.",
+        "Les prairies à vulpin abritent une faune adaptée aux milieux gorgés d'eau (invertébrés aquatiques, oiseaux paludicoles)."
+      ],
+      "isEdible": false,
+      "isMedicinal": false,
+      "medicinalUses": ["Aucun usage médicinal documenté."],
+      "culinaryUses": ["Aucun usage culinaire connu."],
       "notes": [
-        "Les prairies humides paratourbeuses sont particulièrement riches en espèces rares et protégées. Le pâturage les dégrade considérablement tant du point de vue de la quantité de fourrage produit que de la qualité de ce fourrage. Le surpâturage fait également disparaître, en même temps que les bonnes espèces fourragères, les plantes rares et protégées",
-        "Pour améliorer ce type de prairies, en biodiversité, en rendement et en qualité de fourrage, il convient de les faucher, si possible en fauche tardive, c'est à dire au moment de la floraison de la fléole.",
-        "Le pâturage est à proscrire dans les prairies humides"
+        "Les prairies humides à vulpin, souvent paratourbeuses, constituent des réservoirs de biodiversité fragiles (espèces protégées comme certaines orchidées). Le pâturage y dégrade la flore et la productivité fourragère. Une fauche tardive (coïncidant avec la floraison de la fléole) préserve ces milieux tout en optimisant rendement et qualité du foin. La suppression du pâturage est recommandée pour régénérer ces écosystèmes sensibles."
       ],
       "images": []
     },
@@ -533,54 +557,80 @@
       "id": 11,
       "scientificName": ["Amaranthus albus"],
       "commonName": ["Amarante blanche"],
-      "family": ["AMARANTACÉES", "SALSOLACÉES"],
+      "family": ["AMARANTACÉES"],
       "synonyms": [],
       "description": {
         "generalDescription": [
-          "Herbacée annuelle, à racine pivotante, l'amarante blanche est une plante hermaphrodite."
+          "Plante herbacée annuelle à racine pivotante, hermaphrodite."
         ],
-        "size": [],
+        "size": ["20 à 80 cm de hauteur."],
         "root": [],
-        "stem": [
-          "La tige, glabre et très rameuse, de 20 à 80cm de hauteur, est complètement blanche."
-        ],
-        "leaf": ["Les petites feuilles simples sont ovales ou lancéolées."],
+        "stem": ["Glabre, très rameuse, blanche."],
+        "leaf": ["Petites, simples, ovales ou lancéolées."],
         "flower": [
-          "Les glomérules de fleurs vert pâle, souvent géminés, sont tous axillaires."
+          "Glomérules vert pâle, axillaires, souvent géminés, bractées épineuses plus longues que le calice épineux."
         ],
-        "fruit": [
-          "Le fruit plus court que le calice s'ouvre comme une boîte à savon"
-        ]
+        "fruit": ["Capsule plus courte que le calice, déhiscente en opercule."]
       },
       "primaryHabitat": [
-        "Espèce d'Amérique du Nord naturalisée dans les vallées alluviales de la région méditerranéenne",
-        "Vases et sables maritimes",
-        "Vases et sables continentaux salés"
+        "L’amarante blanche est originaire d’Amérique du Nord et s’est naturalisée dans les vallées alluviales méditerranéennes.",
+        "Elle privilégie les sols vaseux ou sableux, qu’ils soient maritimes ou continentaux, souvent soumis à la salinité."
       ],
       "secondaryHabitat": [
-        "Bords des chemins et des routes",
-        "Terrains vagues",
-        "Cultures, vignes et vergers"
+        "Elle s’installe fréquemment sur les bords de chemins, routes, terrains vagues, ainsi que dans les cultures, vignes et vergers, où elle tolère les perturbations.\nCaractères indicateurs",
+        "La présence de l’amarante blanche signale généralement un sol enrichi en fumure minérale, notamment en potasse.",
+        "Elle indique aussi une tendance à la salinisation, souvent due à un excès d’irrigation en période chaude, et traduit des contrastes hydriques liés à la chaleur estivale."
       ],
-      "indicatorTraits": [
-        "Excès de fumure minérale, en particulier de potasse (sulfate de potassium, chlorure de potassium et nitrate de potassium)",
-        "Salinisation des sols par excès d'irrigation en période chaude Contraste hydrique chaleur estivale"
-      ],
+      "indicatorTraits": [],
       "soilCondition": 3,
-      "floweringPeriod": "",
-      "melliferous": "",
-      "ecology": [],
-      "isEdible": null,
+      "floweringPeriod": "juin – septembre",
+      "melliferous": "1",
+      "ecology": [
+        "Cette espèce attire peu les pollinisateurs spécifiques, ses fleurs étant discrètes et peu nectarifères.",
+        "Elle cohabite souvent avec d’autres plantes nitrophiles et halophiles. Sa compétitivité élevée peut limiter la diversité florale locale, surtout dans les milieux perturbés ou cultivés."
+      ],
+      "isEdible": true,
       "isMedicinal": null,
-      "medicinalUses": [],
+      "medicinalUses": [
+        "Aucune donnée spécifique sur un usage médicinal reconnu pour l’amarante blanche."
+      ],
       "culinaryUses": [
-        "Les graines graines sont consommées comme les céréales",
-        "Les jeunes pousses et les feuilles des quatre amarantes sont comestibles crues ou cuites mais la meilleure de toutes est l'amarante blette"
+        "Les graines peuvent être utilisées comme céréales, entières ou moulues. Les jeunes pousses et feuilles, crues ou cuites, sont comestibles, mais d’autres espèces d’amarante sont généralement préférées pour leur goût."
       ],
       "notes": [
-        "Les amarantes font parties des légumes oubliés. Elles étaient encore couramment cultivées dans les jardins potagers au 19ème siècle"
+        "L’amarante blanche, comme d’autres amarantes, fait partie des légumes oubliés. Elle était couramment cultivée dans les potagers au 19e siècle et peut constituer une ressource alimentaire alternative dans les systèmes agricoles diversifiés.",
+        "L’amarante blanche est une plante nutritive riche en protéines, minéraux et antioxydants. Ses graines sans gluten sont digestes et ses feuilles sont utilisées traditionnellement pour traiter divers troubles digestifs, respiratoires et inflammatoires.",
+        "Agronomiquement, elle s’adapte bien aux sols pauvres et secs, améliore la structure du sol et favorise la biodiversité en attirant pollinisateurs et oiseaux.",
+        "En jardinage, elle s’associe avantageusement avec le maïs, les haricots et les tomates, tout en étant compétitive avec certaines autres cultures.",
+        "Elle possède également un intérêt ornemental et tinctorial grâce à ses fleurs colorées.",
+        "Enfin, elle représente une ressource prometteuse pour la sécurité alimentaire dans les zones arides ou salines, bien que certaines populations montrent une résistance aux herbicides, ce qui complique leur gestion en agriculture conventionnelle."
       ],
-      "images": []
+      "images": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Amaranthus_albus_kz02.jpg/800px-Amaranthus_albus_kz02.jpg",
+          "caption": "",
+          "author": "",
+          "license": "",
+          "licenseUrl": "",
+          "sourceUrl": ""
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Amaranthus_albus_sl22.jpg/800px-Amaranthus_albus_sl22.jpg",
+          "caption": "",
+          "author": "",
+          "license": "",
+          "licenseUrl": "",
+          "sourceUrl": ""
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Amaranthus_albus_Coste_3067.png",
+          "caption": "(Gb)Prostate Pigweed, (Us)Tumble Pigweed (Amaranthus albus), an etching by Hippolyte Coste (1858-1924), Flore descriptive et illustrée de la France, de la Corse et des contrées limitrophes, published from 1900 to 1906 by Paul Klincksieck.",
+          "author": "Hippolyte Coste",
+          "license": "Public domain",
+          "licenseUrl": "",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amaranthus_albus_Coste_3067.png"
+        }
+      ]
     },
     {
       "id": 12,
@@ -879,55 +929,80 @@
       "synonyms": [],
       "description": {
         "generalDescription": [
-          "Herbacée vivace, à souche fibreuse, la flouve odorante est une plante hermaphrodite  d'une hauteur de 10 à 80 cm."
+          "Herbacée vivace à souche fibreuse, hermaphrodite."
         ],
-        "size": [],
+        "size": ["10 à 80 cm de hauteur."],
         "root": [],
-        "stem": [],
+        "stem": ["Dressée, fine, lisse ou légèrement rugueuse."],
         "leaf": [
-          "Les feuilles sont simples, larges, ciliées au sommet de la gaine avec une ligule souvent déchirée."
+          "Simples, larges, ciliées au sommet de la gaine, ligule souvent déchirée."
         ],
         "flower": [
-          "L'inflorescence en grappe, peu dense, devient jaunâtre et odorante à maturité."
+          "Inflorescence en grappe peu dense, jaunâtre et très odorante à maturité ; épillets de 6 à 8 mm, une fleur fertile et deux stériles, glumes très inégales, glumelles des fleurs stériles velues et munies d’arêtes."
         ],
-        "fruit": []
+        "fruit": ["Caryopse allongé, peu visible, libéré à maturité."]
       },
       "primaryHabitat": [
-        "Prairies naturelles des grandes vallées alluviales et alpines sur sols frais et riches",
-        "Bordures et clairières forestières riches en humus"
+        "La flouve odorante se rencontre principalement dans les prairies naturelles des grandes vallées alluviales et alpines, sur sols frais et riches en matière organique végétale, ainsi que sur les bordures et clairières forestières riches en humus."
       ],
       "secondaryHabitat": [
-        "Prairies agricoles, n'ayant été ni drainées, ni amendées",
-        "Talus des chemins et des routes Coupes de bois"
+        "Elle s’installe aussi dans les prairies agricoles non drainées ni amendées, sur les talus de chemins et routes, et dans les coupes de bois, tolérant ainsi certains milieux semi-anthropisés."
       ],
       "indicatorTraits": [
-        "La flouve odorante est un indicateur de grande biodiversité des sols frais et riches en MO d'origine végétale",
-        "Elle pousse dans des prairies, favorables à la production laitière, méritant un léger apport de très bon compost (3 à 5 tonnes par ha).",
-        "Elle indique un engorgement en carbone, une carence en MO animale ou en azote"
+        "La présence de la flouve odorante révèle un sol frais, riche en matière organique d’origine végétale, à forte biodiversité.",
+        "Lorsqu’elle est abondante, elle signale des sols maigres, c’est-à-dire pauvres en éléments nutritifs, notamment en azote et en matière organique animale.",
+        "Sa dominance traduit également un excès relatif de carbone par rapport à l’azote, ce qui révèle un déséquilibre du rapport C/N du sol.",
+        "Indice",
+        "2"
       ],
-      "soilCondition": 2,
-      "floweringPeriod": "",
-      "melliferous": "",
-      "ecology": [],
-      "isEdible": null,
-      "isMedicinal": null,
+      "soilCondition": "",
+      "floweringPeriod": "mai - juillet",
+      "melliferous": "1",
+      "ecology": [
+        "La flouve odorante attire principalement des insectes pollinisateurs généralistes, bien qu’elle soit essentiellement anémophile.",
+        "Elle cohabite souvent avec d’autres graminées et dicotylédones des prairies riches, participant à la structuration de communautés végétales diversifiées. Elle semble peu compétitive en présence d’espèces nitrophiles, mais favorise la biodiversité locale.",
+        "Les prairies à flouve sont des habitats essentiels pour de nombreux invertébrés et oiseaux des milieux ouverts."
+      ],
+      "isEdible": true,
+      "isMedicinal": true,
       "medicinalUses": [
-        "Contient des coumarines",
-        "Elle est sédative, anti inflammatoire et circulatoire",
-        "Nervosité, insomnies, insuffisance veineuse",
-        "La plante moisie est toxique"
+        "La flouve odorante contient des coumarines, substances aux propriétés sédatives, anti-inflammatoires et circulatoires. Elle est utilisée contre la nervosité, l’insomnie et l’insuffisance veineuse.",
+        "Attention, la plante moisie contient du dicoumarol, une antivitamine K, devenant toxique et pouvant provoquer de graves hémorragies."
       ],
       "culinaryUses": [
-        "La partie aérienne parfume liqueurs, sirops, crèmes anglaises ou glaces",
-        "Elle est plus aromatique sèche que fraîche"
+        "En séchant, la flouve acquiert une agréable odeur de vanille (ou de foin coupé) avec laquelle on peut en faire du thé parfumé. On peut aussi parfumer liqueurs, sirops, crèmes anglaises et glaces. Son arôme est plus prononcé après séchage qu’à l’état frais."
       ],
       "notes": [
-        "La flouve odorante est une espèce des prairies de fauche de la Directive Habitat. Ces prairies sont riches en espèces rares et protégées. La biodiversité remarquable de ces milieux garantit l'équilibre des sols et la bonne santé des animaux domestiques qui les pâturent.",
-        "Pour maintenir cette biodiversité, ces prairies doivent être fauchées, si possible en fauche tardive, et pâturées le moins souvent possible.",
-        "Elle est nécessaire à la qualité des fromages AOC",
-        "Les prairies naturelles, riches d'un grand nombre d'espèces, sont des réservoirs à semences dans lesquels on pourra puiser pour revégétaliser les déserts que l'agriculture actuelle crée"
+        "C’est elle qui donne au foin son odeur si caractéristique",
+        "La flouve odorante est une espèce caractéristique des prairies de fauche riches en espèces, habitats d’intérêt communautaire (Directive Habitat). Ces milieux favorisent la santé des sols et des animaux domestiques.",
+        "Leur gestion optimale repose sur la fauche tardive et une pâture limitée."
       ],
-      "images": []
+      "images": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/AnthoxanthumOdoratum.jpg/800px-AnthoxanthumOdoratum.jpg",
+          "caption": "",
+          "author": "",
+          "license": "",
+          "licenseUrl": "",
+          "sourceUrl": ""
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Anthoxanthum_odoratum.jpg",
+          "caption": "Gewöhnliches Ruchgras Anthoxanthum odoratum",
+          "author": "Kristian Peters -- Fabelfroh 18:00, 27 May 2006 (UTC)",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anthoxanthum_odoratum.jpg"
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Anthoxanthum_odoratum_RF.jpg/800px-Anthoxanthum_odoratum_RF.jpg",
+          "caption": "",
+          "author": "",
+          "license": "",
+          "licenseUrl": "",
+          "sourceUrl": ""
+        }
+      ]
     },
     {
       "id": 19,
@@ -1326,9 +1401,7 @@
         "Talus et terrains vagues"
       ],
       "indicatorTraits": [
-        "La présence de l’arum d’Italie révèle des sols riches en matières organiques végétales, où l’évolution vers un sol forestier est amorcée.",
-        "Elle trahit souvent une accumulation de résidus végétaux qui ne se décomposent pas correctement, menant à une forme de fossilisation au lieu d’une transformation minérale classique.",
-        "Sa croissance peut aussi signaler une carence en matières organiques d’origine animale, ainsi qu’un déséquilibre de la vie microbienne du sol — notamment une faible activité des micro-organismes aérobiques —, ce qui freine la disponibilité de certains nutriments comme la potasse."
+        "La présence de l’arum d’Italie révèle des sols riches en matières organiques végétales, où l’évolution vers un sol forestier est amorcée. Elle trahit souvent une accumulation de résidus végétaux qui ne se décomposent pas correctement, menant à une forme de fossilisation au lieu d’une transformation minérale classique. Sa croissance peut aussi signaler une carence en matières organiques d’origine animale, ainsi qu’un déséquilibre de la vie microbienne du sol — notamment une faible activité des micro-organismes aérobiques —, ce qui freine la disponibilité de certains nutriments comme la potasse."
       ],
       "soilCondition": 2,
       "floweringPeriod": "",
@@ -3127,54 +3200,52 @@
       "synonyms": [],
       "description": {
         "generalDescription": [
-          "Herbacée vivace, très polymorphe, haute de 40 cm à 1,5 m."
+          "Herbacée vivace, très polymorphe, haute de 40 cm à 1,5 m, dotée de racines à la fois pivotantes et traçantes qui lui permettent de se régénérer et de coloniser efficacement les prairies."
         ],
-        "size": [],
-        "root": [
-          "Ses racines pivotantes, les latérales traçantes, émettent de nombreux bourgeons."
-        ],
-        "stem": [],
-        "leaf": [
-          "Les feuilles sont alternes, diversement découpées et épineuses."
-        ],
+        "size": ["40 cm à 1,5 m de hauteur."],
+        "root": [],
+        "stem": ["Dressée, rugueuse."],
+        "leaf": ["Alternes, diversement découpées et épineuses."],
         "flower": [
-          "Les nombreux capitules, petits, ovoïdes, portent des fleurs violettes, très odorantes en pleine floraison."
+          "Nombreux capitules petits, ovoïdes, portant des fleurs violettes, très odorantes en pleine floraison."
         ],
-        "fruit": [
-          "Les fruits sont des akènes surmontés d'une aigrette plumeuse."
-        ]
+        "fruit": ["Akènes surmontés d'une aigrette plumeuse."]
       },
       "primaryHabitat": [
-        "Ripisylves et prairies des vallées alluviales",
-        "Clairières forestières",
-        "Le chardon commun existe partout en France mais il est rare en région méditerranéenne"
+        "Le chardon commun se plaît dans les ripisylves et les prairies des vallées alluviales, ainsi que dans les clairières forestières. Il est présent partout en France mais reste rare en région méditerranéenne."
       ],
       "secondaryHabitat": [
-        "Prairies d'élevage amendées",
-        "Cultures, jachères",
-        "Vignes et vergers, maraîchages, jardins",
-        "Fossés, bords des chemins et des routes",
-        "Terrains vagues et zones remuées"
+        "Il s'adapte aux prairies d'élevage amendées, aux cultures et jachères, ainsi qu'aux vignes, vergers, maraîchages et jardins. On le trouve également dans les fossés, sur les bords des chemins et des routes, ainsi que sur les terrains vagues et les zones remuées."
       ],
       "indicatorTraits": [
-        "Saturation du CAH par excès de matière organique, d'engrais azotés ou d'épandage de fumiers, lisiers et purins non compostés provoquant le blocage de P",
-        "Saturation naturelle du CAH par un pH trop élevé",
-        "Le surpâturage risque de provoquer l'explosion des chardons par excès de MO et compactage des sols"
+        "La présence du chardon commun indique souvent une saturation du complexe argilo-humique (CAH) due à un excès de matière organique, d'engrais azotés ou d'épandage de fumiers, lisiers et purins non compostés, ce qui peut bloquer le phosphore.",
+        "Elle peut aussi révéler une saturation naturelle du CAH par un pH trop élevé.",
+        "Le surpâturage, en augmentant la matière organique et en compactant les sols, peut également favoriser sa prolifération."
       ],
       "soilCondition": 3,
-      "floweringPeriod": "",
-      "melliferous": "",
-      "ecology": [],
-      "isEdible": null,
-      "isMedicinal": null,
-      "medicinalUses": [
-        "Carence en phosphore",
-        "Intoxication par l'aluminium",
-        "Maladies de dégénérescences nerveuses (Alzheimer, sclérose en plaque, etc.)"
+      "floweringPeriod": "juin - septembre",
+      "melliferous": "2",
+      "ecology": [
+        "Le chardon commun est souvent associé à des pollinisateurs tels que les abeilles et les papillons. Il semble également interagir avec diverses plantes compagnes dans les prairies et les jachères, où il peut entrer en compétition pour les ressources."
       ],
-      "culinaryUses": ["Bon comestible, malgré ses épines"],
+      "isEdible": true,
+      "isMedicinal": true,
+      "medicinalUses": [
+        "Le chardon commun est utilisé pour traiter la carence en phosphore et l'intoxication par l'aluminium.",
+        "Il est également étudié pour ses potentialités dans le traitement des maladies dégénératives nerveuses comme Alzheimer et la sclérose en plaques."
+      ],
+      "culinaryUses": [
+        "Malgré ses épines, le chardon commun est un bon comestible. Ses jeunes pousses et feuilles peuvent être consommées cuites, après avoir retiré les épines.",
+        "Il se cuisine en utilisant ses jeunes feuilles crues en salade ou cuites comme des épinards, ses pétioles et nervures à la manière des côtes de bette (en gratin ou à la vapeur), et ses racines, récoltées la première année, cuites à l’eau ou à la poêle puis mixées en purée ou en tartinade. Les boutons floraux peuvent aussi être consommés comme légume ou en saumure.",
+        "Cette plante sauvage offre une saveur douce rappelant l’artichaut ou le topinambour"
+      ],
       "notes": [
-        "Le chardon commun est une plante des prairies grasses, favorables à l'élevage des bovins viande, et plus particulièrement des prés d'embouche où l'on peut faire de l'engraissement à l'herbe sans apport de granulés ou autres artifices plus ou moins nocifs"
+        "En plus de son rôle dans les prairies grasses favorables à l’élevage bovin, le chardon commun présente d’autres utilités écologiques et agronomiques. Sa fleur est très appréciée des abeilles et autres pollinisateurs, contribuant ainsi à la biodiversité des prairies.",
+        "Grâce à ses racines pivotantes, le chardon explore le sol en profondeur, ce qui peut aider à améliorer la structure du sol et à favoriser la régénération des parcelles agricoles",
+        "Images",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Yponomeuta_evonymella_-_Cirsium_arvense_-_Keila.jpg/800px-Yponomeuta_evonymella_-_Cirsium_arvense_-_Keila.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/c/c1/181_Cirsium_arvense_Scop.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/0/03/Creeping_thistle_%28Cirsium_arvense%29_-_geograph.org.uk_-_5448147.jpg"
       ],
       "images": []
     },
@@ -5090,7 +5161,7 @@
         "Engorgement total du sol en eau et en MO végétale provoquant des hydromorphismes avec formation de gley et des anaérobioses totales",
         "Apparition de tourbe"
       ],
-      "soilCondition": "3",
+      "soilCondition": 3,
       "floweringPeriod": "",
       "melliferous": "",
       "ecology": [],
@@ -9136,56 +9207,67 @@
       "id": 181,
       "scientificName": ["Plantago lanceolata"],
       "commonName": ["Plantain lancéolé"],
-      "family": ["PLANTAGINACÉES", "PLANTAGINÉES"],
+      "family": ["PLANTAGINACÉES"],
       "synonyms": [],
       "description": {
-        "generalDescription": [
-          "Le plantain lancéolé est une petite plante vivace, acaule."
-        ],
-        "size": [],
+        "generalDescription": ["Plante vivace acaule."],
+        "size": ["5 à 40 cm de hauteur."],
         "root": [],
-        "stem": [],
+        "stem": ["Absente, feuilles en rosette."],
         "leaf": [
-          "Les feuilles en rosette, lancéolées, ont des nervures parallèles. Les pédoncules striés dépassent beaucoup les feuilles."
+          "Lancéolées, nervures parallèles, pédoncules striés dépassant les feuilles."
         ],
-        "flower": [
-          "Les fleurs disposées en épi très dense, sont brunâtres avec des étamines jaunes."
-        ],
-        "fruit": [
-          "Le fruit est une capsule qui s'ouvre en boîte à savon et qui contient deux graines"
-        ]
+        "flower": ["Épi très dense, brunâtre, étamines jaunes."],
+        "fruit": ["Capsule s'ouvrant en boîte à savon, contenant deux graines."]
       },
       "primaryHabitat": [
-        "Pelouses et prairies naturelles des grandes vallées alluviales des plateaux calcaires et basaltiques, sur sol équilibré en eau, en argile et en humus"
+        "Le plantain lancéolé prospère dans les pelouses et prairies naturelles des grandes vallées alluviales, sur des sols équilibrés en eau, en argile et en humus, souvent présents sur les plateaux calcaires et basaltiques."
       ],
       "secondaryHabitat": [
-        "Prairies d'élevages",
-        "Cultures, vignes et vergers équilibrés",
-        "Bords des chemins et des routes"
+        "Il s'adapte bien aux prairies d'élevage, aux cultures, vignes et vergers équilibrés, ainsi qu'aux bords des chemins et des routes."
       ],
       "indicatorTraits": [
-        "Equilibre eau / fertilisant / MO",
-        "Bonne activité microbienne aérobie",
-        "Le plantain lancéolé est une plante des meilleures prairies.",
-        "Il est indispensable à la santé du bétail, particulièrement des ovins"
+        "Le plantain lancéolé révèle un sol équilibré en eau, en fertilisants et en matière organique, avec une bonne activité microbienne aérobie. Sa présence indique des prairies de qualité, essentielles à la santé des animaux, notamment des ovins."
       ],
       "soilCondition": 1,
-      "floweringPeriod": "",
-      "melliferous": "",
-      "ecology": [],
-      "isEdible": null,
-      "isMedicinal": null,
+      "floweringPeriod": "mai - septembre",
+      "melliferous": "1",
+      "ecology": [
+        "Le plantain lancéolé est souvent associé à des prairies riches en biodiversité, attirant divers pollinisateurs comme les abeilles et les papillons.",
+        "Il contribue à la santé des sols grâce à sa capacité à améliorer la structure du sol et à favoriser l'activité microbienne."
+      ],
+      "isEdible": true,
+      "isMedicinal": true,
       "medicinalUses": [
-        "La plante entière est anti-histaminique, astringente et anti-inflammatoire",
-        "Elle soigne les irritations et les allergies de la sphère oto-rhino (Nez - oreilles - dents - gorge), en association avec Calendula",
-        "En externe piqûres d'insectes, brûlures d'orties, cicatrisante, etc."
+        "La plante entière est reconnue pour ses propriétés anti-histaminiques, astringentes et anti-inflammatoires. Elle est utilisée pour soigner les irritations et les allergies de la sphère oto-rhino-laryngologique, souvent en association avec le calendula.",
+        "En usage externe, elle est efficace contre les piqûres d'insectes, les brûlures d'orties et favorise la cicatrisation."
       ],
       "culinaryUses": [
-        "Les jeunes feuilles crues du centre de la rosette, au goût de champignon, sont aromatiques",
-        "Les jeunes plantes se mangent crues ou cuites"
+        "Le plantain lancéolé se cuisine facilement : ses feuilles fraîches, au léger goût de champignon, peuvent être ajoutées aux salades, soupes, pestos ou tartes. On peut aussi les incorporer dans des purées, boulettes ou crackers pour apporter une saveur douce et légèrement herbacée.",
+        "En plus de la cuisine, le plantain est utilisé en infusions ou sirops pour ses bienfaits.",
+        "C’est une plante polyvalente qui enrichit les plats tout en étant facile à préparer."
       ],
-      "notes": [],
-      "images": []
+      "notes": [
+        "Le plantain lancéolé est une plante précieuse en agriculture pour ses propriétés améliorant la qualité des sols et la santé des prairies. Il est également utilisé en phytothérapie pour ses nombreuses vertus médicinales."
+      ],
+      "images": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Plantago_lanceolata_plant.jpg",
+          "caption": "Plantago lanceolata",
+          "author": "Kurt Stueber",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plantago_lanceolata_plant.jpg"
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Plantago_lanceolata_Sturm61.jpg/800px-Plantago_lanceolata_Sturm61.jpg",
+          "caption": "",
+          "author": "",
+          "license": "",
+          "licenseUrl": "",
+          "sourceUrl": ""
+        }
+      ]
     },
     {
       "id": 182,
@@ -9194,52 +9276,76 @@
       "family": ["PLANTAGINACÉES", "PLANTAGINÉES"],
       "synonyms": [],
       "description": {
-        "generalDescription": [
-          "Le grand plantain est, malgré son nom, une petite plante, vivace, herbacée, acaule."
-        ],
-        "size": [],
+        "generalDescription": ["Plante vivace, herbacée, acaule."],
+        "size": ["5 à 30 cm de hauteur."],
         "root": [],
-        "stem": [],
-        "leaf": [
-          "Les feuilles en rosette, épaisses et larges ont des nervures parallèles."
-        ],
+        "stem": ["Absente, feuilles en rosette basale."],
+        "leaf": ["Épaisses, larges, nervures parallèles."],
         "flower": [
-          "Les pédoncules floraux non striés, dépassent à peine les feuilles. L'épi de fleurs très serrées, brunâtres avec des étamines jaunes, est le plus souvent allongé."
+          "Pédoncules floraux non striés, épi de fleurs brunâtres, serrées, étamines jaunes."
         ],
         "fruit": [
-          "Le fruit est une capsule qui s'ouvre en boîte à savon et contient une dizaine de graines"
+          "Capsule s'ouvrant en boîte à savon, contenant une dizaine de graines."
         ]
       },
       "primaryHabitat": [
-        "Sables et limons compactés des grandes vallées alluviales"
+        "Le grand plantain se plaît sur les sables et limons compactés des grandes vallées alluviales."
       ],
       "secondaryHabitat": [
-        "Prairies d'élevage piétinées par le bétail",
-        "Cultures, vignes et vergers sur sols tassés, lieux de passage des machines",
-        "Allées des jardins",
-        "Terrains vagues, bords des routes et des chemins"
+        "Il s'adapte aux prairies d'élevage piétinées par le bétail, aux cultures, vignes et vergers sur sols tassés, aux lieux de passage des machines, aux allées des jardins, ainsi qu'aux terrains vagues, bords des routes et des chemins."
       ],
       "indicatorTraits": [
-        "Tassements et compactages provoquant l'anaérobiose des sols, piétinement du bétail dans les prairies surchargées",
-        "Hydromorphismes induits par le tassement du sol par temps humide (travail du sol, piétinement du bétail)"
+        "La présence du grand plantain révèle des sols tassés et compactés, souvent sujets à l'anaérobiose, notamment dans les prairies surchargées par le piétinement du bétail.",
+        "Il indique également des hydromorphismes provoqués par le tassement du sol en période humide, que ce soit par le travail du sol ou le piétinement."
       ],
       "soilCondition": 3,
-      "floweringPeriod": "",
-      "melliferous": "",
-      "ecology": [],
-      "isEdible": null,
-      "isMedicinal": null,
+      "floweringPeriod": "mai - septembre",
+      "melliferous": "1",
+      "ecology": [
+        "Le grand plantain est souvent associé à des milieux perturbés par l'activité humaine ou animale. Il est fréquemment visité par divers insectes pollinisateurs, bien que son potentiel mellifère soit modéré.",
+        "Sa capacité à pousser dans des sols compactés en fait un indicateur précieux des pratiques agricoles et de l'état des sols."
+      ],
+      "isEdible": true,
+      "isMedicinal": true,
       "medicinalUses": [
-        "La plante entière est anti- histaminique, astringente et anti-inflammatoire",
-        "Elle soigne les irritations et les allergies de la sphère oto-rhino (nez - oreilles dents - gorge), en association avec Calendula",
-        "En externe : piqûres d'insectes, brûlures d'orties, cicatrisante"
+        "La plante entière est reconnue pour ses propriétés anti-histaminiques, astringentes et anti-inflammatoires.",
+        "Elle est utilisée pour soigner les irritations et les allergies de la sphère ORL, souvent en association avec le calendula.",
+        "En usage externe, elle est efficace contre les piqûres d'insectes, les brûlures d'orties et favorise la cicatrisation."
       ],
       "culinaryUses": [
-        "Les jeunes feuilles crues du centre de la rosette, au goût de champignon, sont aromatiques",
-        "Les jeunes plantes se mangent crues ou cuites"
+        "Le Grand Plantain se cuisine facilement : Les jeunes feuilles crues du centre de la rosette, au goût de champignon, sont appréciées pour leur saveur aromatique. Elles peuvent être ajoutées crues dans les salades, cuites en soupe ou en velouté, intégrées à des tartes salées, ou encore préparées en beignets.",
+        "Ses boutons floraux se dégustent aussi en salade ou en tapenade, et la plante peut être utilisée en infusion ou en sirop.",
+        "C’est une plante sauvage polyvalente qui apporte une saveur douce et légèrement herbacée à de nombreux plats."
       ],
-      "notes": [],
-      "images": []
+      "notes": [
+        "Le grand plantain est une plante résiliente et utile dans de nombreux contextes. Il est souvent utilisé en agriculture pour ses propriétés indicatrices des sols tassés et compactés. Sa capacité à pousser dans des conditions difficiles en fait un allié précieux pour les jardiniers et les agriculteurs."
+      ],
+      "images": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Plantago_major_001.JPG",
+          "caption": "Plantago major, Plantaginaceae, Greater Plantain, Common Plantain, habitus.",
+          "author": "H. Zell",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Plantago_major_001.JPG"
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Plantago_major_002.JPG/500px-Plantago_major_002.JPG?20100714145947",
+          "caption": "",
+          "author": "",
+          "license": "",
+          "licenseUrl": "",
+          "sourceUrl": ""
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Plantago_major_003.JPG/500px-Plantago_major_003.JPG?20100714150156",
+          "caption": "",
+          "author": "",
+          "license": "",
+          "licenseUrl": "",
+          "sourceUrl": ""
+        }
+      ]
     },
     {
       "id": 183,
@@ -9936,7 +10042,7 @@
     },
     {
       "id": 196,
-      "scientificName": ["Poа аnnua"],
+      "scientificName": ["Poa annua"],
       "commonName": ["Pâturin annuel"],
       "family": ["POACÉES", "GRAMINÉES"],
       "synonyms": [],
@@ -11730,53 +11836,72 @@
       "family": ["ASTÉRACÉES", "COMPOSÉES"],
       "synonyms": [],
       "description": {
-        "generalDescription": [
-          "Le séneçon jacobée est une plante vivace herbacée, à racines fibreuses."
-        ],
-        "size": [],
+        "generalDescription": ["Plante vivace herbacée, à racines fibreuses."],
+        "size": ["Jusqu'à 1 m de hauteur."],
         "root": [],
-        "stem": [
-          "Sa longue tige raide, rameuse au sommet, peut atteindre 1 m de haut."
-        ],
+        "stem": ["Longue, raide, rameuse au sommet."],
         "leaf": [
-          "Les feuilles alternes, généralement glabres, sont ovales, incisées dentées, surtout à la base du limbe."
+          "Alternes, généralement glabres, ovales, incisées dentées, surtout à la base du limbe, inférieures pétiolées, supérieures sessiles embrassant la tige par deux oreillettes."
         ],
         "flower": [
-          "Les capitules de fleurs jaunes forment une large panicule au sommet de la tige."
+          "Capitules de fleurs jaunes en large panicule au sommet de la tige, fleurs périphériques ligulées, fleurs centrales tubuleuses, folioles de l'involucre tachées de noir au sommet."
         ],
         "fruit": [
-          "Les fruits sont des petits akènes, pubescents au centre du capitule, glabres à la périphérie, surmontés d'une couronne de soies qui forme une aigrette sessile"
+          "Petits akènes, pubescents au centre du capitule, glabres à la périphérie, surmontés d'une couronne de soies formant une aigrette sessile."
         ]
       },
       "primaryHabitat": [
-        "Pelouses, prairies naturelles, landes et fruticées des vallées alluviales, des plaines et des montagnes"
+        "Le séneçon jacobée prospère dans les pelouses, les prairies naturelles, les landes et les fruticées des vallées alluviales, des plaines et des montagnes."
       ],
       "secondaryHabitat": [
-        "Talus, bords des chemins et des routes",
-        "Friches agricoles, jachères",
-        "Prairies agricoles",
-        "Vignes et vergers"
+        "Il s'adapte également aux talus, aux bords des chemins et des routes, aux friches agricoles, aux jachères, aux prairies agricoles, ainsi qu'aux vignes et vergers."
       ],
       "indicatorTraits": [
-        "Equilibre des sols en cours d'enrichissement en MO végétale, évolution vers la forêt",
-        "Carence en MO animale et en azote"
+        "La présence du séneçon jacobée indique un sol en cours d'enrichissement en matière organique végétale, évoluant vers un stade forestier. Elle peut aussi révéler une carence en matière organique animale et en azote, nécessitant une gestion appropriée pour maintenir l'équilibre du sol."
       ],
       "soilCondition": 1,
-      "floweringPeriod": "",
-      "melliferous": "",
-      "ecology": [],
-      "isEdible": null,
-      "isMedicinal": null,
+      "floweringPeriod": "juin - septembre",
+      "melliferous": "1",
+      "ecology": [
+        "Le séneçon jacobée est une plante mellifère qui attire divers pollinisateurs comme les abeilles et les papillons. Il contribue à la biodiversité des prairies de fauche, souvent riches en espèces rares et protégées. Sa présence favorise l'équilibre des sols et la santé des animaux domestiques qui pâturent ces milieux."
+      ],
+      "isEdible": false,
+      "isMedicinal": true,
       "medicinalUses": [
-        "Toxique, réservé aux prescriptions des médecins",
-        "Emménagogue",
-        "Régulateur de la circulation veineuse"
+        "Le séneçon jacobée est toxique et doit être utilisé uniquement sous prescription médicale.",
+        "Il est reconnu pour ses propriétés emménagogues et régulatrices de la circulation veineuse."
       ],
-      "culinaryUses": ["Non comestible"],
+      "culinaryUses": ["Non comestible."],
       "notes": [
-        "Le séneçon jacobée est une espèce des prairies de fauche de la Directive Habitat. Ces prairies sont riches en espèces rares et protégées. La biodiversité remarquable de ces milieux garantit l'équilibre des sols et la bonne santé des animaux domestiques qui les pâturent Pour maintenir cette biodiversité, ces prairies doivent être fauchées, si possible en fauche tardive, et pâturées le moins souvent possible. Les prairies naturelles, riches d'un grand nombre d'espèces, sont des réservoirs à semences dans lesquels on pourra puiser pour revégétaliser les déserts que l'agriculture actuelle crée Prairies favorables à la production laitière"
+        "Le séneçon jacobée est une espèce caractéristique des prairies de fauche, reconnues par la Directive Habitat pour leur biodiversité remarquable, il nourrirait plus de 35 espèces d’insectes butineurs, contribuant ainsi à la diversité faunistique des prairies. Ces prairies, riches en espèces rares et protégées, garantissent l'équilibre des sols et la bonne santé des animaux domestiques. Pour maintenir cette biodiversité, il est recommandé de faucher tardivement et de limiter le pâturage.",
+        "!! Les fleurs du séneçon de Jacob sont les parties les plus toxiques, et bien que les animaux puissent éviter la plante en pâturage, ils risquent de l'ingérer accidentellement, surtout en cas de surpâturage ou dans le foin, ce qui entraîne des lésions hépatiques irréversibles et potentiellement mortelles, les chevaux étant les plus sensibles."
       ],
-      "images": []
+      "images": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Ragwort_%28Jacobaea_vulgaris%29_-_flowers_-_geograph.org.uk_-_5454723.jpg",
+          "caption": "Ragwort (Jacobaea vulgaris) - flowers",
+          "author": "Evelyn Simak",
+          "license": "CC BY-SA 2.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+          "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ragwort_(Jacobaea_vulgaris)_-_flowers_-_geograph.org.uk_-_5454723.jpg"
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Senecio_jacobaea_%28modern%3DJacobaea_vulgaris_subsp._vulgaris%29_-_Pl0169_-_FloraBatava-KB-v03.jpg/800px-Senecio_jacobaea_%28modern%3DJacobaea_vulgaris_subsp._vulgaris%29_-_Pl0169_-_FloraBatava-KB-v03.jpg",
+          "caption": "",
+          "author": "",
+          "license": "",
+          "licenseUrl": "",
+          "sourceUrl": ""
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Zomer_in_de_Bemmelse_Waard%2C_met_massaal_bloeiende_Jacobaea_vulgaris.jpg/800px-Zomer_in_de_Bemmelse_Waard%2C_met_massaal_bloeiende_Jacobaea_vulgaris.jpg",
+          "caption": "",
+          "author": "",
+          "license": "",
+          "licenseUrl": "",
+          "sourceUrl": ""
+        }
+      ]
     },
     {
       "id": 230,

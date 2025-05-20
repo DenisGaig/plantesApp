@@ -2,24 +2,57 @@
   &__title {
     font-size: 1rem;
     margin: 0.5rem 0;
-    color: $text-color;
+    color: $primary-color;
+    display: flex;
+    flex-direction: column;
   }
   &__scientific_title,
   &__family {
     font-size: 0.8rem;
+    font-style: italic;
     margin: 0.2rem 0;
     color: $text-color;
   }
 
+  &__description {
+    font-size: 0.7rem;
+    text-align: left;
+    margin: 0.5rem 0;
+    padding: 0 0.5rem;
+    color: $text-color;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   &__soil-state {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+    &__symbol {
+      font-size: 0.8rem;
+      margin: 0.5rem 0;
+      color: $text-color;
+
+      span {
+        width: 1rem;
+        height: 1rem;
+        display: inline-block;
+        border-radius: 50%;
+      }
+    }
     .plant-card__soil-state__good {
-      color: green;
+      background-color: green;
     }
     .plant-card__soil-state__medium {
-      color: orange;
+      background-color: orange;
     }
     .plant-card__soil-state__bad {
-      color: red;
+      background-color: red;
     }
   }
 
@@ -45,6 +78,8 @@
       .lucide-info {
         width: 1.5rem;
         height: 1.5rem;
+        background-color: $white;
+        border-radius: 50%;
         &:hover {
           color: $white;
           background-color: $secondary-color;
@@ -94,23 +129,10 @@
     }
   }
 
-  &__comestible {
-    background-color: rgba(0, 128, 0, 0.589);
-    padding: 5px 10px;
-    border-radius: 10px;
-    color: white;
-  }
-  &__toxique {
-    background-color: rgba(255, 0, 0, 0.589);
-    padding: 5px 10px;
-    border-radius: 10px;
-    color: white;
-  }
-
   .plant-card__grid {
     border: 1px solid #ccc;
     border-radius: $border-radius;
-    padding: 1rem;
+    padding: 0.5rem;
     margin: 1rem;
     width: 270px;
     height: 400px;
@@ -156,8 +178,8 @@
     }
 
     &__image {
-      width: 100%;
-      height: 200px;
+      // width: 100%;
+      height: 150px;
       object-fit: cover;
       border-radius: 5px;
       background-color: $light-gray-transparent;

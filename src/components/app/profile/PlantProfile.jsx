@@ -95,25 +95,27 @@ const PlantProfile = () => {
 
   const SoilCondition = ({ soilCondition }) => {
     return (
-      <div
-        className="soil-conditions"
-        style={{
-          backgroundColor:
-            soilCondition > 2
-              ? "#e74c3c"
-              : soilCondition > 1
-              ? "#f39c12"
-              : "#2ecc71",
-        }}
-      >
+      <div className="soil-conditions">
         {" "}
         <img src="/soilIndicator.svg" width="24px" height="24px" alt="soil" />
         Indique un sol :{" "}
-        {soilCondition > 2
-          ? "Très dégradé"
-          : soilCondition > 1
-          ? "Dégradé"
-          : "Equilibré"}
+        <div
+          className="soil-conditions__indicator"
+          style={{
+            backgroundColor:
+              soilCondition > 2
+                ? "#e74c3c"
+                : soilCondition > 1
+                ? "#f39c12"
+                : "#2ecc71",
+          }}
+        >
+          {soilCondition > 2
+            ? "Très dégradé"
+            : soilCondition > 1
+            ? "Dégradé"
+            : "Equilibré"}
+        </div>
       </div>
     );
   };
@@ -158,7 +160,11 @@ const PlantProfile = () => {
       </button>
       <div className="plant-profile__header">
         <div className="plant-profile__header__image">
-          <img src={plant["images"][0]?.url} alt={plant["commonName"]} />
+          {plant.images.length > 0 ? (
+            <img src={plant["images"][0]?.url} alt={plant["commonName"]} />
+          ) : (
+            <img src="/plant-placeholder.webp" alt={plant["commonName"]} />
+          )}
         </div>
         <div className="plant-profile__header__title">
           <div className="plant-profile__header__title__scientific-name">

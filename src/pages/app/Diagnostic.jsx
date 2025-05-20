@@ -39,8 +39,16 @@ export default function Diagnostic() {
     const storedData = storageService.getStoredData("formData");
     return storedData || emptyFormData;
   });
+  const [selectedContext, setSelectedContext] = useState(() => {
+    const storedContext = storageService.getStoredData("selectedContext");
+    return storedContext || "";
+  });
   const [analysisResults, setAnalysisResults] = useState([]);
   const [sortedResultsColumns, setSortedResultsColumns] = useState(null);
+  const [compositesResults, setCompositesResults] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
+
+  const [detailedReport, setDetailedReport] = useState(null);
 
   console.log("COEFFICIENTS", Object.keys(coefficients).length);
 
@@ -71,16 +79,39 @@ export default function Diagnostic() {
       setFormData(updateFormData);
       // Sauvegarder les données dans le localStorage
       storageService.storeData("formData", updateFormData);
+      storageService.storeData("selectedContext", selectedContext);
       console.log("Handle Form data: ", updateFormData);
+      console.log("Handle Form data: ", selectedContext);
     }
   };
 
-  const handleAnalysisComplete = (results, sortedColumns) => {
+  const handleAnalysisComplete = (
+    results,
+    sortedColumns,
+    compositesResults,
+    recommendations,
+    detailedReport
+    // selectedContext
+  ) => {
     console.log("Diagnostic: Résultats de l'analyse :", results);
-    setAnalysisResults(results);
     console.log("Diagnostic: Colonnes triées :", sortedColumns);
+    console.log("Diagnostic: Résultats composites :", compositesResults);
+    console.log("Diagnostic: Recommandations :", recommendations);
+    console.log("Diagnostic: Contexte sélectionné :", selectedContext);
+    console.log("Diagnostic: Rapport détaillé :", detailedReport);
+
+    setAnalysisResults(results);
     setSortedResultsColumns(sortedColumns);
+    setCompositesResults(compositesResults);
+    setRecommendations(recommendations);
+    setDetailedReport(detailedReport);
+    // setSelectedContext(selectedContext);
+
+    // Stockage des résultats dans le localStorage
     storageService.storeData("analysisResults", results);
+    storageService.storeData("compositesResults", compositesResults);
+    storageService.storeData("recommendations", recommendations);
+    storageService.storeData("detailedReport", detailedReport);
   };
 
   const handleNext = () => {
@@ -104,6 +135,10 @@ export default function Diagnostic() {
     storageService.removeItem("coefficients");
     storageService.removeItem("formData");
     storageService.removeItem("analysisResults");
+    storageService.removeItem("compositesResults");
+    storageService.removeItem("recommendations");
+    storageService.removeItem("selectedContext");
+    storageService.removeItem("detailedReport");
   };
 
   const renderStepContent = () => {
@@ -127,7 +162,9 @@ export default function Diagnostic() {
         return (
           <SoilQuery
             initialData={formData}
-            onDataChange={(data) => {
+            initialContext={selectedContext}
+            onDataChange={(data, context) => {
+              setSelectedContext(context);
               handleFormDataUpdate("soil", data.soil);
               handleFormDataUpdate("history", data.history);
             }}
@@ -140,6 +177,7 @@ export default function Diagnostic() {
             selectedCoverages={coverages}
             selectedCoefficients={coefficients}
             selectedFormData={formData}
+            selectedContext={selectedContext}
             onAnalysisComplete={handleAnalysisComplete}
             onNextStep={handleNext}
           />
@@ -150,6 +188,10 @@ export default function Diagnostic() {
             selectedPlants={selectedPlants}
             selectedCoefficients={coefficients}
             analysisResults={analysisResults}
+            compositesResults={compositesResults}
+            recommendations={recommendations}
+            selectedContext={selectedContext}
+            detailedReport={detailedReport}
             sortedResultsColumns={sortedResultsColumns}
             isPreview={false}
           />
@@ -166,6 +208,9 @@ export default function Diagnostic() {
     }
     if (currentStep === 1) {
       return Object.keys(coefficients).length === 0;
+    }
+    if (currentStep === 2) {
+      return selectedContext === "";
     }
     return false;
   };

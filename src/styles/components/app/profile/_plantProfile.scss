@@ -133,12 +133,15 @@
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
-        font-size: 14px;
-        padding: 5px;
-        border-radius: $border-radius;
-        margin: 0.5rem 0 1.5rem 0;
         font-style: italic;
-        // width: 70%;
+        font-size: 14px;
+        margin: 1.5rem 0;
+
+        &__indicator {
+          padding: 5px 10px;
+          border-radius: $border-radius * 5;
+          // width: 70%;
+        }
       }
     }
   }
@@ -148,7 +151,7 @@
     align-items: stretch;
     justify-content: center;
     width: 100%;
-    background-color: $secondary-color;
+    background-color: transparent;
     border: none;
     border-radius: $border-radius;
 
@@ -160,16 +163,17 @@
       width: 100%;
       gap: 0.5rem;
       padding: 0.5rem;
-      border: none;
+      border: 0.5px solid $white;
       cursor: pointer;
       border-radius: $border-radius;
-      background-color: $secondary-color;
+      background-color: $secondary-color-light;
       transition: all 0.3s ease-in-out;
       &:hover {
-        background-color: $primary-color;
+        background-color: $primary-color-light;
+        color: $white;
       }
       &.active {
-        background-color: $primary-color;
+        background-color: $primary-color-light;
         color: $white;
       }
     }

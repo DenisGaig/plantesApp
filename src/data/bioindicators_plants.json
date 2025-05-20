@@ -1253,6 +1253,7 @@
     "caracteristiques": {
       "BNS": "+",
       "Eau": "-",
+      "MOT": "--",
       "MO(C)": "-",
       "MO(N)": "-",
       "Less": "++",
@@ -1266,7 +1267,6 @@
     "caracteristiques": {
       "BNS": "+",
       "BS": "+",
-      "MOT": "++",
       "MO(C)": "+",
       "MO(N)": "+",
       "Sali": "++",

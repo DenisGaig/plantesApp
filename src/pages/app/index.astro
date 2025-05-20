@@ -1,8 +1,10 @@
 ---
 import React from "react";
+// Import DIRECT (sans React.lazy) pour client:only
 import App from "../../components/app/App.jsx";
 import AppLayout from "../../layouts/AppLayout.astro";
 import "../../styles/index.scss";
+
 //import "/src/styles/index.css";
 
 ---
@@ -14,8 +16,13 @@ Toutes les autres pages sont générées statiquement au moment de la constructi
 
 <AppLayout>
     <div class="app-wrapper" transition:animate="slide">
+    {import.meta.env.DEV ? (
         <React.StrictMode>
             <App client:only/>
         </React.StrictMode>
+        ) : (
+        <App client:only/>
+        )}
     </div>
 </AppLayout>
+

@@ -131,6 +131,16 @@ const AdvancedSearch = () => {
       ],
     },
     {
+      id: "soilCondition",
+      label: "Etat du sol",
+      type: "select",
+      options: [
+        { value: 1, label: "En équilibre" },
+        { value: 2, label: "Dégradation en cours" },
+        { value: 3, label: "Danger - Graves déséquilibres" },
+      ],
+    },
+    {
       id: "isEdible",
       label: "Comestible",
       type: "checkbox",

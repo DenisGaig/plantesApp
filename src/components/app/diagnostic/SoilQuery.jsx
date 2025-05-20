@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
-const SoilQuery = ({ initialData, onDataChange }) => {
+const SoilQuery = ({ initialData, initialContext, onDataChange }) => {
   const [formData, setFormData] = useState(initialData);
+  const [selectedContext, setSelectedContext] = useState(initialContext);
   const [activeTab, setActiveTab] = useState("soilParameters");
   const tabs = [
     { id: "soilParameters", label: "Paramètres du sol" },
@@ -12,8 +13,8 @@ const SoilQuery = ({ initialData, onDataChange }) => {
 
   // Mettre à jour le parent diagnostic.jsx lorsque les données changent
   useEffect(() => {
-    onDataChange(formData);
-  }, [formData]);
+    onDataChange(formData, selectedContext);
+  }, [formData, selectedContext]);
 
   // useEffect(() => {
   //   console.log("Updated formData:", formData);
@@ -33,13 +34,35 @@ const SoilQuery = ({ initialData, onDataChange }) => {
   return (
     <div className="soil-query">
       <div className="soil-query__header">
-        <h2>Etape 3: Paramètres du sol</h2>
+        <h2>Etape 3: Type de culture & Paramètres du sol</h2>
         <p>
           Afin d'enrichir l'analyse et d'améliorer les résultats, vous pouvez
           ajouter des informations sur votre parcelle basées sur vos
           observations et votre expérience.
         </p>
       </div>
+
+      <div className="soil-query__context-selector">
+        <label className="soil-query__context-selector__label">
+          Type de culture <span> (* obligatoire)</span>
+        </label>
+        <select
+          className="soil-query__context-selector__select"
+          value={selectedContext}
+          onChange={(e) => setSelectedContext(e.target.value)}
+        >
+          <option value="">Sélectionner...</option>
+          <option value="maraichageBio">Maraîchage Biologique</option>
+          <option value="potager">Potager</option>
+          <option value="grandesCultures">Grandes Cultures Céréalières</option>
+          <option value="prairiePermanente">Prairie Permanente</option>
+          <option value="viticulture">Viticulture</option>
+          <option value="jardinOrnemental">Jardinage Ornemental</option>
+          <option value="verger">Verger</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+
       <div className="soil-query__tabs">
         {tabs.map((tab) => (
           <button

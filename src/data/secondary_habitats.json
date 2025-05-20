@@ -1,0 +1,77 @@
+{
+  "secondaryHabitat": {
+    "Zones agricoles et cultivées": [
+      "friches agricoles",
+      "jachères",
+      "cultures",
+      "moissons",
+      "vignes",
+      "vergers",
+      "champs cultivés",
+      "cultures intensives",
+      "maraîchages",
+      "prairies",
+      "prairies agricoles",
+      "prairies agricoles humides",
+      "prairies d'élevage",
+      "prairies humides d'élevage",
+      "prairies de fauche"
+    ],
+    "Zones forestières et boisées": [
+      "coupes de bois",
+      "petits bois résiduels",
+      "pré-bois",
+      "forêts humides et marécageuses",
+      "forêts anthropisées",
+      "clairières et lisières forestières",
+      "coupes forestières",
+      "chemins et layons forestiers",
+      "haies",
+      "haies de bocages",
+      "haies agricoles",
+      "broussailles"
+    ],
+    "Zones humides et aquatiques": [
+      "bords des mares et des étangs",
+      "fossés",
+      "fosses humides",
+      "rives de mares et étangs artificiels",
+      "mares et étangs artificiels",
+      "prairies marécageuses",
+      "prairies paratourbeuses",
+      "canaux d'irrigation artificiels"
+    ],
+    "Zones urbaines et périurbaines": [
+      "environs des villages et des habitations",
+      "places de village",
+      "parcs et jardins",
+      "jardins",
+      "terrains vagues",
+      "décombres",
+      "décharges sauvages",
+      "ruines",
+      "friches industrielles",
+      "espaces perturbés par les grands travaux routiers et urbains"
+    ],
+    "Zones de transport et infrastructures": [
+      "bords des routes et chemins",
+      "fossés des chemins et des routes",
+      "digues des canaux",
+      "ballasts des chemins de fer",
+      "talus",
+      "clotures"
+    ],
+    "Zones perturbées et remuées": [
+      "zones remuées",
+      "terrains remués",
+      "anciennes carrières"
+    ],
+    "Zones spécifiques et autres": [
+      "golfs",
+      "vieux murs",
+      "gazons et pelouses artificielles",
+      "zones inondables plus ou moins polluées",
+      "peupleraies"
+    ]
+  }
+}

@@ -16,6 +16,7 @@
 @import "pages/app/main";
 @import "pages/app/identification";
 @import "pages/app/diagnostic";
+@import "pages/app/home";
 
 // composants de l'application
 @import "components/app/shared/plantCard";
@@ -48,3 +49,7 @@
 @import "components/app/diagnostic/soilIndicators";
 @import "components/app/diagnostic/diagnosticResults";
 @import "components/app/diagnostic/recommendations";
+@import "components/app/diagnostic/soilDetailedReport";
+
+// Composant de test de calibration en mode developement
+@import "pages/app/calibrationTester";

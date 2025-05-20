@@ -1,4 +1,4 @@
-import { Info, Plus, Trash2 } from "lucide-react";
+import { Info, Plus, Skull, Trash2, Utensils } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usePlants } from "../../../context/PlantsProvider.jsx";
 
@@ -34,11 +34,11 @@ const PlantCard = ({
   if (!plant) return <p>Plante non disponible</p>;
 
   const soilStates = {
-    1: { className: "plant-card__soil-state__good", text: "A l'équilibre" },
-    2: { className: "plant-card__soil-state__medium", text: "Equilibre rompu" },
+    1: { className: "plant-card__soil-state__good", text: "" },
+    2: { className: "plant-card__soil-state__medium", text: "" },
     3: {
       className: "plant-card__soil-state__bad",
-      text: "Graves déséquilibres",
+      text: "",
     },
   };
 
@@ -56,26 +56,41 @@ const PlantCard = ({
             <div className="plant-card__grid__selected-badge"></div>
           )}
           <div className="plant-card__grid__image">
-            {plant.images && (
+            {plant.images.length > 0 ? (
               <img src={plant.images[0]?.url} alt={plant.commonName} />
+            ) : (
+              <img src="/plant-placeholder.webp" alt={plant.commonName} />
             )}
+            {/* {plant.images && (
+              <img src={plant.images[0]?.url} alt={plant.commonName} />
+            )} */}
           </div>
-          <h3 className="plant-card__title">{plant["commonName"]}</h3>
+          <h3 className="plant-card__title">
+            <span>{plant.commonName[0]}</span>
+            {"  "}
+            {plant.commonName[1] && <span>({plant.commonName[1]})</span>}
+          </h3>
           <p className="plant-card__scientific_title">
             ({plant["scientificName"]})
           </p>
+          <p className="plant-card__description">
+            {plant.description.generalDescription?.[0]}
+          </p>
 
           <div className="plant-card__soil-state">
-            <p>
-              Etat du sol:{" "}
-              <span className={soilState.className}>{soilState.text}</span>
+            <p className="plant-card__soil-state__symbol">
+              Sol: <span className={soilState.className}>{soilState.text}</span>
             </p>
 
-            {plant.edible === "O" && (
-              <span className="plant-card__comestible">Comestible</span>
+            {plant.isEdible && (
+              <span className="plant-card__comestible">
+                <Utensils size={20} color="green" strokeWidth={1.5} />
+              </span>
             )}
-            {plant.edible === "T" && (
-              <span className="plant-card__toxique">Toxique</span>
+            {!plant.isEdible && (
+              <span className="plant-card__toxique">
+                <Skull size={20} color="red" strokeWidth={1.5} />
+              </span>
             )}
           </div>
 
@@ -115,8 +130,10 @@ const PlantCard = ({
               <div className="plant-card__list__selected-badge"></div>
             )}
             <div className="plant-card__list__image">
-              {plant.images && (
+              {plant.images.length > 0 ? (
                 <img src={plant.images[0]?.url} alt={plant.commonName} />
+              ) : (
+                <img src="/plant-placeholder.webp" alt={plant.commonName} />
               )}
             </div>
             <div className="plant-card__list__content">
@@ -125,7 +142,9 @@ const PlantCard = ({
                   isSelected ? "plant-card__title--selected" : ""
                 }`}
               >
-                {plant.commonName}
+                <span>{plant.commonName[0]}</span>
+                {"  "}
+                {plant.commonName[1] && <span>({plant.commonName[1]})</span>}
               </h3>
               <p className="plant-card__scientific_title">
                 ({plant.scientificName})

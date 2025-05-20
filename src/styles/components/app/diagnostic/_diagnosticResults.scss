@@ -9,6 +9,18 @@
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
+  .tooltip {
+    animation: fadeIn 0.2s ease-in;
+    h4 {
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+    p {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -117,14 +129,21 @@
 
           .chart-bar-positive {
             height: 100%;
-            background-color: $success-color;
+            // background-color: $success-color;
             border-radius: 9999px;
           }
 
           .chart-bar-negative {
             height: 100%;
-            background-color: $error-color;
+            // background-color: $error-color;
             border-radius: 9999px;
+            background-image: repeating-linear-gradient(
+              45deg,
+              transparent,
+              transparent 5px,
+              rgba(255, 255, 255, 0.5) 5px,
+              rgba(255, 255, 255, 0.5) 10px
+            );
           }
         }
 
@@ -203,10 +222,85 @@
   }
 
   &__recommendations {
-    margin-top: 1rem;
+    // margin-top: 1rem;
     margin-bottom: 1rem;
     background-color: $white;
-    padding: 1.5rem;
+    // padding: 1.5rem;
     border-radius: $border-radius;
+  }
+
+  /* Styles pour la légende */
+  .color-legend {
+    margin-top: 30px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: $text-color;
+  }
+
+  .color-legend h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+  }
+
+  .legend-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .legend-category {
+    min-width: 200px;
+  }
+
+  .legend-category h5 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #444;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    margin-right: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .legend-label {
+    font-size: 12px;
+  }
+
+  .legend-patterns {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ddd;
+    display: flex;
+    gap: 30px;
+  }
+
+  .legend-color-solid {
+    background-color: #66c7b4;
+  }
+
+  .legend-color-hatched {
+    background-color: #66c7b4;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 5px,
+      rgba(255, 255, 255, 0.5) 5px,
+      rgba(255, 255, 255, 0.5) 10px
+    );
   }
 }

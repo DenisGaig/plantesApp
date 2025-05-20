@@ -15,10 +15,13 @@ import Home from "../../pages/app/Home.jsx";
 import Identification from "../../pages/app/Identification.jsx";
 import PlantDatabase from "../../pages/app/PlantDatabase.jsx";
 import Result from "../../pages/app/Results.jsx";
+import CalibrationTester from "./dev/CalibrationTester.jsx";
 import Method from "./methode/Method.jsx";
 import PlantProfile from "./profile/PlantProfile.jsx";
 import Spinner from "./shared/Spinner.jsx";
 import VerticalNavbar from "./shared/VerticalNavbar.jsx";
+
+const enableCalibration = import.meta.env.REACT_APP_ENABLE_CALIBRATION;
 
 export default function App() {
   useEffect(() => {
@@ -73,6 +76,11 @@ const router = createBrowserRouter([
       {
         path: "plants/:id",
         element: <PlantProfile />,
+      },
+      {
+        path: "calibration",
+        // element: enableCalibration ? <CalibrationTester /> : <Home />,
+        element: <CalibrationTester />,
       },
     ],
   },

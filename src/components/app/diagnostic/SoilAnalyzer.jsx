@@ -33,6 +33,7 @@ const SoilAnalyzer = ({
   selectedCoverages,
   selectedCoefficients,
   selectedFormData,
+  selectedContext,
   onAnalysisComplete,
   // sortedResultsColumns,
   onNextStep,
@@ -48,13 +49,21 @@ const SoilAnalyzer = ({
   const {
     loading,
     error,
-    showResults,
-    sortedColumns,
     analysisResults,
+    compositesResults,
+    recommendations,
+    sortedColumns,
+    showResults,
+    detailedReport,
     generateAnalysisResults,
     resetAnalysis,
     getSortedResults,
-  } = useSoilAnalysis(selectedPlants, selectedCoefficients, allColumns);
+  } = useSoilAnalysis(
+    selectedPlants,
+    selectedCoefficients,
+    allColumns,
+    selectedContext
+  );
 
   const handleSoilAnalysis = () => {
     generateAnalysisResults();
@@ -66,7 +75,14 @@ const SoilAnalyzer = ({
 
   useEffect(() => {
     if (analysisResults) {
-      onAnalysisComplete(analysisResults, sortedColumns);
+      onAnalysisComplete(
+        analysisResults,
+        sortedColumns,
+        compositesResults,
+        recommendations,
+        detailedReport
+        // selectedContext
+      );
     }
   }, [analysisResults]);
 
@@ -151,6 +167,10 @@ const SoilAnalyzer = ({
             selectedPlants={selectedPlants}
             selectedCoefficients={selectedCoefficients}
             analysisResults={analysisResults}
+            compositesResults={compositesResults}
+            recommendations={recommendations}
+            selectedContext={selectedContext}
+            detailedReport={detailedReport}
             isPreview={true}
             sortedResultsColumns={sortedColumns}
           />

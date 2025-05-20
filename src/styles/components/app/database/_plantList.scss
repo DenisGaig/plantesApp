@@ -1,6 +1,7 @@
 .plant-list-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
   // align-items: center;
 
   .plant-list {
@@ -18,7 +19,7 @@
     &.grid {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      // justify-content: center;
       justify-content: space-around;
     }
     & > * {
@@ -47,14 +48,14 @@
   }
 
   .pagination button:hover {
-    background-color: #007bff;
+    background-color: $primary-color;
     color: white;
   }
 
   .pagination button.active {
-    background-color: #0056b3;
+    background-color: $primary-color-light;
     color: white;
-    border-color: #0056b3;
+    border-color: $primary-color-light;
   }
 
   .pagination button.active:hover {

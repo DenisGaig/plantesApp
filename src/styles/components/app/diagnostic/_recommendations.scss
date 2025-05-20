@@ -1,7 +1,248 @@
+// Variables pour les couleurs
+$color-deficit: #ffa500; // Orange
+$color-exces: #ff0000; // Rouge
+$color-equilibre: #008000; // Vert
+
 .recommendations {
-  h2 {
-    color: $text-color;
+  margin-top: 1rem;
+
+  &__title {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: $text-color;
+    text-align: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  &__card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      &__title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: $primary-color;
+        margin-bottom: 0rem;
+      }
+      &__status {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .status-deficit {
+        color: $color-deficit;
+      }
+
+      .status-exces {
+        color: $color-exces;
+      }
+
+      .status-equilibre {
+        color: $color-equilibre;
+      }
+    }
+
+    &__description {
+      font-size: 0.9rem;
+      color: $text-color;
+      font-style: italic;
+    }
+
+    &__intensity {
+      font-size: 0.9rem;
+      color: $text-color;
+      margin-top: 0.5rem;
+
+      &__label {
+        font-weight: 500;
+      }
+    }
+
+    &__box {
+      background-color: #f1f1f1;
+      border-radius: $border-radius;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      &__text {
+        font-size: 0.9rem;
+        color: $text-color;
+      }
+    }
+  }
+  .no-recommendations {
+    font-size: 1rem;
+    color: $gray;
+    font-style: italic;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .recommendations__visualization {
+    margin: 1rem auto;
+    max-width: 600px;
+  }
+
+  /* Styles pour le graphique radar */
+  .radar-chart-container {
+    position: relative;
+  }
+
+  .radar-instructions {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+
+  /* Styles pour le graphique en secteurs */
+  .pie-chart-container {
+    position: relative;
+    padding: 1rem 0;
+  }
+
+  .pie-instructions {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 1rem;
+    font-style: italic;
+  }
+
+  .pie-legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 1.5rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+
+  .color-box {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    border-radius: 3px;
+  }
+
+  .color-box.equilibre {
+    background-color: #008000; /* Vert */
+  }
+
+  .color-box.deficit {
+    background-color: #ffa500; /* Orange */
+  }
+
+  .color-box.exces {
+    background-color: #ff0000; /* Rouge */
+  }
+
+  .legend-text {
+    color: #333;
+  }
+
+  /* Animation pour les sections du camembert au survol */
+  @keyframes pulse {
+    0% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.8;
+    }
+  }
+
+  /* Styles pour l'affichage des recommandations */
+  .recommendations__chart-toggle {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    gap: 1rem;
+  }
+
+  .recommendations__chart-toggle button {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+
+  .recommendations__chart-toggle button.active {
+    background-color: $primary-color;
+    color: white;
+  }
+
+  /* Animation pour l'affichage des détails */
+  // .recommendations__details {
+  //   opacity: 0;
+  //   height: 0;
+  //   overflow: hidden;
+  //   transition: all 0.5s ease;
+  // }
+
+  // .recommendations__details.show {
+  //   opacity: 1;
+  //   height: auto;
+  //   padding: 1rem 0;
+  // }
+
+  /* Responsive design */
+  @media screen and (max-width: 768px) {
+    .pie-chart-container {
+      margin-bottom: 2rem;
+    }
+
+    .pie-legend {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+
+  /* Styles pour améliorer l'interactivité */
+  .recommendations__grid {
+    transition: all 0.3s ease;
+  }
+
+  /* Animation pour la carte sélectionnée */
+  @keyframes highlight {
+    0% {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    100% {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .recommendations__card--selected {
+    animation: highlight 2s ease-in-out;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 }

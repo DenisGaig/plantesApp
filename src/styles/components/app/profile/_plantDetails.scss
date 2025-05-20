@@ -1,5 +1,27 @@
 .plant-details {
   width: 100%;
+
+  .plant-identity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+
+    p {
+      display: flex;
+      // align-items: first baseline;
+      // justify-content: flex-start;
+      text-align: left;
+      width: 100%;
+      gap: 1rem;
+
+      // strong {
+      //   width: 25%;
+      // }
+    }
+  }
+
   .plant-details__header {
     display: flex;
     align-items: center;
@@ -25,36 +47,45 @@
   .plant-details__content__description {
     margin-bottom: 1.25rem;
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     align-items: center;
+    // justify-content: center;
     gap: 0.5rem;
     text-align: left;
+
+    strong {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 25%;
+    }
 
     p {
       font-size: 16px;
       width: 100%;
       text-align: left;
+      margin-bottom: 0;
     }
   }
-  .plant-details__footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    margin-top: 20px;
-  }
-  .plant-details__footer__button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .plant-details__footer__button:hover {
-    background-color: #0056b3;
-  }
+  // .plant-details__footer {
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  //   justify-content: center;
+  //   padding: 20px;
+  //   background-color: #f5f5f5;
+  //   border-radius: 10px;
+  //   margin-top: 20px;
+  // }
+  // .plant-details__footer__button {
+  //   padding: 10px 20px;
+  //   background-color: #007bff;
+  //   color: #fff;
+  //   border: none;
+  //   border-radius: 5px;
+  //   cursor: pointer;
+  // }
+  // .plant-details__footer__button:hover {
+  //   background-color: #0056b3;
+  // }
 }

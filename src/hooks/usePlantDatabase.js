@@ -114,10 +114,16 @@ export function usePlantDatabase() {
           );
         });
       },
-      // secondaryBiotope: (plant, value) =>
-      //   (plant["secondaryBiotope"] || []).some((biotope) =>
-      //     biotope.toLowerCase().includes(value.toLowerCase())
-      //   ),
+
+      soilCondition: (plant, value) => {
+        // Convertir la valeur en nombre
+        const numericValue = Number(value);
+        // Si la valeur est NaN (par exemple, si la conversion échoue), ne pas filtrer sur ce critère
+        if (isNaN(numericValue) || value === undefined || value === null) {
+          return true;
+        }
+        return plant["soilCondition"] === numericValue;
+      },
 
       isEdible: (plant, value) => {
         // Si la valeur est vide ou undefined, ne pas filtrer sur ce critère

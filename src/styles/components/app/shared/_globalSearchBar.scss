@@ -29,11 +29,12 @@ $transition-speed: 0.2s;
 
 .plant-search {
   width: 100%;
-  max-width: 48rem; // max-w-3xl
+  max-width: 50rem;
   margin: 0 auto;
   font-family: system-ui, -apple-system, sans-serif;
 
   .search-container {
+    width: 100%;
     position: relative;
     margin-bottom: 1rem;
   }
@@ -146,6 +147,7 @@ $transition-speed: 0.2s;
 
   .search-results {
     margin-top: 1.5rem;
+    width: 100%;
 
     .results-header {
       font-size: 1.125rem;
@@ -156,99 +158,102 @@ $transition-speed: 0.2s;
 
     .results-list {
       display: flex;
-      flex-direction: column;
+      // flex-direction: column;
+      flex-wrap: wrap;
+      // justify-content: center;
+      justify-content: space-around;
       gap: 1rem;
     }
   }
 
-  .plant-card {
-    @include card;
-    width: 300px;
-    background-color: $white;
-    padding: 1rem;
-    transition: box-shadow $transition-speed;
+  // .plant-card {
+  //   @include card;
+  //   width: 300px;
+  //   background-color: $white;
+  //   padding: 1rem;
+  //   transition: box-shadow $transition-speed;
 
-    &:hover {
-      box-shadow: $box-shadow;
-    }
+  //   &:hover {
+  //     box-shadow: $box-shadow;
+  //   }
 
-    .plant-card-header {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.5rem;
+  //   .plant-card-header {
+  //     display: flex;
+  //     flex-direction: column;
+  //     justify-content: space-between;
+  //     align-items: flex-start;
+  //     margin-bottom: 0.5rem;
 
-      .plant-name-container {
-        .scientific-name {
-          font-weight: 600;
-          color: $primary-dark;
-          margin: 0;
-        }
+  //     .plant-name-container {
+  //       .scientific-name {
+  //         font-weight: 600;
+  //         color: $primary-dark;
+  //         margin: 0;
+  //       }
 
-        .common-name {
-          color: $gray-600;
-          margin: 0.25rem 0 0;
-        }
-      }
+  //       .common-name {
+  //         color: $gray-600;
+  //         margin: 0.25rem 0 0;
+  //       }
+  //     }
 
-      .plant-family {
-        font-size: 0.875rem;
-        color: $gray-500;
-      }
-    }
+  //     .plant-family {
+  //       font-size: 0.875rem;
+  //       color: $gray-500;
+  //     }
+  //   }
 
-    .plant-description {
-      margin: 0.5rem 0;
+  //   .plant-description {
+  //     margin: 0.5rem 0;
 
-      p {
-        font-size: 0.875rem;
-        color: $gray-700;
-        margin: 0;
-      }
-    }
+  //     p {
+  //       font-size: 0.875rem;
+  //       color: $gray-700;
+  //       margin: 0;
+  //     }
+  //   }
 
-    .plant-indicators {
-      margin-top: 0.75rem;
+  //   .plant-indicators {
+  //     margin-top: 0.75rem;
 
-      .indicators-header {
-        font-size: 0.75rem;
-        color: $gray-500;
-        margin-bottom: 0.25rem;
-      }
+  //     .indicators-header {
+  //       font-size: 0.75rem;
+  //       color: $gray-500;
+  //       margin-bottom: 0.25rem;
+  //     }
 
-      .indicators-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+  //     .indicators-list {
+  //       display: flex;
+  //       flex-wrap: wrap;
+  //       gap: 0.5rem;
 
-        .indicator-badge {
-          display: inline-block;
-          padding: 0.25rem 0.5rem;
-          background-color: $primary-light;
-          color: $primary-dark;
-          border-radius: 9999px;
-          font-size: 0.75rem;
-          font-weight: 500;
-        }
-      }
-    }
+  //       .indicator-badge {
+  //         display: inline-block;
+  //         padding: 0.25rem 0.5rem;
+  //         background-color: $primary-light;
+  //         color: $primary-dark;
+  //         border-radius: 9999px;
+  //         font-size: 0.75rem;
+  //         font-weight: 500;
+  //       }
+  //     }
+  //   }
 
-    .plant-keywords {
-      margin-top: 0.5rem;
+  //   .plant-keywords {
+  //     margin-top: 0.5rem;
 
-      .keywords-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.25rem;
+  //     .keywords-list {
+  //       display: flex;
+  //       flex-wrap: wrap;
+  //       gap: 0.25rem;
 
-        .keyword {
-          font-size: 0.75rem;
-          color: $gray-500;
-        }
-      }
-    }
-  }
+  //       .keyword {
+  //         font-size: 0.75rem;
+  //         color: $gray-500;
+  //       }
+  //     }
+  //   }
+  // }
 
   .no-results {
     margin-top: 1.5rem;

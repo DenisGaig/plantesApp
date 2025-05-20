@@ -1,4 +1,4 @@
-import { Info, Sprout } from "lucide-react";
+import { Flower, Grape, Info, Leaf, Sprout, TreePalm } from "lucide-react";
 import CollapsibleCard from "../shared/CollapsibleCard.jsx";
 
 const PlantDetails = ({ plant }) => {
@@ -12,14 +12,13 @@ const PlantDetails = ({ plant }) => {
         defaultOpen={true}
       >
         <div className="plant-identity">
+          <p>{plant.description.generalDescription || "Non spécifié"}</p>
           <p>
             <strong>Famille:</strong> {plant.family[0] || "Non spécifiée"}
           </p>
           <p>
             <strong>Taille:</strong>{" "}
-            {plant.description.size.lenght > 0
-              ? plant.description.size
-              : "Non spécifiée"}
+            {plant.description.size ? plant.description.size : "Non spécifiée"}
           </p>
           {/* <p><strong>Type:</strong> {plant.type || "Non spécifié"}</p> */}
         </div>
@@ -31,26 +30,36 @@ const PlantDetails = ({ plant }) => {
         defaultOpen={false}
       >
         {/* <div className="plant-details__content"> */}
-        {plant.description.generalDescription && (
+        {/* {plant.description.generalDescription && (
           <div className="plant-details__content__description">
             <p>{plant.description.generalDescription}</p>
+          </div>
+        )} */}
+        {plant.description.stem && (
+          <div className="plant-details__content__description">
+            <TreePalm size={20} />
+            <strong>Tige: </strong>
+            <p>{plant.description.stem}</p>
           </div>
         )}
         {plant.description.leaf && (
           <div className="plant-details__content__description">
-            <strong>🌿 Feuilles</strong>
+            <Leaf size={20} />
+            <strong>Feuilles: </strong>
             <p>{plant.description.leaf}</p>
           </div>
         )}
         {plant.description.flower && (
           <div className="plant-details__content__description">
-            <strong>🌺 Fleur</strong>
+            <Flower size={20} />
+            <strong>Fleur: </strong>
             <p>{plant.description.flower}</p>
           </div>
         )}
         {plant.description.fruit && (
           <div className="plant-details__content__description">
-            <strong>🍇 Fruit</strong>
+            <Grape size={20} />
+            <strong>Fruit: </strong>
             <p>{plant.description.fruit}</p>
           </div>
         )}

@@ -2,6 +2,7 @@ import { Search, X } from "lucide-react";
 import { useEffect, useRef } from "react";
 import plantesData from "../../../data/fiches_plantes.json";
 import useGlobalSearch from "../../../hooks/useGlobalSearch";
+import PlantCard from "./PlantCard.jsx";
 
 const GlobalSearchBar = () => {
   const searchInputRef = useRef(null);
@@ -162,81 +163,85 @@ const GlobalSearchBar = () => {
           <h2 className="results-header">Résultats ({searchResults.length})</h2>
           <div className="results-list">
             {searchResults.map((plant) => (
-              <div key={plant.id} className="plant-card">
-                <div className="plant-card-header">
-                  <div className="plant-name-container">
-                    <h3
-                      className="scientific-name"
-                      dangerouslySetInnerHTML={{
-                        __html: highlightText(
-                          plant.scientificName?.[0],
-                          searchTerm
-                        ),
-                      }}
-                    />
-                    <p
-                      className="common-name"
-                      dangerouslySetInnerHTML={{
-                        __html: highlightText(
-                          plant.commonName?.[0],
-                          searchTerm
-                        ),
-                      }}
-                    />
-                  </div>
-                  <div className="plant-family">
-                    Famille:{" "}
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: highlightText(plant.family?.[0], searchTerm),
-                      }}
-                    />
-                  </div>
+              // <div key={plant.id} className="plant-card">
+              //   <div className="plant-card-header">
+              //     <div className="plant-name-container">
+              //       <h3
+              //         className="scientific-name"
+              //         dangerouslySetInnerHTML={{
+              //           __html: highlightText(
+              //             plant.scientificName?.[0],
+              //             searchTerm
+              //           ),
+              //         }}
+              //       />
+              //       <p
+              //         className="common-name"
+              //         dangerouslySetInnerHTML={{
+              //           __html: highlightText(
+              //             plant.commonName?.[0],
+              //             searchTerm
+              //           ),
+              //         }}
+              //       />
+              //     </div>
+              //     <div className="plant-family">
+              //       Famille:{" "}
+              //       <span
+              //         dangerouslySetInnerHTML={{
+              //           __html: highlightText(plant.family?.[0], searchTerm),
+              //         }}
+              //       />
+              //     </div>
 
-                  <div className="plant-description">
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: highlightText(
-                          plant.description.generalDescription?.[0],
-                          searchTerm
-                        ),
-                      }}
-                    />
-                  </div>
-                </div>
+              //     <div className="plant-description">
+              //       <p
+              //         dangerouslySetInnerHTML={{
+              //           __html: highlightText(
+              //             plant.description.generalDescription?.[0],
+              //             searchTerm
+              //           ),
+              //         }}
+              //       />
+              //     </div>
+              //   </div>
 
-                {/* <div className="plant-indicators">
-                  <div className="indicators-header">Bio-indications:</div>
-                  <div className="indicators-list">
-                    {plant.indicators.map((indicator, i) => (
-                      <span
-                        key={i}
-                        className="indicator-badge"
-                        dangerouslySetInnerHTML={{
-                          __html: highlightText(indicator, searchTerm),
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
+              //   {/* <div className="plant-indicators">
+              //     <div className="indicators-header">Bio-indications:</div>
+              //     <div className="indicators-list">
+              //       {plant.indicators.map((indicator, i) => (
+              //         <span
+              //           key={i}
+              //           className="indicator-badge"
+              //           dangerouslySetInnerHTML={{
+              //             __html: highlightText(indicator, searchTerm),
+              //           }}
+              //         />
+              //       ))}
+              //     </div>
+              //   </div>
 
-                <div className="plant-keywords">
-                  <div className="keywords-list">
-                    {plant.keywords.map((keyword, i) => (
-                      <span
-                        key={i}
-                        className="keyword"
-                        dangerouslySetInnerHTML={{
-                          __html: `${i > 0 ? "• " : ""}${highlightText(
-                            keyword,
-                            searchTerm
-                          )}`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div> */}
-              </div>
+              //   <div className="plant-keywords">
+              //     <div className="keywords-list">
+              //       {plant.keywords.map((keyword, i) => (
+              //         <span
+              //           key={i}
+              //           className="keyword"
+              //           dangerouslySetInnerHTML={{
+              //             __html: `${i > 0 ? "• " : ""}${highlightText(
+              //               keyword,
+              //               searchTerm
+              //             )}`,
+              //           }}
+              //         />
+              //       ))}
+              //     </div>
+              //   </div> */}
+              // </div>
+
+              // console.log("Search term: ", searchTerm);
+              // console.log("Highlighted text: ", highlightText("test", "te"));
+              <PlantCard key={plant.id} plant={plant} />
             ))}
           </div>
         </div>
