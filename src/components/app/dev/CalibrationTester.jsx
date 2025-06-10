@@ -3,40 +3,75 @@ import soilDiagnosticData from "../../../data/soilDiagnosticData.js";
 import usePlantImpact from "../../../hooks/usePlantImpact";
 import useSoilAnalysis from "../../../hooks/useSoilAnalysis";
 // import "./CalibrationTester.scss"; // Import du fichier SCSS
+import {
+  average,
+  calculatePercentiles,
+  standardDeviation,
+} from "../../../utils.ts";
 
 const CalibrationTester = () => {
   // État pour les contextes et ensembles de test
+  const [mode, setMode] = useState("contexte"); // 'contexte' ou 'biotope'
   const [selectedContext, setSelectedContext] = useState("maraichageBio");
   const [selectedBiotope, setSelectedBiotope] = useState(null);
   const [selectedTestSet, setSelectedTestSet] = useState(null);
   const [availableBiotopes, setAvailableBiotopes] = useState([]);
-  const [testSets, setTestSets] = useState({});
+  // const [testSets, setTestSets] = useState({});
   const [thresholdProposals, setThresholdProposals] = useState({});
   const [isCalibrating, setIsCalibrating] = useState(false);
   const [calibrationResults, setCalibrationResults] = useState(null);
+
+  // États supplémentaires
+  const [calibrationStats, setCalibrationStats] = useState(null);
+  const [calibrationProgress, setCalibrationProgress] = useState(0);
+  const [numberOfTests, setNumberOfTests] = useState(10);
 
   const [selectedBiotopeForStats, setSelectedBiotopeForStats] = useState(null);
 
   // Import des hooks
   const plantImpact = usePlantImpact();
+  // const soilAnalysis = useSoilAnalysis(
+  //   selectedTestSet?.plants || [],
+  //   selectedTestSet?.plants
+  //     ? Object.fromEntries(selectedTestSet.plants.map((p) => [p.id, p.density]))
+  //     : {},
+  //   Object.keys(soilDiagnosticData.indicators),
+  //   selectedContext,
+  //   true
+  // );
   const soilAnalysis = useSoilAnalysis(
-    selectedTestSet?.plants || [],
-    selectedTestSet?.plants
-      ? Object.fromEntries(selectedTestSet.plants.map((p) => [p.id, p.density]))
-      : {},
+    [],
+    {},
     Object.keys(soilDiagnosticData.indicators),
-    selectedContext
+    selectedContext,
+    true
   );
 
   // Constantes pour les contextes agricoles
   const contexts = [
     { id: "maraichageBio", name: "Maraîchage Biologique" },
-    { id: "grandes_cultures", name: "Grandes Cultures" },
+    { id: "jardinage", name: "Jardins" },
+    { id: "grandesCultures", name: "Grandes Cultures" },
+    { id: "prairiesAgricoles", name: "Prairies Permanentes" },
     { id: "viticulture", name: "Viticulture" },
     { id: "arboriculture", name: "Arboriculture" },
-    { id: "prairies", name: "Prairies Permanentes" },
+    { id: "agroforesterie", name: "Agroforesterie" },
+    { id: "permaculture", name: "Permaculture" },
   ];
 
+  // Contextes agricoles considérés
+  const agricultureContexts = [
+    { id: "maraichageBio", biotopes: ["maraîchages"] },
+    { id: "jardinage", biotopes: ["jardins"] },
+    { id: "grandesCultures", biotopes: ["cultures"] },
+    { id: "prairiesAgricoles", biotopes: ["prairies"] },
+    { id: "viticulture", biotopes: ["vignes"] },
+    { id: "arboriculture", biotopes: ["vergers"] },
+    { id: "agroforesterie", biotopes: ["haies", "cultures", "prairies"] },
+    { id: "permaculture", biotopes: ["jardins", "maraîchages", "vergers"] },
+  ];
+
+  // Constantes pour les contextes agricoles
   const MIN_PLANTS_PER_BIOTOPE = 10;
 
   // Critères de fertilité du sol
@@ -50,216 +85,480 @@ const CalibrationTester = () => {
 
   // Initialisation des données d'impact des plantes
   useEffect(() => {
-    const fetchData = async () => {
-      const calibrationData = await plantImpact.analyzeAllPlants();
+    const fetchData = () => {
+      const calibrationData = plantImpact.analyzeAllPlants();
+
       if (calibrationData) {
-        setAvailableBiotopes(Object.keys(calibrationData));
-        if (Object.keys(calibrationData).length > 0) {
-          setSelectedBiotope(Object.keys(calibrationData)[0]);
+        // Filtrer pour ne garder que les biotopes
+        const biotopes = Object.keys(calibrationData).filter(
+          (key) => !contexts.some((context) => context.id === key)
+        );
+        setAvailableBiotopes(biotopes);
+
+        if (biotopes.length > 0) {
+          setSelectedBiotope(biotopes[0]);
         }
+
+        console.log("Nouvelle calibration :", calibrationData);
       }
     };
 
     fetchData();
   }, []);
 
-  // Mise à jour des ensembles de test lorsque le biotope change
-  useEffect(() => {
-    if (
-      selectedBiotope &&
-      plantImpact.calibrationSets &&
-      plantImpact.calibrationSets[selectedBiotope]
-    ) {
-      const biotopeData = plantImpact.calibrationSets[selectedBiotope];
+  // ------ Partie: Génération des tests pour calibration ------
 
-      // Format pour l'interface utilisateur
-      const formattedSets = {
-        equilibrated: biotopeData.equilibrated,
-        imbalances: Object.values(biotopeData.imbalances),
-      };
+  // 1. Génère un ensemble de test aléatoire équilibré
+  const getRandomTestSet = (calibrationSets, context, biotope) => {
+    const { equilibrated, imbalances } =
+      calibrationSets[mode === "contexte" ? context : biotope] || {};
 
-      setTestSets(formattedSets);
+    if (!equilibrated) {
+      console.log("Aucun ensemble équilibré trouvé pour ce " + mode);
+      return null;
+    }
 
-      // Sélectionner le premier ensemble par défaut
-      if (formattedSets.equilibrated && !selectedTestSet) {
-        setSelectedTestSet(formattedSets.equilibrated);
+    // Fonction pour mélanger un tableau
+    const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
+
+    // Sélection aléatoire de 7 plantes équilibrées et 4 plantes déséquilibrées (2 excès et 2 déficits)
+
+    const selectedEquilibratedPlants = shuffleArray(equilibrated.plants).slice(
+      0,
+      7
+    );
+
+    // Initialiser les tableaux pour les plantes en excès et en déficit
+    const excessPlants = [];
+    const deficitPlants = [];
+
+    // Parcourir les imbalances pour séparer les plantes en excès et en déficit
+    Object.values(imbalances).forEach((imbalance) => {
+      if (imbalance.name.includes("Déficit")) {
+        deficitPlants.push(...imbalance.plants);
+      } else if (imbalance.name.includes("Excès")) {
+        excessPlants.push(...imbalance.plants);
       }
-    }
-  }, [selectedBiotope, plantImpact.calibrationSets]);
-
-  // Déclenchement de l'analyse du sol lorsqu'un ensemble de test est sélectionné
-  useEffect(() => {
-    if (selectedTestSet?.plants?.length > 0) {
-      // Réinitialiser l'analyse
-      soilAnalysis.resetAnalysis();
-      // Démarrer une nouvelle analyse
-      setTimeout(() => {
-        soilAnalysis.generateAnalysisResults();
-      }, 100);
-    }
-  }, [selectedTestSet, selectedContext]);
-
-  // Déclencher la calibration
-  const startCalibration = () => {
-    setIsCalibrating(true);
-
-    // Structure pour stocker les résultats des tests par contexte
-    const results = {};
-
-    // Pour chaque contexte
-    contexts.forEach((context) => {
-      results[context.id] = {
-        equilibratedResults: {},
-        imbalanceResults: {},
-      };
     });
 
-    // Délai pour permettre l'affichage de l'état de chargement
-    setTimeout(() => {
-      calibratePlagesAndThresholds();
-    }, 100);
+    // Sélection aléatoire de 2 plantes en excès et 2 en déficit
+    const selectedExcessPlants = shuffleArray(excessPlants).slice(0, 2);
+    const selectedDeficitPlants = shuffleArray(deficitPlants).slice(0, 2);
+
+    // Combiner les plantes sélectionnées
+    const selectedPlants = [
+      ...selectedEquilibratedPlants,
+      ...selectedExcessPlants,
+      ...selectedDeficitPlants,
+    ];
+
+    // Construction synchronisée des densités
+    const densities = selectedPlants.reduce(
+      (acc, plant) => ({
+        ...acc,
+        [plant.id]: plant.density, // Garantit que chaque plante a sa densité correspondante
+      }),
+      {}
+    );
+
+    console.log("Start generating random test set ...");
+    console.log("Selected plants:", selectedPlants);
+    console.log("Densities:", densities);
+    console.log("End generating random test set ...");
+
+    return {
+      name: `Test_${Date.now()}`,
+      plants: selectedPlants,
+      densities,
+    };
   };
 
-  // Fonction principale de calibration
-  const calibratePlagesAndThresholds = () => {
+  // 2. Exécute un test unique
+  const runSingleTest = async (testSet) => {
+    // setCurrentTestSet(testSet);
+    const startTime = performance.now();
+
+    console.log(
+      "Start running single test ...",
+      Object.fromEntries(testSet.plants.map((p) => [p.id, p.coefficient]))
+    );
+
+    const compositesResults = await soilAnalysis.generateAnalysisResults(
+      testSet.plants,
+      Object.fromEntries(testSet.plants.map((p) => [p.id, p.coefficient]))
+    );
+    const duration = (performance.now() - startTime).toFixed(2);
+
+    console.log("Résultats du single test:", compositesResults);
+
+    return {
+      ...testSet,
+      results: compositesResults,
+      duration: `${duration}ms`,
+      timestamp: new Date().toISOString(),
+    };
+  };
+
+  // 3. Exécute une série de tests
+  const runMultipleTests = async (
+    context,
+    biotope,
+    calibrationSets,
+    numberOfTests = 10
+  ) => {
+    const allTestResults = [];
+    for (let i = 0; i < numberOfTests; i++) {
+      console.log(`Exécution du test ${i + 1}/${numberOfTests}`);
+
+      const testSet = getRandomTestSet(calibrationSets, context, biotope);
+      if (!testSet) {
+        console.error("Hook - Failed to generate test", i + 1);
+        continue;
+      }
+
+      const result = await runSingleTest(testSet);
+      allTestResults.push(result);
+      // setTestSeries((prev) => [...prev, result]);
+    }
+    return allTestResults;
+  };
+
+  // 4. Calcule les statistiques
+  const calculateStatistics = (results) => {
+    console.log("Calcul des statistiques pour:", results);
+
+    return FERTILITY_CRITERIA.reduce((acc, criterion) => {
+      const values = results.map((r) => r.results[criterion]).filter(Boolean);
+      if (values.length === 0) return acc;
+
+      // Calcul des percentiles d'abord
+      const percentiles = calculatePercentiles(values, [10, 20, 50, 80, 90]);
+      const stdDev = standardDeviation(values);
+      const minValue = Math.min(...values);
+      const maxValue = Math.max(...values);
+      const meanValue = average(values);
+
+      const medianValue = percentiles.p50;
+
+      // Diviser les valeurs en deux groupes : Déficit et Excès
+      const deficitValues = values.filter((v) => v <= medianValue);
+      const excessValues = values.filter((v) => v >= medianValue);
+      const stdDevDeficit = standardDeviation(deficitValues);
+      const stdDevExcess = standardDeviation(excessValues);
+
+      acc[criterion] = {
+        mean: meanValue,
+        stdDev: stdDev,
+        min: minValue,
+        max: maxValue,
+        percentiles: percentiles,
+        sampleSize: values.length,
+        // Proposition de plages optimales basées sur les percentiles
+        suggestedOptimalRange: {
+          min: Number(percentiles.p10.toFixed(2)),
+          max: Number(percentiles.p90.toFixed(2)),
+        },
+        // Proposition de seuils d'écart basés sur l'écart-type
+        suggestedThresholds: {
+          deficit: {
+            leger: Number((stdDevDeficit * 0.5).toFixed(2)),
+            modere: Number((stdDevDeficit * 1.0).toFixed(2)),
+            important: Number((stdDevDeficit * 1.5).toFixed(2)),
+          },
+          exces: {
+            leger: Number((stdDevExcess * 0.5).toFixed(2)),
+            modere: Number((stdDevExcess * 1.0).toFixed(2)),
+            important: Number((stdDevExcess * 1.5).toFixed(2)),
+          },
+        },
+      };
+      return acc;
+    }, {});
+  };
+
+  // 5. Déclencher la calibration
+  const startCalibration = async () => {
+    console.log(
+      "CalibrationTester - Starting calibration for " + mode + " ",
+      mode === "contexte" ? selectedContext : selectedBiotope
+    );
+
+    if (!selectedContext || !selectedBiotope) {
+      alert(
+        `Veuillez sélectionner un ${
+          mode === "contexte" ? "contexte agricole" : "biotope"
+        } avant de lancer la calibration.`
+      );
+      return;
+    }
+
+    // Vérifier que les ensembles de calibration sont disponibles
+    if (
+      !plantImpact.calibrationSets ||
+      !plantImpact.calibrationSets[selectedContext]
+    ) {
+      alert(
+        `Aucun ensemble de calibration disponible pour ce ${
+          mode === "contexte" ? "contexte agricole" : "biotope"
+        }. Veuillez d'abord générer les groupes de référence.`
+      );
+      return;
+    }
+
     try {
-      // Résultats pour les plages de tous les contextes
-      const allContextRanges = {};
-      const criteriaThresholds = {};
+      setIsCalibrating(true);
+      setCalibrationProgress(0);
+      setCalibrationResults(null);
+      setCalibrationStats(null);
 
-      // Pour chaque critère de fertilité
-      Object.keys(soilDiagnosticData.formules).forEach((criterion) => {
-        criteriaThresholds[criterion] = {
-          deficit: { leger: 0, modere: 0 },
-          exces: { leger: 0, modere: 0 },
-        };
+      console.log(
+        "CalibrationTester - Launching",
+        numberOfTests,
+        "tests for context or biotope:",
+        mode === "contexte" ? selectedContext : selectedBiotope
+      );
 
-        // Pour chaque contexte agricole
-        contexts.forEach((context) => {
-          if (!allContextRanges[context.id]) {
-            allContextRanges[context.id] = {};
-          }
+      // Lancer les tests multiples
+      const testResults = await runMultipleTests(
+        selectedContext,
+        selectedBiotope,
+        plantImpact.calibrationSets,
+        numberOfTests
+      );
+      console.log("CalibrationTester - Tests terminés", testResults);
 
-          // Tests pour les ensembles équilibrés
-          let equilibriumValues = [];
+      const statistics = calculateStatistics(testResults);
 
-          // Tests pour les ensembles de déséquilibre (excès et déficit)
-          let excessValues = [];
-          let deficitValues = [];
+      if (!statistics) {
+        throw new Error("Impossible de calculer les statistiques");
+      }
 
-          // Simuler l'analyse pour chaque ensemble de test
-          // Note: Dans une implémentation réelle, ces valeurs proviendraient de tests multiples
-          // Ici nous utilisons des approximations basées sur l'ensemble sélectionné et le contexte
+      console.log("CalibrationTester - Statistiques calculées:", statistics);
 
-          // Pour l'équilibre: basé sur les plantes équilibrantes
-          const baseValue = Math.random() * 0.2 + 0.4; // Entre 0.4 et 0.6 comme base
-          const contextModifier = {
-            maraichageBio: 1.0,
-            grandes_cultures: 0.9,
-            viticulture: 1.1,
-            arboriculture: 1.05,
-            prairies: 0.95,
-          };
+      setCalibrationProgress(90);
+      setCalibrationStats(statistics);
 
-          // Simuler des valeurs d'équilibre avec une certaine variation
-          for (let i = 0; i < 5; i++) {
-            const variation = Math.random() * 0.3 - 0.15; // Variation de ±0.15
-            equilibriumValues.push(
-              baseValue * contextModifier[context.id] + variation
-            );
-          }
+      setCalibrationResults(testResults);
+      // setCalibrationResults({context: selectedContext,
+      // statistics: statistics,
+      // testSets: tests,
+      // generatedAt: new Date().toISOString(),});
+      setCalibrationProgress(100);
 
-          // Simuler des valeurs d'excès avec une variation plus grande
-          for (let i = 0; i < 3; i++) {
-            const excessBase = baseValue * 1.8; // Valeur d'excès ~80% au-dessus de la base
-            const variation = Math.random() * 0.5; // Variation positive uniquement
-            excessValues.push(excessBase + variation);
-          }
+      const proposals = generateThresholdProposals(statistics);
+      setThresholdProposals(proposals);
 
-          // Simuler des valeurs de déficit
-          for (let i = 0; i < 3; i++) {
-            const deficitBase = baseValue * 0.3; // Valeur de déficit ~70% en dessous de la base
-            const variation = Math.random() * 0.2; // Variation positive uniquement
-            deficitValues.push(deficitBase + variation);
-          }
-
-          // Calculer les moyennes pour définir les plages
-          const avgEquilibrium =
-            equilibriumValues.reduce((sum, val) => sum + val, 0) /
-            equilibriumValues.length;
-          const stdDevEquilibrium = Math.sqrt(
-            equilibriumValues.reduce(
-              (sum, val) => sum + Math.pow(val - avgEquilibrium, 2),
-              0
-            ) / equilibriumValues.length
-          );
-
-          // Définir les plages min/max pour ce critère et ce contexte
-          allContextRanges[context.id][criterion] = {
-            min: Math.max(0, avgEquilibrium - stdDevEquilibrium),
-            max: avgEquilibrium + stdDevEquilibrium,
-            optimal: avgEquilibrium,
-            description: `Plage optimale pour ${criterion} en ${context.id}`,
-          };
-
-          // Calculer les seuils de déficit et d'excès
-          // Note: Nous accumulons ces valeurs pour calculer une moyenne globale ensuite
-          const avgDeficit =
-            deficitValues.reduce((sum, val) => sum + val, 0) /
-            deficitValues.length;
-          const distanceToMinimum =
-            allContextRanges[context.id][criterion].min - avgDeficit;
-
-          criteriaThresholds[criterion].deficit.leger +=
-            distanceToMinimum * 0.3;
-          criteriaThresholds[criterion].deficit.modere +=
-            distanceToMinimum * 0.6;
-
-          const avgExcess =
-            excessValues.reduce((sum, val) => sum + val, 0) /
-            excessValues.length;
-          const distanceToMaximum =
-            avgExcess - allContextRanges[context.id][criterion].max;
-
-          criteriaThresholds[criterion].exces.leger += distanceToMaximum * 0.3;
-          criteriaThresholds[criterion].exces.modere += distanceToMaximum * 0.6;
-        });
-
-        // Calculer les moyennes des seuils sur tous les contextes
-        criteriaThresholds[criterion].deficit.leger /= contexts.length;
-        criteriaThresholds[criterion].deficit.modere /= contexts.length;
-        criteriaThresholds[criterion].exces.leger /= contexts.length;
-        criteriaThresholds[criterion].exces.modere /= contexts.length;
-      });
-
-      // Mettre à jour l'état avec les résultats de calibration
-      setCalibrationResults({
-        contextRanges: allContextRanges,
-        thresholds: criteriaThresholds,
-      });
-
-      // Générer les propositions de modification pour soilDiagnosticData.js
-      generateThresholdProposals(allContextRanges, criteriaThresholds);
-    } catch (error) {
-      console.error("Erreur lors de la calibration:", error);
+      console.log("CalibrationTester - Calibration terminée avec succès");
     } finally {
       setIsCalibrating(false);
+      setTimeout(() => {
+        setCalibrationProgress(0);
+      }, 2000);
     }
   };
 
-  // Générer les propositions de modification pour le fichier soilDiagnosticData.js
-  const generateThresholdProposals = (contextRanges, thresholds) => {
-    // Format pour le code JavaScript à insérer dans soilDiagnosticData.js
-    const plagesOptimalesCode = `// Plages optimales par contexte agricole
-export const plagesOptimales = ${JSON.stringify(contextRanges, null, 2)};`;
+  // 6. Générer les propositions de seuils
+  const generateThresholdProposals = (statistics, context, biotope) => {
+    console.log(
+      "CalibrationTester - Génération des propositions de seuils pour le" + mode
+    );
 
-    const seuilsEcartsCode = `// Seuils pour les écarts (déficit et excès)
-export const seuilsEcarts = ${JSON.stringify(thresholds, null, 2)};`;
+    const proposals = {
+      context: mode === "biotope" ? biotope : context,
+      generatedAt: new Date().toISOString(),
+      numberOfTests: numberOfTests,
+      criteria: {},
+    };
 
-    setThresholdProposals({
-      plagesOptimalesCode,
-      seuilsEcartsCode,
+    // Pour chaque critère, générer des propositions de seuils
+    FERTILITY_CRITERIA.forEach((criterion) => {
+      const stats = statistics[criterion];
+      if (!stats) return;
+
+      proposals.criteria[criterion] = {
+        currentRange: soilDiagnosticData.plagesOptimales[context]?.[
+          criterion
+        ] || { min: 0, max: 10 },
+        statistics: stats,
+        proposedRange: {
+          min: stats.suggestedOptimalRange.min,
+          max: stats.suggestedOptimalRange.max,
+          description: `Plage optimale basée sur les percentiles 10-90 (${numberOfTests} tests)`,
+        },
+        proposedThresholds: {
+          deficit: stats.suggestedThresholds.deficit,
+          exces: stats.suggestedThresholds.exces,
+        },
+        // Comparaison avec les valeurs actuelles
+        comparison: {
+          rangeShift: {
+            min:
+              stats.suggestedOptimalRange.min -
+              (soilDiagnosticData.plagesOptimales[context]?.[criterion]?.min ||
+                0),
+            max:
+              stats.suggestedOptimalRange.max -
+              (soilDiagnosticData.plagesOptimales[context]?.[criterion]?.max ||
+                10),
+          },
+        },
+      };
     });
+    return proposals;
+  };
+
+  // -------- Configuration et affichage des résultats --------
+  /**
+   * Fonction pour configurer le nombre de tests
+   */
+  const renderTestConfiguration = () => {
+    return (
+      <div className="calibration-tester__test-config">
+        <h3>Configuration des tests</h3>
+        <div className="calibration-tester__test-config-item">
+          <label htmlFor="numberOfTests">Nombre de tests:</label>
+          <select
+            id="numberOfTests"
+            value={numberOfTests}
+            onChange={(e) => setNumberOfTests(parseInt(e.target.value))}
+            disabled={isCalibrating}
+          >
+            <option value={5}>5 tests (rapide)</option>
+            <option value={10}>10 tests (recommandé)</option>
+            <option value={20}>20 tests (précis)</option>
+            <option value={50}>50 tests (très précis)</option>
+          </select>
+        </div>
+        {calibrationProgress > 0 && calibrationProgress < 100 && (
+          <div
+            className="calibration-tester__progress"
+            data-stage={
+              calibrationProgress < 20
+                ? "generating"
+                : calibrationProgress < 80
+                ? "analyzing"
+                : "calculating"
+            }
+          >
+            <div className="calibration-tester__progress-bar">
+              <div
+                className="calibration-tester__progress-fill"
+                style={{ width: `${calibrationProgress}%` }}
+              ></div>
+            </div>
+            <span className="calibration-tester__progress-text">
+              {calibrationProgress}% -{" "}
+              {calibrationProgress < 20
+                ? "Génération des tests..."
+                : calibrationProgress < 80
+                ? "Analyse en cours..."
+                : "Calcul des statistiques..."}
+            </span>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  /**
+   * Fonction pour afficher les résultats de calibration
+   */
+  const renderCalibrationStatistics = () => {
+    if (!calibrationStats) return null;
+
+    return (
+      <div className="calibration-tester__statistics">
+        <h2>Résultats de calibration</h2>
+        <div className="calibration-tester__statistics-summary">
+          <p>
+            <strong>{mode === "contexte" ? "Contexte:" : "Biotope:"}</strong>{" "}
+            {mode === "contexte"
+              ? contexts.find((c) => c.id === selectedContext)?.name
+              : selectedBiotope}
+          </p>
+          <p>
+            <strong>Nombre de tests:</strong> {numberOfTests}
+          </p>
+          <p>
+            <strong>Date:</strong> {new Date().toLocaleDateString("fr-FR")}
+          </p>
+        </div>
+
+        <div className="calibration-tester__criteria-stats">
+          {FERTILITY_CRITERIA.map((criterion) => {
+            const stats = calibrationStats[criterion];
+            if (!stats) return null;
+
+            return (
+              <div
+                key={criterion}
+                className="calibration-tester__criterion-stats"
+              >
+                <h3>{getCriterionDisplayName(criterion)}</h3>
+                <div className="calibration-tester__stats-grid">
+                  <div className="calibration-tester__stats-basic">
+                    <h4>Statistiques descriptives</h4>
+                    <p>
+                      <strong>Moyenne:</strong> {stats.mean.toFixed(2)}
+                    </p>
+                    <p>
+                      <strong>Écart-type:</strong> {stats.stdDev.toFixed(2)}
+                    </p>
+                    <p>
+                      <strong>Min - Max:</strong> {stats.min.toFixed(2)} -{" "}
+                      {stats.max.toFixed(2)}
+                    </p>
+                  </div>
+                  <div className="calibration-tester__stats-percentiles">
+                    <h4>Percentiles</h4>
+                    <p>
+                      <strong>P10:</strong> {stats.percentiles.p10.toFixed(2)}
+                    </p>
+                    <p>
+                      <strong>P50 (médiane):</strong>{" "}
+                      {stats.percentiles.p50.toFixed(2)}
+                    </p>
+                    <p>
+                      <strong>P90:</strong> {stats.percentiles.p90.toFixed(2)}
+                    </p>
+                  </div>
+                  <div className="calibration-tester__stats-proposals">
+                    <h4>Propositions</h4>
+                    <p>
+                      <strong>Plage optimale:</strong>{" "}
+                      {stats.suggestedOptimalRange.min} -{" "}
+                      {stats.suggestedOptimalRange.max}
+                    </p>
+                    <p>
+                      <strong>Seuil déficit modéré:</strong>{" "}
+                      {stats.suggestedThresholds.deficit.modere}
+                    </p>
+                    <p>
+                      <strong>Seuil excès modéré:</strong>{" "}
+                      {stats.suggestedThresholds.exces.modere}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  /**
+   * Fonction utilitaire pour obtenir le nom d'affichage d'un critère
+   */
+  const getCriterionDisplayName = (criterion) => {
+    const names = {
+      vieMicrobienne: "Vie Microbienne Aérobie",
+      complexeArgiloHumique: "Complexe Argilo-Humique",
+      matiereOrganique: "Matière Organique",
+      equilibreCN: "Équilibre C/N",
+      structurePorosite: "Structure et Porosité",
+    };
+    return names[criterion] || criterion;
   };
 
   // Exporter les résultats de calibration
@@ -277,38 +576,22 @@ export const seuilsEcarts = ${JSON.stringify(thresholds, null, 2)};`;
     linkElement.click();
   };
 
-  // Visualiser les résultats d'analyse du sol pour l'ensemble de test courant
-  const renderSoilAnalysisResults = () => {
-    if (!soilAnalysis.results) return null;
-
+  // Affichage du contexte agricole
+  const renderContextSelector = () => {
     return (
-      <div className="analysis-results">
-        <h3 className="analysis-results__title">
-          Résultats de l'analyse pour l'ensemble de test actuel
-        </h3>
-
-        <table className="analysis-results__table">
-          <thead>
-            <tr>
-              <th className="analysis-results__header">Critère</th>
-              <th className="analysis-results__header">Valeur</th>
-              <th className="analysis-results__header">Interprétation</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.keys(soilAnalysis.results.indicators).map((criterion) => (
-              <tr key={criterion} className="analysis-results__row">
-                <td className="analysis-results__cell">{criterion}</td>
-                <td className="analysis-results__cell">
-                  {soilAnalysis.results.indicators[criterion].value.toFixed(2)}
-                </td>
-                <td className="analysis-results__cell">
-                  {soilAnalysis.results.indicators[criterion].interpretation}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="context-selector">
+        <label className="context-selector__label">Contexte agricole:</label>
+        <select
+          className="context-selector__select"
+          value={selectedContext}
+          onChange={(e) => setSelectedContext(e.target.value)}
+        >
+          {contexts.map((context) => (
+            <option key={context.id} value={context.id}>
+              {context.name}
+            </option>
+          ))}
+        </select>
       </div>
     );
   };
@@ -341,134 +624,37 @@ export const seuilsEcarts = ${JSON.stringify(thresholds, null, 2)};`;
     );
   };
 
-  // Affichage des ensembles de test disponibles pour le biotope sélectionné
-  const renderTestSetsSelector = () => {
-    if (!selectedBiotope || !testSets.equilibrated) {
-      return (
-        <p className="test-sets-selector__loading">
-          Aucun ensemble de test disponible
-        </p>
-      );
-    }
-
-    return (
-      <div className="test-sets-selector">
-        <h3 className="test-sets-selector__title">
-          Ensembles de test disponibles
-        </h3>
-
-        <div className="test-sets-selector__grid">
-          {/* Ensemble équilibré */}
-          <div
-            className={`test-sets-selector__item ${
-              selectedTestSet?.name === testSets.equilibrated.name
-                ? "test-sets-selector__item--selected"
-                : ""
-            }`}
-            onClick={() => setSelectedTestSet(testSets.equilibrated)}
-          >
-            <h4 className="test-sets-selector__item-title">
-              {testSets.equilibrated.name}
-            </h4>
-            <p className="test-sets-selector__item-description">
-              {testSets.equilibrated.description}
-            </p>
-            <p className="test-sets-selector__item-plants">
-              {testSets.equilibrated.plants.length} plantes
-            </p>
-          </div>
-
-          {/* Ensembles de déséquilibre */}
-          {testSets.imbalances &&
-            testSets.imbalances.map((set) => (
-              <div
-                key={set.name}
-                className={`test-sets-selector__item ${
-                  selectedTestSet?.name === set.name
-                    ? "test-sets-selector__item--selected"
-                    : ""
-                }`}
-                onClick={() => setSelectedTestSet(set)}
-              >
-                <h4 className="test-sets-selector__item-title">{set.name}</h4>
-                <p className="test-sets-selector__item-description">
-                  {set.description}
-                </p>
-                <p className="test-sets-selector__item-plants">
-                  {set.plants.length} plantes
-                </p>
-              </div>
-            ))}
-        </div>
-      </div>
-    );
-  };
-
-  // Affichage des détails de l'ensemble de test sélectionné
-  const renderSelectedTestSetDetails = () => {
-    if (!selectedTestSet) return null;
-
-    return (
-      <div className="selected-test-set-details">
-        <h3 className="selected-test-set-details__title">
-          Détails de l'ensemble: {selectedTestSet.name}
-        </h3>
-
-        <table className="selected-test-set-details__table">
-          <thead>
-            <tr>
-              <th className="selected-test-set-details__header">Plante</th>
-              <th className="selected-test-set-details__header">Nom commun</th>
-              <th className="selected-test-set-details__header">Densité</th>
-            </tr>
-          </thead>
-          <tbody>
-            {selectedTestSet.plants.map((plant) => (
-              <tr key={plant.id} className="selected-test-set-details__row">
-                <td className="selected-test-set-details__cell italic">
-                  {Array.isArray(plant.scientificName)
-                    ? plant.scientificName[0]
-                    : plant.scientificName}
-                </td>
-                <td className="selected-test-set-details__cell">
-                  {Array.isArray(plant.commonName)
-                    ? plant.commonName[0]
-                    : plant.commonName}
-                </td>
-                <td className="selected-test-set-details__cell">
-                  {plant.density}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
-
-  // Affichage du contexte agricole
-  const renderContextSelector = () => {
-    return (
-      <div className="context-selector">
-        <label className="context-selector__label">Contexte agricole:</label>
-        <select
-          className="context-selector__select"
-          value={selectedContext}
-          onChange={(e) => setSelectedContext(e.target.value)}
-        >
-          {contexts.map((context) => (
-            <option key={context.id} value={context.id}>
-              {context.name}
-            </option>
-          ))}
-        </select>
-      </div>
-    );
-  };
-
-  // Affichage des résultats de calibration
   const renderCalibrationResults = () => {
     if (!calibrationResults) return null;
+    console.log("Rendering calibration results", calibrationResults);
+    return (
+      <div className="calibration-results">
+        <h3 className="calibration-results__title">Résultats des tests</h3>
+        {calibrationResults.map((result, index) => (
+          <div key={index} className="calibration-results__item">
+            <details key={index}>
+              <summary>{result.name}</summary>
+              <div>
+                {result.plants.map((plant) => (
+                  <li>
+                    {plant.scientificName}
+                    {plant.commonName && ` (${plant.commonName})`}
+                    {plant.density && ` - Densité: ${plant.density}`}
+                  </li>
+                ))}
+              </div>
+            </details>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  // Affichage des résultats de seuils de calibration
+  const renderCalibrationThresholdResults = () => {
+    if (!calibrationResults) return null;
+
+    console.log("Rendering calibration results", calibrationResults);
 
     return (
       <div className="calibration-results">
@@ -480,34 +666,22 @@ export const seuilsEcarts = ${JSON.stringify(thresholds, null, 2)};`;
           {/* Plages optimales */}
           <div className="calibration-results__optimal-ranges">
             <h4 className="calibration-results__optimal-ranges-title">
-              Plages optimales par contexte
+              Plages optimales pour le contexte sélectionné
             </h4>
-
-            {Object.keys(calibrationResults.contextRanges).map((contextId) => (
-              <details
-                key={contextId}
-                className="calibration-results__optimal-ranges-details"
-              >
-                <summary className="calibration-results__optimal-ranges-summary">
-                  {contexts.find((c) => c.id === contextId)?.name || contextId}
-                </summary>
-                <div className="calibration-results__optimal-ranges-content">
-                  {Object.entries(
-                    calibrationResults.contextRanges[contextId]
-                  ).map(([criterion, range]) => (
-                    <div
-                      key={criterion}
-                      className="calibration-results__optimal-ranges-item"
-                    >
-                      <p className="calibration-results__optimal-ranges-criterion">
-                        {criterion}
-                      </p>
-                      <p className="calibration-results__optimal-ranges-values">
-                        Min: {range.min.toFixed(2)} | Optimal:{" "}
-                        {range.optimal.toFixed(2)} | Max: {range.max.toFixed(2)}
-                      </p>
-                    </div>
-                  ))}
+            {Object.keys(thresholdProposals.criteria).map((criterion) => (
+              <details key={criterion}>
+                <summary>{criterion}</summary>
+                <div
+                  key={criterion}
+                  className="calibration-results__optimal-ranges-item"
+                >
+                  <p className="calibration-results__optimal-ranges-criterion">
+                    Plage:{" "}
+                    {thresholdProposals.criteria[criterion].proposedRange.min}
+                    {" : "}
+                    {thresholdProposals.criteria[criterion].proposedRange.max}
+                  </p>
+                  <p className="calibration-results__optimal-ranges-value"></p>
                 </div>
               </details>
             ))}
@@ -518,43 +692,56 @@ export const seuilsEcarts = ${JSON.stringify(thresholds, null, 2)};`;
             <h4 className="calibration-results__thresholds-title">
               Seuils pour les écarts
             </h4>
+            {Object.keys(thresholdProposals.criteria).map((criterion) => (
+              <details key={criterion}>
+                <summary>{criterion}</summary>
 
-            {Object.entries(calibrationResults.thresholds).map(
-              ([criterion, thresholds]) => (
-                <details
-                  key={criterion}
-                  className="calibration-results__thresholds-details"
-                >
-                  <summary className="calibration-results__thresholds-summary">
-                    {criterion}
-                  </summary>
-                  <div className="calibration-results__thresholds-content">
-                    <div className="calibration-results__thresholds-deficit">
-                      <p className="calibration-results__thresholds-deficit-title">
-                        Déficit
-                      </p>
-                      <p className="calibration-results__thresholds-deficit-value">
-                        Léger: {thresholds.deficit.leger.toFixed(2)}
-                      </p>
-                      <p className="calibration-results__thresholds-deficit-value">
-                        Modéré: {thresholds.deficit.modere.toFixed(2)}
-                      </p>
-                    </div>
-                    <div className="calibration-results__thresholds-excess">
-                      <p className="calibration-results__thresholds-excess-title">
-                        Excès
-                      </p>
-                      <p className="calibration-results__thresholds-excess-value">
-                        Léger: {thresholds.exces.leger.toFixed(2)}
-                      </p>
-                      <p className="calibration-results__thresholds-excess-value">
-                        Modéré: {thresholds.exces.modere.toFixed(2)}
-                      </p>
-                    </div>
+                <div className="calibration-results__thresholds-content">
+                  <div className="calibration-results__thresholds-deficit">
+                    <p className="calibration-results__thresholds-deficit-title">
+                      Déficit
+                    </p>
+                    <p className="calibration-results__thresholds-deficit-value">
+                      Léger:{" "}
+                      {thresholdProposals.criteria[
+                        criterion
+                      ].proposedThresholds.deficit.leger.toFixed(2)}
+                      <br />
+                      Modéré:{" "}
+                      {thresholdProposals.criteria[
+                        criterion
+                      ].proposedThresholds.deficit.modere.toFixed(2)}
+                      <br />
+                      Important:{" "}
+                      {thresholdProposals.criteria[
+                        criterion
+                      ].proposedThresholds.deficit.important.toFixed(2)}
+                    </p>
                   </div>
-                </details>
-              )
-            )}
+                  <div className="calibration-results__thresholds-excess">
+                    <p className="calibration-results__thresholds-excess-title">
+                      Excès
+                    </p>
+                    <p className="calibration-results__thresholds-excess-value">
+                      Léger:{" "}
+                      {thresholdProposals.criteria[
+                        criterion
+                      ].proposedThresholds.exces.leger.toFixed(2)}
+                      <br />
+                      Modéré:{" "}
+                      {thresholdProposals.criteria[
+                        criterion
+                      ].proposedThresholds.exces.modere.toFixed(2)}
+                      <br />
+                      Important:{" "}
+                      {thresholdProposals.criteria[
+                        criterion
+                      ].proposedThresholds.exces.important.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+              </details>
+            ))}
           </div>
         </div>
 
@@ -586,7 +773,42 @@ export const seuilsEcarts = ${JSON.stringify(thresholds, null, 2)};`;
     );
   };
 
-  // Affichage des résultats des stats des biotopes
+  // --------------------------------------------------------
+  // ------ Affichage des résultats des stats unitaires des biotopes
+
+  // Rend le sélecteur de biotopes, bridé par un nombre minimum de plantes, à partir des statistiques des biotopes
+  const renderBiotopeSelector = (biotopeStats) => {
+    if (!biotopeStats) return null;
+    // console.log(
+    //   "Rendering biotope selector with stats:",
+    //   Object.keys(biotopeStats)
+    // );
+
+    return (
+      <div className="biotope-selector">
+        <label className="biotope-selector__label">
+          Sélectionner un biotope pour les statistiques:
+        </label>
+        <select
+          className="biotope-selector__select"
+          value={selectedBiotopeForStats || ""}
+          onChange={(e) => setSelectedBiotopeForStats(e.target.value)}
+        >
+          <option value="">Sélectionner un biotope</option>
+          {Object.entries(biotopeStats)
+            .filter(
+              ([_, stats]) => stats.plants.length >= MIN_PLANTS_PER_BIOTOPE
+            )
+            .map(([biotope]) => (
+              <option key={biotope} value={biotope}>
+                {biotope}
+              </option>
+            ))}
+        </select>
+      </div>
+    );
+  };
+
   const renderBiotopeStats = (biotopeStats) => {
     if (!biotopeStats || !selectedBiotopeForStats) return null;
 
@@ -692,42 +914,81 @@ export const seuilsEcarts = ${JSON.stringify(thresholds, null, 2)};`;
     );
   };
 
-  const renderBiotopeSelector = (biotopeStats) => {
-    if (!biotopeStats) return null;
+  const renderModeSelector = () => (
+    <div className="mode-selector">
+      <h3>Type de calibration :</h3>
+      <button
+        className={`mode-selector__button ${
+          mode === "contexte" ? "active" : ""
+        }`}
+        onClick={() => setMode("contexte")}
+      >
+        Par Contexte Agricole
+      </button>
+      <button
+        className={`mode-selector__button ${
+          mode === "biotope" ? "active" : ""
+        }`}
+        onClick={() => setMode("biotope")}
+      >
+        Par Biotope
+      </button>
+    </div>
+  );
+
+  // 2. Affiche le sélecteur approprié
+  const renderDynamicSelector = () => {
+    switch (mode) {
+      case "contexte":
+        return renderContextSelector();
+      case "biotope":
+        return renderBiotopesSelector();
+      default:
+        return null;
+    }
+  };
+
+  // 3. Indicateur de cible (version améliorée)
+  const renderTargetIndicator = () => {
+    const targetName =
+      mode === "contexte"
+        ? contexts.find((c) => c.id === selectedContext)?.name
+        : selectedBiotope;
 
     return (
-      <div className="biotope-selector">
-        <label className="biotope-selector__label">
-          Sélectionner un biotope pour les statistiques:
-        </label>
-        <select
-          className="biotope-selector__select"
-          value={selectedBiotopeForStats || ""}
-          onChange={(e) => setSelectedBiotopeForStats(e.target.value)}
-        >
-          <option value="">Sélectionner un biotope</option>
-          {Object.entries(biotopeStats)
-            .filter(
-              ([_, stats]) => stats.plants.length >= MIN_PLANTS_PER_BIOTOPE
-            )
-            .map(([biotope]) => (
-              <option key={biotope} value={biotope}>
-                {biotope}
-              </option>
-            ))}
-        </select>
+      <div className="target-indicator">
+        <h3>🔎 Cible des tests :</h3>
+        <div className="target-indicator__card">
+          <strong>Mode :</strong>{" "}
+          {mode === "contexte" ? "Contexte Agricole" : "Biotope"}
+          <br />
+          <strong>Element :</strong> {targetName || "Non sélectionné"}
+          <br />
+          {mode === "contexte" && (
+            <small>
+              Biotopes inclus :{" "}
+              {agricultureContexts
+                .find((c) => c.id === selectedContext)
+                ?.biotopes.join(", ")}
+            </small>
+          )}
+        </div>
       </div>
     );
   };
 
   return (
     <div className="calibration-tester">
-      {renderBiotopeSelector(plantImpact.biotopeStats)}
-      {renderBiotopeStats(plantImpact.biotopeStats)}
-      {renderClassifiedPlantsByImpact(
-        plantImpact.referenceGroups,
-        plantImpact.biotopeStats
-      )}
+      <div className="calibration-tester__header">
+        <h1 className="calibration-tester__title">Statistiques par biotope</h1>
+        {renderBiotopeSelector(plantImpact.biotopeStats)}
+        {renderBiotopeStats(plantImpact.biotopeStats)}
+        {renderClassifiedPlantsByImpact(
+          plantImpact.referenceGroups,
+          plantImpact.biotopeStats
+        )}
+      </div>
+
       <h1 className="calibration-tester__title">
         Calibration des plages et seuils d'interprétation
       </h1>
@@ -736,8 +997,12 @@ export const seuilsEcarts = ${JSON.stringify(thresholds, null, 2)};`;
         <div className="calibration-tester__config">
           <h2 className="calibration-tester__config-title">Configuration</h2>
 
-          {renderContextSelector()}
-          {renderBiotopesSelector()}
+          {renderModeSelector()}
+
+          {renderDynamicSelector()}
+          <div className="selectors-grid">{renderTargetIndicator()}</div>
+
+          {renderTestConfiguration()}
 
           <div className="calibration-tester__calibrate-button-container">
             <button
@@ -754,16 +1019,13 @@ export const seuilsEcarts = ${JSON.stringify(thresholds, null, 2)};`;
 
         <div className="calibration-tester__test-sets">
           <h2 className="calibration-tester__test-sets-title">
-            Ensembles de test
+            Ensembles de tests
           </h2>
-
-          {renderTestSetsSelector()}
-          {renderSelectedTestSetDetails()}
-          {renderSoilAnalysisResults()}
+          {renderCalibrationResults()}
+          {renderCalibrationThresholdResults()}
+          {renderCalibrationStatistics()}
         </div>
       </div>
-
-      {renderCalibrationResults()}
     </div>
   );
 };

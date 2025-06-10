@@ -5,6 +5,13 @@
   max-width: 96rem;
   margin: 0 auto;
 
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
   .biotope-selector {
     display: flex;
     flex-wrap: wrap;
@@ -65,9 +72,10 @@
   }
 
   &__title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
+    margin-top: 1rem;
   }
 
   &__grid {
@@ -81,15 +89,114 @@
   }
 
   &__config {
-    &-title {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: rgba(245, 245, 245, 0.521);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) &-title {
       font-size: 1.25rem;
       font-weight: semibold;
       margin-bottom: 1rem;
     }
+
+    /* Mode selector */
+    .mode-selector {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+
+      h3 {
+        font-size: 1.3rem;
+      }
+
+      &__button {
+        padding: 8px 16px;
+        border: 1px solid #ddd;
+        &.active {
+          background: #4caf50;
+          color: white;
+        }
+      }
+    }
+
+    .biotopes-selector,
+    .context-selector {
+      margin-bottom: 1rem;
+      background-color: #f8f9fa;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      &__label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: medium;
+        font-size: 1.1rem;
+      }
+      &__select {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #d1d5db;
+
+        option {
+          padding: 0.5rem;
+          border-bottom: 1px solid #9fb9ec;
+          &:last-child {
+            border-bottom: none;
+          }
+          &:hover {
+            background-color: #d871ad;
+          }
+        }
+      }
+    }
+
+    /* Selectors grid */
+    .selectors-grid {
+      display: flex;
+      flex-direction: column;
+      // display: grid;
+      // grid-template-rows: 1fr 1fr;
+      gap: 20px;
+    }
+    .target-indicator {
+      margin-bottom: 1rem;
+      width: 100%;
+
+      &__card {
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border-left: 4px solid #4caf50;
+      }
+    }
+    /* Target indicator */
+
+    .biotopes-selector {
+      margin-bottom: 1rem;
+
+      &__loading {
+        color: #6b7280;
+      }
+
+      &__label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: medium;
+      }
+
+      &__select {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.375rem;
+      }
+    }
   }
 
   &__calibrate-button-container {
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
   }
 
   &__calibrate-button {
@@ -116,129 +223,81 @@
       margin-bottom: 1rem;
     }
   }
-}
 
-.context-selector {
-  margin-bottom: 1rem;
+  /* Configuration des tests */
+  &__test-config {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
 
-  &__label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: medium;
+    h3 {
+      margin: 0 0 15px 0;
+      color: #343a40;
+      font-size: 1.2em;
+      font-weight: 600;
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+
+      label {
+        font-weight: 500;
+        color: #495057;
+        min-width: 120px;
+      }
+      select {
+        padding: 8px 12px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        background: white;
+        font-size: 14px;
+        min-width: 200px;
+        transition: border-color 0.2s ease;
+      }
+      select:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+      }
+      select:disabled {
+        background-color: #e9ecef;
+        color: #6c757d;
+        cursor: not-allowed;
+      }
+    }
   }
 
-  &__select {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.375rem;
+  &__statistics {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
   }
-}
-
-.biotopes-selector {
-  margin-bottom: 1rem;
-
-  &__loading {
-    color: #6b7280;
+  &__criteria-stats {
+    margin-bottom: 20px;
   }
-
-  &__label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: medium;
+  &__criterion-stats {
+    margin-bottom: 15px;
   }
-
-  &__select {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.375rem;
-  }
-}
-
-.test-sets-selector {
-  margin-bottom: 1.5rem;
-
-  &__title {
-    font-size: 1.125rem;
-    font-weight: medium;
-    margin-bottom: 0.75rem;
-  }
-
-  &__grid {
+  &__stats-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
   }
-
-  &__item {
-    padding: 0.75rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-
-    &:hover {
-      background-color: #f9fafb;
-    }
-
-    &--selected {
-      background-color: #eff6ff;
-      border-color: #93c5fd;
-    }
-  }
-
-  &__item-title {
-    font-weight: medium;
-  }
-
-  &__item-description {
-    font-size: 0.875rem;
-    color: #6b7280;
-  }
-
-  &__item-plants {
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
-  }
-
-  &__loading {
-    color: #6b7280;
-  }
-}
-
-.selected-test-set-details {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background-color: #f9fafb;
-  border-radius: 0.5rem;
-
-  &__title {
-    font-size: 1.125rem;
-    font-weight: medium;
-    margin-bottom: 0.75rem;
-  }
-
-  &__table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  &__header {
-    text-align: left;
-    padding: 0.5rem;
-  }
-
-  &__row {
-    border-top: 1px solid #e5e7eb;
-  }
-
-  &__cell {
-    padding: 0.5rem;
+  &__stats-basic,
+  &__stats-percentiles,
+  &__stats-proposals {
+    background-color: white;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -413,6 +472,123 @@
 
     &:hover {
       background-color: #2563eb;
+    }
+  }
+
+  /* **** Barre de progression ******* */
+  .calibration-tester__progress {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+  }
+
+  .calibration-tester__progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  .calibration-tester__progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Animation de la barre de progression */
+  .calibration-tester__progress-fill::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  .calibration-tester__progress-text {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: #495057;
+    font-weight: 500;
+  }
+
+  /* Variantes de couleur selon le pourcentage */
+  .calibration-tester__progress-fill[style*="width: 0%"],
+  .calibration-tester__progress-fill[style*="width: 1%"],
+  .calibration-tester__progress-fill[style*="width: 2%"] {
+    background: linear-gradient(90deg, #dc3545, #c82333);
+  }
+
+  /* États de progression avec différentes couleurs */
+  .calibration-tester__progress[data-stage="generating"]
+    .calibration-tester__progress-fill {
+    background: linear-gradient(90deg, #ffc107, #e0a800);
+  }
+
+  .calibration-tester__progress[data-stage="analyzing"]
+    .calibration-tester__progress-fill {
+    background: linear-gradient(90deg, #17a2b8, #138496);
+  }
+
+  .calibration-tester__progress[data-stage="calculating"]
+    .calibration-tester__progress-fill {
+    background: linear-gradient(90deg, #28a745, #1e7e34);
+  }
+
+  /* Animation pulsante pour le texte */
+  .calibration-tester__progress-text {
+    animation: pulse 1.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse {
+    from {
+      opacity: 0.8;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .calibration-tester__test-config-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .calibration-tester__test-config-item label {
+      min-width: auto;
+    }
+
+    .calibration-tester__test-config-item select {
+      width: 100%;
+      min-width: auto;
     }
   }
 }

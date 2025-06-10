@@ -7,24 +7,31 @@ const soilDiagnosticData = {
         { indicateur: "AB+", coefficient: 2 },
         { indicateur: "AB-", coefficient: 1.5 },
         { indicateur: "MOT", coefficient: 1 },
-        { indicateur: "Eau", coefficient: -1.5 },
-        { indicateur: "Air", coefficient: 1.5 },
         { indicateur: "Sali", coefficient: -1.2 },
         { indicateur: "Poll", coefficient: -2 },
+      ],
+      interactions: [
+        {
+          indicateurs: ["Air", "Eau"],
+          coefficient: 1,
+          operation: "airWaterBalance",
+        },
       ],
       diviseur: 8.2,
     },
     complexeArgiloHumique: {
       facteurs: [
-        { indicateur: "BS", coefficient: 1.5 },
-        { indicateur: "BNS", coefficient: -2 },
-        { indicateur: "MOT", coefficient: 0.8 },
+        { indicateur: "BS", coefficient: 1.8 },
+        { indicateur: "BNS", coefficient: -1.2 },
+        { indicateur: "MOT", coefficient: 1.2 },
+        { indicateur: "MO(C)", coefficient: 0.8 },
         { indicateur: "Nit", coefficient: -1 },
         { indicateur: "Al3+", coefficient: -1.5 },
-        { indicateur: "BP", coefficient: -1 },
-        { indicateur: "BK", coefficient: -1 },
+        { indicateur: "BP", coefficient: -0.8 },
+        { indicateur: "BK", coefficient: -0.8 },
         { indicateur: "Sali", coefficient: -1 },
         { indicateur: "Poll", coefficient: -1 },
+        { indicateur: "Less", coefficient: -1 },
       ],
       interactions: [
         {
@@ -32,21 +39,25 @@ const soilDiagnosticData = {
           coefficient: -0.5,
           operation: "multiply",
         },
+        {
+          indicateurs: ["Air", "Eau"],
+          coefficient: 1,
+          operation: "airWaterEffect",
+        },
       ],
-      diviseur: 10.8,
+      diviseur: 12,
     },
     matiereOrganique: {
       facteurs: [
         { indicateur: "MOT", coefficient: 2 },
         { indicateur: "MO(C)", coefficient: 1 },
-        { indicateur: "MO(N)", coefficient: 1 },
-        { indicateur: "Foss", coefficient: -2 },
+        { indicateur: "MO(N)", coefficient: -1 },
+        { indicateur: "Foss", coefficient: -3 },
       ],
-      diviseur: 5,
+      diviseur: 7,
     },
     equilibreCN: {
       type: "special", // Nouveau champ pour identifier les formules spéciales
-      specialFormula: "(MO_C / (MO_N + 0.1)) * 0.3", // Nouveau champ pour la formule hybride
       facteurs: [
         { indicateur: "MO(C)", coefficient: 1 },
         { indicateur: "MO(N)", coefficient: -1 },
@@ -55,7 +66,8 @@ const soilDiagnosticData = {
     },
     structurePorosite: {
       facteurs: [
-        { indicateur: "Air", coefficient: 4 },
+        { indicateur: "Air", coefficient: 3.5 },
+        { indicateur: "MO(C)", coefficient: 1 },
         { indicateur: "Eau", coefficient: -1.5 },
         { indicateur: "Ero", coefficient: -2 },
         { indicateur: "Less", coefficient: -2 },
@@ -63,7 +75,7 @@ const soilDiagnosticData = {
         { indicateur: "Sali", coefficient: -2 },
         { indicateur: "Poll", coefficient: -2.5 },
       ],
-      diviseur: 15.5,
+      diviseur: 15,
     },
   },
 
@@ -71,19 +83,208 @@ const soilDiagnosticData = {
   plagesOptimales: {
     maraichageBio: {
       vieMicrobienne: {
-        min: 0.8,
-        max: 2.0,
+        min: 4.41,
+        max: 5.35,
         description: "Activité biologique intense",
       },
       complexeArgiloHumique: {
-        min: 0.5,
-        max: 1.5,
+        min: 3.61,
+        max: 4.61,
         description: "Bon équilibre argile-humus",
       },
       matiereOrganique: {
-        min: 0.8,
-        max: 1.8,
+        min: 4.43,
+        max: 5.31,
         description: "Riche en matière organique",
+      },
+      equilibreCN: {
+        min: 23.5,
+        max: 28.35,
+        description: "Légèrement riche en azote",
+      },
+      structurePorosite: {
+        min: 3.57,
+        max: 4.21,
+        description: "Bonne aération et drainage",
+      },
+    },
+    jardinage: {
+      vieMicrobienne: {
+        min: 4.38,
+        max: 5.23,
+        description: "Activité biologique intense",
+      },
+      complexeArgiloHumique: {
+        min: 3.83,
+        max: 4.47,
+        description: "Bon équilibre argile-humus",
+      },
+      matiereOrganique: {
+        min: 4.49,
+        max: 5.22,
+        description: "Riche en matière organique ",
+      },
+      equilibreCN: {
+        min: 24.32,
+        max: 33.44,
+        description: "Légèrement riche en azote",
+      },
+      structurePorosite: {
+        min: 3.39,
+        max: 4.07,
+        description: "Bonne aération et drainage",
+      },
+    },
+    grandesCultures: {
+      vieMicrobienne: {
+        min: 3.98,
+        max: 5.15,
+        description: "Activité biologique intense",
+      },
+      complexeArgiloHumique: {
+        min: 3.65,
+        max: 4.79,
+        description: "Bon équilibre argile-humus",
+      },
+      matiereOrganique: {
+        min: 3.89,
+        max: 4.98,
+        description: "Riche en matière organique ",
+      },
+      equilibreCN: {
+        min: 23.64,
+        max: 33.44,
+        description: "Légèrement riche en azote",
+      },
+      structurePorosite: {
+        min: 3.24,
+        max: 4.42,
+        description: "Bonne aération et drainage",
+      },
+    },
+    prairiesAgricoles: {
+      vieMicrobienne: {
+        min: 4.94,
+        max: 5.94,
+        description: "Activité biologique intense",
+      },
+      complexeArgiloHumique: {
+        min: 4.54,
+        max: 5.15,
+        description: "Bon équilibre argile-humus",
+      },
+      matiereOrganique: {
+        min: 4.37,
+        max: 5.28,
+        description: "Riche en matière organique ",
+      },
+      equilibreCN: {
+        min: 25.75,
+        max: 35.47,
+        description: "Légèrement riche en azote",
+      },
+      structurePorosite: {
+        min: 3.83,
+        max: 4.7,
+        description: "Bonne aération et drainage",
+      },
+    },
+    viticulture: {
+      vieMicrobienne: {
+        min: 4.58,
+        max: 5.52,
+        description: "Activité biologique intense",
+      },
+      complexeArgiloHumique: {
+        min: 4,
+        max: 4.93,
+        description: "Bon équilibre argile-humus",
+      },
+      matiereOrganique: {
+        min: 4.21,
+        max: 4.95,
+        description: "Riche en matière organique ",
+      },
+      equilibreCN: {
+        min: 27.03,
+        max: 36.42,
+        description: "Bon équilibre carbone-azote",
+      },
+      structurePorosite: {
+        min: 3.59,
+        max: 4.57,
+        description: "Bonne aération et drainage",
+      },
+    },
+    arboriculture: {
+      vieMicrobienne: {
+        min: 4.26,
+        max: 5.46,
+        description: "Activité biologique intense",
+      },
+      complexeArgiloHumique: {
+        min: 3.59,
+        max: 4.96,
+        description: "Bon équilibre argile-humus",
+      },
+      matiereOrganique: {
+        min: 3.99,
+        max: 5,
+        description: "Riche en matière organique ",
+      },
+      equilibreCN: {
+        min: 26.36,
+        max: 34.32,
+        description: "Equilibre carbone-azote optimal",
+      },
+      structurePorosite: {
+        min: 3.43,
+        max: 5.46,
+        description: "Bonne aération et drainage",
+      },
+    },
+    agroforesterie: {
+      vieMicrobienne: {
+        min: 4.68,
+        max: 5.65,
+        description: "Activité biologique intense",
+      },
+      complexeArgiloHumique: {
+        min: 4.22,
+        max: 4.94,
+        description: "Bon équilibre argile-humus",
+      },
+      matiereOrganique: {
+        min: 4.12,
+        max: 5,
+        description: "Riche en matière organique ",
+      },
+      equilibreCN: {
+        min: 24.32,
+        max: 35.81,
+        description: "Equilibre carbone-azote optimal",
+      },
+      structurePorosite: {
+        min: 3.63,
+        max: 4.34,
+        description: "Bonne aération et drainage",
+      },
+    },
+    permaculture: {
+      vieMicrobienne: {
+        min: 3.9,
+        max: 6.83,
+        description: "Activité biologique intense",
+      },
+      complexeArgiloHumique: {
+        min: 3.83,
+        max: 5.22,
+        description: "Bon équilibre argile-humus",
+      },
+      matiereOrganique: {
+        min: 4.05,
+        max: 6.43,
+        description: "Riche en matière organique ",
       },
       equilibreCN: {
         min: 20,
@@ -91,36 +292,8 @@ const soilDiagnosticData = {
         description: "Légèrement riche en azote",
       },
       structurePorosite: {
-        min: 0.7,
-        max: 1.5,
-        description: "Bonne aération et drainage",
-      },
-    },
-    // Ajoutez les autres contextes ici (grandesCultures, prairiePermanente, etc.)
-    potager: {
-      vieMicrobienne: {
-        min: 0.8,
-        max: 2.0,
-        description: "Activité biologique intense nécessaire",
-      },
-      complexeArgiloHumique: {
-        min: 0.5,
-        max: 1.5,
-        description: "Bon équilibre argile-humus",
-      },
-      matiereOrganique: {
-        min: 0.8,
-        max: 1.8,
-        description: "Riche en matière organique ",
-      },
-      equilibreCN: {
-        min: -0.3,
-        max: 0.5,
-        description: "Légèrement riche en azote",
-      },
-      structurePorosite: {
-        min: 0.7,
-        max: 1.5,
+        min: 3,
+        max: 5.33,
         description: "Bonne aération et drainage",
       },
     },
@@ -150,13 +323,501 @@ const soilDiagnosticData = {
 
   // Seuils pour catégoriser les écarts
   seuilsEcarts: {
-    deficit: {
-      leger: 0.2,
-      modere: 0.5,
+    maraichageBio: {
+      complexeArgiloHumique: {
+        deficit: {
+          leger: 0.12,
+          modere: 0.24,
+          important: 0.37,
+        },
+        exces: {
+          leger: 0.09,
+          modere: 0.17,
+          important: 0.26,
+        },
+      },
+      equilibreCN: {
+        deficit: {
+          leger: 0.99,
+          modere: 1.97,
+          important: 2.96,
+        },
+        exces: {
+          leger: 0.49,
+          modere: 0.98,
+          important: 1.47,
+        },
+      },
+      matiereOrganique: {
+        deficit: {
+          leger: 0.11,
+          modere: 0.22,
+          important: 0.33,
+        },
+        exces: {
+          leger: 0.11,
+          modere: 0.22,
+          important: 0.33,
+        },
+      },
+      structurePorosite: {
+        deficit: {
+          leger: 0.07,
+          modere: 0.14,
+          important: 0.21,
+        },
+        exces: {
+          leger: 0.08,
+          modere: 0.17,
+          important: 0.25,
+        },
+      },
+      vieMicrobienne: {
+        deficit: {
+          leger: 0.11,
+          modere: 0.23,
+          important: 0.34,
+        },
+        exces: {
+          leger: 0.09,
+          modere: 0.18,
+          important: 0.27,
+        },
+      },
     },
-    exces: {
-      leger: 0.2,
-      modere: 0.5,
+    jardinage: {
+      complexeArgiloHumique: {
+        deficit: {
+          leger: 0.08,
+          modere: 0.16,
+          important: 0.25,
+        },
+        exces: {
+          leger: 0.07,
+          modere: 0.14,
+          important: 0.21,
+        },
+      },
+      equilibreCN: {
+        deficit: {
+          leger: 1.08,
+          modere: 2.16,
+          important: 3.25,
+        },
+        exces: {
+          leger: 0.8,
+          modere: 1.61,
+          important: 2.41,
+        },
+      },
+      matiereOrganique: {
+        deficit: {
+          leger: 0.08,
+          modere: 0.15,
+          important: 0.23,
+        },
+        exces: {
+          leger: 0.1,
+          modere: 0.2,
+          important: 0.29,
+        },
+      },
+      structurePorosite: {
+        deficit: {
+          leger: 0.07,
+          modere: 0.15,
+          important: 0.22,
+        },
+        exces: {
+          leger: 0.08,
+          modere: 0.17,
+          important: 0.25,
+        },
+      },
+      vieMicrobienne: {
+        deficit: {
+          leger: 0.07,
+          modere: 0.13,
+          important: 0.2,
+        },
+        exces: {
+          leger: 0.13,
+          modere: 0.27,
+          important: 0.4,
+        },
+      },
+    },
+    grandesCultures: {
+      complexeArgiloHumique: {
+        deficit: {
+          leger: 0.16,
+          modere: 0.32,
+          important: 0.47,
+        },
+        exces: {
+          leger: 0.09,
+          modere: 0.17,
+          important: 0.26,
+        },
+      },
+      equilibreCN: {
+        deficit: {
+          leger: 1.12,
+          modere: 2.24,
+          important: 3.36,
+        },
+        exces: {
+          leger: 1.12,
+          modere: 2.25,
+          important: 3.37,
+        },
+      },
+      matiereOrganique: {
+        deficit: {
+          leger: 0.14,
+          modere: 0.28,
+          important: 0.42,
+        },
+        exces: {
+          leger: 0.09,
+          modere: 0.18,
+          important: 0.26,
+        },
+      },
+      structurePorosite: {
+        deficit: {
+          leger: 0.14,
+          modere: 0.28,
+          important: 0.43,
+        },
+        exces: {
+          leger: 0.11,
+          modere: 0.22,
+          important: 0.34,
+        },
+      },
+      vieMicrobienne: {
+        deficit: {
+          leger: 0.12,
+          modere: 0.23,
+          important: 0.35,
+        },
+        exces: {
+          leger: 0.14,
+          modere: 0.27,
+          important: 0.41,
+        },
+      },
+    },
+    prairiesAgricoles: {
+      complexeArgiloHumique: {
+        deficit: {
+          leger: 0.1,
+          modere: 0.2,
+          important: 0.31,
+        },
+        exces: {
+          leger: 0.06,
+          modere: 0.11,
+          important: 0.17,
+        },
+      },
+      equilibreCN: {
+        deficit: {
+          leger: 1.12,
+          modere: 2.23,
+          important: 3.35,
+        },
+        exces: {
+          leger: 0.82,
+          modere: 1.63,
+          important: 2.45,
+        },
+      },
+      matiereOrganique: {
+        deficit: {
+          leger: 0.1,
+          modere: 0.2,
+          important: 0.29,
+        },
+        exces: {
+          leger: 0.08,
+          modere: 0.16,
+          important: 0.24,
+        },
+      },
+      structurePorosite: {
+        deficit: {
+          leger: 0.09,
+          modere: 0.17,
+          important: 0.26,
+        },
+        exces: {
+          leger: 0.08,
+          modere: 0.16,
+          important: 0.24,
+        },
+      },
+      vieMicrobienne: {
+        deficit: {
+          leger: 0.11,
+          modere: 0.21,
+          important: 0.32,
+        },
+        exces: {
+          leger: 0.09,
+          modere: 0.18,
+          important: 0.27,
+        },
+      },
+    },
+    viticulture: {
+      complexeArgiloHumique: {
+        deficit: {
+          leger: 0.16,
+          modere: 0.31,
+          important: 0.47,
+        },
+        exces: {
+          leger: 0.05,
+          modere: 0.11,
+          important: 0.16,
+        },
+      },
+      equilibreCN: {
+        deficit: {
+          leger: 1.2,
+          modere: 2.4,
+          important: 3.6,
+        },
+        exces: {
+          leger: 0.96,
+          modere: 1.92,
+          important: 2.88,
+        },
+      },
+      matiereOrganique: {
+        deficit: {
+          leger: 0.13,
+          modere: 0.25,
+          important: 0.38,
+        },
+        exces: {
+          leger: 0.06,
+          modere: 0.12,
+          important: 0.19,
+        },
+      },
+      structurePorosite: {
+        deficit: {
+          leger: 0.08,
+          modere: 0.17,
+          important: 0.25,
+        },
+        exces: {
+          leger: 0.11,
+          modere: 0.23,
+          important: 0.34,
+        },
+      },
+      vieMicrobienne: {
+        deficit: {
+          leger: 0.1,
+          modere: 0.19,
+          important: 0.29,
+        },
+        exces: {
+          leger: 0.11,
+          modere: 0.22,
+          important: 0.33,
+        },
+      },
+    },
+    arboriculture: {
+      complexeArgiloHumique: {
+        deficit: {
+          leger: 0.24,
+          modere: 0.49,
+          important: 0.73,
+        },
+        exces: {
+          leger: 0.1,
+          modere: 0.19,
+          important: 0.29,
+        },
+      },
+      equilibreCN: {
+        deficit: {
+          leger: 0.78,
+          modere: 1.57,
+          important: 2.35,
+        },
+        exces: {
+          leger: 1.04,
+          modere: 2.07,
+          important: 3.11,
+        },
+      },
+      matiereOrganique: {
+        deficit: {
+          leger: 0.12,
+          modere: 0.23,
+          important: 0.35,
+        },
+        exces: {
+          leger: 0.12,
+          modere: 0.24,
+          important: 0.36,
+        },
+      },
+      structurePorosite: {
+        deficit: {
+          leger: 0.1,
+          modere: 0.19,
+          important: 0.29,
+        },
+        exces: {
+          leger: 0.13,
+          modere: 0.26,
+          important: 0.39,
+        },
+      },
+      vieMicrobienne: {
+        deficit: {
+          leger: 0.11,
+          modere: 0.22,
+          important: 0.33,
+        },
+        exces: {
+          leger: 0.15,
+          modere: 0.3,
+          important: 0.45,
+        },
+      },
+    },
+    agroforesterie: {
+      complexeArgiloHumique: {
+        deficit: {
+          leger: 0.1,
+          modere: 0.21,
+          important: 0.31,
+        },
+        exces: {
+          leger: 0.08,
+          modere: 0.15,
+          important: 0.23,
+        },
+      },
+      equilibreCN: {
+        deficit: {
+          leger: 1.4,
+          modere: 2.8,
+          important: 4.2,
+        },
+        exces: {
+          leger: 1.14,
+          modere: 2.29,
+          important: 3.43,
+        },
+      },
+      matiereOrganique: {
+        deficit: {
+          leger: 0.13,
+          modere: 0.27,
+          important: 0.4,
+        },
+        exces: {
+          leger: 0.14,
+          modere: 0.27,
+          important: 0.41,
+        },
+      },
+      structurePorosite: {
+        deficit: {
+          leger: 0.09,
+          modere: 0.18,
+          important: 0.27,
+        },
+        exces: {
+          leger: 0.06,
+          modere: 0.12,
+          important: 0.18,
+        },
+      },
+      vieMicrobienne: {
+        deficit: {
+          leger: 0.1,
+          modere: 0.2,
+          important: 0.3,
+        },
+        exces: {
+          leger: 0.11,
+          modere: 0.22,
+          important: 0.32,
+        },
+      },
+    },
+    permaculture: {
+      complexeArgiloHumique: {
+        deficit: {
+          leger: 0.16,
+          modere: 0.32,
+          important: 0.47,
+        },
+        exces: {
+          leger: 0.09,
+          modere: 0.17,
+          important: 0.26,
+        },
+      },
+      equilibreCN: {
+        deficit: {
+          leger: 1.12,
+          modere: 2.24,
+          important: 3.36,
+        },
+        exces: {
+          leger: 1.12,
+          modere: 2.25,
+          important: 3.37,
+        },
+      },
+      matiereOrganique: {
+        deficit: {
+          leger: 0.14,
+          modere: 0.28,
+          important: 0.42,
+        },
+        exces: {
+          leger: 0.09,
+          modere: 0.18,
+          important: 0.26,
+        },
+      },
+      structurePorosite: {
+        deficit: {
+          leger: 0.14,
+          modere: 0.28,
+          important: 0.43,
+        },
+        exces: {
+          leger: 0.11,
+          modere: 0.22,
+          important: 0.34,
+        },
+      },
+      vieMicrobienne: {
+        deficit: {
+          leger: 0.12,
+          modere: 0.23,
+          important: 0.35,
+        },
+        exces: {
+          leger: 0.14,
+          modere: 0.27,
+          important: 0.41,
+        },
+      },
     },
   },
 

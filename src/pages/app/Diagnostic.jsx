@@ -6,12 +6,13 @@ import SoilQuery from "../../components/app/diagnostic/SoilQuery.jsx";
 import SpeciesInventory from "../../components/app/diagnostic/SpeciesInventory.jsx";
 import Button from "../../components/app/shared/Button.jsx";
 import Stepper from "../../components/app/shared/Stepper.jsx";
+import { usePlants } from "../../context/PlantsProvider.jsx";
 import storageService from "../../services/storageService.js";
 
 export default function Diagnostic() {
-  // const { identifiedPlants } = usePlants();
+  const { identifiedPlants } = usePlants();
   const [currentStep, setCurrentStep] = useState(0);
-  const [selectedPlants, setSelectedPlants] = useState([]);
+  // const [selectedPlants, setSelectedPlants] = useState([]);
   const [coverages, setCoverages] = useState(() => {
     const storedCoverages = storageService.getStoredData("coverages");
     return storedCoverages || {};
@@ -60,9 +61,9 @@ export default function Diagnostic() {
     { id: 5, label: "Résultats" },
   ];
 
-  const handlePlantSelection = (plants) => {
-    setSelectedPlants(plants);
-  };
+  // const handlePlantSelection = (plants) => {
+  //   setSelectedPlants(plants);
+  // };
 
   const handleCoverageChange = (coverageData, coefficientData) => {
     setCoverages(coverageData);
@@ -124,13 +125,13 @@ export default function Diagnostic() {
 
   const handleReset = () => {
     setCurrentStep(0);
-    setSelectedPlants([]);
+    // setSelectedPlants([]);
     setCoverages({});
     setCoefficients({});
     setFormData(emptyFormData);
     setAnalysisResults(null);
     setSortedResultsColumns([]);
-    storageService.removeItem("selectedPlants");
+    // storageService.removeItem("selectedPlants");
     storageService.removeItem("coverages");
     storageService.removeItem("coefficients");
     storageService.removeItem("formData");
@@ -146,14 +147,14 @@ export default function Diagnostic() {
       case 0:
         return (
           <SpeciesInventory
-            selectedPlants={selectedPlants}
-            onSelectionChange={handlePlantSelection}
+          // selectedPlants={selectedPlants}
+          // onSelectionChange={handlePlantSelection}
           />
         );
       case 1:
         return (
           <CoverageEditor
-            selectedPlants={selectedPlants}
+            selectedPlants={identifiedPlants}
             initialCoverages={coverages}
             onCoverageChange={handleCoverageChange}
           />
@@ -173,7 +174,7 @@ export default function Diagnostic() {
       case 3:
         return (
           <SoilAnalyzer
-            selectedPlants={selectedPlants}
+            selectedPlants={identifiedPlants}
             selectedCoverages={coverages}
             selectedCoefficients={coefficients}
             selectedFormData={formData}
@@ -185,7 +186,7 @@ export default function Diagnostic() {
       case 4:
         return (
           <DiagnosticResults
-            selectedPlants={selectedPlants}
+            selectedPlants={identifiedPlants}
             selectedCoefficients={coefficients}
             analysisResults={analysisResults}
             compositesResults={compositesResults}
@@ -204,7 +205,7 @@ export default function Diagnostic() {
   const handleDisableNext = () => {
     if (currentStep === 0) {
       // Si aucun plante n'est sélectionnée, désactiver le bouton "Suivant"
-      return selectedPlants.length === 0;
+      return identifiedPlants.length === 0;
     }
     if (currentStep === 1) {
       return Object.keys(coefficients).length === 0;

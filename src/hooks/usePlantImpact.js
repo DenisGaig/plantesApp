@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import plantsIndicators from "../data/bioindicators_plants.json";
 import plantProfiles from "../data/fiches_plantes.json"; // Import des fiches détaillées de plantes
 import secondaryHabitat from "../data/secondary_habitats.json";
@@ -37,9 +37,134 @@ const usePlantImpact = () => {
   ];
 
   /**
+   * Fonction de normalisation standard pour tous les critères de fertilité conçue pour être utilisée avec n'importe quel biotope
+   * @param {number} rawScore  Valeur brute du score
+   * @param {string} criterion Critère de fertilité
+   * @param {number} totalDensity Densité totale des plantes
+   * @param {number} plantCount Nombre de plantes dans le biotope
+   * @returns Valeur normalisée entre 0 et 10
+   */
+  function normalizeScore(
+    rawScore,
+    criterion,
+    totalDensity = null,
+    plantCount = null
+  ) {
+    // Paramètres de normalisation par critère
+    // Ces valeurs sont calibrées pour étaler les résultats sur toute l'échelle 0-10
+    const normalizationParams = {
+      vieMicrobienne: {
+        outputMin: 0, // Valeur minimale souhaitée après normalisation
+        outputMax: 10, // Valeur maximale souhaitée après normalisation
+      },
+      complexeArgiloHumique: {
+        outputMin: 0,
+        outputMax: 10,
+      },
+      matiereOrganique: {
+        outputMin: 0,
+        outputMax: 10,
+      },
+      structurePorosite: {
+        outputMin: 0,
+        outputMax: 10,
+      },
+      equilibreCN: {
+        // Le C/N a une échelle spéciale, nous le traiterons séparément
+        baseValue: 25,
+        minValue: 10,
+        maxValue: 40,
+      },
+    };
+
+    // Cas spécial pour l'équilibre C/N (qui a son propre système d'échelle)
+    if (criterion === "equilibreCN") {
+      // Pas besoin de normalisation supplémentaire car déjà traité dans le hook
+      return rawScore;
+    }
+
+    // Pour les autres critères, normalisation linéaire dynamique
+    const params = normalizationParams[criterion];
+
+    // Détermination dynamique des limites d'entrée en fonction du nombre de plantes et densités
+    let inputMin, inputMax;
+
+    if (totalDensity !== null && plantCount !== null) {
+      // Pour les tests in-situ avec plusieurs plantes
+      // La valeur maximale théorique serait la densité totale (si toutes les plantes contribuent positivement)
+      // La valeur minimale théorique serait l'opposé de la densité totale (si toutes contribuent négativement)
+      inputMax = totalDensity;
+      inputMin = -totalDensity;
+    } else {
+      // Pour les tests unitaires (une seule plante)
+      // On utilise la plage par défaut -2 à 2
+      inputMax = 1.5;
+      inputMin = -1.5;
+    }
+
+    // Application de la transformation linéaire
+    // normalizedScore = (rawScore - inputMin) * (outputMax - outputMin) / (inputMax - inputMin) + outputMin
+    const normalizedScore =
+      ((rawScore - inputMin) * (params.outputMax - params.outputMin)) /
+        (inputMax - inputMin) +
+      params.outputMin;
+
+    // S'assurer que le score est bien dans l'intervalle [outputMin, outputMax]
+    return Math.max(
+      params.outputMin,
+      Math.min(params.outputMax, normalizedScore)
+    );
+
+    // return rawScore;
+
+    // Formule de normalisation avec décalage, échelle et minimum
+    // (rawScore + offset) * scale + minValue
+    // Borne les résultats entre 0 et 10
+    // const normalizedScore = Math.max(
+    //   params.minValue,
+    //   Math.min(10, (rawScore + params.offset) * params.scale + params.minValue)
+    // );
+
+    // return normalizedScore;
+  }
+
+  /**
+   * Calcule l'équilibre C/N d'un sol à partir des valeurs de matière organique carbonée (moC) et matière organique azotée (moN).
+   * @param {number} moC
+   * @param {number} moN
+   * @returns
+   */
+  const calculateEquilibreCN = (moC, moN) => {
+    // Calcul de l'écart (C - N)
+    // Écart positif = plus de carbone relatif = ratio C/N plus élevé
+    // Écart négatif = plus d'azote relatif = ratio C/N plus bas
+    const ecart = moC - moN;
+
+    // Cas particuliers : carences simultanées
+    if (moC < 0 && moN < 0) {
+      // Sol carencé en C ET N : ratio dégradé même si "équilibré"
+      const severite = Math.abs(moC + moN) / 2; // Moyenne des carences
+      const ratioDegrade = 25 - severite * 3; // Dégradation progressive
+      return Math.max(
+        8,
+        Math.min(ratioDegrade + 15 * Math.tanh(ecart * 0.5), 40)
+      );
+    }
+    // Transformation sigmoïde centrée sur 25 (ratio C/N idéal)
+    // Formule: ratio = centre + amplitude * tanh(écart * sensibilité)
+    const centre = 25; // Ratio C/N de référence (équilibré)
+    const amplitude = 15; // Amplitude max (25 ± 15 = [10, 40])
+    const sensibilite = 0.5; // Contrôle la pente de la courbe
+
+    const ratio = centre + amplitude * Math.tanh(ecart * sensibilite);
+
+    // Borner entre des valeurs réalistes
+    return Math.max(8, Math.min(ratio, 40));
+  };
+  /**
    * Calcule l'impact unitaire de chaque plante de la base de données
    */
-  const calculatePlantsUnitaryImpact = () => {
+  const calculatePlantsUnitaryImpact = useCallback(() => {
     console.log("🌱 Calcul de l'impact unitaire des plantes...");
     setLoading(true);
     try {
@@ -51,9 +176,11 @@ const usePlantImpact = () => {
         const scientificName = plant.scientificName;
         const commonName = plant.commonName;
         const indicators = plant.caracteristiques;
+        const id = plant.id;
 
         // Initialiser la structure de résultat pour cette plante
         impacts[scientificName] = {
+          id,
           scientificName,
           commonName,
           rawIndicators: { ...indicators }, // Copie des indicateurs bruts
@@ -105,58 +232,31 @@ const usePlantImpact = () => {
           const formula = soilDiagnosticData.formules[criterion];
           let sum = 0;
 
+          // Calculer la somme pondérée des indicateurs
+          const getNumericValue = (indicator) => {
+            if (!simulatedResults[indicator]) return 0;
+            return (
+              simulatedResults[indicator].positive -
+              simulatedResults[indicator].negative
+            );
+          };
+
           // Cas spécial pour l'équilibre C/N
           if (criterion === "equilibreCN") {
-            // Conversion explicite des symboles
-            const getNumericValue = (indicator) => {
-              if (!simulatedResults[indicator]) return 0;
-              return (
-                simulatedResults[indicator].positive -
-                simulatedResults[indicator].negative
-              );
-            };
+            let CN_result = null;
 
             const MO_C = getNumericValue("MO(C)");
-            const MO_N = getNumericValue("MO(N)") * -1;
+            const MO_N = getNumericValue("MO(N)");
 
-            // --------------------------
-            // Protection contre les divisions extrêmes
-            const safeMO_N = Math.max(MO_N, 0.1); // Évite division par zéro
+            CN_result = calculateEquilibreCN(MO_C, MO_N);
 
-            // Calcul de base
-            let cnRatio = MO_C / safeMO_N;
-
-            // Transformation logarithmique pour compresser l'échelle
-            cnRatio = Math.sign(cnRatio) * Math.log1p(Math.abs(cnRatio));
-
-            // Normalisation pour correspondre aux plages C/N agronomiques
-            const normalizedCN = cnRatio * 3.5 + 25; // Centre autour de 20-30
-
-            // Les valeurs logarithmiques fortement négatives donneraient des C/N < 10: Excès très important d'azote (minéralisation très rapide)
-            // Les valeurs logarithmiques légèrement négatives donneraient des C/N 10-20: Excès modéré d'azote (minéralisation accélérée)
-            // Les valeurs logarithmiques proches de zéro donneraient des C/N 20-30: Équilibre optimal pour l'humification
-            // Les valeurs logarithmiques positives donneraient des C/N > 30: Fossilisation de la matière organique végétale (ralentissement de la décomposition)
-
-            // Bornes réalistes
-            impacts[scientificName].compositeImpact[criterion] = Math.max(
-              5,
-              Math.min(normalizedCN, 40)
-            );
-
-            // ---------------------------------
-            // Applique la formule hybride
-            // impacts[scientificName].compositeImpact[criterion] =
-            //   (MO_C / Math.max(MO_N, 0.1)) * 0.3;
+            impacts[scientificName].compositeImpact[criterion] = CN_result;
           } else {
             formula.facteurs.forEach((factor) => {
               const indicator = factor.indicateur;
               const coefficient = factor.coefficient;
 
-              // Calculer la valeur nette de l'indicateur (positif - négatif)
-              const indicatorValue = simulatedResults[indicator]
-                ? simulatedResults[indicator].positive -
-                  simulatedResults[indicator].negative
-                : 0;
+              const indicatorValue = getNumericValue(indicator);
 
               sum += indicatorValue * coefficient;
             });
@@ -164,25 +264,36 @@ const usePlantImpact = () => {
             // Gestion des interactions (cas spécial pour Nit*Al3+)
             if (formula.interactions) {
               formula.interactions.forEach((interaction) => {
-                const val1 = simulatedResults[interaction.indicateurs[0]]
-                  ? simulatedResults[interaction.indicateurs[0]].positive -
-                    simulatedResults[interaction.indicateurs[0]].negative
-                  : 0;
-                const val2 = simulatedResults[interaction.indicateurs[1]]
-                  ? simulatedResults[interaction.indicateurs[1]].positive -
-                    simulatedResults[interaction.indicateurs[1]].negative
-                  : 0;
+                const val1 = getNumericValue(interaction.indicateurs[0]);
+                const val2 = getNumericValue(interaction.indicateurs[1]);
 
                 if (interaction.operation === "multiply") {
                   sum += val1 * val2 * interaction.coefficient;
+                }
+                if (interaction.operation === "airWaterEffect") {
+                  sum +=
+                    0.8 * (Math.min(1, val1) - Math.max(0, val1)) -
+                    0.5 * Math.abs(val2) * interaction.coefficient;
+                }
+                if (interaction.operation === "airWaterBalance") {
+                  sum +=
+                    (1 - Math.abs(val1 - 0.5) - Math.max(0, val2)) *
+                    interaction.coefficient;
                 }
                 // Ajoutez d'autres opérations si nécessaire (ex: addition)
               });
             }
 
+            // Normalisation pour avoir une échelle de 0 à 10
+            const rawScore = sum / formula.diviseur;
+
             // Diviser par le diviseur défini dans la formule
-            impacts[scientificName].compositeImpact[criterion] =
-              sum / formula.diviseur;
+            // impacts[scientificName].compositeImpact[criterion] =
+            //   sum / formula.diviseur;
+            impacts[scientificName].compositeImpact[criterion] = normalizeScore(
+              rawScore,
+              criterion
+            );
           }
         });
       });
@@ -198,7 +309,7 @@ const usePlantImpact = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   /**
    * Enrichit les données d'impact avec les informations de biotope et calcule les statistiques
@@ -384,9 +495,9 @@ const usePlantImpact = () => {
         classificationByBiotope[biotope][criterion] = {
           highPositive: [],
           mediumPositive: [],
-          lowPositive: [],
+          // lowPositive: [],
           neutral: [],
-          lowNegative: [],
+          // lowNegative: [],
           mediumNegative: [],
           highNegative: [],
         };
@@ -441,7 +552,15 @@ const usePlantImpact = () => {
 
             // console.log("THRESHOLDS", thresholds.POSITIVE);
 
-            // Classification selon les seuils
+            // *****************************
+
+            // Classification selon les seuils avec prise en compte des scores normalisés entre 0 et 10 (sauf pour C/N)
+            // Si l'impact est > à p90 => impact très positif
+            // Si l'impact est > à p50 => impact positif
+            // Si l'impact est > à p10 => impact négatif
+            // Si l'impact est < à p10 => impact très négatif (extrême)
+            // Si l'impact est = à p50 => impact neutre
+
             if (impact >= thresholds.POSITIVE.HIGH) {
               classificationByBiotope[biotope][criterion].highPositive.push(
                 plant
@@ -452,22 +571,14 @@ const usePlantImpact = () => {
               );
               equilibriumScore++; // Ajouter à l'équilibre pour ce critère
             } else if (impact > thresholds.POSITIVE.LOW) {
-              classificationByBiotope[biotope][criterion].lowPositive.push(
+              classificationByBiotope[biotope][criterion].mediumNegative.push(
                 plant
               );
-            } else if (impact <= thresholds.NEGATIVE.HIGH) {
+            } else if (impact <= thresholds.POSITIVE.LOW) {
               classificationByBiotope[biotope][criterion].highNegative.push(
                 plant
               );
               extremeCount++;
-            } else if (impact <= thresholds.NEGATIVE.MEDIUM) {
-              classificationByBiotope[biotope][criterion].mediumNegative.push(
-                plant
-              );
-            } else if (impact <= thresholds.NEGATIVE.LOW) {
-              classificationByBiotope[biotope][criterion].lowNegative.push(
-                plant
-              );
             } else {
               classificationByBiotope[biotope][criterion].neutral.push(plant);
             }
@@ -498,159 +609,6 @@ const usePlantImpact = () => {
     setReferenceGroups(classificationByBiotope);
     return classificationByBiotope;
   };
-  /**
-   * Génère des ensembles de plantes pour la calibration par biotope
-   */
-  // const generateCalibrationSets = (plantsData, classification) => {
-  //   if (!plantsData || !classification) return null;
-
-  //   console.log("Génération des ensembles de calibration...", classification);
-
-  //   // Extraction des biotopes uniques
-  //   // const biotopes = new Set();
-
-  //   // Object.values(plantsData).forEach((plant) => {
-  //   //   if (plant.secondaryHabitat) {
-  //   //     plant.secondaryHabitat.forEach((habitat) => {
-  //   //       biotopes.add(habitat.toLowerCase());
-  //   //     });
-  //   //   }
-  //   // });
-
-  //   const biotopes = [
-  //     "maraîchages",
-  //     "jardins",
-  //     "cultures",
-  //     "prairies",
-  //     "vergers",
-  //     "vignes",
-  //   ];
-
-  //   // console.log("Biotopes uniques:", biotopes);
-
-  //   const biotopeSets = {};
-
-  //   // Pour chaque biotope, créer des ensembles de calibration
-  //   biotopes.forEach((biotope) => {
-  //     // Filtrer les plantes présentes dans ce biotope
-  //     const plantsInBiotope = Object.values(plantsData).filter((plant) => {
-  //       return (
-  //         plant.secondaryHabitat &&
-  //         plant.secondaryHabitat.some((h) => h.toLowerCase().includes(biotope))
-  //       );
-  //     });
-
-  //     //console.log(`Plantes dans le biotope ${biotope}:`, plantsInBiotope);
-
-  //     if (plantsInBiotope.length < 5) return; // Pas assez de plantes pour ce biotope
-
-  //     // Ensemble pour tester l'équilibre
-  //     const equilibratedSet = {
-  //       name: `Équilibre - ${biotope}`,
-  //       description: `Ensemble de plantes pour tester les conditions d'équilibre dans ${biotope}`,
-  //       plants: [],
-  //     };
-
-  //     // Ajouter jusqu'à 5 plantes équilibrantes de ce biotope
-  //     classification.equilibrated
-  //       .filter(
-  //         (p) =>
-  //           p.secondaryHabitat &&
-  //           p.secondaryHabitat.some((h) => h.toLowerCase().includes(biotope))
-  //       )
-  //       .slice(0, 5)
-  //       .forEach((p) => {
-  //         equilibratedSet.plants.push({
-  //           scientificName: [p.scientificName],
-  //           commonName: [p.commonName],
-  //           id: p.scientificName,
-  //           density: 20, // Densité réaliste pour la calibration
-  //         });
-  //       });
-
-  //     //console.log(`Ensemble équilibré pour ${biotope}:`, equilibratedSet);
-
-  //     // Ensembles pour tester les déséquilibres
-  //     const imbalanceSets = {};
-
-  //     // Pour chaque critère, créer un ensemble "excès" et un ensemble "déficit"
-  //     FERTILITY_CRITERIA.forEach((criterion) => {
-  //       // Ensemble pour tester l'excès
-  //       imbalanceSets[`exces_${criterion}`] = {
-  //         name: `Excès - ${criterion} - ${biotope}`,
-  //         description: `Ensemble de plantes pour tester l'excès de ${criterion} dans ${biotope}`,
-  //         plants: [],
-  //       };
-
-  //       // Ajouter jusqu'à 3 plantes à fort impact positif sur ce critère
-  //       classification[criterion].highPositive
-  //         .filter(
-  //           (p) =>
-  //             p.secondaryHabitat &&
-  //             p.secondaryHabitat.some((h) => h.toLowerCase().includes(biotope))
-  //         )
-  //         .slice(0, 3)
-  //         .forEach((p) => {
-  //           imbalanceSets[`exces_${criterion}`].plants.push({
-  //             scientificName: [p.scientificName],
-  //             commonName: [p.commonName],
-  //             id: p.scientificName,
-  //             density: 30, // Densité plus élevée pour simuler un déséquilibre
-  //           });
-  //         });
-
-  //       // Ensemble pour tester le déficit
-  //       imbalanceSets[`deficit_${criterion}`] = {
-  //         name: `Déficit - ${criterion} - ${biotope}`,
-  //         description: `Ensemble de plantes pour tester le déficit de ${criterion} dans ${biotope}`,
-  //         plants: [],
-  //       };
-
-  //       // Ajouter jusqu'à 3 plantes à fort impact négatif sur ce critère
-  //       classification[criterion].highNegative
-  //         .filter(
-  //           (p) =>
-  //             p.secondaryHabitat &&
-  //             p.secondaryHabitat.some((h) => h.toLowerCase().includes(biotope))
-  //         )
-  //         .slice(0, 3)
-  //         .forEach((p) => {
-  //           imbalanceSets[`deficit_${criterion}`].plants.push({
-  //             scientificName: [p.scientificName],
-  //             commonName: [p.commonName],
-  //             id: p.scientificName,
-  //             density: 30, // Densité plus élevée pour simuler un déséquilibre
-  //           });
-  //         });
-  //     });
-
-  //     // Filtrer les ensembles qui ont suffisamment de plantes
-  //     const validImbalanceSets = Object.fromEntries(
-  //       Object.entries(imbalanceSets).filter(
-  //         ([_, set]) => set.plants.length >= 2
-  //       )
-  //     );
-
-  //     // Ne conserver ce biotope que s'il a au moins un ensemble d'équilibre
-  //     // et quelques ensembles de déséquilibre
-  //     if (
-  //       equilibratedSet.plants.length >= 3 &&
-  //       Object.keys(validImbalanceSets).length >= 3
-  //     ) {
-  //       biotopeSets[biotope] = {
-  //         equilibrated: equilibratedSet,
-  //         imbalances: validImbalanceSets,
-  //       };
-  //     }
-  //   });
-
-  //   console.log("Calibration sets:", biotopeSets);
-  //   // console.log("Reference groups:", referenceGroups);
-  //   // console.log("Plants with biotope:", plantsWithBiotope);
-
-  //   setCalibrationSets(biotopeSets);
-  //   return biotopeSets;
-  // };
 
   /**
    * Génère des ensembles de plantes pour la calibration par biotope et par contexte agricole
@@ -658,9 +616,9 @@ const usePlantImpact = () => {
    * @param {Object} classification - Classification des plantes par biotope
    * @returns {Object} - Ensembles de calibration
    */
-
-  const generateCalibrationSets = (plantsData, classification) => {
-    if (!plantsData || !classification) return null;
+  const generateCalibrationSets = (classification) => {
+    // const generateCalibrationSets = (plantsData, classification) => {
+    if (!classification) return null;
 
     console.log("Génération des ensembles de calibration...");
 
@@ -671,19 +629,43 @@ const usePlantImpact = () => {
       "prairies",
       "vergers",
       "vignes",
+      "haies",
     ];
+
+    const equilibratedCategories = [
+      { coefficient: 1, density: 10, probability: 0.1 },
+      { coefficient: 2, density: 25, probability: 0.3 },
+      { coefficient: 3, density: 50, probability: 0.4 },
+      { coefficient: 4, density: 75, probability: 0.15 },
+      { coefficient: 5, density: 100, probability: 0.05 },
+    ];
+
+    const imbalancedCategories = [
+      { coefficient: 1, density: 10, probability: 0.4 },
+      { coefficient: 2, density: 25, probability: 0.2 },
+      { coefficient: 3, density: 50, probability: 0.1 },
+      { coefficient: 4, density: 75, probability: 0.15 },
+      { coefficient: 5, density: 100, probability: 0.15 },
+    ];
+
+    // Fonction pour choisir une catégorie basée sur les probabilités
+    function getRandomCategory(categories) {
+      const random = Math.random();
+      let cumulativeProbability = 0;
+
+      for (const category of categories) {
+        cumulativeProbability += category.probability;
+        if (random < cumulativeProbability) {
+          return category;
+        }
+      }
+
+      // Retourner la dernière catégorie par défaut (ne devrait normalement pas arriver)
+      return categories[categories.length - 1];
+    }
 
     // Structure pour les ensembles de calibration
     const calibrationSets = {};
-
-    // Contextes agricoles considérés
-    const agricultureContexts = [
-      { id: "maraichageBio", biotopes: ["maraîchages", "jardins"] },
-      { id: "grandes_cultures", biotopes: ["cultures"] },
-      { id: "viticulture", biotopes: ["vignes"] },
-      { id: "arboriculture", biotopes: ["vergers"] },
-      { id: "prairies", biotopes: ["prairies"] },
-    ];
 
     // Pour chaque biotope
     biotopes.forEach((biotope) => {
@@ -708,13 +690,24 @@ const usePlantImpact = () => {
         imbalances: {},
       };
 
-      // Ajouter jusqu'à 5 plantes équilibrantes de ce biotope
-      classification[biotope].equilibrated.slice(0, 5).forEach((p) => {
+      // Ajouter aléatoirement toutes les (jusqu'à 5) plantes équilibrantes de ce biotope
+      const shuffledPlants = [...classification[biotope].equilibrated].sort(
+        () => 0.5 - Math.random()
+      );
+      // shuffledPlants.slice(0, 5).forEach((p) => {
+      shuffledPlants.forEach((p) => {
+        const { coefficient, density } = getRandomCategory(
+          equilibratedCategories
+        );
+
         calibrationSets[biotope].equilibrated.plants.push({
           scientificName: [p.scientificName],
           commonName: [p.commonName],
-          id: p.scientificName,
-          density: 20, // Densité réaliste pour la calibration
+          id: p.id,
+          // Ajout des indicateurs bruts
+          rawIndicators: p.rawIndicators,
+          coefficient: coefficient,
+          density: density,
         });
       });
 
@@ -728,19 +721,29 @@ const usePlantImpact = () => {
             plants: [],
           };
 
-          // Ajouter jusqu'à 3 plantes à fort impact positif sur ce critère
-          classification[biotope][criterion].highPositive
-            .slice(0, 3)
-            .forEach((p) => {
-              calibrationSets[biotope].imbalances[
-                `exces_${criterion}`
-              ].plants.push({
-                scientificName: [p.scientificName],
-                commonName: [p.commonName],
-                id: p.scientificName,
-                density: 30, // Densité plus élevée pour simuler un déséquilibre
-              });
+          // Ajouter toutes les (jusqu'à 3) plantes à fort impact positif sur ce critère
+          const shuffledPlantsHighPositive = [
+            ...classification[biotope][criterion].highPositive,
+          ].sort(() => 0.5 - Math.random());
+
+          // shuffledPlantsHighPositive.slice(0, 3).forEach((p) => {
+          shuffledPlantsHighPositive.forEach((p) => {
+            // Calculer un coefficient et une densité aléatoires pour chaque plante
+            const { coefficient, density } =
+              getRandomCategory(imbalancedCategories);
+
+            calibrationSets[biotope].imbalances[
+              `exces_${criterion}`
+            ].plants.push({
+              scientificName: [p.scientificName],
+              commonName: [p.commonName],
+              id: p.id,
+              // Ajout des indicateurs bruts
+              rawIndicators: p.rawIndicators,
+              coefficient: coefficient,
+              density: density,
             });
+          });
         }
 
         // Ensemble pour tester le déficit
@@ -751,19 +754,27 @@ const usePlantImpact = () => {
             plants: [],
           };
 
-          // Ajouter jusqu'à 3 plantes à fort impact négatif sur ce critère
-          classification[biotope][criterion].highNegative
-            .slice(0, 3)
-            .forEach((p) => {
-              calibrationSets[biotope].imbalances[
-                `deficit_${criterion}`
-              ].plants.push({
-                scientificName: [p.scientificName],
-                commonName: [p.commonName],
-                id: p.scientificName,
-                density: 30, // Densité plus élevée pour simuler un déséquilibre
-              });
+          // Ajouter toutes les (jusqu'à 3) plantes à fort impact positif sur ce critère
+          const shuffledPlantsHighNegative = [
+            ...classification[biotope][criterion].highNegative,
+          ].sort(() => 0.5 - Math.random());
+
+          // shuffledPlantsHighNegative.slice(0, 3).forEach((p) => {
+          shuffledPlantsHighNegative.forEach((p) => {
+            const { coefficient, density } =
+              getRandomCategory(imbalancedCategories);
+
+            calibrationSets[biotope].imbalances[
+              `deficit_${criterion}`
+            ].plants.push({
+              scientificName: [p.scientificName],
+              commonName: [p.commonName],
+              id: p.id,
+              rawIndicators: p.rawIndicators,
+              coefficient: coefficient,
+              density: density,
             });
+          });
         }
       });
 
@@ -774,14 +785,28 @@ const usePlantImpact = () => {
         );
         delete calibrationSets[biotope];
       }
+
+      // console.log(`Calibration set for ${biotope}:`, calibrationSets[biotope]);
     });
 
-    // Créer des ensembles supplémentaires pour les contextes agricoles spécifiques
-    // en combinant les plantes des biotopes correspondants
+    // Contextes agricoles considérés
+    const agricultureContexts = [
+      { id: "maraichageBio", biotopes: ["maraîchages"] },
+      { id: "jardinage", biotopes: ["jardins"] },
+      { id: "grandesCultures", biotopes: ["cultures"] },
+      { id: "prairiesAgricoles", biotopes: ["prairies"] },
+      { id: "viticulture", biotopes: ["vignes"] },
+      { id: "arboriculture", biotopes: ["vergers"] },
+      { id: "agroforesterie", biotopes: ["haies", "cultures", "prairies"] },
+      { id: "permaculture", biotopes: ["jardins", "maraîchages", "vergers"] },
+    ];
+
+    // Créer des ensembles supplémentaires pour les contextes agricoles spécifiques en combinant les plantes des biotopes correspondants
     agricultureContexts.forEach((context) => {
       const contextBiotopes = context.biotopes.filter(
-        (b) => calibrationSets[b]
+        (b) => calibrationSets[b] && calibrationSets[b].equilibrated
       );
+      // console.log(`Context biotopes for ${context.id}:`, contextBiotopes);
 
       if (contextBiotopes.length === 0) {
         console.log(
@@ -803,15 +828,22 @@ const usePlantImpact = () => {
       // Collecter toutes les plantes équilibrantes des biotopes associés à ce contexte
       const equilibratedPlants = new Set();
       contextBiotopes.forEach((biotope) => {
-        calibrationSets[biotope].equilibrated.plants.forEach((plant) => {
-          equilibratedPlants.add(JSON.stringify(plant)); // Utiliser JSON pour éviter les doublons
-        });
+        if (calibrationSets[biotope] && calibrationSets[biotope].equilibrated) {
+          calibrationSets[biotope].equilibrated.plants.forEach((plant) => {
+            equilibratedPlants.add(JSON.stringify(plant)); // Utiliser JSON pour éviter les doublons
+          });
+        }
       });
 
-      // Convertir de nouveau en objets et limiter à 5 plantes
+      // console.log(
+      //   `Plantes équilibrantes trouvées pour ${context.id}:`,
+      //   equilibratedPlants.size
+      // );
+
+      // Convertir de nouveau en objets (et limiter à 5 plantes)
       Array.from(equilibratedPlants)
         .map((p) => JSON.parse(p))
-        .slice(0, 5)
+        // .slice(0, 5)
         .forEach((plant) => {
           calibrationSets[context.id].equilibrated.plants.push(plant);
         });
@@ -821,7 +853,11 @@ const usePlantImpact = () => {
         // Ensemble pour tester l'excès
         const excessPlants = new Set();
         contextBiotopes.forEach((biotope) => {
-          if (calibrationSets[biotope].imbalances[`exces_${criterion}`]) {
+          if (
+            calibrationSets[biotope] &&
+            calibrationSets[biotope].imbalances &&
+            calibrationSets[biotope].imbalances[`exces_${criterion}`]
+          ) {
             calibrationSets[biotope].imbalances[
               `exces_${criterion}`
             ].plants.forEach((plant) => {
@@ -834,16 +870,19 @@ const usePlantImpact = () => {
           calibrationSets[context.id].imbalances[`exces_${criterion}`] = {
             name: `Excès - ${criterion} - ${context.id}`,
             description: `Ensemble de plantes pour tester l'excès de ${criterion} en ${context.id}`,
-            plants: Array.from(excessPlants)
-              .map((p) => JSON.parse(p))
-              .slice(0, 3),
+            plants: Array.from(excessPlants).map((p) => JSON.parse(p)),
+            // .slice(0, 3),
           };
         }
 
         // Ensemble pour tester le déficit
         const deficitPlants = new Set();
         contextBiotopes.forEach((biotope) => {
-          if (calibrationSets[biotope].imbalances[`deficit_${criterion}`]) {
+          if (
+            calibrationSets[biotope] &&
+            calibrationSets[biotope].imbalances &&
+            calibrationSets[biotope].imbalances[`deficit_${criterion}`]
+          ) {
             calibrationSets[biotope].imbalances[
               `deficit_${criterion}`
             ].plants.forEach((plant) => {
@@ -856,15 +895,29 @@ const usePlantImpact = () => {
           calibrationSets[context.id].imbalances[`deficit_${criterion}`] = {
             name: `Déficit - ${criterion} - ${context.id}`,
             description: `Ensemble de plantes pour tester le déficit de ${criterion} en ${context.id}`,
-            plants: Array.from(deficitPlants)
-              .map((p) => JSON.parse(p))
-              .slice(0, 3),
+            plants: Array.from(deficitPlants).map((p) => JSON.parse(p)),
+            // .slice(0, 3),
           };
         }
       });
 
+      // console.log(`Ensembles créés pour ${context.id}:`, {
+      //   equilibrated: calibrationSets[context.id].equilibrated.plants.length,
+      //   imbalances: Object.keys(calibrationSets[context.id].imbalances).length,
+      // });
+
       // Supprimer les contextes sans assez d'ensembles de déséquilibre
       if (Object.keys(calibrationSets[context.id].imbalances).length < 3) {
+        console.log(
+          `Suppression du contexte ${context.id} - Ensembles insuffisants:`,
+          {
+            imbalances: Object.keys(calibrationSets[context.id].imbalances)
+              .length,
+            equilibrated:
+              calibrationSets[context.id].equilibrated.plants.length,
+          }
+        );
+
         delete calibrationSets[context.id];
       }
     });
@@ -946,7 +999,8 @@ const usePlantImpact = () => {
     const classified = classifyPlantsByImpact(enrichedData, stats);
     if (!classified) return null;
 
-    const calibration = generateCalibrationSets(enrichedData, classified);
+    const calibration = generateCalibrationSets(classified);
+    // const calibration = generateCalibrationSets(enrichedData, classified);
     return calibration;
   };
 

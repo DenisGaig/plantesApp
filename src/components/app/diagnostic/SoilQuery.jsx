@@ -53,13 +53,13 @@ const SoilQuery = ({ initialData, initialContext, onDataChange }) => {
         >
           <option value="">Sélectionner...</option>
           <option value="maraichageBio">Maraîchage Biologique</option>
-          <option value="potager">Potager</option>
+          <option value="jardinage">Potager</option>
           <option value="grandesCultures">Grandes Cultures Céréalières</option>
-          <option value="prairiePermanente">Prairie Permanente</option>
+          <option value="prairiesAgricoles">Prairie agricole</option>
           <option value="viticulture">Viticulture</option>
-          <option value="jardinOrnemental">Jardinage Ornemental</option>
-          <option value="verger">Verger</option>
-          <option value="autre">Autre</option>
+          <option value="arboriculture">Arboriculture</option>
+          <option value="agroforesterie">Agroforesterie</option>
+          <option value="permaculture">Permaculture</option>
         </select>
       </div>
 

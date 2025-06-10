@@ -12,11 +12,12 @@ const SoilDetailedReport = ({ detailedReport, selectedContext }) => {
     {
       maraichageBio: "maraîchage biologique",
       grandesCultures: "grandes cultures",
-      potager: "potager",
-      prairiePermanente: "prairie permanente",
-      viticulture: "vignoble",
-      jardinOrnemental: "jardin ornemental",
-      verger: "verger",
+      jardinage: "jardinage",
+      prairiesAgricoles: "prairie agricole",
+      viticulture: "viticulture",
+      arboriculture: "arboriculture",
+      agroforesterie: "agroforesterie",
+      permaculture: "permaculture",
     }[selectedContext] || selectedContext;
 
   return (
@@ -93,8 +94,8 @@ const SoilDetailedReport = ({ detailedReport, selectedContext }) => {
       <div className="detailed-report__footer">
         <p className="detailed-report__footer-text">
           Ce rapport est généré à partir des plantes bio-indicatrices présentes
-          dans votre sol. Pour des résultats plus précis, une analyse en
-          laboratoire peut être complémentaire.
+          dans votre sol. Pour des résultats plus précis, contactez des
+          spécialistes en pédologie et en écologie du sol.
         </p>
       </div>
     </div>

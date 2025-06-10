@@ -52,7 +52,8 @@ function calculatePercentiles(values: number[], percentiles = [25, 50, 75]) {
 
   percentiles.forEach((p) => {
     const index = Math.floor((sortedValues.length * p) / 100);
-    results[`p${p}`] = sortedValues[index];
+    //  results[`p${p}`] = sortedValues[index];
+    results[`p${p < 1 ? "0" : ""}${p}`] = sortedValues[index];
   });
 
   return results;

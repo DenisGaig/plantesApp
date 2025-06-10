@@ -66,7 +66,7 @@ const SoilAnalyzer = ({
   );
 
   const handleSoilAnalysis = () => {
-    generateAnalysisResults();
+    generateAnalysisResults(selectedPlants, selectedCoefficients);
   };
 
   // const sortedResultsColumns = analysisResults

@@ -1,41 +1,12 @@
-import { CircleCheckBigIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { usePlants } from "../../../context/PlantsProvider.jsx";
 import Button from "../shared/Button.jsx";
 import GlobalSearchBar from "../shared/GlobalSearchBar.jsx";
 import PlantCard from "../shared/PlantCard.jsx";
 
-const SpeciesInventory = ({ selectedPlants, onSelectionChange }) => {
+const SpeciesInventory = () => {
   const { identifiedPlants } = usePlants();
-  const [localSelectedPlants, setLocalSelectedPlants] = useState([]);
   const [showAddPlantModal, setShowAddPlantModal] = useState(false);
-
-  // Mets à jour la liste des plantes sélectionnées
-  useEffect(() => {
-    setLocalSelectedPlants(selectedPlants);
-    console.log("Local selected plants updated: ", localSelectedPlants);
-  }, [selectedPlants]);
-
-  const handlePlantToggle = (plant) => {
-    const isSelected = localSelectedPlants.some((p) => p.id === plant.id);
-    if (isSelected) {
-      // Si la plante est déjà sélectionnée, la désélectionner
-      const updated = localSelectedPlants.filter((p) => p.id !== plant.id);
-      setLocalSelectedPlants(updated);
-      onSelectionChange(updated);
-    } else {
-      // Sinon, l'ajouter à la liste des plantes sélectionnées
-      const updated = [...localSelectedPlants, plant];
-      setLocalSelectedPlants(updated);
-      onSelectionChange(updated);
-    }
-  };
-
-  const handleRemovePlant = (plant) => {
-    const updated = localSelectedPlants.filter((p) => p.id !== plant.id);
-    setLocalSelectedPlants(updated);
-    onSelectionChange(updated);
-  };
 
   return (
     <div className="species-inventory">
@@ -47,15 +18,12 @@ const SpeciesInventory = ({ selectedPlants, onSelectionChange }) => {
           pouvez en ajouter de nouvelles en cliquant sur le bouton ci-dessous.
         </p>
       </div>
-
+      {/* Modal pour ajouter une plante */}
       {!showAddPlantModal ? (
         <Button
           variant="default"
           className="species-inventory__identified-plants__button"
-          // component={Link}
-          // to="/app/plants"
           onClick={() => setShowAddPlantModal(true)}
-          // disabled={!identifiedPlants.length}
         >
           + Ajouter une plante
         </Button>
@@ -72,14 +40,13 @@ const SpeciesInventory = ({ selectedPlants, onSelectionChange }) => {
           <GlobalSearchBar />
         </div>
       )}
-
       <div className="species-inventory__identified-plants">
         <div className="species-inventory__identified-plants__section-header">
           <h3>Plantes identifiées récemment</h3>
           {identifiedPlants.length > 0 && (
             <p>
-              Sélectionnez (en cliquant sur les cartes) les plantes présentes
-              sur votre terrain pour passer au diagnostic.
+              Cliquez sur le bouton "Retirer" des plantes qui ne sont pas
+              représentatives de votre terrain
             </p>
           )}
         </div>
@@ -89,20 +56,9 @@ const SpeciesInventory = ({ selectedPlants, onSelectionChange }) => {
             {identifiedPlants.map((plant) => (
               <div
                 key={plant.id}
-                className={`species-inventory__identified-plants__plant-card ${
-                  localSelectedPlants.some((p) => p.id === plant.id)
-                    ? "species-inventory__identified-plants__plant-card--selected"
-                    : ""
-                }`}
-                onClick={() => handlePlantToggle(plant)}
+                className="species-inventory__identified-plants__plant-card"
               >
                 <PlantCard plant={plant} viewMode="list" />
-                <div className="species-inventory__identified-plants__selection-indicator">
-                  {/* Indicateur de sélection de la plante pour le diagnostic */}
-                  {localSelectedPlants.some((p) => p.id === plant.id) ? (
-                    <CircleCheckBigIcon className="species-inventory__identified-plants--check-icon" />
-                  ) : null}
-                </div>
               </div>
             ))}
           </div>
@@ -110,34 +66,6 @@ const SpeciesInventory = ({ selectedPlants, onSelectionChange }) => {
           <p className="species-inventory__identified-plants__empty">
             Vous n'avez pas encore identifié de plantes. Utilisez la
             fonctionnalité d'identification ou ajoutez des plantes manuellement.
-          </p>
-        )}
-      </div>
-
-      <div className="species-inventory__selected-plants">
-        <h3>Plantes sélectionnées pour le diagnostic</h3>
-        {localSelectedPlants.length > 0 ? (
-          <div className="species-inventory__selected-plants__plants-list">
-            {localSelectedPlants.map((plant) => (
-              <div
-                key={plant.id}
-                className="species-inventory__selected-plants__plant-card"
-              >
-                {/* <ListCard plant={plant} /> */}
-                <p>{plant.commonName || plant.scientificName}</p>
-                <button
-                  className="species-inventory__selected-plants__remove-button"
-                  onClick={() => handleRemovePlant(plant)}
-                  aria-label="Retirer cette plante"
-                >
-                  x
-                </button>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="species-inventory__selected-plants__empty">
-            Vous n'avez pas encore sélectionné de plantes pour le diagnostic.
           </p>
         )}
       </div>

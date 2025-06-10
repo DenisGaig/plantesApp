@@ -7,7 +7,8 @@ const useSoilAnalysis = (
   selectedPlants,
   selectedCoefficients,
   allColumns,
-  selectedContext = "maraichageBio"
+  selectedContext = "maraichageBio",
+  isForCalibration = false // Nouveau paramètre pour la calibration
 ) => {
   const [indicatorsDatabase, setIndicatorsDatabase] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,8 +21,11 @@ const useSoilAnalysis = (
   const [compositesResults, setCompositesResults] = useState(null);
   const [recommendations, setRecommendations] = useState(null);
 
-  // Nouveau état pour le rapport détaillé
+  // Nouvel état pour le rapport détaillé
   const [detailedReport, setDetailedReport] = useState(null);
+
+  // Nouvel état pour la calibration
+  const [isCalibrating, setIsCalibrating] = useState(false);
 
   useEffect(() => {
     try {
@@ -35,45 +39,167 @@ const useSoilAnalysis = (
     }
   }, []);
 
+  /**
+   * Fonction de normalisation standard pour tous les critères de fertilité conçue pour être utilisée avec n'importe quel biotope
+   * @param {number} rawScore  Valeur brute du score
+   * @param {string} criterion Critère de fertilité
+   * @param {number} totalDensity Densité totale des plantes
+   * @param {number} plantCount Nombre de plantes dans le biotope
+   * @returns Valeur normalisée entre 0 et 10
+   */
+  function normalizeScore(
+    rawScore,
+    criterion,
+    totalDensity = null,
+    plantCount = null
+  ) {
+    // Paramètres de normalisation par critère
+    // Ces valeurs sont calibrées pour étaler les résultats sur toute l'échelle 0-10
+    const normalizationParams = {
+      vieMicrobienne: {
+        outputMin: 0, // Valeur minimale souhaitée après normalisation
+        outputMax: 10, // Valeur maximale souhaitée après normalisation
+      },
+      complexeArgiloHumique: {
+        outputMin: 0,
+        outputMax: 10,
+      },
+      matiereOrganique: {
+        outputMin: 0,
+        outputMax: 10,
+      },
+      structurePorosite: {
+        outputMin: 0,
+        outputMax: 10,
+      },
+      equilibreCN: {
+        // Le C/N a une échelle spéciale, nous le traiterons séparément
+        baseValue: 25,
+        minValue: 5,
+        maxValue: 40,
+      },
+    };
+
+    // Cas spécial pour l'équilibre C/N (qui a son propre système d'échelle)
+    if (criterion === "equilibreCN") {
+      // Pas besoin de normalisation supplémentaire car déjà traité dans le hook
+      return rawScore;
+    }
+
+    // Pour les autres critères, normalisation linéaire dynamique
+    const params = normalizationParams[criterion];
+
+    // Détermination dynamique des limites d'entrée en fonction du nombre de plantes et densités
+    let inputMin, inputMax;
+
+    if (totalDensity !== null && plantCount !== null) {
+      // Pour les tests in-situ avec plusieurs plantes
+      // La valeur maximale théorique serait la densité totale (si toutes les plantes contribuent positivement)
+      // La valeur minimale théorique serait l'opposé de la densité totale (si toutes contribuent négativement)
+      inputMax = totalDensity;
+      inputMin = -totalDensity;
+    } else {
+      // Pour les tests unitaires (une seule plante)
+      // On utilise la plage par défaut -2 à 2
+      inputMax = 1.5;
+      inputMin = -1.5;
+    }
+
+    // Application de la transformation linéaire
+    // normalizedScore = (rawScore - inputMin) * (outputMax - outputMin) / (inputMax - inputMin) + outputMin
+    const normalizedScore =
+      ((rawScore - inputMin) * (params.outputMax - params.outputMin)) /
+        (inputMax - inputMin) +
+      params.outputMin;
+
+    // S'assurer que le score est bien dans l'intervalle [outputMin, outputMax]
+    return Math.max(
+      params.outputMin,
+      Math.min(params.outputMax, normalizedScore)
+    );
+
+    // return rawScore;
+
+    // Formule de normalisation avec décalage, échelle et minimum
+    // (rawScore + offset) * scale + minValue
+    // Borne les résultats entre 0 et 10
+    // const normalizedScore = Math.max(
+    //   params.minValue,
+    //   Math.min(10, (rawScore + params.offset) * params.scale + params.minValue)
+    // );
+
+    // return normalizedScore;
+  }
+  /**
+   * Calcule l'équilibre C/N d'un sol à partir des valeurs de matière organique carbonée (moC) et matière organique azotée (moN).
+   * @param {number} moC
+   * @param {number} moN
+   * @returns
+   */
+  const calculateEquilibreCN = (moC, moN, totalPlants = 1) => {
+    // Calcul de l'écart (C - N)
+    // Écart positif = plus de carbone relatif = ratio C/N plus élevé
+    // Écart négatif = plus d'azote relatif = ratio C/N plus bas
+    const moCNormalized = moC / totalPlants;
+    const moNNormalized = moN / totalPlants;
+    const ecart = moCNormalized - moNNormalized;
+
+    // Cas particuliers : carences simultanées
+    if (moCNormalized < 0 && moNNormalized < 0) {
+      // Sol carencé en C ET N : ratio dégradé même si "équilibré"
+      const severite = Math.abs(moCNormalized + moNNormalized) / 2; // Moyenne des carences
+      const ratioDegrade = 25 - severite * 3; // Dégradation progressive
+      return Math.max(
+        8,
+        Math.min(ratioDegrade + 15 * Math.tanh(ecart * 0.5), 40)
+      );
+    }
+    // Transformation sigmoïde centrée sur 25 (ratio C/N idéal)
+    // Formule: ratio = centre + amplitude * tanh(écart * sensibilité)
+    const centre = 25; // Ratio C/N de référence (équilibré)
+    const amplitude = 15; // Amplitude max (25 ± 15 = [10, 40])
+    const sensibilite = 0.5; // Contrôle la pente de la courbe
+
+    const ratio = centre + amplitude * Math.tanh(ecart * sensibilite);
+
+    // Borner entre des valeurs réalistes
+    return Math.max(8, Math.min(ratio, 40));
+  };
+
   // Calcul des indices composites basé sur les résultats des indicateurs
-  const calculateCompositeIndices = (results) => {
+  const calculateCompositeIndices = (results, selectedCoefficients) => {
     console.log("Hook - calculateCompositeIndices called");
     const composites = {};
 
+    const totalDensity = Object.values(selectedCoefficients).reduce(
+      (sum, coeff) => sum + coeff,
+      0
+    );
+    const plantCount = Object.keys(selectedCoefficients).length;
+
+    // console.log("Hook - Coefficients sélectionnés : ", selectedCoefficients);
+    // console.log("Hook - Densité totale : ", totalDensity);
+    // console.log("Hook - Nombre de plantes : ", plantCount);
+
     // Calcul pour chaque indice composite selon les formules définies
-    Object.keys(soilDiagnosticData.formules).forEach((indiceKey) => {
-      const formule = soilDiagnosticData.formules[indiceKey];
-      let result;
+    Object.keys(soilDiagnosticData.formules).forEach((criterion) => {
+      const formule = soilDiagnosticData.formules[criterion];
+      let rawScore;
+
+      // Fonction utilitaire pour récupérer la valeur numérique d'un indicateur
+      const getNumericValue = (indicator) => {
+        if (!results[indicator]) return 0;
+        return results[indicator].positive - results[indicator].negative;
+      };
 
       // Cas spécial pour l'équilibre C/N
-      if (indiceKey === "equilibreCN") {
-        // Conversion explicite des symboles
-        const getNumericValue = (indicator) => {
-          if (!results[indicator]) return 0;
-          return results[indicator].positive - results[indicator].negative;
-        };
-
+      if (criterion === "equilibreCN") {
         const MO_C = getNumericValue("MO(C)");
         const MO_N = getNumericValue("MO(N)");
 
-        // --------------------------
-        // Protection contre les divisions extrêmes
-        const safeMO_N = Math.max(MO_N, 0.1); // Évite division par zéro
+        rawScore = calculateEquilibreCN(MO_C, MO_N, plantCount);
 
-        // Calcul de base
-        let cnRatio = MO_C / safeMO_N;
-
-        // Transformation logarithmique pour compresser l'échelle
-        cnRatio = Math.sign(cnRatio) * Math.log1p(Math.abs(cnRatio));
-
-        // Normalisation pour correspondre aux plages C/N agronomiques
-        const normalizedCN = cnRatio * 3.5 + 25; // Centre autour de 20-30
-
-        result = Math.max(5, Math.min(normalizedCN, 40));
-
-        // Applique la formule hybride
-        // result = (MO_C / Math.max(MO_N, 0.1)) * 0.3;
-        // console.log("Hook - Calcul équilibre C/N: ", result);
+        console.log("Hook Soil Analysis - Calcul équilibre C/N: ", rawScore);
       } else {
         // 1. Calcul standard des termes principaux pour les autres indices
         let sum = 0;
@@ -82,9 +208,7 @@ const useSoilAnalysis = (
           const coefficient = facteur.coefficient;
 
           // Récupérer la valeur nette de l'indicateur (positif - négatif)
-          const indicateurValue = results[indicateur]
-            ? results[indicateur].positive - results[indicateur].negative
-            : 0;
+          const indicateurValue = getNumericValue(indicateur);
 
           sum += indicateurValue * coefficient;
         });
@@ -92,29 +216,38 @@ const useSoilAnalysis = (
         // 2. Gestion des interactions (cas spécial pour Nit*Al3+)
         if (formule.interactions) {
           formule.interactions.forEach((interaction) => {
-            const val1 = results[interaction.indicateurs[0]]
-              ? results[interaction.indicateurs[0]].positive -
-                results[interaction.indicateurs[0]].negative
-              : 0;
-            const val2 = results[interaction.indicateurs[1]]
-              ? results[interaction.indicateurs[1]].positive -
-                results[interaction.indicateurs[1]].negative
-              : 0;
+            const val1 = getNumericValue(interaction.indicateurs[0]);
+            const val2 = getNumericValue(interaction.indicateurs[1]);
 
             if (interaction.operation === "multiply") {
               sum += val1 * val2 * interaction.coefficient;
+            }
+            if (interaction.operation === "airWaterEffect") {
+              sum +=
+                0.8 * (Math.min(1, val1) - Math.max(0, val1)) -
+                0.5 * Math.abs(val2) * interaction.coefficient;
+            }
+            if (interaction.operation === "airWaterBalance") {
+              sum +=
+                (1 - Math.abs(val1 - 0.5) - Math.max(0, val2)) *
+                interaction.coefficient;
             }
             // Ajoutez d'autres opérations si nécessaire (ex: addition)
           });
         }
 
         // 3. Division finale de la somme par le diviseur défini dans la formule
-        result = sum / formule.diviseur;
-        console.log(`Hook - Calculated ${indiceKey}:`, result);
-        console.log(`Hook - Formula used:`, formule);
+        rawScore = sum / formule.diviseur;
+        // console.log(`Hook - Calculated ${criterion}:`, rawScore);
+        // console.log(`Hook - Formula used:`, formule);
       }
 
-      composites[indiceKey] = result;
+      composites[criterion] = normalizeScore(
+        rawScore,
+        criterion,
+        totalDensity,
+        plantCount
+      );
     });
     return composites;
   };
@@ -122,12 +255,15 @@ const useSoilAnalysis = (
   // Génération des recommandations basé sur les indices composites et le contexte sélectionné
   const generateRecommendations = (composites, selectedContext) => {
     console.log("Hook - generateRecommendations called");
+
     const recommendations = {};
     const plagesContext = soilDiagnosticData.plagesOptimales[selectedContext];
-    const deficit = soilDiagnosticData.seuilsEcarts.deficit;
-    const exces = soilDiagnosticData.seuilsEcarts.exces;
 
     Object.keys(composites).forEach((indiceKey) => {
+      const deficit =
+        soilDiagnosticData.seuilsEcarts[selectedContext][indiceKey].deficit;
+      const exces =
+        soilDiagnosticData.seuilsEcarts[selectedContext][indiceKey].exces;
       const valeur = composites[indiceKey];
       const plage = plagesContext[indiceKey];
 
@@ -495,107 +631,135 @@ const useSoilAnalysis = (
     [indicatorsDatabase]
   );
 
-  const generateAnalysisResults = () => {
+  const generateAnalysisResults = (
+    selectedPlants = selectedPlants,
+    selectedCoefficients = selectedCoefficients
+  ) => {
+    setIsCalibrating(isForCalibration);
     setLoading(true);
-    console.log("Hook - Loading set to true");
-    setTimeout(() => {
-      try {
-        setError(null);
+    console.log("Hook - Génération des résultats d'analyse...");
+    // Logique pour générer les résultats d'analyse
+    console.log("Hook - Analyse du sol en cours...");
+    // console.log("Hook - Selected plants:", selectedPlants);
+    // console.log("Hook - Selected coefficients:", selectedCoefficients);
 
-        // Logique pour générer les résultats d'analyse
-        console.log("Hook - Analyse du sol en cours...");
-        console.log("Hook - Selected plants:", selectedPlants);
-        console.log("Hook - Selected coefficients:", selectedCoefficients);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        try {
+          setError(null);
 
-        const results = {};
-        // Initialiser les résultats avec des objets pour stocker les valeurs positives et négatives
-        allColumns.forEach((column) => {
-          results[column] = { positive: 0, negative: 0, total: 0 };
-        });
-
-        selectedPlants.forEach((plant) => {
-          const plantData = indicatorsDatabase.find(
-            (p) => p.scientificName === plant.scientificName[0]
-          );
-
-          // Récupérer la densité correspondante à partir de selectedCoefficients
-          const density = selectedCoefficients[plant.id] || 0;
-          console.log(
-            "Hook - Densité de la plante",
-            plant.scientificName,
-            ":",
-            density,
-            "%"
-          );
-
-          if (plantData && plantData.caracteristiques) {
-            Object.entries(plantData.caracteristiques).forEach(
-              ([column, value]) => {
-                if (!results[column]) {
-                  results[column] = { positive: 0, negative: 0, total: 0 };
-                }
-                if (value === "+" || value === "+K" || value === "++") {
-                  results[column].positive += density;
-                } else if (value === "-" || value === "--") {
-                  results[column].negative += density;
-                }
-                results[column].total =
-                  results[column].positive + results[column].negative;
-              }
-            );
-          }
-        });
-
-        setAnalysisResults(results);
-
-        // Calculer les indices composites
-        const composites = calculateCompositeIndices(results);
-        setCompositesResults(composites);
-        console.log("Hook - Indices composites calculés:", composites);
-
-        // Générer les recommandations
-        const recommendationsResults = generateRecommendations(
-          composites,
-          selectedContext
-        );
-        setRecommendations(recommendationsResults);
-        console.log("Hook - Recommandations générées:", recommendationsResults);
-
-        // Générer le rapport
-        const report = generateDetailedReport(
-          results,
-          composites,
-          recommendationsResults,
-          selectedContext
-        );
-        setDetailedReport(report);
-        console.log("Hook - Rapport détaillé généré:", report);
-
-        setShowResults(true);
-        console.log("Hook - Analyse du sol terminée", results);
-
-        // Calculer et définir sortedColumns immédiatement
-        const sortedResultsColumns = allColumns
-          .filter((column) => results[column].total > 0)
-          .sort((a, b) => {
-            const totalA = results[a].total;
-            const totalB = results[b].total;
-            return totalB - totalA;
+          const results = {};
+          // Initialiser les résultats avec des objets pour stocker les valeurs positives et négatives
+          allColumns.forEach((column) => {
+            results[column] = { positive: 0, negative: 0, total: 0 };
           });
 
-        setSortedColumns(sortedResultsColumns);
-        console.log(
-          "Hook - Colonnes triées (immédiatement après analyse):",
-          sortedResultsColumns
-        );
-        return results; // Retourne les résultats pour les tests unitaires
-      } catch (err) {
-        setError("Erreur lors de l'analyse du sol");
-        console.error("Hook - Erreur lors de l'analyse du sol:", err);
-      } finally {
-        setLoading(false);
-      }
-    }, 2000); // Simule un délai de 2 secondes pour l'analyse);
+          selectedPlants.forEach((plant) => {
+            const plantData = indicatorsDatabase.find(
+              (p) => p.scientificName === plant.scientificName[0]
+            );
+
+            // Récupérer la densité correspondante à partir de selectedCoefficients
+            const density = selectedCoefficients[plant.id] || 0;
+
+            if (!density) {
+              console.warn(
+                `Hook - Densité non trouvée pour la plante ${plant.scientificName}`
+              );
+              return;
+            }
+
+            // console.log(
+            //   "Hook - Densité de la plante",
+            //   plant.scientificName,
+            //   ":",
+            //   density,
+            //   "%"
+            // );
+
+            if (plantData && plantData.caracteristiques) {
+              Object.entries(plantData.caracteristiques).forEach(
+                ([column, value]) => {
+                  if (!results[column]) {
+                    results[column] = { positive: 0, negative: 0, total: 0 };
+                  }
+                  if (value === "+" || value === "+K" || value === "++") {
+                    results[column].positive += density;
+                  } else if (value === "-" || value === "--") {
+                    results[column].negative += density;
+                  }
+                  results[column].total =
+                    results[column].positive + results[column].negative;
+                }
+              );
+            }
+          });
+
+          setAnalysisResults(results);
+
+          console.log("Hook - Résultats de l'analyse:", results);
+
+          // Calculer les indices composites
+          const composites = calculateCompositeIndices(
+            results,
+            selectedCoefficients
+          );
+          setCompositesResults(composites);
+          console.log("Hook - Indices composites calculés:", composites);
+
+          // Si c'est pour la calibration, on s'arrête ici
+          if (isForCalibration) {
+            resolve(composites); // Retourne seulement l'essentiel pour les tests
+          }
+          // Générer les recommandations
+          const recommendationsResults = generateRecommendations(
+            composites,
+            selectedContext
+          );
+          setRecommendations(recommendationsResults);
+          console.log(
+            "Hook - Recommandations générées:",
+            recommendationsResults
+          );
+
+          // Générer le rapport
+          const report = generateDetailedReport(
+            results,
+            composites,
+            recommendationsResults,
+            selectedContext
+          );
+          setDetailedReport(report);
+          console.log("Hook - Rapport détaillé généré:", report);
+
+          setShowResults(true);
+          console.log("Hook - Analyse du sol terminée", results);
+
+          // Calculer et définir sortedColumns immédiatement
+          const sortedResultsColumns = allColumns
+            .filter((column) => results[column].total > 0)
+            .sort((a, b) => {
+              const totalA = results[a].total;
+              const totalB = results[b].total;
+              return totalB - totalA;
+            });
+
+          setSortedColumns(sortedResultsColumns);
+          console.log(
+            "Hook - Colonnes triées (immédiatement après analyse):",
+            sortedResultsColumns
+          );
+          resolve(results); // Retourne les résultats pour les tests unitaires
+        } catch (err) {
+          setError("Erreur lors de l'analyse du sol");
+          console.error("Hook - Erreur lors de l'analyse du sol:", err);
+          resolve(null); // Retourne null en cas d'erreur pour les tests unitaires
+        } finally {
+          setIsCalibrating(false);
+          setLoading(false);
+        }
+      }, 2000); // Simule un délai de 2 secondes pour l'analyse);
+    });
   };
 
   // Fonction getSortedResults pour toute utilisation externe
@@ -632,6 +796,7 @@ const useSoilAnalysis = (
     sortedColumns,
     showResults,
     detailedReport,
+    isCalibrating,
     generateAnalysisResults,
     resetAnalysis,
     getSortedResults,
