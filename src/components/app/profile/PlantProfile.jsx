@@ -120,11 +120,36 @@ const PlantProfile = () => {
     );
   };
 
+  const handleSendPlant = () => {
+    console.log("Envoyer la plante pour ajout à la base de donnée");
+  };
+
   if (loading) {
     return <div>Chargement...</div>;
   }
   if (!plant) {
-    return <div>Plante non trouvée</div>;
+    return (
+      <div className="plant-profile__not-found">
+        Cette plante ne fait pas partie de la base de donnée
+        <p>
+          Envoyer cette plante à l'administrateur pour quelle soit ajoutée à la
+          base de donnée{" "}
+        </p>
+        <button
+          onClick={handleSendPlant}
+          className="plant-profile__send-button"
+        >
+          Envoyer
+        </button>{" "}
+        <button
+          onClick={handleBackToSearch}
+          className="plant-profile__back-button"
+        >
+          {" "}
+          ← Retour aux résultats
+        </button>
+      </div>
+    );
   }
 
   const menu = [
@@ -208,7 +233,7 @@ const PlantProfile = () => {
         </div>
       </div>
       <div className="plant-profile__tabs">
-        {menu.map((item) => (
+        {menu.map((item, index) => (
           <button
             className={`tabs-button ${activeTab === item.name ? "active" : ""}`}
             onClick={() => setActiveTab(item.name)}

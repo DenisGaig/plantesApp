@@ -40,7 +40,7 @@ const verticalNavbar = () => {
     {
       id: "plants",
       link: "/plants",
-      label: "Base de données",
+      label: "Recherche",
       icon: LucideSearch,
     },
     {
@@ -52,7 +52,7 @@ const verticalNavbar = () => {
     {
       id: "resultats",
       link: "/resultats",
-      label: "Résultats",
+      label: "Historique",
       icon: ClipboardCheck,
     },
     {

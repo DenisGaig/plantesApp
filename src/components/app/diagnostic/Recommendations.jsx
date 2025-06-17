@@ -132,11 +132,12 @@ const Recommendations = ({
         En résumé pour{" "}
         {selectedContext === "maraichageBio" && "votre maraîchage bio"}
         {selectedContext === "grandesCultures" && "vos grandes cultures"}
-        {selectedContext === "potager" && "votre potager"}
-        {selectedContext === "prairiePermanente" && "votre prairie permanente"}
+        {selectedContext === "jardin" && "votre potager"}
+        {selectedContext === "prairieAgricole" && "votre prairie permanente"}
         {selectedContext === "viticulture" && "votre vignoble"}
-        {selectedContext === "jardinOrnemental" && "votre jardin ornemental"}
-        {selectedContext === "verger" && "votre verger"}
+        {selectedContext === "arboriculture" && "votre verger"}
+        {selectedContext === "agroforesterie" && "votre agroforesterie"}
+        {selectedContext === "permaculture" && "votre parcelle en permaculture"}
       </h2>
 
       {/* Boutons pour basculer entre les types de graphiques */}

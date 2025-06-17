@@ -1301,7 +1301,7 @@
         "Prairies équilibrées pour Arrhenatherum elatius subsp. elatius",
         "Engorgement en C ou enfouissement de MO végétale au fond de la raie lors de labours pour Arrhenatherum elatius subsp.bulbosum (Avoine à chapelet)"
       ],
-      "soilCondition": "",
+      "soilCondition": "1",
       "floweringPeriod": "",
       "melliferous": "",
       "ecology": [],
@@ -2091,7 +2091,7 @@
       "id": 40,
       "scientificName": ["Bidens radiata", "Bidens tripartita"],
       "commonName": ["Bident radié", "Bident tripartite"],
-      "family": ["Astéracée"],
+      "family": ["ASTÉRACÉES"],
       "synonyms": [],
       "description": {
         "generalDescription": [
@@ -10143,8 +10143,8 @@
     {
       "id": 198,
       "scientificName": ["Prunus spinosa"],
-      "commonName": ["Prunellier", "Épine noire", "Buisson noir", "ROSACÉES"],
-      "family": [],
+      "commonName": ["Prunellier", "Épine noire", "Buisson noir"],
+      "family": ["ROSACÉES"],
       "synonyms": [],
       "description": {
         "generalDescription": [
@@ -13831,7 +13831,7 @@
       "id": 267,
       "scientificName": ["Xanthium strumarium", "Xanthium macrecarpum"],
       "commonName": ["Lampourde"],
-      "family": ["Astéracées"],
+      "family": ["ASTÉRACÉES"],
       "synonyms": ["Xanthium orientale"],
       "description": {
         "generalDescription": [

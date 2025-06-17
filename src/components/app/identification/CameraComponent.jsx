@@ -46,21 +46,25 @@ const CameraComponent = ({ onResultsReceived, onImagePreview }) => {
   return (
     <div className="camera-component">
       <form className="camera-component__upload-input" onSubmit={handleSubmit}>
-        <span className="camera-component__upload-icon">
-          <ImagePlus />
-        </span>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          id="image-upload"
-        />
-        <label
-          htmlFor="image-upload"
-          className="camera-component__upload-label"
-        >
-          Sélectionnez une image
-        </label>
+        {!imagePreview && (
+          <>
+            <span className="camera-component__upload-icon">
+              <ImagePlus />
+            </span>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              id="image-upload"
+            />
+            <label
+              htmlFor="image-upload"
+              className="camera-component__upload-label"
+            >
+              Sélectionnez une image
+            </label>
+          </>
+        )}
 
         {imagePreview && (
           <div className="camera-component__image-preview">

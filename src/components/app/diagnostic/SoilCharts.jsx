@@ -32,6 +32,11 @@ const SoilCharts = ({
   // Etat pour suivre la section active du camembert
   const [activeIndex, setActiveIndex] = useState(null);
 
+  // Ajouter cette fonction helper si elle n'existe pas déjà
+  function normalizeValue(value, inMin, inMax, outMin, outMax) {
+    return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+  }
+
   // Préparation des données pour les barres
   const plantData = selectedPlants
     ? selectedPlants.map((plant) => ({
@@ -57,8 +62,18 @@ const SoilCharts = ({
       // Vérifier si la clé existe dans les recommandations
       if (!recommendations[key]) return;
 
-      const value = compositesResults[key];
+      console.log(
+        "Equilibre CN Avant Normalisation: ",
+        compositesResults["equilibreCN"]
+      );
+
+      const value =
+        key === "equilibreCN"
+          ? normalizeValue(compositesResults[key], 8, 40, 0, 10)
+          : compositesResults[key];
       const rec = recommendations[key];
+
+      console.log(key === "equilibreCN" ? value : "");
 
       // Conversion des clés en noms affichables
       let displayName = key;
@@ -120,9 +135,9 @@ const SoilCharts = ({
   // Obtenir la couleur en fonction du type (déficit, équilibre, excès)
   const getColorForType = (type) => {
     switch (type) {
-      case "deficit":
-        return "#ffa500"; // Orange
       case "exces":
+        return "#ffa500"; // Orange
+      case "deficit":
         return "#ff0000"; // Rouge
       case "equilibre":
         return "#008000"; // Vert

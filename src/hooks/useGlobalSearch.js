@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { normalizeString } from "../utils.ts";
 
 const useGlobalSearch = (initialData = []) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -116,25 +117,45 @@ const useGlobalSearch = (initialData = []) => {
         ) {
           suggestions.add(plant.scientificName[0]);
         }
-        if (
-          plant.commonName[0]?.toLowerCase().includes(searchTerm.toLowerCase())
-        ) {
-          suggestions.add(plant.commonName[0]);
-        }
+
+        plant.commonName.forEach((name) => {
+          const normalizedName = normalizeString(name);
+          const normalizedSearchTerm = normalizeString(searchTerm);
+          if (
+            normalizedName
+              .toLowerCase()
+              .includes(normalizedSearchTerm.toLowerCase())
+          ) {
+            suggestions.add(name);
+          }
+        });
       });
 
       // Ajouter des indicateurs si nous avons encore de la place
       if (suggestions.size < 5) {
         initialData.forEach((plant) => {
           console.log("family", plant.family);
-          if (
-            plant.family?.[0]?.toLowerCase().includes(searchTerm.toLowerCase())
-          ) {
-            suggestions.add(plant.family);
-          }
-          // plant.indicators.forEach((indicator) => {
+
+          plant.family.forEach((name) => {
+            const normalizedName = normalizeString(name);
+            const normalizedSearchTerm = normalizeString(searchTerm);
+
+            if (
+              normalizedName
+                .toLowerCase()
+                .includes(normalizedSearchTerm.toLowerCase())
+            ) {
+              suggestions.add(name);
+            }
+          });
+
+          // plant.primaryHabitat.forEach((indicator) => {
+          //   const normalizedName = normalizeString(indicator);
+          //   const normalizedSearchTerm = normalizeString(searchTerm);
           //   if (
-          //     indicator.toLowerCase().includes(searchTerm.toLowerCase()) &&
+          //     normalizedName
+          //       .toLowerCase()
+          //       .includes(normalizedSearchTerm.toLowerCase()) &&
           //     suggestions.size < 5
           //   ) {
           //     suggestions.add(indicator);
@@ -164,7 +185,19 @@ const useGlobalSearch = (initialData = []) => {
   // Mise en évidence du texte correspondant
   const highlightText = (text, term) => {
     console.log("highlightText text, term: ", text, term);
-    if (text === undefined || text === null) return "";
+    // if (text === undefined || text === null) return "";
+
+    // Vérifie si le texte est un tableau
+    if (Array.isArray(text)) {
+      // Traite chaque élément du tableau
+      return text.map((item) => highlightText(item, term)).join(", ");
+    }
+
+    // Vérifie si le texte est undefined, null, ou non une chaîne
+    if (typeof text !== "string") {
+      console.warn("Text is not a string:", text);
+      return String(text); // Convertit en chaîne ou retourne une valeur par défaut
+    }
 
     if (!term.trim()) return text;
 

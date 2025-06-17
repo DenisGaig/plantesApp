@@ -26,8 +26,7 @@ export default function Identification() {
 
     let normalizedPlant;
 
-    // Vérifier si c'est une plante temporaire (issue directement de PlantNet)
-    // ou une plante de votre base de données (qui a été matchée)
+    // Vérifier si c'est une plante temporaire (issue directement de PlantNet) ou une plante de votre base de données (qui a été matchée)
     if (plant.isTemporary !== undefined) {
       // C'est une plante traitée par integrateIdentificationResults
       if (plant.isTemporary) {
