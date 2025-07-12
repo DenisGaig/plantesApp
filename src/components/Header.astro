@@ -40,24 +40,28 @@ const navItems = [
       throw new Error('navbar is required')
   }
 
-  window.addEventListener('scroll',()=>{
-      if (window.scrollY > 100) 
-          { 
-              header.style.height = "50px";
-              logo.style.width = "40px";
-              logo.style.height = "40px"
+  let lastScrollPosition = 0;
 
-          } else {
-            header.style.height = "70px";
-              logo.style.width = "50px";
-              logo.style.height = "50px"
-          } 
-          if (window.scrollY > 150) {
-            header.classList.add('active')
-          }
-          else {
-            header.classList.remove('active')
-          }
-      })
+  window.addEventListener('scroll',()=>{
+    const currentScrollPosition = window.scrollY;
+      if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 100) {
+      // Fait défiler vers le bas
+      header.style.display = "none";
+    } else if (currentScrollPosition < lastScrollPosition ) {
+      // Fait défiler vers le haut
+      header.style.display = "flex";
+      header.style.height = "70px";
+      logo.style.width = "50px";
+      logo.style.height = "50px";
+    }
+    if (window.scrollY > 150) {
+      header.classList.add('active')
+    }
+    else {
+      header.classList.remove('active')
+    }
+    lastScrollPosition = currentScrollPosition;
+  }
+  )
 
 </script>

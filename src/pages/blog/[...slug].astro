@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
+import TableOfContent from "../../components/blog/astro/TableOfContent.astro";
+import Tags from "../../components/blog/astro/Tags.astro";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 import "/src/styles/index.scss";
 
@@ -13,7 +15,8 @@ export async function getStaticPaths() {
 }
 type Props = {entry: CollectionEntry<"blog">};
 const { entry } = Astro.props as Props;
-const { Content } = await entry.render();
+const { Content, headings} = await entry.render();
+const imageUrl = entry.data.image.src ? entry.data.image.src : "";
 ---
 <!-- <style>
   .article__header {
@@ -29,8 +32,14 @@ const { Content } = await entry.render();
   url={`https://www.monblogastro.com/blog/${entry.slug}`}
 >
 <div class="article">
-  <div class="article__header" style={`--article-header-bg: url(${entry.data.image.src});`}>
-    <h1>{entry.data.title}</h1>
+  <div class="article__header" style={`--article-header-bg: url(${imageUrl});`}>
+    <!-- <h1>{entry.data.title}</h1> -->
+  </div>
+  <div class="article__toc">
+    <TableOfContent headings={headings} />
+  </div>
+  <div class="article__tags">
+    <Tags tags={entry.data.tags} />
   </div>
   <div class="article__content">
     <Content/>

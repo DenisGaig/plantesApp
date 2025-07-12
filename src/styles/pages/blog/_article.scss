@@ -1,10 +1,68 @@
-// --article-header-bg: url("../../assets/images/plantes/achillee.jpg");
 $article-header-height: 500px;
 
 .article {
+  @media (min-width: 1200px) {
+    position: relative;
+  }
   &__header {
     height: $article-header-height;
     background: var(--article-header-bg) no-repeat center/cover;
+  }
+
+  /* Styles pour le conteneur du sommaire */
+  &__toc {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+
+    /* Version mobile et tablette */
+    @media (max-width: 1199px) {
+      padding: 0 1rem;
+    }
+
+    /* Sommaire sticky dans la marge gauche sur desktop */
+    @media (min-width: 1200px) {
+      position: absolute;
+      left: calc((100vw - 800px) / 2 - 310px);
+      top: $article-header-height;
+      width: 300px;
+      padding: 0;
+      margin: 0;
+      z-index: 10;
+
+      /* Rendre le sommaire sticky une fois qu'il atteint le top */
+      .article__toc {
+        position: sticky;
+        top: 2rem;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+      }
+
+      /* Masquer le sommaire si l'écran est trop petit */
+      @media (max-width: 1400px) {
+        display: none;
+      }
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+    // border-top: 1px solid rgba($primary-color, 0.2);
+
+    //   span {
+    //     background: rgba($primary-color, 0.1);
+    //     color: $primary-color;
+    //     padding: 0.3rem 0.8rem;
+    //     border-radius: 20px;
+    //     font-size: 0.9rem;
+    //     font-weight: 500;
+    //   }
   }
 
   &__content {
@@ -14,8 +72,52 @@ $article-header-height: 500px;
 
     h1 {
       font-size: 2.5rem;
-      margin-bottom: 1rem;
+      text-align: center;
+      color: $primary-color;
+      margin-bottom: 2rem;
+      position: relative;
+
+      &::after {
+        content: "";
+        width: 100px;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          $primary-color,
+          lighten($primary-color, 20%)
+        );
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
+
+    h2 {
+      font-size: 1.8rem;
+      color: $primary-color;
+      border-left: 4px solid $primary-color;
+      padding-left: 1rem;
+      margin: 2.5rem 0 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: darken($primary-color, 10%);
+      margin: 2rem 0 1rem;
+      position: relative;
+
+      &::after {
+        content: "";
+        width: 50px;
+        height: 2px;
+        background: $primary-color;
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+      }
+    }
+
     p {
       font-size: 1.125rem;
       line-height: 1.6;
@@ -25,6 +127,201 @@ $article-header-height: 500px;
         font-style: italic;
         color: $primary-color;
         font-weight: 600;
+      }
+    }
+
+    //lien hypertexte
+    a {
+      color: $primary-color;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+      &:hover {
+        border-bottom: 1px solid $primary-color;
+      }
+      &:active {
+        color: darken($primary-color, 10%);
+      }
+      &:visited {
+        color: darken($primary-color, 15%);
+      }
+    }
+
+    .footnote {
+      font-size: 0.9rem;
+      line-height: 1.2;
+    }
+
+    // Style général des listes
+    ul {
+      background: rgba($primary-color, 0.02);
+      border-radius: 8px;
+      padding: 1.5rem;
+      // margin: 1.5rem 0;
+
+      li {
+        position: relative;
+        padding-left: 2.5rem;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+
+        &::before {
+          position: absolute;
+          content: "•";
+          left: 0;
+          top: 0;
+          font-size: 1.2rem;
+        }
+
+        strong {
+          color: $primary-color;
+          font-weight: 600;
+        }
+      }
+    }
+
+    img {
+      max-width: 50%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 2rem auto;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    // Listes avec icônes contextuelles
+    .identification-list {
+      li::before {
+        content: "🔍";
+      }
+    }
+
+    .ecological-list {
+      li::before {
+        content: "🌾";
+      }
+    }
+
+    .animal-list {
+      li::before {
+        content: "🪲";
+      }
+    }
+
+    .medicinal-list {
+      li::before {
+        content: "⚕️";
+      }
+    }
+
+    .culinary-list {
+      li::before {
+        content: "🍃";
+      }
+    }
+
+    blockquote {
+      background: linear-gradient(
+        135deg,
+        rgba($primary-color, 0.1),
+        rgba($primary-color, 0.05)
+      );
+      border-left: 4px solid $primary-color;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      strong {
+        color: $primary-color;
+        font-size: 1.1rem;
+      }
+    }
+
+    .ducerf-profile {
+      background: linear-gradient(
+        135deg,
+        rgba(#2e7d32, 0.1),
+        rgba(#4caf50, 0.05)
+      );
+      border: 2px solid #4caf50;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      position: relative;
+
+      &::before {
+        content: "🔬";
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        background: white;
+        padding: 0 10px;
+        font-size: 1.2rem;
+      }
+
+      strong {
+        color: #2e7d32;
+        font-size: 1.1rem;
+      }
+    }
+
+    // Encadré Précautions
+    .warning-box {
+      background: linear-gradient(
+        135deg,
+        rgba(#ff9800, 0.1),
+        rgba(#ffc107, 0.05)
+      );
+      border: 2px solid #ff9800;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      position: relative;
+
+      &::before {
+        content: "⚠️";
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        background: white;
+        padding: 0 10px;
+        font-size: 1.2rem;
+      }
+
+      strong {
+        color: #e65100;
+        font-size: 1.1rem;
+      }
+    }
+
+    // Encadré Astuce terrain
+    .field-tip {
+      background: linear-gradient(
+        135deg,
+        rgba(#2196f3, 0.1),
+        rgba(#03a9f4, 0.05)
+      );
+      border: 2px solid #2196f3;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      position: relative;
+
+      &::before {
+        content: "💡";
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        background: white;
+        padding: 0 10px;
+        font-size: 1.2rem;
+      }
+
+      strong {
+        color: #1976d2;
+        font-size: 1.1rem;
       }
     }
   }

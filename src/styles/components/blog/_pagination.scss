@@ -1,0 +1,26 @@
+.pagination-container {
+  display: flex;
+  margin: 10px 30px 30px;
+  justify-content: space-between;
+  //   gap: 50px;
+
+  a {
+    background: $primary-color;
+    padding: 2px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 50ms ease;
+  }
+
+  a:hover {
+    background: $primary-color;
+    color: white;
+    transform: scale(1.1);
+  }
+
+  .previous-disable,
+  .next-disable {
+    pointer-events: none;
+    background: gray;
+  }
+}

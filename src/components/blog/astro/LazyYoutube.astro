@@ -1,0 +1,82 @@
+---
+
+const { videoId, title } = Astro.props;
+---
+
+<div class="video-lazy" data-video-id={videoId} data-title={title}>
+  <img src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`} alt={title} />
+  <button class="play-button">▶️</button>
+</div>
+
+<style>
+  .video-lazy {
+  position: relative;
+  padding-bottom: 56.25%; /* Ratio 16:9 */
+  height: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.video-lazy img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.play-button:hover {
+  background: rgba(255,0,0,0.8);
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const videoContainers = document.querySelectorAll<HTMLElement>('.video-lazy');
+  
+  videoContainers.forEach(container => {
+    container.addEventListener('click', () => {
+      const videoId = container.dataset.videoId;
+
+      // Vérifier que videoId existe
+      if (!videoId) {
+        console.error('videoId manquant dans data-video-id');
+        return;
+      }
+      
+      // Créer l'iframe
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      iframe.width = '100%';
+      iframe.height = '100%';
+      iframe.style.position = 'absolute';
+      iframe.style.top = '0';
+      iframe.style.left = '0';
+      iframe.frameBorder = '0';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      
+      // Remplacer le contenu par l'iframe
+      container.innerHTML = '';
+      container.appendChild(iframe);
+    });
+  });
+});
+</script>

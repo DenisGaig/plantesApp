@@ -1,3 +1,4 @@
+import { LucideScan, LucideSearch } from "lucide-react";
 import { useState } from "react";
 import { usePlants } from "../../../context/PlantsProvider.jsx";
 import Button from "../shared/Button.jsx";
@@ -7,7 +8,7 @@ import PlantCard from "../shared/PlantCard.jsx";
 const SpeciesInventory = () => {
   const { identifiedPlants } = usePlants();
   const [showAddPlantModal, setShowAddPlantModal] = useState(false);
-
+  console.log("Plantes identifiées", identifiedPlants);
   return (
     <div className="species-inventory">
       <div className="species-inventory__header">
@@ -63,10 +64,17 @@ const SpeciesInventory = () => {
             ))}
           </div>
         ) : (
-          <p className="species-inventory__identified-plants__empty">
-            Vous n'avez pas encore identifié de plantes. Utilisez la
-            fonctionnalité d'identification ou ajoutez des plantes manuellement.
-          </p>
+          <div>
+            <p className="species-inventory__identified-plants__empty">
+              Vous n'avez pas encore identifié de plantes.
+            </p>
+            <p className="species-inventory__identified-plants__empty">
+              {" "}
+              Utilisez la fonctionnalité d'identification {<LucideScan />} ou la
+              recherche avancée {<LucideSearch />} pour commencer à identifier
+              des plantes.
+            </p>
+          </div>
         )}
       </div>
     </div>

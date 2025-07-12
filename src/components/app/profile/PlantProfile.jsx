@@ -120,27 +120,17 @@ const PlantProfile = () => {
     );
   };
 
-  const handleSendPlant = () => {
-    console.log("Envoyer la plante pour ajout à la base de donnée");
-  };
-
   if (loading) {
     return <div>Chargement...</div>;
   }
   if (!plant) {
     return (
       <div className="plant-profile__not-found">
-        Cette plante ne fait pas partie de la base de donnée
         <p>
-          Envoyer cette plante à l'administrateur pour quelle soit ajoutée à la
-          base de donnée{" "}
+          Cette plante n'est pas encore référencée dans notre base de données.
         </p>
-        <button
-          onClick={handleSendPlant}
-          className="plant-profile__send-button"
-        >
-          Envoyer
-        </button>{" "}
+        <p>Elle ne pourra pas être incluse dans votre diagnostic actuel.</p>
+
         <button
           onClick={handleBackToSearch}
           className="plant-profile__back-button"

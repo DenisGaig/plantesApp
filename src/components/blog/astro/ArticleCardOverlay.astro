@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { DateFormater } from '../../../utils.ts';
-import './../../../styles/index.css';
+import './src/styles/index.scss';
 
 interface Props {
   article: CollectionEntry<'blog'>;
@@ -9,13 +9,16 @@ interface Props {
 const {article} = Astro.props; 
 ---
 
-  <a class="article-card" href={`blog/${article.slug}`}>
+  <a class="article-card-overlay" href={`blog/${article.slug}`}>
     <div class="card-background" style={{backgroundImage: `url(${article.data.image.src})`}}>
     </div>
     <div class="article-card-content">
       <h2>{article.data.title}</h2>
       <p>{article.data.description}</p>
-      <p>{DateFormater(article.data.pubDate)}</p>
+      <div class="article-card-meta">
+        <span class="date">{DateFormater(article.data.pubDate)}</span>
+        <span class="author">{article.data.author}</span>
+      </div>
       <!-- <div class="first-lines">
         <p>{article.body.slice(0, 100)}</p>
       </div> -->

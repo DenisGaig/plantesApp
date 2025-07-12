@@ -1,0 +1,40 @@
+Liste des tags pour les articles
+
+************** TAGS D'INDICATIONS BIOLOGIQUE ************** 
+Bases minérales insolubles
+Bases minérales solubles
+Sol bien aéré
+Sol compacté
+Sol engorgé
+Sol sec
+Sol riche en matière organique
+Carence matière organique
+Excès azote
+Carence azote
+Présence nitrites
+Libération aluminium
+Début fossilisation
+Lessivage
+Érosion
+Salinisation
+Blocage phosphore
+Blocage potassium
+Activité microbienne saine
+Activité microbienne perturbée
+Sol pollué
+
+************** TAGS BIOTOPE ********************************
+Lisière
+Clairière
+Forêt
+Prairie
+Jardin
+Haie
+ZoneHumide
+Verger
+Vigne
+Culture
+Maraîchage
+
+************** TAGS DE LA FAMILLE BOTANIQUE ****************
+#Vivace #Annuelle #Bisannuelle #Persistante #Caduc #Grimpante #Rampante #Arbustive #Aquatique

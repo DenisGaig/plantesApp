@@ -87,7 +87,7 @@ export function PlantsProvider({ children }) {
       };
     });
 
-    // Ajouter unique les nouvelles plantes qui n'existent pas déjà
+    // Ajouter uniquement les nouvelles plantes qui n'existent pas déjà
     const uniqueNewPlants = newIdentifiedPlants.filter(
       (newPlant) =>
         !identifiedPlants.some(

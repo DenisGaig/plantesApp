@@ -1,0 +1,99 @@
+.article-card-classic {
+  display: block;
+  text-decoration: none;
+  background: $white;
+  border: 1px solid #e0e0e0;
+  border-radius: $spacing-medium;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 200ms ease;
+    }
+  }
+
+  &:hover .card-image img {
+    transform: scale(1.02);
+  }
+
+  .article-card-content {
+    padding: $spacing-medium;
+    color: $black;
+
+    h2 {
+      margin-bottom: $spacing-small;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: $dark-gray;
+      line-height: 1.3;
+
+      &:hover {
+        color: $primary-color; // Ajustez selon votre couleur primaire
+      }
+    }
+
+    p {
+      margin-bottom: $spacing-medium;
+      color: $medium-gray;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    .article-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: $font-size-small;
+      color: $light-gray;
+      padding-top: $spacing-small;
+      border-top: 1px solid #f0f0f0;
+
+      .date {
+        font-weight: 500;
+        color: $medium-gray;
+      }
+
+      .author {
+        font-style: italic;
+        color: $light-gray;
+      }
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-small;
+      margin-bottom: $spacing-small;
+
+      .tag {
+        background-color: $light-gray;
+        color: $dark-gray;
+        padding: $spacing-unit;
+        border-radius: $spacing-small;
+        font-size: $font-size-small;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        transition: background-color 200ms ease;
+
+        &:hover {
+          background-color: $primary-color;
+          color: $white;
+        }
+      }
+    }
+  }
+}

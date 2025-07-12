@@ -5,12 +5,17 @@
 
 // composants du blog
 @import "components/blog/header";
-@import "components/blog/articleCard";
+@import "components/blog/articleCardOverlay";
+@import "components/blog/articleCardClassic";
 @import "components/blog/mostRecentArticle";
+@import "components/blog/pagination";
+@import "components/blog/tagsComponent";
 
 // pages du blog
 @import "pages/main";
 @import "pages/blog/article";
+@import "pages/blog/blog";
+@import "pages/blog/tag";
 
 // pages de l'application
 @import "pages/app/main";

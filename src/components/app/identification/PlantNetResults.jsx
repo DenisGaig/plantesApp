@@ -70,57 +70,71 @@ const PlantNetResults = ({
     return (
       <div className="modal">
         <div className="modal-content">
-          <h2>Plante non présente dans la base de donnée</h2>
+          <h2>🌱 Nouvelle plante détectée !</h2>
           <p>
-            Elle ne pourra pas être prise en compte pour votre diagnostique
-            actuel.
+            Cette plante n'est pas encore référencée dans notre base de données.
           </p>
-          <p>Faites la demande pour ajouter cette nouvelle plante </p>
+          <p>
+            Elle ne pourra pas être incluse dans votre diagnostic actuel, mais
+            vous pouvez nous aider à enrichir l'application en demandant son
+            ajout.
+          </p>
+          <p>
+            <strong>
+              Votre contribution sera utile à toute la communauté !
+            </strong>
+          </p>
+          <p>
+            <em>
+              Délai de traitement : 2 à 3 jours. Ajoutez votre email pour être
+              notifié(e) de l'ajout.
+            </em>
+          </p>
           <form
             className="modal-content__form"
             ref={form}
             onSubmit={handleSubmit}
           >
-            <div className="modal-content__form-element">
-              <label htmlFor="mail">Email (optionnel)</label>
-              <input type="email" id="mail" name="mail" />
-            </div>
-            <div className="modal-content__form-element">
-              <label htmlFor="scientific_name">Nom scientifique</label>
-              <input
-                type="text"
-                id="scientific_name"
-                name="scientific_name"
-                defaultValue={scientificName}
-              />
-            </div>
-            <div className="modal-content__form-element">
-              <label htmlFor="common_name">Nom commun</label>
-              <input
-                type="text"
-                id="common_name"
-                name="common_name"
-                defaultValue={commonName}
-              />
-            </div>
-            <div className="modal-content__form-element">
-              <label htmlFor="genus">Genre</label>
-              <input type="text" id="genus" name="genus" defaultValue={genus} />
-            </div>
-            <div className="modal-content__form-element">
-              <label htmlFor="family">Famille</label>
-              <input
-                type="text"
-                id="family"
-                name="family"
-                defaultValue={family}
-              />
-            </div>
-            <div>
-              <Button type="submit" variant="small">
+            <label htmlFor="mail">Votre email (optionnel)</label>
+            <input
+              type="email"
+              id="mail"
+              name="mail"
+              placeholder="Pour être notifié(e) de l'ajout"
+            />
+
+            <label htmlFor="scientific_name">Nom scientifique</label>
+            <input
+              type="text"
+              id="scientific_name"
+              name="scientific_name"
+              defaultValue={scientificName}
+            />
+
+            <label htmlFor="common_name">Nom commun</label>
+            <input
+              type="text"
+              id="common_name"
+              name="common_name"
+              defaultValue={commonName}
+            />
+
+            <label htmlFor="genus">Genre</label>
+            <input type="text" id="genus" name="genus" defaultValue={genus} />
+
+            <label htmlFor="family">Famille</label>
+            <input
+              type="text"
+              id="family"
+              name="family"
+              defaultValue={family}
+            />
+
+            <div className="modal-content__form-buttons">
+              <Button type="submit" variant="outline">
                 Envoyer
               </Button>
-              <Button variant="small" onClick={onClose}>
+              <Button variant="outline" onClick={onClose}>
                 Annuler{" "}
               </Button>
             </div>
@@ -141,12 +155,11 @@ const PlantNetResults = ({
     const processedResults = integrateIdentificationResults([result]);
     // Appeler la fonction de rappel pour sélectionner la plante
     // et passer les résultats intégrés
-    console.log("Résultats intégrés: ", processedResults);
+    console.log("PlantNetResults - Résultats intégrés: ", processedResults);
 
     const firstResult = Array.isArray(processedResults)
       ? processedResults[0]
       : processedResults;
-    // Vérifier si le résultat est une plante
 
     if (firstResult && firstResult.isTemporary) {
       console.log("Plante temporaire- Ouverture du formulaire");

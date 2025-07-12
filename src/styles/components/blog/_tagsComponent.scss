@@ -1,0 +1,32 @@
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  .tag-odd,
+  .tag-even {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .tag-odd {
+    background-color: rgba($primary-color, 0.1);
+    color: $primary-color-dark;
+    &:hover {
+      background-color: rgba($primary-color, 0.9);
+      color: $white;
+    }
+  }
+  .tag-even {
+    background-color: rgba($secondary-color, 0.1);
+    color: $secondary-color-dark;
+    &:hover {
+      background-color: rgba($secondary-color, 0.9);
+      color: $white;
+    }
+  }
+}

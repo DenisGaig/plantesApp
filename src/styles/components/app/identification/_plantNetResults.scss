@@ -81,33 +81,42 @@
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
-    max-width: 500px;
+    max-width: 600px;
+
     &__form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
-      &-element {
-        display: flex;
-        justify-content: space-between;
-        width: 80%;
-        gap: 10px;
-        align-items: center;
-        label {
-          font-size: 16px;
-          font-weight: bold;
+      max-width: 100%;
+      // align-items: center;
+      label {
+        align-self: end;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      input {
+        align-self: start;
+        padding: 10px;
+        // width: 50%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 5px rgba($primary-color, 0.5);
         }
-        input {
-          padding: 10px;
-          // width: 50%;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          font-size: 16px;
-          &:focus {
-            outline: none;
-            border-color: $primary-color;
-            box-shadow: 0 0 5px rgba($primary-color, 0.5);
-          }
+      }
+      &-buttons {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+
+        button {
+          max-width: 150px;
         }
       }
     }

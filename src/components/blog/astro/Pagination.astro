@@ -1,0 +1,15 @@
+---
+const {currentPage, disablePrevious, disableNext} = Astro.props
+
+interface Props {
+    currentPage: number;
+    // totalPages: number;
+    disablePrevious: boolean;
+    disableNext: boolean;
+}
+---
+
+<div class="pagination-container">
+    <a href={"/blog?page=" + (currentPage - 1)} class={disablePrevious ? "previous-disable" : "previous"}>Retour</a>
+    <a href={"/blog?page=" + (currentPage + 1)}  class={disableNext ? "next-disable" : "next"}>Suite</a>
+</div>

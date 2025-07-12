@@ -1,7 +1,177 @@
 ---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import ArticleCardClassic from "../../components/blog/astro/ArticleCardClassic.astro";
+import Pagination from "../../components/blog/astro/Pagination.astro";
+import { ARTICLES_PER_PAGE } from "../../constants.ts";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 
+const allBlogArticles: CollectionEntry<'blog'>[] = (await getCollection('blog')).sort((a: CollectionEntry<'blog'>, b:CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const currentPage: number | null = +Astro.url.searchParams.get('page') || 1;
+
+const totalPages: number = Math.ceil(allBlogArticles.length / ARTICLES_PER_PAGE);
+
+
+const articlesForPage: CollectionEntry<'blog'>[] = allBlogArticles.slice((currentPage-1) * ARTICLES_PER_PAGE, currentPage * ARTICLES_PER_PAGE);
 ---
-<BlogLayout title="Blog" description="Bienvenue sur le blog" >
-  <h1>BIENVENUE SUR LE BLOG</h1>
+<BlogLayout title="Blog" description="Bienvenue sur le blog des plantes bio-indicatrices" >
+
+<div class="blog-hero-container">
+    {allBlogArticles.slice(0, 5).map((article, index) => (
+      <article data-index={index} data-status={index === 0 ? "active" : "inactive"}>
+        <div class="article-image-section article-section" style={`background: url(${article.data.image.src}) center/cover;`}></div>
+        <div class="article-description-section article-section">
+          <p>
+            {article.data.description || article.body.slice(0, 150) + "..."}
+          </p>
+          <a href="#all-articles" class="voir-toutes-btn">Voir toutes les plantes</a>
+        </div>
+        <div class="article-title-section article-section">
+          <a href={`/blog/${article.slug}`}>
+            <div class="h2-titles">
+              <h2 class="h2-visible">{article.data.title}</h2>
+              <h2 class="h2-invisible">Découvre moi</h2>
+            </div>
+            <img class="plus-shape" src="/plus-shape.svg" alt="" />
+          </a>
+        </div>
+        <div class="article-nav-section article-section">
+          <button class="article-nav-button" type="button" onclick="handleLeftClick()">
+            <i class="fa-solid fa-arrow-left-long"></i>
+          </button>
+          <button class="article-nav-button" type="button" onclick="handleRightClick()">
+            <i class="fa-solid fa-arrow-right-long"></i>
+          </button>
+        </div>
+      </article>
+    ))}
+
+    <div class="hero-indicators">
+    {allBlogArticles.slice(0, 5).map((_, index) => (
+      <div class={`dot ${index === 0 ? 'active' : ''}`} data-slide={index}></div>
+    ))}
+  </div>
+  </div>
+
+  <div id="all-articles" class="articles-blog-container">
+    <div class="title">
+      <h1>BIENVENUE SUR LE BLOG</h1>
+    </div>
+    <div class="search-container"></div>
+    <div class="articles-container">
+      {articlesForPage.map((article) => (
+        <ArticleCardClassic article={article} />
+      ))}
+  </div>
+  <Pagination currentPage={currentPage} disablePrevious={currentPage === 1} disableNext={currentPage === totalPages} />
+</div>
 </BlogLayout>
+
+<script is:inline>
+  const slides = document.querySelectorAll("article");
+let currentIndex = 0;
+let activeIndex = 0;
+
+function updateArticlesStatus() {
+  slides.forEach((element, index) => {
+    if (index === currentIndex) {
+      element.dataset.status = "active";
+    } else {
+      element.dataset.status = "inactive";
+    }
+  });
+}
+
+function updateIndicators() {
+  document.querySelectorAll('.dot').forEach((dot, index) => {
+    dot.classList.toggle('active', index === activeIndex);
+  });
+}
+// Ajoutez les event listeners pour les dots
+document.querySelectorAll('.dot').forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+    goToSlide(index);
+  });
+});
+
+// Fonction pour aller directement à un slide
+function goToSlide(targetIndex) {
+  const currentSlide = document.querySelector(`[data-index="${activeIndex}"]`);
+  const targetSlide = document.querySelector(`[data-index="${targetIndex}"]`);
+  
+  if (targetIndex === activeIndex) return;
+  
+  currentSlide.dataset.status = targetIndex > activeIndex ? "before" : "after";
+  targetSlide.dataset.status = targetIndex > activeIndex ? "becoming-active-from-after" : "becoming-active-from-before";
+  
+  setTimeout(() => {
+    targetSlide.dataset.status = "active";
+    activeIndex = targetIndex;
+    updateIndicators();
+  });
+}
+
+const handleLeftClick = () => {
+  const nextIndex = activeIndex - 1 >= 0 ? activeIndex - 1 : slides.length - 1;
+
+  const currentSlide = document.querySelector(`[data-index="${activeIndex}"]`),
+    nextSlide = document.querySelector(`[data-index="${nextIndex}"]`);
+
+  currentSlide.dataset.status = "after";
+
+  nextSlide.dataset.status = "becoming-active-from-before";
+
+  setTimeout(() => {
+    nextSlide.dataset.status = "active";
+    activeIndex = nextIndex;
+  });
+  updateIndicators();
+};
+
+const handleRightClick = () => {
+  const nextIndex = activeIndex + 1 <= slides.length - 1 ? activeIndex + 1 : 0;
+
+  const currentSlide = document.querySelector(`[data-index="${activeIndex}"]`),
+    nextSlide = document.querySelector(`[data-index="${nextIndex}"]`);
+
+  currentSlide.dataset.status = "before";
+
+  nextSlide.dataset.status = "becoming-active-from-after";
+
+  setTimeout(() => {
+    nextSlide.dataset.status = "active";
+    activeIndex = nextIndex;
+  });
+  updateIndicators();
+};
+
+// Cercles sur souris
+
+// Sélectionnez toutes les icônes
+const icones = document.querySelectorAll("i");
+
+// Créez un cercle et ajoutez-le au body
+const circle = document.createElement("span");
+document.body.appendChild(circle);
+circle.classList.add("small-circle", "circle");
+
+// Suivez le mouvement de la souris
+window.addEventListener("mousemove", (e) => {
+  circle.style.left = e.pageX + "px";
+  circle.style.top = e.pageY + "px";
+});
+
+// Ajoutez des écouteurs d'événements pour chaque icône
+icones.forEach((element) => {
+  element.addEventListener("mouseover", () => {
+    circle.classList.remove("small-circle");
+    circle.classList.add("big-circle");
+  });
+  element.addEventListener("mouseout", () => {
+    circle.classList.remove("big-circle");
+    circle.classList.add("small-circle");
+  });
+});
+
+</script>

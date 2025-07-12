@@ -1,0 +1,39 @@
+.tag-blog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+  background-color: $background-color;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: $breakpoint-medium) {
+    padding: $spacing-medium;
+  }
+
+  .back-to-blog {
+    align-self: flex-start;
+    margin-bottom: 20px;
+    padding: 0 50px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1rem;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .tag-articles-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: auto;
+    max-width: 1200px;
+  }
+}

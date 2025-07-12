@@ -303,22 +303,7 @@ const SoilCharts = ({
                 tickCount={6}
                 tick={{ fill: "#666", fontSize: 10 }}
               />
-              {/* <Tooltip
-                formatter={(value, name, props) => {
-                  if (!props || !props.payload || !props.payload.type) {
-                    return [value.toFixed(2), name];
-                  }
 
-                  const type = props.payload.type;
-                  let status = "Équilibre";
-                  if (type === "deficit") status = "Déficit";
-                  if (type === "exces") status = "Excès";
-                  return [
-                    `${value.toFixed(2)} (${status})`,
-                    props.payload.subject,
-                  ];
-                }}
-              /> */}
               <Tooltip
                 content={(props) => {
                   // N'afficher le tooltip que s'il est actif et contient des données

@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import ArticleCardClassic from "../../../components/blog/astro/ArticleCardClassic.astro";
+import BlogLayout from "../../../layouts/BlogLayout.astro";
+
+import { capitalize } from "../../../utils";
+import "/src/styles/index.scss";
+
+// Fonction pour générer les chemins statiques basés sur les tags des articles - nécessaire pour le mode statique
+// Cette fonction est appelée à la construction du site pour générer les pages statiques pour chaque tag
+export async function getStaticPaths() {
+  const allBlogArticles: CollectionEntry<'blog'>[] = await getCollection('blog');
+
+  // Extraire tous les tags uniques de tous les articles
+  const allTags = new Set<string>();
+  allBlogArticles.forEach((article) => {
+    article.data.tags.forEach((tag: string) => {
+      allTags.add(tag);
+    });
+  });
+  
+  // Créer les paths pour chaque tag
+  return Array.from(allTags).map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      articles: allBlogArticles
+        .filter((article) => article.data.tags.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    }
+  }));
+}
+
+const { tag } = Astro.params;
+const { articles } = Astro.props;
+
+if (tag === undefined) {
+  throw new Error("Tag is required");
+}
+
+// console.log("tag", tag);
+// console.log("tagsArticles", articles);
+
+---
+
+<BlogLayout title="Blog" description="Bienvenue sur le blog des plantes bio-indicatrices" >
+  <div class="tag-blog-container">
+    <a href="/blog" class="back-to-blog">&larr; Retour au blog</a>
+    <div class="title">
+      <h1>Tous les articles sur : {capitalize(tag)}</h1>
+    </div>
+
+    <div class="tag-articles-container">
+      {articles.map((article) => (
+        <ArticleCardClassic article={article} />
+      ))}
+    </div>
+  </div>
+</BlogLayout>
