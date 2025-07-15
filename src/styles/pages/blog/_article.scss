@@ -45,30 +45,45 @@ $article-header-height: 500px;
     }
   }
 
+  /* Styles pour le fil d'Ariane */
+  &__breadcrumb {
+    max-width: 800px;
+    margin: 2rem auto 0;
+    padding: 0 2rem;
+  }
+
   &__tags {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.5rem;
     margin-top: 2rem;
-    margin-bottom: 2rem;
+    // margin-bottom: 2rem;
     padding-top: 2rem;
-    // border-top: 1px solid rgba($primary-color, 0.2);
-
-    //   span {
-    //     background: rgba($primary-color, 0.1);
-    //     color: $primary-color;
-    //     padding: 0.3rem 0.8rem;
-    //     border-radius: 20px;
-    //     font-size: 0.9rem;
-    //     font-weight: 500;
-    //   }
   }
 
   &__content {
     padding: 2rem;
     max-width: 800px;
     margin: 0 auto;
+
+    .article__blog__back {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: fit-content;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+
+      color: lighten($primary-color, 80%);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      &:hover {
+        color: $primary-color-dark;
+      }
+    }
 
     h1 {
       font-size: 2.5rem;
@@ -162,8 +177,9 @@ $article-header-height: 500px;
       li {
         position: relative;
         padding-left: 2.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         line-height: 1.6;
+        font-size: 1.125rem;
 
         &::before {
           position: absolute;

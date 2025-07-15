@@ -1,9 +1,10 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
-import TableOfContent from "../../components/blog/astro/TableOfContent.astro";
-import Tags from "../../components/blog/astro/Tags.astro";
-import BlogLayout from "../../layouts/BlogLayout.astro";
+import Breadcrumb from "../../../components/blog/astro/Breadcrumb.astro";
+import TableOfContent from "../../../components/blog/astro/TableOfContent.astro";
+import Tags from "../../../components/blog/astro/Tags.astro";
+import BlogLayout from "../../../layouts/BlogLayout.astro";
 import "/src/styles/index.scss";
 
 export async function getStaticPaths() {
@@ -34,10 +35,11 @@ const imageUrl = entry.data.image.src ? entry.data.image.src : "";
   </div>
   <div class="article__tags">
     <Tags tags={entry.data.tags} />
-    
+  </div>
+  <div class="article__breadcrumb">
+    <Breadcrumb items={[{ href: "/blog", label: "Blog" }, { href: "/blog/articles", label: "Articles" }, { label: entry.data.title, current: true }]} />
   </div>
   <div class="article__content">
-    <a href="/blog" class="article__blog__back"><i class="fa-solid fa-arrow-left"></i> Retour au blog</a>
     <Content/>
   </div>
   <div class="article__comments"></div>

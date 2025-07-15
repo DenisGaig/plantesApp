@@ -1,7 +1,10 @@
 ---
 title: "Liseron des champs"
+category: "plante"
 pubDate: 2025-01-01
 author: "denis"
+name:
+  { scientificName: "Convolvulus arvensis", commonName: "Liseron des champs" }
 description: "Connaissez les bienfaits du liseron des champs"
 image: { src: "/src/assets/images/plantes/liseron.jpg", alt: "Géranium" }
 tags: ["grimpante", "convolvulacées"]

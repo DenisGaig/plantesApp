@@ -1,12 +1,14 @@
 ---
 title: "Malva alcea"
-pubDate: 2025-07-05
+category: "plante"
+pubDate: 2024-05-05
 author: "denis"
+name: { scientificName: "Malva alcea", commonName: "Mauve alcée bis" }
 description: "Connaissez les bienfaits de la Malva alcea"
 image: { src: "/src/assets/images/plantes/malva_alcea.jpg", alt: "Malva alcea" }
 tags: ["bio-indicateur", "mauve"]
-slug: malva-alcea
-id: 10
+slug: malva-alcea-copy
+id: 20
 ---
 
 # La Mauve Alcée, un joyau à découvrir

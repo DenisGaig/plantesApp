@@ -8,22 +8,77 @@ interface Props {
 }
 
 const { article } = Astro.props;
+
+const isPlantProfile = article.data.category === 'plante';
+const isBlogArticle = article.data.category === 'article';
+
+const getArticleUrl = () => {
+  if (isPlantProfile) {
+    return `/blog/plantes/${article.slug}`;
+  } else if (isBlogArticle){
+    return `/blog/articles/${article.slug}`;
+  } else {
+    return `/blog/${article.slug}`;
+  }
+};
+
+// Gérer les différents schémas de données
+const getTitle = () => {
+  if (isPlantProfile) {
+    return (article.data as any).name.commonName;
+  } else {
+    return article.data.title;
+  }
+};
+
+const getSubtitle = () => {
+  if (isPlantProfile) {
+    return (article.data as any).name.scientificName;
+  } else {
+    // Pour les articles blog, on peut utiliser une catégorie ou autre
+    // return (article.data as any).category || '';
+    return '';
+  }
+};
+
+const getImageAlt = () => {
+  if (isPlantProfile) {
+    return (article.data as any).name.commonName;
+  } else {
+    return article.data.title;
+  }
+};
 ---
 
-<a class="article-card-classic" href={`/blog/${article.slug}`}>
+<a class="article-card-classic" href={getArticleUrl()}>
   <div class="card-image">
     <img 
       src={article.data.image.src} 
-      alt={article.data.title}
+      alt={getImageAlt()}
       loading="lazy"
     />
   </div>
   <div class="article-card-content">
-    <h2>{article.data.title}</h2>
-    <p>{article.data.description}</p>
+    <h2>{getTitle()}</h2>
+
+    {/* Afficher le nom scientifique seulement pour les plantes */}
+    {isPlantProfile && (
+      <p class="scientific-name">{getSubtitle()}</p>
+    )}
+    
+    {/* Afficher la catégorie pour les articles blog */}
+    {isBlogArticle && getSubtitle() && (
+      <p class="category">{getSubtitle()}</p>
+    )}
+    {/* Description de l'article limitée à 3 lignes*/}
+    <p>{article.data.description.slice(0, 100)}</p>
     <div class="article-card-meta">
       <span class="date">{DateFormater(article.data.pubDate)}</span>
       <span class="author">{article.data.author}</span>
+      {/* Badge pour indiquer le type de contenu */}
+      <span class={`content-type ${isPlantProfile ? 'plant' : 'article'}`}>
+        {isPlantProfile ? 'Plante' : 'Article'}
+      </span>
     </div>
     <!-- <div class="first-lines">
       <p>{article.body.slice(0, 100)}</p>

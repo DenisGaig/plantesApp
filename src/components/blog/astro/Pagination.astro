@@ -1,15 +1,39 @@
 ---
-const {currentPage, disablePrevious, disableNext} = Astro.props
+const {currentPage, totalPages ,baseUrl} = Astro.props
 
 interface Props {
     currentPage: number;
-    // totalPages: number;
+    totalPages: number;
     disablePrevious: boolean;
     disableNext: boolean;
+    baseUrl: string;
 }
+
+const getPathUrl = (pageNumber: number) => {
+    if (pageNumber === 1) {
+        // Page 1 : utiliser baseUrl sans numéro
+        return baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;;
+    }
+    else {
+        // Pages suivantes : baseUrl + numéro
+        return `${baseUrl}${pageNumber}`;
+    }
+};
 ---
 
 <div class="pagination-container">
-    <a href={"/blog?page=" + (currentPage - 1)} class={disablePrevious ? "previous-disable" : "previous"}>Retour</a>
-    <a href={"/blog?page=" + (currentPage + 1)}  class={disableNext ? "next-disable" : "next"}>Suite</a>
+        {Array.from({ length: totalPages }, (_, index) => {
+            const pageNumber = index + 1;
+            return (
+                <a
+                    href={getPathUrl(pageNumber)}
+                    class={currentPage === pageNumber  ? "active" : ""}
+                    aria-label={`Page ${pageNumber}`}
+                >
+                    {pageNumber}
+                </a>
+            )
+        })}
 </div>
+
+

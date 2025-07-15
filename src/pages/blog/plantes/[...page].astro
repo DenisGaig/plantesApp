@@ -1,0 +1,92 @@
+---
+// /src/pages/blog/[...page].astro
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import ArticleCardClassic from "../../../components/blog/astro/ArticleCardClassic.astro";
+import Pagination from "../../../components/blog/astro/Pagination.astro";
+import { ARTICLES_PER_PAGE } from "../../../constants.ts";
+import BlogLayout from "../../../layouts/BlogLayout.astro";
+
+export async function getStaticPaths() {
+  
+// Récupérer la collection des articles de plantes
+  const allBlogArticles: CollectionEntry<'blog'>[] = (await getCollection('blog'));
+  const sortedArticles = allBlogArticles.filter(article => article.data.category === 'plante').sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+  
+  const generatePages = (articles: any[], pathPrefix: string = '') => {
+    const totalPages = Math.ceil(articles.length / ARTICLES_PER_PAGE);
+    
+    return Array.from({ length: totalPages }, (_, i) => ({
+      params: { page: i === 0 ? undefined : String(i + 1) },
+      props: { 
+        currentPage: i + 1, 
+        totalPages,
+        allArticles: sortedArticles,
+        currentFilter: pathPrefix ? pathPrefix.replace('/', '') : 'all' as 'all' | 'articles' | 'plantes'
+      }
+    }));
+  }
+  return generatePages(sortedArticles, '/plantes');
+}
+
+const { currentPage, totalPages, allArticles } = Astro.props;
+
+// const url = new URL(Astro.request.url);
+// const category = url.searchParams.get('filter') || 'all';
+const category = Astro.props.currentFilter || 'all';
+
+const allBlogArticles: CollectionEntry<'blog'>[] = (await getCollection('blog'));
+const allFilteredArticles = allBlogArticles.filter(article => article.data.category === 'article');
+const allPlantArticles = allBlogArticles.filter(article => article.data.category === 'plante');
+
+// console.log('Current filter:', category);
+
+const articlesForPage = allArticles.slice((currentPage - 1) * ARTICLES_PER_PAGE, currentPage * ARTICLES_PER_PAGE);
+
+---
+
+<BlogLayout title="Blog" description="Bienvenue sur le blog des plantes bio-indicatrices">
+  <!-- Votre contenu existant -->
+  
+
+  <div id="all-articles" class="articles-blog-container">
+    <div class="title">
+      <h1>
+        TOUS LES ARTICLES SUR LES PLANTES BIO-INDICATRICES
+      </h1>
+    </div>
+
+    <!-- Filtres de navigation -->
+    <div class="filter-container">
+      <div class="filter-buttons">
+        <a href="/blog/" class={`filter-btn ${category === 'all' ? 'active' : ''}`}>
+          Tout ({allBlogArticles.length})
+        </a>
+        <a href="/blog/articles" class={`filter-btn ${category  === 'articles' ? 'active' : ''}`}>
+          Articles ({allFilteredArticles.length})
+        </a>
+          <a href="/blog/plantes" class={`filter-btn ${category === 'plantes' ? 'active' : ''}`}>
+            Plantes ({allPlantArticles.length})
+          </a>
+      </div>
+    </div>
+
+    <div class="search-container"></div>
+
+    <div class="articles-container">
+      {articlesForPage.map((article) => (
+        <ArticleCardClassic article={article} />
+      ))}
+    </div>
+    <Pagination 
+      currentPage={currentPage} 
+      totalPages={totalPages}
+      disablePrevious={currentPage === 1} 
+      disableNext={currentPage === totalPages}
+      baseUrl={'/blog/plantes/'} 
+    />
+  </div>
+</BlogLayout>
+

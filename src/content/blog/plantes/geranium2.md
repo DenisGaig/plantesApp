@@ -1,7 +1,9 @@
 ---
 title: "Géranium des Bois"
+category: "plante"
 pubDate: 2024-12-11
 author: "Denis"
+name: { scientificName: "Geranium sylvaticum", commonName: "Géranium des bois" }
 description: "Le géranium des bois, une plante méconnue mais fascinante."
 image: { src: "/src/assets/images/plantes/geranium.jpg", alt: "Géranium" }
 tags: ["géraniacées", "sauvage", "vivace"]

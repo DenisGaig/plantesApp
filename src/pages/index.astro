@@ -9,7 +9,7 @@ import '/src/styles/index.scss';
 const allBlogArticles: CollectionEntry<'blog'>[] = (await getCollection('blog')).sort((a: CollectionEntry<'blog'>, b:CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const mostRecentBlogArticle: CollectionEntry<'blog'> = allBlogArticles[0];
-const otherBlogArticles:CollectionEntry<'blog'>[] = allBlogArticles.slice(1);
+const otherBlogArticles:CollectionEntry<'blog'>[] = allBlogArticles.slice(0);
 
 // console.log("Tous les articles",otherBlogArticles);
 ---
