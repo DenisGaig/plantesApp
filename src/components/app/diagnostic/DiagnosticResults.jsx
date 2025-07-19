@@ -351,44 +351,6 @@ const DiagnosticResults = ({
         </div>
       ) : (
         <div className="diagnostic-results__complete">
-          {/* <CollapsibleCard
-            title="Résultats détaillés des indicateurs"
-            icon={<Table size={20} />}
-            defaultOpen={false}
-          >
-            <div className="diagnostic-results__table">
-              <table className="results-table">
-                <thead>
-                  <tr>
-                    <th>Facteurs</th>
-                    <th>Caractère indicateur positif </th>
-                    <th>Caractère indicateur négatif </th>
-                    <th>Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sortedResultsColumns.map((col) => (
-                    <tr key={col}>
-                      <td>{col}</td>
-                      <td className="positive-value">
-                        {analysisResults[col].positive > 0
-                          ? analysisResults[col].positive
-                          : "-"}
-                      </td>
-                      <td className="negative-value">
-                        {analysisResults[col].negative > 0
-                          ? analysisResults[col].negative
-                          : "-"}
-                      </td>
-                      <td className="total-value">
-                        {analysisResults[col].total}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </CollapsibleCard> */}
           <CollapsibleCard
             title="Tous les indicateurs en graphique"
             icon={<ChartBar size={20} />}

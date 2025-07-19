@@ -388,6 +388,7 @@
   padding-top: 100px;
   background-color: $background-color;
   gap: $spacing-medium;
+  color: $text-color;
 
   @media (max-width: $breakpoint-medium) {
     padding: $spacing-medium;

@@ -15,30 +15,236 @@ const otherBlogArticles:CollectionEntry<'blog'>[] = allBlogArticles.slice(0);
 ---
 
 <BaseLayout>
-	<main>
-		<div class="title-container">
-			<h1>Les plantes nous parlent... <br/>écoutons les !</h1>
-			<h2>Découvrez l'univers des plantes bio-indicatrices</h2>
-		</div>
-		
-		<div class="main__latest-article">
-			<MostRecentArticle article={mostRecentBlogArticle} />
-		</div>
-		
-		<section class="main__appli">
-			<div class="main__appli-left">
-				<h2>Une application de diagnostic du sol</h2>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-				<a href="/app"><button class="main__btn"> En savoir plus </button></a>
+	<main class="parallax-page">
+		<section class="hero">
+			<div class="hero-bg"></div>
+			<div class="hero-content">
+				<h1 class="fade-in-element">Nous avons oublié comment parler à la Terre</h1>
+				<h2 class="fade-in-element">Reconnectons-nous au langage vivant de notre sol</h2>
+				<div class="quote fade-in-element">
+					Comprendre <strong> & </strong> ressentir : <br>les plantes bio-indicatrices dévoilent les secrets de votre sol à travers l'observation sensible et les connaissances scientifiques.
+				</div>
+				<a href="#bio-indicatrices" class="cta-button fade-in-element">Devenez pisteur de votre sol 🔍</a>
 			</div>
-			<div class="main__appli-right"></div>
+		</section>
+		
+		<section class="urgence">
+			<div class="container">
+				<div class="urgence__intro fade-in-element">
+					<!-- <h2>Un héritage en péril, un langage à retrouver</h2> -->
+					<!-- <h3>Comprendre les sols grâce aux plantes bio-indicatrices</h3> -->
+					<p>
+						<span class="first-letter">D</span>epuis des millénaires, les sols, façonnés par les processus naturels, ont maintenu une étonnante fertilité et une biodiversité remarquable par sa diversité.
+					</p> <br>
+					<p>
+						Si la dégradation des sols n'est pas nouvelle, <strong>le dernier siècle a vu cette menace s'intensifier et se mondialiser à une vitesse alarmante.</strong>
+					</p><br>
+					<p>
+						En maltraitant la matrice vitale à tous les êtres interdépendants, nous sommes entrés dans une crise écologique sans précédent.
+					</p>
+				</div>
+				
+				<div class="urgence__scroll-narrative">
+					<div class="narrative-step fade-in-element" data-step="1">
+						<div class="narrative-content">
+							<h3>Hier...</h3>
+							<p>Partout dans le monde, les écosystèmes vivaient en équilibre. Les sols, vivants et structurés, abritaient une biodiversité foisonnante, façonnée par des millénaires d’interactions naturelles.</p>
+							<p>Les plantes bio-indicatrices, témoins discrets de cet équilibre, révélaient la santé et la richesse des sols.</p>
+						</div>
+						<figure class="narrative-image">
+							<img src="/src/assets/images/urgence1_prairie.jpg" alt="Prairie en bonne santé">
+							<figcaption>Photo de Daniel Pintilei sur Unsplash</figcaption>
+						</figure>
+					</div>
+                
+					<div class="narrative-step fade-in-element" data-step="2">
+						<div class="narrative-image">
+							<img src="/src/assets/images/urgence2_prairie.jpg" alt="Prairie en bonne santé">
+							<title></title>
+						</div>
+						<div class="narrative-content">
+							<h3>Aujourd'hui...</h3>
+							
+							<p>En un siècle, l'urbanisation et l'industrialisation agricole a rompu ce dialogue millénaire. 
+							Les sols bétonnés, tassés, appauvris, saturés d'intrants chimiques, semblent avoir perdu leur voix. Ainsi en France, ce sont</p>
+							<!-- <div class="counter-container"> -->
+							<div class="counter" id="counter">30,000</div>
+							<p>hectares de sols qui disparaissent ou se dégradent chaque année</p>
+							
+							<!-- </div> -->
+						</div>
+						<div class="narrative-content__bottom">
+							<p> Pourtant, même dans nos paysages transformés, si vous regardez attentivement... 
+							certaines plantes surgissent, messagères silencieuses qui révèlent les blessures... apportant la guérison.</p>
+						</div>
+					</div>
+                
+					<div class="narrative-step fade-in-element" data-step="3">
+						<div class="narrative-content">
+							<h3>Les plantes bio-indicatrices n'ont jamais cessé de parler !</h3>
+							<p>
+								Elles nous révèlent les secrets de chaque mètre carré de sol : 
+							<ul>
+								<li class="narrative-step__list"> &rarr; L'ortie vous parle d'azote et d'humus</li>
+								<li class="narrative-step__list"> &rarr; Le pissenlit témoigne d'un sol tassé</li>
+								<li class="narrative-step__list"> &rarr; La bourrache vous raconte un engorgement en eau</li>
+							</ul>
+							</p>
+						</div>
+						<div class="narrative-image">
+							<img src="/src/assets/images/urgence3_bourrache.jpg" alt="Prairie en bonne santé">
+						</div>
+						<div class="narrative-content__bottom">
+							<p>
+								Chaque espèce est un livre ouvert sur la santé de votre terre. 
+							  Il suffit d'apprendre leur langage pour comprendre son état actuel, ce qu'il vit... 
+							  et parfois ce dont il a besoin pour revivre et ramener la vie dans votre jardin.
+							</p>
+						</div>
+					</div>
+
+					<div class="narrative-step fade-in-element" data-step="4">
+						<div class="narrative-content last-step">
+							<h3>Êtes-vous prêt à renouer ce dialogue ?</h3>
+							
+							<p><em>Les plantes vous attendent, patientes, dans votre jardin. </em><br>
+							<em>Elles ont tant à vous dire sur votre terre...</em></p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
 
-		<section class="main__blog">
-			<h2>Des articles complets et détaillés sur les plantes bio-indicatrices</h2>
-			<div class="main__articles-grid">
-				{otherBlogArticles.slice(0,3).map((article,index) => (
-					<a href={`blog/${article.slug}`} class={`article${index+1}`}>
+		<section class="art-decoder">
+        <div class="floating-elements">
+        </div>
+
+        <div class="container">
+            <div class="art-decoder__intro fade-in-element">
+                <h2>L'art de décoder la nature</h2>
+                <p>Mais comment passer de l'intuition à la connaissance ? Comment transformer un regard curieux en diagnostic précis ? Les plantes bio-indicatrices nous offrent un chemin unique : celui qui marie la rigueur scientifique à l'émerveillement sensible.</p>
+            </div>
+
+            <div class="scroll-narrative">
+                <div class="dual-approach">
+                    <div class="approach-card science fade-in-element">
+                        <span class="approach-icon">
+													<svg height="65px" width="65px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#ffffff;} </style> <g> <polygon class="st0" points="251.703,230.024 195.24,187.179 172.747,216.824 229.21,259.661 "></polygon> <path class="st0" d="M365.624,450.3l-30.242-25.594c17.5-8.618,33.39-20.008,46.992-33.626 c31.925-31.889,51.748-76.203,51.736-124.902c0.008-30.404-7.729-59.188-21.336-84.205c-12.864-23.666-30.981-43.959-52.751-59.528 l40.898-53.896L310.579,0L184.865,165.678l90.346,68.549l53.971-71.132c16.035,11.178,29.385,25.988,38.753,43.24 c9.664,17.797,15.139,38.082,15.142,59.844c-0.008,34.764-14.017,66.005-36.786,88.81c-22.809,22.773-54.05,36.778-88.814,36.794 c-33.753-0.016-64.165-13.215-86.796-34.812c-1.41-1.351-2.729-2.796-4.072-4.203h24.247v-23.365H77.89v23.365h25.644 c8.59,15.254,19.345,29.093,31.881,41.084c18.318,17.536,40.511,31.139,65.113,39.528l-20.001,16.92 c-10.826,9.163-17.07,22.622-17.07,36.809V512h219.241v-24.891C382.699,472.922,376.45,459.463,365.624,450.3z"></path> </g> </g></svg>
+													<h3>La science du vivant</h3>
+												</span>
+                        <p>Les travaux de botanistes comme Gérard Ducerf nous révèlent les liens précis entre chaque espèce et les conditions de sol. Une méthode éprouvée, des clés de lecture fiables pour comprendre votre terre.</p>
+                    </div>
+
+                    <div class="approach-card poetic fade-in-element">
+                        <span class="approach-icon">
+													<svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65px" height="65px" viewBox="0 0 114.01 114.01" xml:space="preserve" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.228016"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M99.221,81.124c-4.931-6.69-11.385-11.681-18.191-16.115c-5.523-3.59-11.811-2.827-17.669-0.482 c-0.366,0.146-0.732,0.223-1.099,0.346c-0.202-1.007-0.346-1.988-0.619-3.022c-0.486-1.913-1.16-3.822-1.807-5.709 c-0.75-1.94-1.562-3.864-2.547-5.698c-0.491-0.917-0.985-1.836-1.552-2.706c-0.527-0.896-1.122-1.733-1.721-2.568 c-0.568-0.853-1.254-1.605-1.869-2.397c-0.648-0.763-1.338-1.475-1.993-2.19c-0.708-0.666-1.377-1.348-2.081-1.959 c-0.729-0.589-1.396-1.211-2.116-1.727c-1.417-1.08-2.829-1.986-4.16-2.769c-0.678-0.371-1.326-0.726-1.946-1.066 c-0.638-0.294-1.24-0.579-1.809-0.843c-1.131-0.529-2.173-0.873-3-1.213c-1.706-0.551-2.681-0.869-2.681-0.869 s0.957,0.364,2.632,0.992c0.806,0.382,1.826,0.773,2.922,1.355c0.551,0.291,1.136,0.596,1.752,0.926 c0.594,0.361,1.216,0.743,1.868,1.143c1.276,0.833,2.622,1.793,3.953,2.919c0.685,0.535,1.311,1.184,1.99,1.79 c0.659,0.628,1.28,1.328,1.939,2.009c0.602,0.726,1.241,1.449,1.829,2.221c0.558,0.799,1.188,1.555,1.699,2.411 c0.541,0.832,1.076,1.672,1.542,2.558c0.508,0.866,0.943,1.774,1.371,2.685c0.869,1.819,1.552,3.711,2.173,5.554 c0.561,1.956,1.113,3.814,1.492,5.649c0.222,1.054,0.4,2.087,0.547,3.1c-2.467,0.459-4.905,0.363-7.299-0.362 c-4.598-1.39-9.223-1.54-13.919-1.554c-2.011-0.007-3.682,0.694-4.882,2.275c-0.669,0.883,4.812,4.552,9.512,4.552 C42.61,72.1,27.416,68.41,25.39,68.561l-11.502-1.472c-4.083-0.328-4.079-1.875-8.095,0.404c-0.135,0.075-0.332,0.075-0.5,0.068 c-2.233-0.134-3.498,0.582-4.738,2.057c-0.719,0.855-0.659,1.902-0.277,2.902c0.402,1.04,1.425,0.77,2.271,1.105 c5.14,2.039,6.798,3.028,13.772,4.75c4.959,1.225,9.788,2.724,14.743,3.839c2.047,0.466,4.127,0.814,5.974,1.852 c3.925,2.204,8.092,2.878,12.575,2.673c5.083-0.232,10.186-0.027,15.282-0.055c8.945-0.041,15.742,3.539,20.338,11.416 l28.776-0.062C107.732,90.702,104.964,88.919,99.221,81.124z"></path> <path d="M59.129,51.389c0.08,0.313,0.207,0.578,0.264,0.751c0.073,0.174,0.114,0.272,0.114,0.272s0.079-0.063,0.236-0.178 c0.137-0.123,0.373-0.287,0.605-0.515c0.5-0.448,1.14-1.116,1.772-1.949c0.637-0.83,1.264-1.833,1.808-2.939 c0.54-1.11,1.006-2.32,1.338-3.567c0.691-2.488,0.831-5.126,0.554-7.209c-0.13-1.037-0.352-1.93-0.564-2.575 c-0.078-0.315-0.201-0.578-0.264-0.75c-0.071-0.18-0.112-0.274-0.112-0.274s-0.086,0.063-0.239,0.178 c-0.138,0.12-0.377,0.284-0.606,0.517c-0.503,0.452-1.146,1.114-1.776,1.944c-1.283,1.662-2.484,4.016-3.14,6.511 c-0.337,1.244-0.544,2.527-0.631,3.758c-0.091,1.23-0.048,2.411,0.084,3.447C58.697,49.85,58.922,50.747,59.129,51.389z"></path> <path d="M47.716,34.839c0.081,0.315,0.202,0.577,0.262,0.75c0.077,0.178,0.116,0.274,0.116,0.274s0.081-0.06,0.234-0.177 c0.137-0.123,0.372-0.287,0.603-0.515c0.501-0.452,1.143-1.114,1.774-1.949c0.633-0.83,1.265-1.833,1.804-2.939 c0.544-1.107,1.006-2.32,1.343-3.567c0.69-2.488,0.83-5.126,0.556-7.204c-0.131-1.042-0.357-1.935-0.563-2.577 c-0.085-0.315-0.203-0.577-0.263-0.75c-0.077-0.178-0.117-0.277-0.117-0.277s-0.083,0.063-0.237,0.18 c-0.137,0.118-0.372,0.288-0.603,0.515c-0.505,0.452-1.146,1.114-1.776,1.946c-1.283,1.66-2.484,4.011-3.14,6.511 c-0.337,1.247-0.544,2.529-0.631,3.759c-0.091,1.23-0.05,2.411,0.084,3.448C47.285,33.301,47.509,34.197,47.716,34.839z"></path> <path d="M35.632,53.331c-0.281,0.161-0.501,0.351-0.655,0.452c-0.151,0.123-0.231,0.187-0.231,0.187s0.08,0.063,0.231,0.182 c0.15,0.097,0.371,0.287,0.659,0.448c0.564,0.364,1.374,0.812,2.341,1.203c1.942,0.802,4.524,1.345,7.107,1.321 c1.292-0.003,2.586-0.144,3.795-0.381c1.211-0.236,2.337-0.585,3.304-0.989c0.97-0.396,1.772-0.844,2.337-1.213 c0.284-0.161,0.504-0.349,0.659-0.448c0.147-0.122,0.23-0.182,0.23-0.182s-0.08-0.066-0.234-0.183 c-0.151-0.101-0.375-0.287-0.655-0.445c-0.568-0.364-1.377-0.809-2.344-1.198c-0.972-0.397-2.103-0.739-3.316-0.97 c-1.211-0.232-2.501-0.361-3.795-0.357c-2.582-0.012-5.164,0.546-7.096,1.362C37.006,52.511,36.2,52.963,35.632,53.331z"></path> <path d="M24.839,41.089c0.595,0.32,1.44,0.695,2.437,1.003c2,0.638,4.622,0.959,7.193,0.715c1.287-0.113,2.562-0.358,3.747-0.702 c1.184-0.335,2.281-0.78,3.213-1.261c0.931-0.478,1.696-0.992,2.225-1.405c0.27-0.187,0.474-0.39,0.616-0.505 c0.144-0.13,0.218-0.204,0.218-0.204s-0.084-0.057-0.245-0.157c-0.161-0.087-0.395-0.253-0.693-0.39 c-0.594-0.315-1.437-0.693-2.44-0.998c-0.999-0.31-2.154-0.562-3.381-0.688c-1.227-0.128-2.527-0.15-3.812-0.038 c-2.573,0.207-5.099,0.98-6.961,1.956c-0.927,0.476-1.695,0.994-2.224,1.411c-0.271,0.187-0.474,0.392-0.618,0.505 c-0.141,0.134-0.214,0.204-0.214,0.204s0.085,0.055,0.25,0.161C24.307,40.785,24.544,40.953,24.839,41.089z"></path> </g> </g> </g></svg>
+													<h3>La poésie de l'observation</h3>
+												</span>
+                        <p>Mais au-delà des données, il y a la présence. Se mettre à l'écoute, observer les formes, les couleurs, les associations. Laisser la sensibilité guider la compréhension.</p>
+                    </div>
+                </div>
+
+                <div class="synthesis fade-in-element">
+                    <h3>Une nouvelle façon d'être au monde</h3>
+                    <p>Ni pure technique, ni simple contemplation : une approche où connaissance et émerveillement se nourrissent mutuellement pour retrouver notre lien au vivant.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+		<section class="voyage-commence">
+    <div class="container">
+        <div class="voyage-commence__intro fade-in-element">
+            <h2>Votre voyage commence ici</h2>
+            <h3>Trois chemins pour une même destination</h3>
+            <p><em>Retrouver votre lien au vivant</em></p>
+        </div>
+
+        <div class="journey-steps">
+            <div class="step-card fade-in-element" data-step="1">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3>Éveillez votre regard</h3>
+                    <p>Apprendre à observer les plantes différemment, développer votre sensibilité au vivant. Chaque promenade devient une découverte, chaque "mauvaise herbe" un message.</p>
+                    <div class="step-cta">
+                        <a href="#blog" class="cta-button cta-blog">
+                            <span>Commencez par découvrir</span>
+                            <span class="cta-icon">📖</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="step-visual">
+                    <div class="plant-icon"><svg fill="#8155e9" height="120px" width="120px" version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256 152" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="_x23_691f6fff"> <path d="M123.8,20.9h7.8c13.3,0.5,26.6,3,39.3,7.2c19.3,6.3,37.3,16.1,53.7,27.9c6.2,4.5,12.2,9.3,17.8,14.4 c1.6,1.4,3.1,2.9,4.5,4.5c0.7,0.8,1.2,1.8,1.3,2.8v2.5c-0.1,0.9-0.5,1.7-1,2.4c-1.4,1.9-3.2,3.5-5,5.1 c-15.5,13.8-32.9,25.5-51.7,34.4c-18.5,8.7-38.6,14.4-59.1,15.1h-7.6c-11-0.4-22-2.2-32.6-5.2c-16.4-4.6-31.9-11.9-46.4-20.8 c-0.7-0.4-1.4-0.7-2.1-1.2c-8.4-5.3-16.4-11.1-24-17.5c-3-2.5-5.9-5-8.7-7.8c-1.2-1.3-2.5-2.6-2.7-4.4v-2.5 c0.2-1.5,1.2-2.7,2.1-3.7c1.8-2,3.8-3.7,5.7-5.5c14.7-12.8,31-23.7,48.5-32.1C82.5,27.6,102.9,21.6,123.8,20.9 M123.3,36.4 c-6.5,0.7-12.8,2.8-18.2,6.3c-7.4,4.6-13.3,11.5-16.8,19.6c-3.4,7.9-4.3,16.9-2.6,25.3c1.6,7.9,5.4,15.2,10.9,21 c4.9,5.2,11.2,9.2,18.1,11.4c11.3,3.7,24.1,2.3,34.4-3.7c8.3-4.8,14.9-12.4,18.4-21.3c4.1-10.1,4.1-21.7,0-31.8 c-3.9-9.9-11.7-18.2-21.2-22.7C139.1,37,131.1,35.6,123.3,36.4 M53.2,57.5c-10.5,6.4-20.4,13.6-29.6,21.6c2.6,2.3,5.3,4.5,8,6.6 c16.3,12.8,34.4,23.6,54,30.6c-6.7-7.6-11.3-17-13.1-27c-1.4-7.6-1.2-15.5,0.6-23c2.1-9,6.5-17.4,12.6-24.4 C74.3,46,63.5,51.3,53.2,57.5 M169.6,41.7c3.4,3.8,6.3,8.1,8.6,12.8c5.1,10.3,6.8,22.3,5,33.6c-1.6,10.4-6.4,20.3-13.4,28.3 c12.5-4.4,24.4-10.5,35.6-17.5c9.3-5.9,18.3-12.5,26.6-19.8c-2.1-1.8-4.2-3.6-6.3-5.4C208.8,60.1,190,48.8,169.6,41.7z"></path> <path d="M150.5,81.6c-0.5,5.1-2.8,9.9-6.4,13.5c-3.8,3.9-9.1,6.4-14.6,6.8c-4.9,0.4-9.9-0.9-14-3.5c-4.3-2.7-7.7-7-9.4-11.8 c-1.9-5.5-1.7-11.7,0.7-17c1.8-4.1,5-7.6,8.8-10c4.8-3,10.7-4.1,16.2-3.1c7,1.2,13.3,6,16.5,12.4c-6.8,3.4-13.6,6.7-20.3,10.1 C135.4,79.9,143,80.8,150.5,81.6z"></path> </g> </g></svg></div>
+                </div>
+            </div>
+
+            <div class="step-card fade-in-element" data-step="2">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3>Décryptez les messages</h3>
+                    <p>Identifier les plantes bio-indicatrices, comprendre ce qu'elles révèlent sur votre sol. Transformez votre curiosité en expertise pratique.</p>
+                    <div class="step-cta">
+                        <a href="#blog" class="cta-button cta-blog">
+                            <span>Approfondissez avec nos guides</span>
+                            <span class="cta-icon">🔍</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="step-visual">
+                    <div class="plant-icon"><svg width="110px" height="110px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#8eb533"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.5 11.5H15.51M11.5 11.5H11.51M7.5 11.5H7.51M15.3 19.1L21 21L19.1 15.3C19.1 15.3 20 14 20 11.5C20 6.80558 16.1944 3 11.5 3C6.80558 3 3 6.80558 3 11.5C3 16.1944 6.80558 20 11.5 20C14.0847 20 15.3 19.1 15.3 19.1Z" stroke="#8eb533" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></div>
+                </div>
+            </div>
+
+            <div class="step-card fade-in-element" data-step="3">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3>Devenez pisteur</h3>
+                    <p>Diagnostiquer votre terrain, agir en harmonie avec la nature. Passez de l'observation à l'action concrète pour régénérer votre sol.</p>
+                    <div class="step-cta">
+                        <a href="#app" class="cta-button cta-app">
+                            <span>Passez à l'action avec notre app</span>
+                            <span class="cta-icon">📱</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="step-visual">
+                    <div class="plant-icon"><svg fill="#8155e9" height="110px" width="110px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.001 512.001" xml:space="preserve" stroke="#8155e9"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M318.783,0c-22.289,0-40.421,18.132-40.421,40.421s18.132,40.421,40.421,40.421s40.421-18.132,40.421-40.421 S341.071,0,318.783,0z M318.783,64.674c-13.372,0-24.253-10.88-24.253-24.253c0-13.372,10.88-24.253,24.253-24.253 s24.253,10.88,24.253,24.253C343.035,53.793,332.155,64.674,318.783,64.674z"></path> </g> </g> <g> <g> <path d="M405.014,21.558c-16.344,0-29.642,13.298-29.642,29.642s13.298,29.642,29.642,29.642s29.642-13.298,29.642-29.642 S421.358,21.558,405.014,21.558z M405.014,64.674c-7.43,0-13.474-6.044-13.474-13.474s6.045-13.474,13.474-13.474 c7.43,0,13.474,6.044,13.474,13.474S412.444,64.674,405.014,64.674z"></path> </g> </g> <g> <g> <path d="M458.909,64.674c-16.344,0-29.642,13.298-29.642,29.642s13.298,29.642,29.642,29.642s29.642-13.298,29.642-29.642 S475.253,64.674,458.909,64.674z M458.909,107.789c-7.43,0-13.474-6.044-13.474-13.474s6.045-13.474,13.474-13.474 c7.43,0,13.474,6.044,13.474,13.474S466.339,107.789,458.909,107.789z"></path> </g> </g> <g> <g> <path d="M480.467,129.347c-16.344,0-29.642,13.298-29.642,29.642s13.298,29.642,29.642,29.642s29.642-13.298,29.642-29.642 S496.811,129.347,480.467,129.347z M480.467,172.463c-7.43,0-13.474-6.044-13.474-13.474s6.044-13.474,13.474-13.474 s13.474,6.044,13.474,13.474S487.897,172.463,480.467,172.463z"></path> </g> </g> <g> <g> <path d="M193.219,0c-22.289,0-40.421,18.132-40.421,40.421s18.132,40.421,40.421,40.421S233.64,62.71,233.64,40.421 S215.507,0,193.219,0z M193.219,64.674c-13.372,0-24.253-10.88-24.253-24.253c0-13.372,10.88-24.253,24.253-24.253 s24.253,10.88,24.253,24.253C217.471,53.793,206.591,64.674,193.219,64.674z"></path> </g> </g> <g> <g> <path d="M106.987,21.558c-16.344,0-29.642,13.298-29.642,29.642s13.298,29.642,29.642,29.642s29.642-13.298,29.642-29.642 S123.331,21.558,106.987,21.558z M106.987,64.674c-7.429,0-13.474-6.044-13.474-13.474s6.044-13.474,13.474-13.474 s13.474,6.044,13.474,13.474S114.416,64.674,106.987,64.674z"></path> </g> </g> <g> <g> <path d="M53.092,64.674c-16.344,0-29.642,13.298-29.642,29.642s13.298,29.642,29.642,29.642s29.642-13.298,29.642-29.642 S69.436,64.674,53.092,64.674z M53.092,107.789c-7.43,0-13.474-6.044-13.474-13.474s6.044-13.474,13.474-13.474 s13.474,6.044,13.474,13.474S60.522,107.789,53.092,107.789z"></path> </g> </g> <g> <g> <path d="M31.534,129.347c-16.344,0-29.642,13.298-29.642,29.642s13.298,29.642,29.642,29.642s29.642-13.298,29.642-29.642 S47.878,129.347,31.534,129.347z M31.534,172.463c-7.43,0-13.474-6.044-13.474-13.474s6.044-13.474,13.474-13.474 s13.474,6.044,13.474,13.474S38.963,172.463,31.534,172.463z"></path> </g> </g> <g> <g> <path d="M406.906,366.484h-34.813c-38.754,0-70.282,31.528-70.282,70.282V460.8c0,4.466,3.618,8.084,8.084,8.084h34.813 c38.754,0,70.282-31.528,70.282-70.282v-24.034C414.99,370.103,411.372,366.484,406.906,366.484z M398.822,398.602 c0,29.838-24.275,54.114-54.114,54.114h-26.729v-15.95c0-29.838,24.275-54.114,54.114-54.114h26.729V398.602z"></path> </g> </g> <g> <g> <path d="M139.908,366.484h-34.813c-4.466,0-8.084,3.619-8.084,8.084v24.034c0,38.754,31.528,70.282,70.282,70.282h34.813 c4.466,0,8.084-3.618,8.084-8.084v-24.034C210.19,398.013,178.662,366.484,139.908,366.484z M194.022,452.716h-26.729 c-29.838,0-54.114-24.275-54.114-54.114v-15.95h26.729c29.838,0,54.114,24.275,54.114,54.114V452.716z"></path> </g> </g> <g> <g> <path d="M397.961,96.375c-19.72-10.709-42.412-13.051-63.891-6.599c-21.484,6.45-39.129,20.905-49.686,40.696 c-8.83,16.559-11.807,35.066-8.608,53.521c1.907,11.003,2.516,21.556,1.811,31.366l-0.305,4.25 c-0.664,9.238-2.44,18.793-5.28,28.398c-5.849,19.785-1.321,40.544,10.845,55.947l-26.847,26.846l-26.845-26.846 c12.166-15.403,16.693-36.161,10.845-55.946c-2.84-9.605-4.616-19.16-5.28-28.398l-0.305-4.251 c-0.705-9.809-0.096-20.361,1.811-31.363c3.199-18.456,0.222-36.963-8.609-53.522c-10.556-19.791-28.201-34.246-49.684-40.696 c-21.481-6.45-44.171-4.108-63.891,6.599v-0.001c-40.176,21.81-55.158,72.753-33.395,113.557l12.964,24.305 c2.555,4.79,9.01,5.751,12.849,1.912c2.516-2.516,3.091-6.381,1.416-9.52l-12.963-24.305 c-17.598-32.995-5.555-74.149,26.843-91.737v-0.001c10.019-5.439,20.987-8.202,32.063-8.202c7.657,0,15.37,1.323,22.85,3.993 c15.651,5.587,28.747,16.914,36.603,31.559c7.183,13.392,9.613,28.369,7.025,43.3c-2.131,12.296-2.806,24.166-2.006,35.283 l0.305,4.25c0.746,10.397,2.732,21.104,5.901,31.823c6.232,21.084-3.481,43.677-23.097,53.721 c-22.097,11.318-49.778,2.342-61.699-20.009l-12.455-23.355c-2.555-4.79-9.01-5.751-12.848-1.912 c-2.516,2.516-3.091,6.381-1.416,9.52l12.456,23.355c11.272,21.133,33.069,33.349,55.408,33.443l45.759,61.011l9.595,105.55 c0.937,10.311,9.452,18.087,19.805,18.087c10.353,0,18.869-7.776,19.805-18.087l9.595-105.55l45.759-61.011 c22.337-0.096,44.138-12.312,55.408-33.443l44.79-83.979C453.119,169.126,438.139,118.185,397.961,96.375z M271.091,380.497 c-0.9,1.199-1.448,2.626-1.583,4.119l-9.803,107.834c-0.176,1.928-1.769,3.382-3.705,3.382c-1.936,0-3.528-1.454-3.705-3.382 l-9.803-107.834c-0.136-1.494-0.683-2.92-1.583-4.119l-41.883-55.844c3.307-1.021,6.567-2.326,9.74-3.952 c3.123-1.599,6.052-3.442,8.79-5.48l32.726,32.726c1.579,1.578,3.649,2.367,5.717,2.367s4.138-0.789,5.717-2.367l32.726-32.726 c2.738,2.038,5.668,3.88,8.79,5.479c3.174,1.625,6.434,2.931,9.741,3.952L271.091,380.497z M417.092,202.322l-44.79,83.979 c-11.922,22.35-39.596,31.328-61.7,20.009c-19.616-10.044-29.328-32.638-23.096-53.721c3.168-10.719,5.154-21.426,5.901-31.823 l0.305-4.249c0.799-11.117,0.124-22.988-2.006-35.285c-2.579-14.876-0.177-29.798,6.944-43.151 c8.513-15.961,22.744-27.617,40.07-32.819c6.411-1.926,12.956-2.88,19.465-2.88c11.075,0,22.045,2.764,32.063,8.202v0.001 C422.647,128.172,434.689,169.326,417.092,202.322z"></path> </g> </g> </g></svg></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="voyage-finale fade-in-element">
+            <p>Que vous soyez jardinier·e amateur·e, permaculteur·trice passionné·e, éducateur·trice en quête de sens, citadin désireux de renouer avec les vivants ou simplement passionné·e (comme moi), nous avons créé les outils pour vous accompagner dans cette reconnexion profonde et durable.</p>
+        </div>
+    </div>
+	</section>
+
+		<!-- Section application -->
+		
+		<section class="main__appli">
+			<div class="container fade-in-element">
+				<div class="container-wrapper">
+					<div class="main__appli-left">
+						<h2>Une application de diagnostic du sol</h2>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+						<a href="/app"><button class="main__btn"> En savoir plus </button></a>
+					</div>
+					<div class="main__appli-right">
+						<img src="/src/assets/images/screenshots/diagnostic.jpg" alt="screenshot de l'application" class="screen1 fade-in-element">
+						<img src="/src/assets/images/screenshots/densite.jpg" alt="screenshot de l'application" class="screen2 fade-in-element">
+						<img src="/src/assets/images/screenshots/resultat1.jpg" alt="screenshot de l'application" class="screen3 fade-in-element">
+						<img src="/src/assets/images/screenshots/resultat2.jpg" alt="screenshot de l'application" class="screen4 fade-in-element">
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="main__blog fade-in-element">
+			<div class="container fade-in-element">
+				<h2>Des articles détaillés sur les plantes bio-indicatrices</h2>
+				<div class="main__articles-grid">
+					{otherBlogArticles.slice(0,3).map((article,index) => (
+					<a href={`blog/${article.slug}`} class={`article${index+1} fade-in-element`}>
 						<div class="grid-card" style={{backgroundImage: `url(${article.data.image.src})`}}>
 							<h2>{article.data.title}</h2>
 							<p>{article.data.description}</p>
@@ -46,25 +252,187 @@ const otherBlogArticles:CollectionEntry<'blog'>[] = allBlogArticles.slice(0);
 					</a>))
 				}
 			</div>
+		</div>
 		</section>
 
-		<section class="main__about">
-
+		<section class="main__about fade-in-element">
+			<!-- Votre contenu about -->
 		</section>
-
 	</main>
 </BaseLayout>
 
 <script>
-	const latest = document.querySelector<HTMLElement>('.main__latest-article');
-		console.log(latest);
-	
-	latest?.addEventListener('mouseenter', () => {
-			latest.style.left="55%";
+
+		// Effet parallax alternatif pour le hero
+		function initParallax() {
+			const heroBackground = document.querySelector<HTMLElement>('.hero-bg');
+			
+			if (!heroBackground) return;
+			
+			window.addEventListener('scroll', () => {
+				const scrolled = window.pageYOffset;
+				const rate = scrolled * -0.6; // Vitesse de parallax
+				
+				heroBackground.style.transform = `translateY(${rate}px)`;
+			});
+		}
+
+	// Fonction pour observer les éléments et déclencher les animations
+	function observeElements() {
+		const elements = document.querySelectorAll('.fade-in-element');
+		
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('active');
+				} else {
+					entry.target.classList.remove('active');
+				}
+			});
+		}, {
+			threshold: 0.1,
+			rootMargin: '0px 0px -50px 0px'
 		});
-		latest?.addEventListener('mouseleave', () => {
-			latest.style.left="85%";
+		
+		elements.forEach(element => {
+			observer.observe(element);
 		});
-	
+	}
+
+	// Animation du compteur
+	function animateCounter() {
+		const counter = document.getElementById('counter');
+		if (!counter) return;
+		
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					let start = 0;
+					const end = 30000;
+					const duration = 2000;
+					const increment = end / (duration / 16);
+					
+					const timer = setInterval(() => {
+						start += increment;
+						if (start >= end) {
+							counter.textContent = end.toLocaleString();
+							clearInterval(timer);
+						} else {
+							counter.textContent = Math.floor(start).toLocaleString();
+						}
+					}, 16);
+					
+					observer.unobserve(counter);
+				}
+			});
+		}, { threshold: 0.5 });
+		
+		observer.observe(counter);
+	}
+
+	// Initialisation
+	document.addEventListener('DOMContentLoaded', () => {
+		initParallax();
+		observeElements();
+		animateCounter();
+	});
+
+	// Scroll fluide
+	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+			anchor.addEventListener('click', function (this: HTMLAnchorElement, e: Event) {
+					e.preventDefault();
+					const target = document.querySelector(this.getAttribute('href') || '');
+					if (target) {
+							target.scrollIntoView({
+									behavior: 'smooth'
+							});
+					}
+			});
+	});
+
+
+	// Intersection Observer pour les animations au scroll
+	const observerOptions = {
+			threshold: 0.1,
+			rootMargin: '0px 0px -10% 0px'
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+					if (entry.isIntersecting) {
+							entry.target.classList.add('visible');
+					}
+			});
+	}, observerOptions);
+
+	// Observer tous les éléments avec fade-in
+	// document.querySelectorAll('.fade-in-element').forEach(el => {
+	// 		observer.observe(el);
+	// });
+
+	// Observer les cartes d'approche
+	document.querySelectorAll('.approach-card').forEach(el => {
+			observer.observe(el);
+	});
+
+	// Observer la synthèse
+	const synthesisElement = document.querySelector('.synthesis');
+	if (synthesisElement) {
+  	observer.observe(synthesisElement);
+	} else {
+  	console.error("L'élément .synthesis n'a pas été trouvé dans le DOM.");
+	}
+	// observer.observe(document.querySelector('.synthesis'));
+
+	// Animation des particules flottantes - ajout aléatoire
+	function addRandomFloatingElement() {
+			const elements = ['🌱', '🌿', '🔍', '💚', '🌾', '🌸', '🍃'];
+			const element = document.createElement('div');
+			element.className = 'floating-element';
+			element.textContent = elements[Math.floor(Math.random() * elements.length)];
+			element.style.left = Math.random() * 80 + 10 + '%';
+
+			element.style.animationDelay = (Math.random() * 10) + 's'; // Ajout d'un délai initial aléatoire
+    
+			// element.style.animationDelay = '0s';
+			element.style.animationDuration = (15 + Math.random() * 10) + 's';
+			
+			const floatingElementsContainer = document.querySelector('.floating-elements');
+			const artDecoder = document.querySelector('.art-decoder');
+
+  		if (floatingElementsContainer) {
+				
+				floatingElementsContainer.appendChild(element);
+
+				// Animation JavaScript au lieu du CSS
+				element.animate([
+					{ bottom: '-50px', opacity: 0, transform: 'rotate(0deg)' },
+					{ bottom: '100%', opacity: 1, transform: 'rotate(360deg)' }
+				], {
+					duration: 8000,
+					easing: 'linear'
+				});
+				
+				setTimeout(() => {
+					element.remove();
+				}, 8000);
+  
+				// Supprimer l'élément après l'animation
+				setTimeout(() => {
+						element.remove();
+				}, 25000);
+			} else {
+				console.error("Le conteneur des éléments flottants n'a pas été trouvé dans le DOM.");
+			}
+	}
+
+	// Ajouter quelques éléments au chargement de la page pour un démarrage plus vivant
+	for (let i = 0; i < 5; i++) { // Ajoute 5 éléments au démarrage
+    setTimeout(addRandomFloatingElement, i * 1000); // Espacés d'une seconde
+	}
+
+	// Ajouter des éléments flottants périodiquement
+	setInterval(addRandomFloatingElement, 3000);
+
 
 </script>

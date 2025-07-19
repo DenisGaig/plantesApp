@@ -10,13 +10,13 @@ import {
 // Import des pages
 import { PlantsProvider } from "../../context/PlantsProvider.jsx";
 
-import Diagnostic from "../../pages/app/Diagnostic.jsx";
-import Home from "../../pages/app/Home.jsx";
-import Identification from "../../pages/app/Identification.jsx";
-import PlantDatabase from "../../pages/app/PlantDatabase.jsx";
-import Result from "../../pages/app/Results.jsx";
 import CalibrationTester from "./dev/CalibrationTester.jsx";
 import Method from "./methode/Method.jsx";
+import Diagnostic from "./pages/Diagnostic.jsx";
+import Home from "./pages/Home.jsx";
+import Identification from "./pages/Identification.jsx";
+import PlantDatabase from "./pages/PlantDatabase.jsx";
+import Result from "./pages/Results.jsx";
 import PlantProfile from "./profile/PlantProfile.jsx";
 import Spinner from "./shared/Spinner.jsx";
 import VerticalNavbar from "./shared/VerticalNavbar.jsx";

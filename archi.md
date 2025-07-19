@@ -1,17 +1,12 @@
 mon-projet/
 ├── src/
 │ ├── components/ # Composants de l'application
+│ │ ├── App.jsx # Composant principal
 │ │ ├── app/ # Composants React
 │ │ │ ├── shared/ # Composants réutilisables
 │ │ │ ├── identification/ # Fonctionnalité d'identification
 | │ │ ├── cameraComponent.jsx # Composant de la caméra  
-│ │ │ ├── PlantNetCard.jsx # Carte de plante
-│ │ │ ├── PlantNetResult.jsx # Résultat d'identification
 │ │ │ ├── profile/ # Profils de plantes
-│ │ │ │ ├── plantProfile.jsx # Profil d'une plante
-│ │ │ │ ├── plantDetails.jsx # Détails d'une plante
-│ │ │ │ ├── plantImages.jsx # Images d'une plante
-│ │ │ │ └── bioIndicators.jsx # Indicateurs biologiques
 │ │ │ ├── database/ # Base de données des plantes
 │ │ │ └── diagnostic/ # Diagnostic de sol
 │ │ └── blog/ # Composants Astro pour le blog
@@ -43,10 +38,13 @@ mon-projet/
 │ │ ├── index.astro # Page d'accueil
 │ │ ├── blog/ # Section blog
 │ │ └── app/ # Application React
-│ │ ├── App.jsx # Composant principal
-│ │ ├── identification.jsx
-│ │ ├── plants.jsx
-│ │ └── diagnostic.jsx
+│ │ ├── Identification.jsx
+│ │ ├── PlantDatabase.jsx
+│ │ └── Diagnostic.jsx
+│ │ └── Home.jsx
+│ ├── styles/ # Styles globaux
+│ │ ├── index.scss
+│ │ └── variables.scss
 │ │
 │ └── services/ # Utilitaires
 │ ├── storageService.js # Fonctions d'API génériques

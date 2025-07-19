@@ -1,325 +1,401 @@
+/* Styles généraux pour le CoverageEditor */
 .coverage-editor {
+  padding: 2rem;
+  background-color: #fcfcfc;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+.coverage-editor__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.coverage-editor__header h2 {
+  font-family: "Lato", sans-serif;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+.coverage-editor__header__description {
+  font-family: "Lato", sans-serif;
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* Liste des plantes */
+.coverage-editor__plants-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem; /* Espace entre chaque plante */
+}
+
+.coverage-editor__plant-item {
+  display: flex;
+  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne sur petit écran */
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 10px;
   padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  border: 1px solid #eee;
+  gap: 1.5rem; /* Espace entre les blocs image/info et densité */
+}
+
+.coverage-editor__plant-image {
+  flex-shrink: 0; /* Empêche l'image de rétrécir */
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #e0e0e0; /* Fallback couleur */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coverage-editor__plant-image img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-  &__header {
-    margin-bottom: 1.5rem;
+.coverage-editor__plant-info {
+  flex-grow: 1; /* Permet à l'info de prendre l'espace disponible */
+  min-width: 150px; /* Largeur minimale pour l'info */
+}
 
-    &__description {
-      color: $text-color;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
+.coverage-editor__plant-info__plant-names {
+  display: flex;
+  flex-direction: column;
+}
 
-    &__total {
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
+.coverage-editor__plant-info__plant-latin {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
 
-      &--valid {
-        color: #388e3c;
-      }
+.coverage-editor__plant-info__plant-common {
+  font-family: "Lato", sans-serif;
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0.2rem 0 0 0;
+}
 
-      &--invalid {
-        color: #f44336;
-      }
-    }
-  }
+/* Section de densité */
+.coverage-editor__density-section {
+  flex-grow: 2; /* Permet à la section de densité de prendre plus d'espace */
+  min-width: 300px; /* Largeur minimale pour la section de densité */
+}
 
-  &__plants-list {
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+.coverage-editor__density-section-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.coverage-editor__density-section-label {
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #444;
+  margin: 0;
+}
+
+.coverage-editor__density-section-coefficient {
+  font-family: "Lato", sans-serif;
+  font-size: 0.9rem;
+  color: #16a34a; /* Vert pour le coefficient */
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Grille des options de densité (les cartes) */
+.coverage-editor__density-options-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centre les cartes si elles ne remplissent pas la ligne */
+  gap: 0.8rem; /* Espace entre les cartes */
+}
+
+/* Style de chaque carte d'option de densité */
+.coverage-editor__density-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 2px solid #e5e7eb; /* Bordure légère */
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: 100px; /* Largeur fixe pour les cartes */
+  height: 150px; /* Hauteur fixe pour les cartes */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+.coverage-editor__density-option:hover {
+  background-color: #f3f4f6;
+  border-color: #a7f3d0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.coverage-editor__density-option-selected {
+  border-color: #16a34a; /* Bordure verte foncée si sélectionné */
+  background-color: #dcfce7; /* Fond vert très clair si sélectionné */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Conteneur pour le SVG visuel à l'intérieur de la carte */
+.coverage-editor__density-visual-wrapper {
+  width: 60px; /* Taille du conteneur pour le SVG */
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+  background-color: #f0fdf4;
+}
+
+/* Style du SVG lui-même */
+.coverage-editor__density-visual-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Labels et pourcentages dans les cartes */
+.coverage-editor__density-label {
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #374151;
+  text-align: center;
+  margin-bottom: 0.15rem;
+}
+
+.coverage-editor__density-percentage {
+  font-family: "Lato", sans-serif;
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+/* Responsive adjustments for plant item layout */
+@media (max-width: 768px) {
+  .coverage-editor__plant-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
     padding: 1rem;
   }
 
-  &__plant-item {
-    background-color: white;
-    border-radius: 3px;
-    border: 1px solid #ddd;
-    padding: 0.75rem 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-  &__plant-image {
-    width: 100px;
-    height: 100px;
-    border-radius: $border-radius;
-    overflow: hidden;
-    background-color: lighten($primary-color, 40%);
-    // margin-right: 1rem;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+  .coverage-editor__plant-image {
+    width: 60px;
+    height: 60px;
   }
 
-  &__plant-info {
-    display: flex;
-    align-items: center;
-
-    // &__plant-names {
-    //   margin-left: 1rem;
-    // }
-
-    &__plant-latin {
-      color: #1b5e20;
-      font-size: 1rem;
-      font-weight: bold;
-      margin: 0;
-    }
-
-    &__plant-common {
-      color: #388e3c;
-      font-size: 0.875rem;
-      margin: 0.25rem 0 0 0;
-    }
+  .coverage-editor__plant-info {
+    width: 100%; /* Prend toute la largeur */
+    min-width: unset;
   }
 
-  &__density-section {
-    margin-top: 0.5rem;
-    width: 50%;
+  .coverage-editor__density-section {
+    width: 100%; /* Prend toute la largeur */
+    min-width: unset;
+  }
 
-    &-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
+  .coverage-editor__density-options-grid {
+    justify-content: space-around; /* Mieux réparti sur mobile */
+  }
 
-    &-label {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: #4b5563;
-      margin-bottom: 0.5rem;
-    }
+  .coverage-editor__density-option {
+    width: 85px; /* Plus petit sur mobile */
+    height: 130px;
+    padding: 0.5rem;
+  }
 
-    &-coefficient {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: #4b5563;
-      margin-bottom: 0.5rem;
-      background-color: #dcfce7;
-      padding: 0.25rem 0.5rem;
-      border-radius: $border-radius * 5;
-    }
+  .coverage-editor__density-visual-wrapper {
+    width: 50px;
+    height: 50px;
+  }
 
-    &-options {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+  .coverage-editor__density-label {
+    font-size: 0.8rem;
+  }
 
-    &-option {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-
-      &-circle {
-        height: 2rem;
-        width: 2rem;
-        margin-bottom: 0.25rem;
-        border-radius: 9999px;
-        border: 2px solid #d1d5db; // light border
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &-inner {
-          background-color: #16a34a; // green
-          border-radius: 9999px;
-        }
-
-        &-selected {
-          border-color: #16a34a; // green
-          background-color: #dcfce7; // light green
-        }
-
-        &:hover {
-          background-color: #f3f4f6; // very light gray
-        }
-      }
-
-      &-label {
-        font-size: 0.75rem;
-        color: #6b7280; // gray text
-      }
-    }
+  .coverage-editor__density-percentage {
+    font-size: 0.7rem;
   }
 }
-//   &__slider-container {
-//     display: flex;
-//     align-items: center;
-//     width: 50%;
-//   }
 
-//   &__slider {
-//     -webkit-appearance: none;
-//     height: 10px;
-//     border-radius: 5px;
-//     background: #e8f5e9;
-//     outline: none;
-//     flex-grow: 1;
-//     margin-right: 1rem;
-
-//     &::-webkit-slider-thumb {
-//       -webkit-appearance: none;
-//       appearance: none;
-//       width: 20px;
-//       height: 20px;
-//       border-radius: 50%;
-//       background: #388e3c;
-//       border: 2px solid white;
-//       cursor: pointer;
-//     }
-
-//     &::-moz-range-thumb {
-//       width: 20px;
-//       height: 20px;
-//       border-radius: 50%;
-//       background: #388e3c;
-//       border: 2px solid white;
-//       cursor: pointer;
-//     }
-//   }
-
-//   &__percentage {
-//     font-weight: bold;
-//     color: #1b5e20;
-//     font-size: 1rem;
-//     min-width: 3rem;
-//     text-align: right;
-//   }
-
-//   &__empty-state {
-//     text-align: center;
-//     padding: 2rem;
-//     color: #757575;
-//   }
-
-//   &__actions {
-//     display: flex;
-//     justify-content: flex-end;
-//     margin-top: 1.5rem;
-//     gap: 1rem;
-//   }
-
+// Ancienne version du composant CoverageEditor
 // .coverage-editor {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
+//   padding: 1.5rem;
 //   width: 100%;
-//   height: 100%;
-//   padding: 20px;
-//   // background-color: #f5f5f5;
-//   // border-radius: 10px;
-//   // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-//   overflow: hidden;
 
 //   &__header {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: center;
-//     width: 100%;
-//     margin-bottom: 20px;
-//     h2 {
-//       font-size: 24px;
-//       font-weight: bold;
-//       margin-bottom: 10px;
+//     margin-bottom: 1.5rem;
+
+//     &__description {
+//       color: $text-color;
+//       font-size: 1.1rem;
+//       margin-bottom: 0.5rem;
 //     }
-//     p {
-//       font-size: 16px;
-//       color: #666;
+
+//     &__total {
+//       font-size: 1.2rem;
+//       margin-bottom: 1.5rem;
+
+//       &--valid {
+//         color: #388e3c;
+//       }
+
+//       &--invalid {
+//         color: #f44336;
+//       }
 //     }
 //   }
-//   &__plants-list {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: center;
-//     width: 100%;
-//     margin-bottom: 20px;
-//     .coverage-editor__plant-item {
-//       display: flex;
-//       flex-direction: row;
-//       align-items: center;
-//       justify-content: space-between;
-//       width: 100%;
-//       margin-bottom: 10px;
-//       padding: 10px;
-//       background-color: #fff;
-//       border-radius: 10px;
-//       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
-//       .coverage-editor__plant-image {
-//         width: 50px;
-//         height: 50px;
-//         margin-right: 10px;
-//         img {
-//           width: 100%;
-//           height: 100%;
-//           object-fit: cover;
-//           // border-radius: 50%;
-//         }
-//       }
-//       .coverage-editor__plant-info {
+//   &__plants-list {
+//     background-color: #f5f5f5;
+//     border-radius: 5px;
+//     border: 1px solid #ddd;
+//     padding: 1rem;
+//   }
+
+//   &__plant-item {
+//     background-color: white;
+//     border-radius: 3px;
+//     border: 1px solid #ddd;
+//     padding: 0.75rem 1rem;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     margin-bottom: 0.75rem;
+
+//     &:last-child {
+//       margin-bottom: 0;
+//     }
+//   }
+//   &__plant-image {
+//     width: 100px;
+//     height: 100px;
+//     border-radius: $border-radius;
+//     overflow: hidden;
+//     background-color: lighten($primary-color, 40%);
+//     // margin-right: 1rem;
+//     img {
+//       width: 100%;
+//       height: 100%;
+//       object-fit: cover;
+//     }
+//   }
+
+//   &__plant-info {
+//     display: flex;
+//     align-items: center;
+
+//     // &__plant-names {
+//     //   margin-left: 1rem;
+//     // }
+
+//     &__plant-latin {
+//       color: #1b5e20;
+//       font-size: 1rem;
+//       font-weight: bold;
+//       margin: 0;
+//     }
+
+//     &__plant-common {
+//       color: #388e3c;
+//       font-size: 0.875rem;
+//       margin: 0.25rem 0 0 0;
+//     }
+//   }
+
+//   &__density-section {
+//     margin-top: 0.5rem;
+//     width: 50%;
+
+//     &-info {
+//       display: flex;
+//       justify-content: space-between;
+//       align-items: center;
+//       margin-bottom: 0.5rem;
+//     }
+
+//     &-label {
+//       font-size: 0.875rem;
+//       font-weight: 500;
+//       color: #4b5563;
+//       margin-bottom: 0.5rem;
+//     }
+
+//     &-coefficient {
+//       font-size: 0.875rem;
+//       font-weight: 500;
+//       color: #4b5563;
+//       margin-bottom: 0.5rem;
+//       background-color: #dcfce7;
+//       padding: 0.25rem 0.5rem;
+//       border-radius: $border-radius * 5;
+//     }
+
+//     &-options {
+//       display: flex;
+//       justify-content: space-between;
+//       align-items: center;
+//     }
+
+//     &-option {
+//       display: flex;
+//       flex-direction: column;
+//       align-items: center;
+//       cursor: pointer;
+
+//       &-circle {
+//         height: 2rem;
+//         width: 2rem;
+//         margin-bottom: 0.25rem;
+//         border-radius: 9999px;
+//         border: 2px solid #d1d5db; // light border
 //         display: flex;
-//         flex-direction: column;
-//         align-items: flex-start;
-//         justify-content: center;
-//         width: 100%;
-//         .coverage-editor__plant-names {
-//           display: flex;
-//           flex-direction: column;
-//           align-items: flex-start;
-//           justify-content: center;
-//           width: 100%;
-//           .coverage-editor__plant-latin {
-//             font-size: 18px;
-//             font-weight: bold;
-//             margin-bottom: 5px;
-//           }
-//           .coverage-editor__plant-common {
-//             font-size: 14px;
-//             color: #666;
-//           }
-//         }
-//       }
-//       .coverage-editor__slider-container {
-//         display: flex;
-//         flex-direction: column;
 //         align-items: center;
 //         justify-content: center;
-//         width: 100%;
-//         input[type="range"] {
-//           width: 100%;
-//           margin-bottom: 10px;
+
+//         &-inner {
+//           background-color: #16a34a; // green
+//           border-radius: 9999px;
 //         }
-//         .coverage-editor__slider-value {
-//           font-size: 18px;
-//           font-weight: bold;
+
+//         &-selected {
+//           border-color: #16a34a; // green
+//           background-color: #dcfce7; // light green
+//         }
+
+//         &:hover {
+//           background-color: #f3f4f6; // very light gray
 //         }
 //       }
-//     }
-//   }
-//   .coverage-editor__total {
-//     font-size: 24px;
-//     font-weight: bold;
-//     margin-top: 20px;
-//     &--valid {
-//       color: green;
-//     }
-//     &--invalid {
-//       color: red;
+
+//       &-label {
+//         font-size: 0.75rem;
+//         color: #6b7280; // gray text
+//       }
 //     }
 //   }
 // }

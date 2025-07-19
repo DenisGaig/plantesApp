@@ -88,13 +88,13 @@
         &__synonyms {
           font-size: 0.8rem;
           font-weight: 400;
-          color: $text-color-light;
+          color: $text-color;
         }
       }
       &__common-name {
         font-size: 1rem;
         font-weight: 400;
-        color: $text-color-light;
+        color: $text-color;
         border-bottom: 2px solid rgba(128, 128, 128, 0.329);
         padding-bottom: 10px;
       }

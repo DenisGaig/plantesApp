@@ -1,6 +1,7 @@
 $article-header-height: 500px;
 
 .article {
+  color: $text-color;
   @media (min-width: 1200px) {
     position: relative;
   }
